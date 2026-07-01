@@ -48,6 +48,61 @@
         catch (e) { console.warn("save failed", e); }
       }
     };
+    const CourseData = {
+      phases: [
+        { id: "dashboard", title: "Dashboard", icon: "🏠", lessons: [] },
+        { id: "grammar", title: "Grammar", icon: "📘", lessons: [
+          { id: "modals-shall-will", title: "Modals: shall / will / would", cards: [
+            { type: "concept", title: "shall vs will vs would",
+              english: "Use 'will' for future facts and decisions ('I will call you'). 'shall' is formal or for offers/suggestions ('Shall I open the window?'). 'would' is for polite requests, hypotheticals, and past habits ('I would like tea', 'If I had time, I would travel').",
+              telugu: "'will' — భవిష్యత్తు, నిర్ణయాలకు. 'shall' — మర్యాదపూర్వకంగా లేదా సలహా/ఆఫర్ ఇచ్చేటప్పుడు. 'would' — మర్యాదపూర్వక అభ్యర్థనలు, ఊహాత్మక వాక్యాలు, గత అలవాట్లకు.",
+              examples: [
+                { text: "I will finish the report by evening." },
+                { text: "Shall we start the meeting?" },
+                { text: "I would like a glass of water, please." }
+              ]
+            },
+            { type: "example", pattern: "Offers & suggestions with 'shall'",
+              sentences: [
+                { text: "Shall I carry that for you?" },
+                { text: "Shall we go now?" }
+              ]
+            },
+            { type: "mistake",
+              wrong: "I will can help you tomorrow.",
+              right: "I will be able to help you tomorrow.",
+              whyEn: "Two modals ('will' + 'can') can't stack. Replace the second with 'be able to'.",
+              whyTe: "రెండు modal verbs ('will' + 'can') కలిపి వాడకూడదు. 'can' బదులు 'be able to' వాడండి."
+            },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ I open the window? (offering)",
+                options: ["Will", "Shall", "Would"], answer: "Shall",
+                explanationEn: "'Shall I…?' is the natural form for offers.",
+                explanationTe: "ఆఫర్ ఇచ్చేటప్పుడు 'Shall I…?' సహజమైన రూపం." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I will can join.", "I will be able to join."],
+                answer: "I will be able to join.",
+                explanationEn: "Modals don't stack; use 'be able to'.",
+                explanationTe: "Modals ని కలపకూడదు; 'be able to' వాడండి." },
+              { format: "fill", prompt: "___ you like some coffee? (polite offer)",
+                answer: "Would",
+                explanationEn: "'Would you like…?' is the polite offer form.",
+                explanationTe: "'Would you like…?' మర్యాదపూర్వక ఆఫర్ రూపం." }
+            ]}
+          ]}
+        ]},
+        { id: "vocabulary", title: "Vocabulary", icon: "📗", lessons: [] },
+        { id: "speaking", title: "Speaking", icon: "🗣", lessons: [] },
+        { id: "situations", title: "Situations", icon: "🎬", lessons: [] },
+        { id: "professional", title: "Professional", icon: "💼", lessons: [] },
+        { id: "review", title: "Review", icon: "🔁", lessons: [] }
+      ],
+      phase(id) { return this.phases.find(p => p.id === id); },
+      lesson(phaseId, lessonId) {
+        const p = this.phase(phaseId);
+        return p ? p.lessons.find(l => l.id === lessonId) : null;
+      }
+    };
     // Modules are appended below in subsequent tasks.
     // Bootstrap (defined in the final UI task) runs last.
   </script>
