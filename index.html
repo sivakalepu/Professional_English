@@ -150,6 +150,32 @@
       },
       stop() { if (this.supported) speechSynthesis.cancel(); }
     };
+    const Recorder = {
+      supported: !!(navigator.mediaDevices && window.MediaRecorder),
+      _rec: null, _chunks: [], _url: null, _stream: null,
+      async start() {
+        if (!this.supported) throw new Error("unsupported");
+        this._stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        this._chunks = [];
+        this._rec = new MediaRecorder(this._stream);
+        this._rec.ondataavailable = e => { if (e.data.size) this._chunks.push(e.data); };
+        this._rec.start();
+      },
+      stop() {
+        return new Promise(resolve => {
+          if (!this._rec) return resolve(null);
+          this._rec.onstop = () => {
+            const blob = new Blob(this._chunks, { type: "audio/webm" });
+            if (this._url) URL.revokeObjectURL(this._url);
+            this._url = URL.createObjectURL(blob);
+            if (this._stream) this._stream.getTracks().forEach(t => t.stop());
+            resolve(this._url);
+          };
+          this._rec.stop();
+        });
+      },
+      play() { if (this._url) new Audio(this._url).play(); }
+    };
     // Modules are appended below in subsequent tasks.
     // Bootstrap (defined in the final UI task) runs last.
   </script>
