@@ -90,6 +90,9 @@
     .rule { border-left:3px solid var(--accent); padding:4px 0 4px 12px; }
     .rule-text { font-weight:600; margin-bottom:6px; }
     .used-with { color:var(--muted); font-size:14px; font-style:italic; margin:6px 0; }
+.danger { border-color:var(--warn); color:var(--warn); }
+.reset-lesson { display:block; margin-top:16px; background:transparent; border:1px solid var(--line); color:var(--muted); font-size:13px; }
+.reset-lesson:hover { border-color:var(--warn); color:var(--warn); }
   </style>
 </head>
 <body>
@@ -3427,10 +3430,12 @@
         const restore = this.el("label", { class: "btnlike" }, "⤒ Restore",
           this.el("input", { type: "file", accept: "application/json", style: "display:none",
             onchange: e => this._importProgress(e) }));
+        const reset = this.el("button", { class: "danger", title: "Clear all progress and start fresh",
+          onclick: () => this._resetAll() }, "↺ Reset");
         return this.el("header", { class: "hdr" },
           this.el("h1", {}, "English Path"),
           this.el("div", { class: "hdr-tools" },
-            this.el("span", { class: "muted" }, "🔊 speed"), rate, theme, backup, restore));
+            this.el("span", { class: "muted" }, "🔊 speed"), rate, theme, backup, restore, reset));
       },
       _tabs() {
         const bar = this.el("nav", { class: "tabs" });
@@ -3543,6 +3548,8 @@
           this.el("button", { onclick: () => Router.prevCard(), disabled: idx === 0 ? "" : null }, "◀ Prev"),
           dots,
           this.el("button", { onclick: () => Router.nextCard(), disabled: idx === lesson.cards.length - 1 ? "" : null }, "Next ▶")));
+        wrap.appendChild(this.el("button", { class: "reset-lesson",
+          onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺ Reset this lesson"));
         this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
         return wrap;
       },
@@ -3554,6 +3561,22 @@
           this.state.progress[key] = pr;
           this.save();
         }
+      },
+      _resetAll() {
+        if (!confirm("Reset ALL progress? This clears completed lessons, quiz scores, and your Review queue. Your theme and voice settings are kept. This cannot be undone.")) return;
+        this.state.progress = {};
+        this.state.review = { wrongQuestions: [], learningWords: [] };
+        this.save();
+        Router.goPhase("dashboard");
+      },
+      _resetLesson(phaseId, lessonId) {
+        const lesson = CourseData.lesson(phaseId, lessonId);
+        if (!lesson) return;
+        if (!confirm('Reset progress for "' + lesson.title + '"? This clears its completed cards, quiz score, and its questions in the Review queue. This cannot be undone.')) return;
+        delete this.state.progress[phaseId + "/" + lessonId];
+        this.state.review.wrongQuestions = this.state.review.wrongQuestions.filter(q => !(q.phaseId === phaseId && q.lessonId === lessonId));
+        this.save();
+        Router.goPhase(phaseId);
       },
       _renderCard(card, phaseId, lessonId, idx) {
         switch (card.type) {
