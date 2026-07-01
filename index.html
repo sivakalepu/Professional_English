@@ -433,8 +433,173 @@
             ]}
           ]}
         ]},
-        { id: "vocabulary", title: "Vocabulary", icon: "📗", lessons: [] },
-        { id: "speaking", title: "Speaking", icon: "🗣", lessons: [] },
+        { id: "vocabulary", title: "Vocabulary", icon: "📗", lessons: [
+          { id: "everyday-essentials", title: "Everyday Essentials", cards: [
+            { type: "vocab", word: "deadline", pos: "noun",
+              meaningEn: "the latest time or date by which something must be finished",
+              meaningTe: "ఏదైనా పని పూర్తి చేయాల్సిన చివరి తేదీ లేదా సమయం.",
+              examples: [ { text: "The deadline for the proposal is next Monday." } ] },
+            { type: "vocab", word: "reliable", pos: "adjective",
+              meaningEn: "able to be trusted to do what is needed; consistent and dependable",
+              meaningTe: "అవసరమైనది చేస్తుందని నమ్మదగినది; స్థిరంగా, ఆధారపడదగినది.",
+              examples: [ { text: "She is a reliable team member who always delivers on time." } ] },
+            { type: "vocab", word: "priority", pos: "noun",
+              meaningEn: "something that is more important than other things and should be dealt with first",
+              meaningTe: "ఇతర విషయాల కంటే ఎక్కువ ప్రాధాన్యత ఉన్నది, మొదట చూడవలసినది.",
+              examples: [ { text: "Fixing the login bug is our top priority this week." } ] },
+            { type: "vocab", word: "flexible", pos: "adjective",
+              meaningEn: "able to change or adapt easily to different situations or demands",
+              meaningTe: "వేర్వేరు పరిస్థితులు లేదా అవసరాలకు తేలికగా మారే/అలవడే గుణం కలిగినది.",
+              examples: [ { text: "Our schedule is flexible, so we can move the call if needed." } ] },
+            { type: "vocab", word: "efficient", pos: "adjective",
+              meaningEn: "achieving a result with the least waste of time, effort, or resources",
+              meaningTe: "సమయం, శ్రమ లేదా వనరులను తక్కువగా వృధా చేస్తూ ఫలితం సాధించడం.",
+              examples: [ { text: "The new process is more efficient than the old one." } ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which word means 'the latest time by which something must be done'?",
+                options: ["priority", "deadline", "flexible"],
+                answer: "deadline",
+                explanationEn: "'deadline' refers to the final time limit for completing a task.",
+                explanationTe: "'deadline' అంటే ఒక పని పూర్తి చేయాల్సిన చివరి సమయ పరిమితి." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["He is very reliable person, always help.", "He is a very reliable person who always helps."],
+                answer: "He is a very reliable person who always helps.",
+                explanationEn: "This sentence uses correct articles and grammar around the adjective 'reliable'.",
+                explanationTe: "ఈ వాక్యం 'reliable' అనే adjective చుట్టూ సరైన articles మరియు వ్యాకరణాన్ని వాడుతుంది." },
+              { format: "fill", prompt: "We need to be more ___ (waste less time/effort) with our resources.",
+                answer: "efficient",
+                explanationEn: "'efficient' describes doing something well without wasting time or effort.",
+                explanationTe: "సమయం లేదా శ్రమను వృధా చేయకుండా పని చేయడాన్ని 'efficient' అంటారు." },
+              { format: "mcq", prompt: "Our top ___ this quarter is improving customer support response time.",
+                options: ["priority", "deadline", "reliable"],
+                answer: "priority",
+                explanationEn: "'priority' fits here as the most important item to focus on.",
+                explanationTe: "ఇక్కడ 'priority' అనేది దృష్టి పెట్టవలసిన అతి ముఖ్యమైన విషయాన్ని సూచిస్తుంది." }
+            ]}
+          ]},
+          { id: "connecting-words", title: "Connecting Words", cards: [
+            { type: "vocab", word: "however", pos: "adverb",
+              meaningEn: "used to add a contrasting idea; 'but' in a more formal way",
+              meaningTe: "విరుద్ధమైన భావాన్ని జోడించడానికి; 'కానీ' అనే అర్థంలో మరింత మర్యాదపూర్వకంగా.",
+              examples: [ { text: "The plan is risky. However, it could work." } ] },
+            { type: "vocab", word: "therefore", pos: "adverb",
+              meaningEn: "used to introduce a result or conclusion; 'so' in a more formal way",
+              meaningTe: "ఒక ఫలితం లేదా నిర్ణయాన్ని పరిచయం చేయడానికి; 'so' అనే అర్థంలో మరింత అధికారికంగా.",
+              examples: [ { text: "The server was down; therefore, the deployment was delayed." } ] },
+            { type: "vocab", word: "meanwhile", pos: "adverb",
+              meaningEn: "used to describe something happening at the same time as something else",
+              meaningTe: "ఒక విషయం జరుగుతున్న సమయంలోనే మరొక విషయం జరగడాన్ని వివరించడానికి.",
+              examples: [ { text: "I'll review the design. Meanwhile, could you update the tickets?" } ] },
+            { type: "vocab", word: "nevertheless", pos: "adverb",
+              meaningEn: "used to say that something happens or is true despite what was just mentioned; 'even so'",
+              meaningTe: "ముందు చెప్పిన విషయం ఉన్నప్పటికీ ఏదైనా జరుగుతుందని లేదా నిజమని చెప్పడానికి; 'అయినప్పటికీ'.",
+              examples: [ { text: "The budget is tight. Nevertheless, we will try to hire two more engineers." } ] },
+            { type: "vocab", word: "moreover", pos: "adverb",
+              meaningEn: "used to add extra supporting information to a point already made; 'in addition'",
+              meaningTe: "ఇప్పటికే చెప్పిన విషయానికి మరింత సమాచారాన్ని జోడించడానికి; 'అదనంగా'.",
+              examples: [ { text: "The candidate has strong technical skills. Moreover, she has led two teams." } ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which word means 'but', used in a more formal way?",
+                options: ["however", "meanwhile", "moreover"],
+                answer: "however",
+                explanationEn: "'however' introduces a contrast, similar to 'but' but more formal.",
+                explanationTe: "'however' అనేది 'but' లాగా విరుద్ధతను సూచిస్తుంది, కానీ మరింత అధికారికంగా." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence for adding a supporting point:",
+                options: ["He is skilled. Moreover, he mentors juniors well.", "He is skilled. Meanwhile, he mentors juniors well."],
+                answer: "He is skilled. Moreover, he mentors juniors well.",
+                explanationEn: "'Moreover' adds supporting information; 'meanwhile' is for parallel timing, not supporting points.",
+                explanationTe: "'Moreover' మద్దతు సమాచారాన్ని జోడిస్తుంది; 'meanwhile' అనేది సమాంతర సమయాన్ని సూచించడానికి, మద్దతు పాయింట్లకు కాదు." },
+              { format: "fill", prompt: "The tests failed. ___ (so/as a result), we postponed the release.",
+                answer: "Therefore",
+                explanationEn: "'Therefore' introduces the result or conclusion of the previous statement.",
+                explanationTe: "'Therefore' అనేది ముందు వాక్యం యొక్క ఫలితం లేదా నిర్ణయాన్ని పరిచయం చేస్తుంది." },
+              { format: "mcq", prompt: "The market is uncertain. ___, we plan to proceed with the launch. (despite that)",
+                options: ["Meanwhile", "Nevertheless", "Therefore"],
+                answer: "Nevertheless",
+                explanationEn: "'Nevertheless' means 'despite that', showing the action happens anyway.",
+                explanationTe: "'Nevertheless' అంటే 'అయినప్పటికీ' — అంటే ఆ చర్య ఏమైనా జరుగుతుందని సూచిస్తుంది." }
+            ]}
+          ]}
+        ] },
+        { id: "speaking", title: "Speaking", icon: "🗣", lessons: [
+          { id: "pronunciation-basics", title: "Pronunciation Basics", cards: [
+            { type: "concept", title: "Word stress and tricky sounds for Telugu speakers",
+              english: "English words have one syllable that is stressed (said louder/longer) — for example, PRE-sent (noun) vs pre-SENT (verb). Getting the stress wrong can make a word hard to understand even if every letter is pronounced correctly. Two sounds often mixed up by Telugu speakers: 'v' and 'w' (very vs. wary — the lower lip touches the upper teeth for 'v', but not for 'w'), and 'th' (think, this — the tongue tip touches behind the upper teeth, unlike 't' or 'd').",
+              telugu: "ఇంగ్లీష్ పదాలలో ఒక syllable ఎక్కువ ఒత్తిడితో (గట్టిగా/ఎక్కువ సేపు) పలకబడుతుంది — ఉదాహరణకు PRE-sent (నామవాచకం) vs pre-SENT (క్రియ). ప్రతి అక్షరం సరిగ్గా పలికినా, ఒత్తిడి తప్పుగా ఉంటే అర్థం చేసుకోవడం కష్టం. తెలుగు వారు తరచుగా కలగలిపే రెండు ధ్వనులు: 'v' మరియు 'w' (very vs. wary — 'v' కు కింది పెదవి పై పళ్ళను తాకుతుంది, 'w' కు తాకదు), మరియు 'th' (think, this — నాలుక కొన పై పళ్ళ వెనుక తాకుతుంది, 't' లేదా 'd' లాగా కాదు).",
+              examples: [
+                { text: "record (noun: REC-ord) vs record (verb: re-CORD)" },
+                { text: "very / wary — lip touches teeth only for 'v'" },
+                { text: "think / this — tongue tip touches behind the upper teeth" }
+              ]
+            },
+            { type: "example", pattern: "Practice words and sentences for tricky sounds",
+              sentences: [
+                { text: "very well, wary of, village, wine" },
+                { text: "think, this, three, thank you" },
+                { text: "I think this village makes very good wine." },
+                { text: "We will review the record before the meeting starts." }
+              ]
+            },
+            { type: "dialogue", roles: ["Coach", "You"], lines: [
+              { role: "Coach", text: "Let's practice. Say: 'very well, thank you.'" },
+              { role: "You", text: "Very well, thank you." },
+              { role: "Coach", text: "Good. Now: 'I will think about this.'" },
+              { role: "You", text: "I will think about this." },
+              { role: "Coach", text: "Nice. One more: 'We reviewed the record together.'" },
+              { role: "You", text: "We reviewed the record together." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which sound uses the tongue tip touching behind the upper teeth?",
+                options: ["'v' as in very", "'th' as in think", "'w' as in wary"],
+                answer: "'th' as in think",
+                explanationEn: "'th' requires the tongue tip to touch behind the upper teeth, unlike 't', 'd', or 'v'.",
+                explanationTe: "'th' పలికేటప్పుడు నాలుక కొన పై పళ్ళ వెనుక తాకుతుంది, 't', 'd', లేదా 'v' లాగా కాదు." },
+              { format: "mcq", prompt: "In the noun 'record' (a music record), which syllable is stressed?",
+                options: ["The first syllable (REC-ord)", "The second syllable (re-CORD)", "Both equally"],
+                answer: "The first syllable (REC-ord)",
+                explanationEn: "As a noun, 'record' stresses the first syllable; as a verb, it stresses the second.",
+                explanationTe: "నామవాచకంగా 'record' మొదటి syllable పై ఒత్తిడి పెడుతుంది; క్రియగా రెండవ syllable పై పెడుతుంది." }
+            ]}
+          ]},
+          { id: "fluency-fillers", title: "Fluency Fillers", cards: [
+            { type: "concept", title: "Natural fillers instead of 'umm'",
+              english: "When you need a moment to think while speaking, natural filler phrases sound more professional than repeating 'umm' or 'aa'. Phrases like 'Let me think about that for a second', 'That's a good question', or 'What I mean is…' buy you time while sounding confident and composed.",
+              telugu: "మాట్లాడుతున్నప్పుడు ఆలోచించడానికి క్షణం అవసరమైతే, సహజమైన filler పదబంధాలు 'umm' లేదా 'aa' అని పదేపదే అనడం కంటే మరింత professional గా వినిపిస్తాయి. 'Let me think about that for a second', 'That's a good question', లేదా 'What I mean is…' వంటి పదబంధాలు ఆత్మవిశ్వాసంతో, స్థిరంగా ఉంటూ సమయాన్ని ఇస్తాయి.",
+              examples: [
+                { text: "Let me think about that for a second." },
+                { text: "That's a good question." },
+                { text: "What I mean is, we should prioritize stability first." }
+              ]
+            },
+            { type: "example", pattern: "Natural fillers to buy thinking time",
+              sentences: [
+                { text: "Let me think about that for a second." },
+                { text: "That's a good question." },
+                { text: "Give me a moment to gather my thoughts." },
+                { text: "How can I put this..." }
+              ]
+            },
+            { type: "dialogue", roles: ["Interviewer", "You"], lines: [
+              { role: "Interviewer", text: "Why do you want to move into a leadership role?" },
+              { role: "You", text: "That's a good question. Let me think about that for a second." },
+              { role: "You", text: "What I mean is, I enjoy helping the team grow, not just writing code myself." },
+              { role: "Interviewer", text: "Can you give an example?" },
+              { role: "You", text: "Sure — give me a moment to gather my thoughts on the best example." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which is a natural way to buy time before answering, instead of saying 'umm'?",
+                options: ["That's a good question.", "Umm umm umm.", "I don't know say something."],
+                answer: "That's a good question.",
+                explanationEn: "This phrase sounds composed and professional while giving you a moment to think.",
+                explanationTe: "ఈ పదబంధం ఆత్మవిశ్వాసంతో, professional గా వినిపిస్తుంది మరియు ఆలోచించడానికి క్షణం ఇస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the more natural filler phrase:",
+                options: ["Give me a moment to gather my thoughts.", "Wait wait, my brain thinking now."],
+                answer: "Give me a moment to gather my thoughts.",
+                explanationEn: "This is a natural, professional way to ask for a brief pause before answering.",
+                explanationTe: "ఇది సమాధానం ఇచ్చే ముందు కొద్దిసేపు ఆలోచించడానికి సమయం అడగడానికి సహజమైన, professional విధానం." }
+            ]}
+          ]}
+        ] },
         { id: "situations", title: "Situations", icon: "🎬", lessons: [
           { id: "restaurant", title: "At a Restaurant", cards: [
             { type: "example", pattern: "Key phrases (with meaning)",
@@ -595,7 +760,75 @@
             ]}
           ]}
         ] },
-        { id: "professional", title: "Professional", icon: "💼", lessons: [] },
+        { id: "professional", title: "Professional", icon: "💼", lessons: [
+          { id: "clear-emails", title: "Writing Clear Emails", cards: [
+            { type: "concept", title: "Opening a professional email",
+              english: "Start with a clear purpose line. 'I'm writing to…' or 'I wanted to follow up on…' set context immediately. Keep the first sentence about why you're writing.",
+              telugu: "స్పష్టమైన ఉద్దేశ్యంతో మొదలుపెట్టండి. 'I'm writing to…' లేదా 'I wanted to follow up on…' వెంటనే సందర్భాన్ని తెలియజేస్తాయి.",
+              examples: [ { text: "I'm writing to confirm our meeting on Thursday." } ] },
+            { type: "concept", title: "Being concise and polite",
+              english: "Keep sentences short and get to the point quickly — busy readers appreciate this. Soften requests with words like 'please', 'could you', or 'when you have a moment', without adding unnecessary extra sentences. Avoid long, over-apologetic openings before the actual request.",
+              telugu: "వాక్యాలను చిన్నగా ఉంచి, త్వరగా విషయానికి రండి — busy readers దీన్ని మెచ్చుకుంటారు. 'please', 'could you', లేదా 'when you have a moment' వంటి పదాలతో అభ్యర్థనలను మృదువుగా చేయండి, కానీ అనవసరమైన అదనపు వాక్యాలు చేర్చకండి. అభ్యర్థనకు ముందు ఎక్కువ క్షమాపణలతో నిండిన వాక్యాలను నివారించండి.",
+              examples: [ { text: "Could you please send the updated file by tomorrow?" } ] },
+            { type: "example", pattern: "Good email sentences",
+              sentences: [
+                { text: "I'm writing to confirm our meeting on Thursday at 3 PM." },
+                { text: "I wanted to follow up on the proposal I sent last week." },
+                { text: "Could you please review the attached document by Friday?" },
+                { text: "Let me know if you have any questions." },
+                { text: "Thanks in advance for your help." }
+              ]
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the clearer opening sentence for a follow-up email:",
+                options: ["I am extremely sorry to disturb you again but I was just wondering maybe if possibly you had time to look at my email.", "I wanted to follow up on the email I sent last week."],
+                answer: "I wanted to follow up on the email I sent last week.",
+                explanationEn: "This is direct and states the purpose immediately, without unnecessary over-apologizing.",
+                explanationTe: "ఇది నేరుగా, అనవసరమైన అధిక క్షమాపణలు లేకుండా ఉద్దేశ్యాన్ని వెంటనే తెలియజేస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the more polite and concise request:",
+                options: ["Send file now.", "Could you please send the file when you have a moment?"],
+                answer: "Could you please send the file when you have a moment?",
+                explanationEn: "This softens the request with 'please' and 'when you have a moment' while staying concise.",
+                explanationTe: "ఇది 'please' మరియు 'when you have a moment' తో అభ్యర్థనను మృదువుగా చేస్తూ క్లుప్తంగా ఉంటుంది." },
+              { format: "mcq", prompt: "The best way to start an email requesting a status update is:",
+                options: ["I'm writing to check on the status of the migration project.", "Hi, so, umm, I was thinking about maybe asking about the thing.", "Status? Now?"],
+                answer: "I'm writing to check on the status of the migration project.",
+                explanationEn: "This states the purpose clearly and professionally in the first sentence.",
+                explanationTe: "ఇది మొదటి వాక్యంలోనే ఉద్దేశ్యాన్ని స్పష్టంగా, professional గా తెలియజేస్తుంది." }
+            ]}
+          ]},
+          { id: "speaking-in-meetings", title: "Speaking Up in Meetings", cards: [
+            { type: "concept", title: "Speaking up, interrupting politely, and giving opinions as a leader",
+              english: "In meetings, use short signal phrases to get the floor without being rude: 'Could I add a point here?' or 'Sorry to jump in, but...'. As a Head-level leader, state opinions with confidence but stay open: 'I think we should prioritize X, but I'm open to other views.' Avoid staying silent when you disagree — silence from a leader can be read as agreement.",
+              telugu: "మీటింగ్‌లలో, మర్యాదగా మాట్లాడటానికి చిన్న signal పదబంధాలు వాడండి: 'Could I add a point here?' లేదా 'Sorry to jump in, but...'. Head-level నాయకుడిగా, ఆత్మవిశ్వాసంతో అభిప్రాయాలను చెప్పండి కానీ ఇతర అభిప్రాయాలకు తెరిచి ఉండండి: 'I think we should prioritize X, but I'm open to other views.' మీరు విభేదిస్తున్నప్పుడు మౌనంగా ఉండటం మానుకోండి — నాయకుడి మౌనాన్ని అంగీకారంగా అర్థం చేసుకోవచ్చు.",
+              examples: [
+                { text: "Could I add a point here before we move on?" },
+                { text: "Sorry to jump in, but I think we're missing a risk here." },
+                { text: "I think we should prioritize the migration, but I'm open to other views." }
+              ]
+            },
+            { type: "dialogue", roles: ["Colleague", "You"], lines: [
+              { role: "Colleague", text: "So the plan is to launch next Friday with the current scope." },
+              { role: "You", text: "Sorry to jump in, but I think that timeline is risky given the open bugs." },
+              { role: "Colleague", text: "What would you suggest instead?" },
+              { role: "You", text: "I think we should push the launch by one week, but I'm open to other views." },
+              { role: "Colleague", text: "That's fair. Let's discuss it with the team." },
+              { role: "You", text: "Could I add one more point? We should also flag this risk to the client early." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "The most polite way to interrupt a discussion to add an important point is:",
+                options: ["Sorry to jump in, but I think we're missing a risk here.", "Stop talking, I have something to say.", "Excuse, excuse, my turn now."],
+                answer: "Sorry to jump in, but I think we're missing a risk here.",
+                explanationEn: "This politely signals an interruption while immediately stating why it matters.",
+                explanationTe: "ఇది మర్యాదగా అంతరాయాన్ని సూచిస్తూ, అది ఎందుకు ముఖ్యమో వెంటనే తెలియజేస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the sentence that gives a confident but open opinion, fitting for a Head-level leader:",
+                options: ["I think we should prioritize the migration, but I'm open to other views.", "Do what I say, no more discussion."],
+                answer: "I think we should prioritize the migration, but I'm open to other views.",
+                explanationEn: "This states a clear opinion while staying open to the team's input, which fits collaborative leadership.",
+                explanationTe: "ఇది స్పష్టమైన అభిప్రాయాన్ని చెబుతూనే బృందం అభిప్రాయాలకు తెరిచి ఉంటుంది — సహకార నాయకత్వానికి ఇది సరిపోతుంది." }
+            ]}
+          ]}
+        ] },
         { id: "review", title: "Review", icon: "🔁", lessons: [] }
       ],
       phase(id) { return this.phases.find(p => p.id === id); },
