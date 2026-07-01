@@ -85,6 +85,10 @@
       .bar { width:100%; }
       .stepper { gap:8px; }
     }
+    .concept-intro { margin-top:0; }
+    ul.rules { list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:16px; }
+    .rule { border-left:3px solid var(--accent); padding:4px 0 4px 12px; }
+    .rule-text { font-weight:600; margin-bottom:6px; }
   </style>
 </head>
 <body>
@@ -116,90 +120,219 @@
       phases: [
         { id: "dashboard", title: "Dashboard", icon: "🏠", lessons: [] },
         { id: "grammar", title: "Grammar", icon: "📘", lessons: [
-          { id: "modals-shall-will", title: "Modals: shall / will / would", cards: [
-            { type: "concept", title: "shall vs will vs would",
-              english: "Use 'will' for future facts and decisions ('I will call you'). 'shall' is formal or for offers/suggestions ('Shall I open the window?'). 'would' is for polite requests, hypotheticals, and past habits ('I would like tea', 'If I had time, I would travel').",
-              telugu: "'will' — భవిష్యత్తు, నిర్ణయాలకు. 'shall' — మర్యాదపూర్వకంగా లేదా సలహా/ఆఫర్ ఇచ్చేటప్పుడు. 'would' — మర్యాదపూర్వక అభ్యర్థనలు, ఊహాత్మక వాక్యాలు, గత అలవాట్లకు.",
-              examples: [
-                { text: "I will finish the report by evening." },
-                { text: "Shall we start the meeting?" },
-                { text: "I would like a glass of water, please." }
-              ]
-            },
-            { type: "example", pattern: "Offers & suggestions with 'shall'",
+          { id: "sentence-basics", title: "Sentence Basics: Word Order", cards: [
+            { type: "concept", title: "Subject, Verb, Object (SVO)",
+              intro: "English sentences follow a fixed order: Subject, then Verb, then Object.",
+              introTe: "ఇంగ్లీష్ వాక్యాలు ఒక స్థిర క్రమంలో ఉంటాయి: మొదట Subject (కర్త), తర్వాత Verb (క్రియ), తర్వాత Object (కర్మ).",
+              points: [
+                { rule: "The subject is who or what does the action. It usually comes first.",
+                  ruleTe: "Subject అంటే పని చేసేది ఎవరు లేదా ఏది. ఇది సాధారణంగా వాక్యం మొదట్లో వస్తుంది.",
+                  examples: [
+                    { text: "She works in Hyderabad." },
+                    { text: "The manager approved the budget." },
+                    { text: "They joined the call late." },
+                    { text: "My team finished the project." }
+                  ] },
+                { rule: "The verb is the action word. It comes right after the subject.",
+                  ruleTe: "Verb అంటే పని / చర్యను తెలిపే పదం. ఇది subject తర్వాత వెంటనే వస్తుంది.",
+                  examples: [
+                    { text: "He writes the report every Friday." },
+                    { text: "We discussed the new plan." },
+                    { text: "The client called this morning." },
+                    { text: "I updated the spreadsheet." }
+                  ] },
+                { rule: "The object receives the action. It comes after the verb — so the order is Subject + Verb + Object.",
+                  ruleTe: "Object అంటే చర్యను స్వీకరించేది. ఇది verb తర్వాత వస్తుంది — కాబట్టి క్రమం Subject + Verb + Object.",
+                  examples: [
+                    { text: "I eat rice every day." },
+                    { text: "She reads the news." },
+                    { text: "The team sent the invoice." },
+                    { text: "He checked the server logs." }
+                  ] },
+                { rule: "Every English sentence needs a subject, even when there is no clear 'doer' — English uses 'it' or 'there' as a placeholder subject.",
+                  ruleTe: "స్పష్టమైన 'చేసేవారు' లేకపోయినా ప్రతి ఇంగ్లీష్ వాక్యానికి subject తప్పనిసరి — 'it' లేదా 'there' అనే placeholder subject వాడతారు.",
+                  examples: [
+                    { text: "It is raining." },
+                    { text: "It is 9 o'clock." },
+                    { text: "There is a meeting today." },
+                    { text: "There are two options." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Subject + Verb + Object in real sentences",
               sentences: [
-                { text: "Shall I carry that for you?" },
-                { text: "Shall we go now?" }
-              ]
-            },
-            { type: "mistake",
-              wrong: "I will can help you tomorrow.",
-              right: "I will be able to help you tomorrow.",
-              whyEn: "Two modals ('will' + 'can') can't stack. Replace the second with 'be able to'.",
-              whyTe: "రెండు modal verbs ('will' + 'can') కలిపి వాడకూడదు. 'can' బదులు 'be able to' వాడండి."
-            },
+                { text: "I drink coffee every morning." },
+                { text: "The manager reviewed the proposal." },
+                { text: "It is very hot today." }
+              ] },
+            { type: "mistake", wrong: "I rice eat.", right: "I eat rice.",
+              whyEn: "Telugu word order is Subject-Object-Verb, so the verb feels natural at the end. English is Subject-Verb-Object, so the verb must come right after the subject.",
+              whyTe: "తెలుగులో వాక్య క్రమం Subject-Object-Verb, కాబట్టి verb చివర రావడం సహజంగా అనిపిస్తుంది. ఇంగ్లీష్‌లో Subject-Verb-Object క్రమం ఉంటుంది, కాబట్టి verb subject తర్వాత వెంటనే రావాలి." },
             { type: "quiz", questions: [
-              { format: "mcq", prompt: "___ I open the window? (offering)",
-                options: ["Will", "Shall", "Would"], answer: "Shall",
-                explanationEn: "'Shall I…?' is the natural form for offers.",
-                explanationTe: "ఆఫర్ ఇచ్చేటప్పుడు 'Shall I…?' సహజమైన రూపం." },
+              { format: "mcq", prompt: "Which order does English follow?",
+                options: ["Subject-Object-Verb", "Subject-Verb-Object", "Verb-Subject-Object"],
+                answer: "Subject-Verb-Object",
+                explanationEn: "English always follows Subject-Verb-Object order.",
+                explanationTe: "ఇంగ్లీష్ ఎప్పుడూ Subject-Verb-Object క్రమాన్ని అనుసరిస్తుంది." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["I will can join.", "I will be able to join."],
-                answer: "I will be able to join.",
-                explanationEn: "Modals don't stack; use 'be able to'.",
-                explanationTe: "Modals ని కలపకూడదు; 'be able to' వాడండి." },
-              { format: "fill", prompt: "___ you like some coffee? (polite offer)",
-                answer: "Would",
-                explanationEn: "'Would you like…?' is the polite offer form.",
-                explanationTe: "'Would you like…?' మర్యాదపూర్వక ఆఫర్ రూపం." }
+                options: ["She the report sent.", "She sent the report."],
+                answer: "She sent the report.",
+                explanationEn: "The verb 'sent' must come right after the subject 'She', before the object 'the report'.",
+                explanationTe: "Verb 'sent' subject 'She' తర్వాత వెంటనే రావాలి, object 'the report' కి ముందు." },
+              { format: "fill", prompt: "___ is raining outside. (fill the missing subject)",
+                answer: "It",
+                explanationEn: "English needs a placeholder subject 'It' even when there is no real doer.",
+                explanationTe: "నిజమైన 'చేసేవారు' లేకపోయినా ఇంగ్లీష్‌కి placeholder subject 'It' అవసరం." }
             ]}
           ]},
-          { id: "sentence-basics", title: "Sentence Basics: Subject–Verb–Object", cards: [
-            { type: "concept", title: "English word order: Subject–Verb–Object",
-              english: "English sentences normally follow Subject–Verb–Object (SVO) order: 'I (subject) eat (verb) rice (object)'. Telugu follows Subject–Object–Verb (SOV) order, so the verb comes last in Telugu. When you translate directly from Telugu, the verb often gets pushed to the end in English too — that is incorrect.",
-              telugu: "ఇంగ్లీష్ వాక్యాలు సాధారణంగా Subject–Verb–Object (SVO) క్రమంలో ఉంటాయి: 'I (కర్త) eat (క్రియ) rice (కర్మ)'. తెలుగు Subject–Object–Verb (SOV) క్రమాన్ని అనుసరిస్తుంది, అంటే క్రియ చివర వస్తుంది. తెలుగు నుండి నేరుగా అనువదించినప్పుడు, ఇంగ్లీష్‌లో కూడా క్రియను చివరకు పెట్టేస్తారు — అది తప్పు.",
-              examples: [
-                { text: "I eat rice. (NOT: I rice eat.)" },
-                { text: "She reads the report every morning." },
-                { text: "We completed the project on time." }
-              ]
-            },
-            { type: "example", pattern: "Subject + Verb + Object, in that fixed order",
+          { id: "nouns-plurals", title: "Nouns & Plurals", cards: [
+            { type: "concept", title: "Common, Proper, Plural, and Uncountable Nouns",
+              intro: "Nouns name people, places, and things, and most of them change form to show more than one.",
+              introTe: "నామవాచకాలు (Nouns) వ్యక్తులు, స్థలాలు, వస్తువులను తెలియజేస్తాయి. చాలా నామవాచకాలు ఒకటికి మించి ఉన్నప్పుడు రూపం మారుస్తాయి.",
+              points: [
+                { rule: "Common nouns name general things; proper nouns name specific people or places and start with a capital letter.",
+                  ruleTe: "Common nouns సాధారణ వస్తువులను తెలియజేస్తాయి; proper nouns నిర్దిష్ట వ్యక్తులు/స్థలాలను తెలియజేస్తాయి, ఇవి పెద్ద అక్షరంతో మొదలవుతాయి.",
+                  examples: [
+                    { text: "The manager is from India." },
+                    { text: "Ravi works at Infosys." },
+                    { text: "The city is very busy." },
+                    { text: "Hyderabad is a big city." }
+                  ] },
+                { rule: "Most nouns form the plural by adding -s. Nouns ending in -s, -sh, -ch, -x add -es.",
+                  ruleTe: "చాలా నామవాచకాలు బహువచనం కోసం -s చేరుస్తాయి. -s, -sh, -ch, -x తో ముగిసే పదాలు -es చేరుస్తాయి.",
+                  examples: [
+                    { text: "One laptop, two laptops." },
+                    { text: "One box, two boxes." },
+                    { text: "One class, two classes." },
+                    { text: "One brush, two brushes." }
+                  ] },
+                { rule: "Some nouns have irregular plural forms that do not follow the -s rule.",
+                  ruleTe: "కొన్ని నామవాచకాలు -s నియమాన్ని పాటించని అసాధారణ బహువచన రూపాలను కలిగి ఉంటాయి.",
+                  examples: [
+                    { text: "One man, two men." },
+                    { text: "One woman, two women." },
+                    { text: "One child, two children." },
+                    { text: "One tooth, two teeth." }
+                  ] },
+                { rule: "Uncountable nouns have no plural form — we cannot count them one by one.",
+                  ruleTe: "అగణనీయ నామవాచకాలకు (Uncountable nouns) బహువచన రూపం ఉండదు — వీటిని ఒక్కొక్కటిగా లెక్కించలేము.",
+                  examples: [
+                    { text: "I need some information." },
+                    { text: "She gave me good advice." },
+                    { text: "We don't have much water." },
+                    { text: "He has a lot of experience." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Nouns and plurals in real sentences",
               sentences: [
-                { text: "The manager approved the budget." },
-                { text: "Our team finished the migration last week." }
-              ]
-            },
-            { type: "mistake",
-              wrong: "I rice eat.",
-              right: "I eat rice.",
-              whyEn: "This is a word-for-word translation from Telugu SOV order. English needs the verb right after the subject, before the object.",
-              whyTe: "ఇది తెలుగు SOV క్రమం నుండి పదానికి-పదం అనువాదం. ఇంగ్లీష్‌లో కర్త తర్వాత వెంటనే క్రియ రావాలి, కర్మ దాని తర్వాత రావాలి."
-            },
+                { text: "The children are playing in the park." },
+                { text: "I bought two boxes of pens." },
+                { text: "Please share the information with the team." }
+              ] },
+            { type: "mistake", wrong: "He gave me many informations and advices.", right: "He gave me a lot of information and advice.",
+              whyEn: "'Information' and 'advice' are uncountable nouns in English — they never take a plural -s, even though similar Telugu words feel countable.",
+              whyTe: "'Information', 'advice' ఇంగ్లీష్‌లో అగణనీయ నామవాచకాలు — వీటికి ఎప్పుడూ బహువచనం -s చేర్చకూడదు, తెలుగులో సంబంధిత పదాలు గణించదగినట్లు అనిపించినా." },
             { type: "quiz", questions: [
+              { format: "fill", prompt: "One child, two ___.", answer: "children",
+                explanationEn: "'Child' has an irregular plural: children.", explanationTe: "'Child' అసాధారణ బహువచనం: children." },
+              { format: "mcq", prompt: "Which sentence is correct?",
+                options: ["I need some informations.", "I need some information.", "I need an information."],
+                answer: "I need some information.",
+                explanationEn: "'Information' is uncountable, so it has no plural and no article 'an'.",
+                explanationTe: "'Information' అగణనీయం, కాబట్టి దీనికి బహువచనం లేదా 'an' article ఉండవు." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["He the email sent.", "He sent the email."],
-                answer: "He sent the email.",
-                explanationEn: "English follows Subject–Verb–Object; the verb cannot move to the end.",
-                explanationTe: "ఇంగ్లీష్ Subject–Verb–Object క్రమాన్ని అనుసరిస్తుంది; క్రియను చివరకు మార్చకూడదు." },
-              { format: "fill", prompt: "She ___ (write) the report yesterday.",
-                answer: "wrote",
-                explanationEn: "Subject 'She' + verb 'wrote' + object 'the report', in that order.",
-                explanationTe: "కర్త 'She' + క్రియ 'wrote' + కర్మ 'the report', ఈ క్రమంలో." },
-              { format: "mcq", prompt: "Which order is correct in English?",
-                options: ["Subject–Object–Verb", "Subject–Verb–Object", "Object–Subject–Verb"],
-                answer: "Subject–Verb–Object",
-                explanationEn: "English is an SVO language, unlike Telugu which is SOV.",
-                explanationTe: "ఇంగ్లీష్ SVO భాష; తెలుగు SOV భాష — ఈ తేడా గుర్తుంచుకోవాలి." }
+                options: ["She gave me a useful advice.", "She gave me useful advice."],
+                answer: "She gave me useful advice.",
+                explanationEn: "'Advice' is uncountable, so we don't use 'a' before it.",
+                explanationTe: "'Advice' అగణనీయం, కాబట్టి దీని ముందు 'a' వాడకూడదు." }
+            ]}
+          ]},
+          { id: "pronouns", title: "Pronouns", cards: [
+            { type: "concept", title: "Subject, Object, and Possessive Pronouns",
+              intro: "Pronouns replace nouns so we don't repeat the same name again and again.",
+              introTe: "అదే పేరును పదే పదే చెప్పకుండా ఉండటానికి Pronouns నామవాచకాల స్థానంలో వాడతారు.",
+              points: [
+                { rule: "Subject pronouns (I, you, he, she, it, we, they) come before the verb, as the doer of the action.",
+                  ruleTe: "Subject pronouns (I, you, he, she, it, we, they) చర్య చేసేవారుగా verb ముందు వస్తాయి.",
+                  examples: [
+                    { text: "I work in the IT department." },
+                    { text: "He leads the engineering team." },
+                    { text: "She is our new manager." },
+                    { text: "They joined the meeting late." }
+                  ] },
+                { rule: "Object pronouns (me, him, her, us, them) come after the verb or a preposition, as the receiver of the action.",
+                  ruleTe: "Object pronouns (me, him, her, us, them) verb లేదా preposition తర్వాత, చర్యను స్వీకరించేవిగా వస్తాయి.",
+                  examples: [
+                    { text: "Please call me later." },
+                    { text: "The manager thanked him." },
+                    { text: "She sent the file to us." },
+                    { text: "I saw them at the office." }
+                  ] },
+                { rule: "Possessive pronouns (my, your, his, her, our, their) show ownership and come before a noun.",
+                  ruleTe: "Possessive pronouns (my, your, his, her, our, their) యజమాన్యాన్ని చూపుతాయి, నామవాచకం ముందు వస్తాయి.",
+                  examples: [
+                    { text: "This is my laptop." },
+                    { text: "Is that your badge?" },
+                    { text: "Their office is on the third floor." },
+                    { text: "Our team met the deadline." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Pronouns in real sentences",
+              sentences: [
+                { text: "I called him, but he did not answer." },
+                { text: "They gave us their feedback." },
+                { text: "She finished her report early." }
+              ] },
+            { type: "mistake", wrong: "Me and him went to the client meeting.", right: "He and I went to the client meeting.",
+              whyEn: "Subject pronouns (I, he) must be used as the doer of the action, not object pronouns (me, him). Also, in English it is polite to mention yourself last.",
+              whyTe: "చర్య చేసేవారిగా subject pronouns (I, he) వాడాలి, object pronouns (me, him) కాదు. అలాగే ఇంగ్లీష్‌లో మర్యాద కోసం మనల్ని చివర చెప్పుకోవాలి." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ finished the report before lunch.", options: ["Him", "He", "His"], answer: "He",
+                explanationEn: "As the subject of the sentence, we need the subject pronoun 'He'.",
+                explanationTe: "వాక్యంలో subject గా ఉండటానికి subject pronoun 'He' అవసరం." },
+              { format: "fill", prompt: "The manager gave ___ (I/me) some feedback.", answer: "me",
+                explanationEn: "After the verb 'gave', we need the object pronoun 'me'.",
+                explanationTe: "Verb 'gave' తర్వాత object pronoun 'me' అవసరం." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["Me and him went to the client meeting.", "He and I went to the client meeting."],
+                answer: "He and I went to the client meeting.",
+                explanationEn: "Use subject pronouns 'He' and 'I' as the doers of the action, and mention yourself last.",
+                explanationTe: "చర్య చేసేవారిగా subject pronouns 'He', 'I' వాడాలి, మనల్ని చివర చెప్పుకోవాలి." }
             ]}
           ]},
           { id: "articles", title: "Articles: a / an / the", cards: [
-            { type: "concept", title: "When to use a, an, the",
-              english: "'a/an' introduce one non-specific singular thing ('a car', 'an hour'). 'the' points to a specific thing both speaker and listener know ('the car I bought'). Use no article for general plurals/uncountables ('Cars are useful', 'Water is life').",
-              telugu: "'a/an' — నిర్దిష్టం కాని ఒక వస్తువు గురించి మొదటిసారి చెప్పేటప్పుడు. 'the' — ఇద్దరికీ తెలిసిన నిర్దిష్ట వస్తువు గురించి. సాధారణ బహువచనం/అగణనీయ నామవాచకాలకు article అవసరం లేదు.",
-              examples: [ { text: "I bought a phone. The phone is excellent." }, { text: "She is an engineer." } ] },
-            { type: "example", pattern: "'the' for known/unique things",
-              sentences: [ { text: "Please close the door." }, { text: "The sun rises in the east." } ] },
+            { type: "concept", title: "Using a, an, the",
+              intro: "Articles go before nouns to show whether we mean something general or something specific.",
+              introTe: "వస్తువు సాధారణమా లేక నిర్దిష్టమా అని చూపడానికి నామవాచకాల ముందు articles వస్తాయి.",
+              points: [
+                { rule: "Use 'a' before a consonant sound and 'an' before a vowel sound — for one non-specific thing.",
+                  ruleTe: "హల్లు ధ్వని ముందు 'a', అచ్చు ధ్వని ముందు 'an' — నిర్దిష్టం కాని ఒక వస్తువుకు.",
+                  examples: [
+                    { text: "I need a pen." },
+                    { text: "She is an engineer." },
+                    { text: "We waited an hour." },
+                    { text: "He bought a laptop." }
+                  ] },
+                { rule: "Use 'the' for a specific thing both people already know.",
+                  ruleTe: "ఇద్దరికీ తెలిసిన నిర్దిష్ట వస్తువుకు 'the' వాడండి.",
+                  examples: [
+                    { text: "Please close the door." },
+                    { text: "The report you sent is ready." },
+                    { text: "The sun is bright today." }
+                  ] },
+                { rule: "Use no article for general plurals and uncountable nouns.",
+                  ruleTe: "సాధారణ బహువచనం, అగణనీయ నామవాచకాలకు article అవసరం లేదు.",
+                  examples: [
+                    { text: "Cars are expensive." },
+                    { text: "Water is essential." },
+                    { text: "Engineers solve problems." }
+                  ] }
+              ] },
+            { type: "example", pattern: "a / an / the in real sentences",
+              sentences: [
+                { text: "I saw a movie. The movie was great." },
+                { text: "Open the window, please." },
+                { text: "Books help us learn." }
+              ] },
             { type: "mistake", wrong: "I am going to office.", right: "I am going to the office.",
               whyEn: "A specific workplace takes 'the'. Telugu has no articles, so they are easy to drop.",
               whyTe: "నిర్దిష్ట కార్యాలయానికి 'the' వాడాలి. తెలుగులో articles లేవు కాబట్టి వీటిని మర్చిపోవడం సహజం." },
@@ -207,229 +340,929 @@
               { format: "fill", prompt: "I saw ___ elephant at the zoo.", answer: "an",
                 explanationEn: "'an' before a vowel sound.", explanationTe: "అచ్చు ధ్వని ముందు 'an'." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["I am going to school by the bus.", "I am going to school by bus."],
-                answer: "I am going to school by bus.",
-                explanationEn: "Fixed transport phrases ('by bus') take no article.",
-                explanationTe: "'by bus' లాంటి స్థిర పదబంధాలకు article ఉండదు." },
-              { format: "mcq", prompt: "___ water is essential for life.", options: ["The", "A", "(no article)"],
-                answer: "(no article)", explanationEn: "General uncountable nouns take no article.",
-                explanationTe: "సాధారణ అగణనీయ నామవాచకాలకు article ఉండదు." }
+                options: ["I go to school by the bus.", "I go to school by bus."], answer: "I go to school by bus.",
+                explanationEn: "Fixed transport phrases ('by bus') take no article.", explanationTe: "'by bus' లాంటి స్థిర పదబంధాలకు article ఉండదు." },
+              { format: "mcq", prompt: "___ water is essential for life.", options: ["The", "A", "(no article)"], answer: "(no article)",
+                explanationEn: "General uncountable nouns take no article.", explanationTe: "సాధారణ అగణనీయ నామవాచకాలకు article ఉండదు." }
             ]}
           ]},
-          { id: "present-simple-continuous", title: "Present Simple vs Continuous", cards: [
-            { type: "concept", title: "Present Simple vs Present Continuous",
-              english: "Present Simple describes habits, facts, and permanent states ('I work in Hyderabad', 'Water boils at 100°C'). Present Continuous (am/is/are + -ing) describes actions happening right now or temporary situations ('I am working on a report right now'). Some verbs — called stative verbs (have, know, want, like, believe, own) — describe states, not actions, and are normally NOT used with -ing when they mean possession, knowledge, or emotion.",
-              telugu: "Present Simple అలవాట్లు, వాస్తవాలు, శాశ్వత స్థితులను చెబుతుంది ('I work in Hyderabad', 'Water boils at 100°C'). Present Continuous (am/is/are + -ing) ఇప్పుడు జరుగుతున్న పని లేదా తాత్కాలిక పరిస్థితిని చెబుతుంది ('I am working on a report right now'). Stative verbs (have, know, want, like, believe, own వంటివి) స్థితిని చెబుతాయి, పనిని కాదు — వీటిని ఆ అర్థంలో -ing తో వాడకూడదు.",
-              examples: [
-                { text: "I usually start work at 9 AM. (habit)" },
-                { text: "Right now, I am attending a meeting. (happening now)" },
-                { text: "I have a car. (NOT: I am having a car.)" }
-              ]
-            },
-            { type: "example", pattern: "Stative verbs stay in simple form",
-              sentences: [ { text: "She knows the answer." }, { text: "I like this design." }, { text: "He owns two houses." } ]
-            },
-            { type: "mistake",
-              wrong: "He is having a car.",
-              right: "He has a car.",
-              whyEn: "'have' meaning possession is a stative verb and does not take '-ing'. Use '-ing' with 'have' only in idioms like 'having lunch' or 'having a problem' (an action/experience), not for ownership.",
-              whyTe: "యజమాన్యం (possession) అర్థంలో 'have' ఒక stative verb — దీనికి '-ing' రాదు. 'having lunch' లేదా 'having a problem' లాంటి actions/experiences కు మాత్రమే '-ing' వాడాలి, యజమాన్యానికి కాదు."
-            },
+          { id: "present-simple", title: "Present Simple Tense", cards: [
+            { type: "concept", title: "Present Simple: Habits, Facts, and the -s Rule",
+              intro: "The present simple tense describes habits, routines, and things that are generally true.",
+              introTe: "Present simple tense అలవాట్లు, దైనందిన పనులు, సాధారణంగా నిజమైన విషయాలను తెలియజేస్తుంది.",
+              points: [
+                { rule: "Use the present simple for habits and daily routines.",
+                  ruleTe: "అలవాట్లు మరియు దైనందిన పనులకు present simple వాడతారు.",
+                  examples: [
+                    { text: "I wake up at 6 am." },
+                    { text: "We attend the stand-up meeting every day." },
+                    { text: "She takes the bus to work." },
+                    { text: "They check email every morning." }
+                  ] },
+                { rule: "Use the present simple for general facts and truths that don't change.",
+                  ruleTe: "మారని సాధారణ నిజాలు, సత్యాలకు present simple వాడతారు.",
+                  examples: [
+                    { text: "Water boils at 100 degrees Celsius." },
+                    { text: "The sun rises in the east." },
+                    { text: "India has many languages." },
+                    { text: "Servers store data." }
+                  ] },
+                { rule: "For he, she, and it (third person singular), add -s or -es to the verb.",
+                  ruleTe: "He, she, it (third person singular) కోసం verb కి -s లేదా -es చేర్చాలి.",
+                  examples: [
+                    { text: "He goes to the office by car." },
+                    { text: "She writes the weekly report." },
+                    { text: "It rains a lot in July." },
+                    { text: "The manager checks the schedule every Monday." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Present simple in real sentences",
+              sentences: [
+                { text: "I work in the finance team." },
+                { text: "He starts work at 9 am and finishes at 6 pm." },
+                { text: "Our team reviews the code every Friday." }
+              ] },
+            { type: "mistake", wrong: "He go to work by bus.", right: "He goes to work by bus.",
+              whyEn: "With he/she/it, the verb must add -s or -es. Telugu verbs don't change this way, so this -s is easy to forget.",
+              whyTe: "He/she/it తో verb కి -s లేదా -es చేర్చాలి. తెలుగు క్రియలు ఇలా మారవు కాబట్టి ఈ -s ని మర్చిపోవడం సహజం." },
             { type: "quiz", questions: [
+              { format: "fill", prompt: "She ___ (work) in the marketing team.", answer: "works",
+                explanationEn: "Third person singular 'she' needs the verb + s: works.",
+                explanationTe: "Third person singular 'she' కి verb + s అవసరం: works." },
+              { format: "mcq", prompt: "Water ___ at 100 degrees Celsius.", options: ["boil", "boils", "boiling"], answer: "boils",
+                explanationEn: "A general fact with 'water' (it) needs the -s form: boils.",
+                explanationTe: "'Water' (it) తో సాధారణ నిజానికి -s రూపం అవసరం: boils." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["I am knowing his name.", "I know his name."],
-                answer: "I know his name.",
-                explanationEn: "'know' is a stative verb and is not used in continuous form.",
-                explanationTe: "'know' ఒక stative verb — దీన్ని continuous రూపంలో వాడకూడదు." },
-              { format: "fill", prompt: "Water ___ (boil) at 100 degrees Celsius. (general fact)",
-                answer: "boils",
-                explanationEn: "Permanent scientific facts use Present Simple.",
-                explanationTe: "శాశ్వత శాస్త్రీయ వాస్తవాలకు Present Simple వాడతారు." },
-              { format: "mcq", prompt: "Right now, she ___ a report.",
-                options: ["writes", "is writing", "write"],
-                answer: "is writing",
-                explanationEn: "An action happening at this moment uses Present Continuous.",
-                explanationTe: "ఇప్పుడు జరుగుతున్న పనికి Present Continuous వాడతారు." }
+                options: ["He go to work by bus.", "He goes to work by bus."],
+                answer: "He goes to work by bus.",
+                explanationEn: "Third person singular 'he' requires 'goes', not 'go'.",
+                explanationTe: "Third person singular 'he' తో 'goes' అవసరం, 'go' కాదు." }
             ]}
           ]},
-          { id: "past-tense", title: "Past Tense (simple & continuous)", cards: [
-            { type: "concept", title: "Past Simple vs Past Continuous",
-              english: "Past Simple describes a completed action at a specific past time ('Yesterday I went to the office'). Past Continuous (was/were + -ing) describes an action in progress at a past moment, often interrupted by another action ('I was working when the power went off'). Regular verbs add '-ed' (worked, called); irregular verbs change form (go → went, eat → ate).",
-              telugu: "Past Simple గత కాలంలో పూర్తయిన పనిని చెబుతుంది ('Yesterday I went to the office'). Past Continuous (was/were + -ing) గత కాలంలో ఒక సమయంలో జరుగుతున్న పనిని చెబుతుంది, చాలాసార్లు మరో పని దాన్ని అంతరాయం చేస్తుంది ('I was working when the power went off'). Regular verbs కు '-ed' చేరుస్తారు (worked, called); irregular verbs రూపం మారుతుంది (go → went, eat → ate).",
-              examples: [
-                { text: "I visited my parents last weekend." },
-                { text: "She was cooking dinner when I called her." },
-                { text: "They went to Goa in December." }
-              ]
-            },
-            { type: "example", pattern: "Past Continuous for an interrupted action",
-              sentences: [ { text: "I was reading a book when the phone rang." }, { text: "We were driving to work when it started raining." } ]
-            },
-            { type: "mistake",
-              wrong: "Yesterday I go to the market.",
-              right: "Yesterday I went to the market.",
-              whyEn: "A past time word ('yesterday') needs a past-tense verb. 'go' must change to its past form 'went'; the present-tense form is a common carryover from thinking in Telugu, where the time word alone can feel like enough context.",
-              whyTe: "గత కాల పదం ('yesterday') ఉన్నప్పుడు క్రియ కూడా past tense లో ఉండాలి. 'go' ను 'went' గా మార్చాలి. తెలుగులో ఆలోచించేటప్పుడు కాల పదం ఒక్కటే సరిపోతుందని అనిపించడం వల్ల ఈ తప్పు జరుగుతుంది."
-            },
+          { id: "present-continuous", title: "Present Continuous Tense", cards: [
+            { type: "concept", title: "Present Continuous: Now and Temporary Situations",
+              intro: "The present continuous (am/is/are + verb-ing) describes actions happening right now or temporary situations around now.",
+              introTe: "Present continuous (am/is/are + verb-ing) ఇప్పుడు జరుగుతున్న చర్యలను లేదా ఇప్పటి చుట్టూ తాత్కాలిక పరిస్థితులను తెలియజేస్తుంది.",
+              points: [
+                { rule: "Use the present continuous (am/is/are + verb-ing) for actions happening right now.",
+                  ruleTe: "ఇప్పుడు జరుగుతున్న చర్యలకు present continuous (am/is/are + verb-ing) వాడండి.",
+                  examples: [
+                    { text: "She is writing an email." },
+                    { text: "They are having a meeting now." },
+                    { text: "I am reviewing the report." },
+                    { text: "We are waiting for the client." }
+                  ] },
+                { rule: "Use the present continuous for temporary situations happening around now, even if not this exact second.",
+                  ruleTe: "ఇప్పుడు ఖచ్చితంగా జరగకపోయినా, ఇప్పటి చుట్టూ తాత్కాలిక పరిస్థితులకు present continuous వాడండి.",
+                  examples: [
+                    { text: "I am staying with a friend this week." },
+                    { text: "We are working from the Chennai office this month." },
+                    { text: "She is learning German this year." },
+                    { text: "The team is testing a new tool these days." }
+                  ] },
+                { rule: "Some verbs (called stative verbs) describe states, not actions, and are NOT used in the continuous form — such as know, want, understand, and 'have' when it means possess.",
+                  ruleTe: "కొన్ని verbs (stative verbs) పరిస్థితులను తెలియజేస్తాయి, చర్యలను కాదు — వీటిని continuous రూపంలో వాడకూడదు — ఉదాహరణకు know, want, understand, మరియు 'have' (కలిగి ఉండటం అనే అర్థంలో).",
+                  examples: [
+                    { text: "I know the answer." },
+                    { text: "She wants a new laptop." },
+                    { text: "He understands the process." },
+                    { text: "They have two cars." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Present continuous in real sentences",
+              sentences: [
+                { text: "He is preparing the slides for tomorrow's meeting." },
+                { text: "I am living with my parents right now." },
+                { text: "She knows the client very well." }
+              ] },
+            { type: "mistake", wrong: "He is having a car.", right: "He has a car.",
+              whyEn: "'Have' meaning 'possess' is a stative verb and is not used in the continuous form. Use the simple present 'has' instead.",
+              whyTe: "'Have' అనేది 'కలిగి ఉండటం' అనే అర్థంలో stative verb, దీన్ని continuous రూపంలో వాడకూడదు. దీనికి బదులు simple present 'has' వాడాలి." },
             { type: "quiz", questions: [
-              { format: "fill", prompt: "Yesterday I ___ (go) to the market.",
-                answer: "went",
-                explanationEn: "'go' is irregular; its past form is 'went'.",
-                explanationTe: "'go' ఒక irregular verb; దీని past రూపం 'went'." },
+              { format: "mcq", prompt: "Right now, she ___ (write) a report.", options: ["writes", "is writing", "write"], answer: "is writing",
+                explanationEn: "An action happening right now needs the present continuous: is writing.",
+                explanationTe: "ఇప్పుడు జరుగుతున్న చర్యకు present continuous అవసరం: is writing." },
+              { format: "fill", prompt: "I ___ (stay) with a friend this week.", answer: "am staying",
+                explanationEn: "A temporary situation around now uses the present continuous: am staying.",
+                explanationTe: "ఇప్పటి తాత్కాలిక పరిస్థితికి present continuous వాడతారు: am staying." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["Last night, I was sleeping when the phone rang.", "Last night, I sleeping when the phone rang."],
-                answer: "Last night, I was sleeping when the phone rang.",
-                explanationEn: "Past Continuous needs 'was/were' before the '-ing' verb.",
-                explanationTe: "Past Continuous లో '-ing' క్రియ ముందు 'was/were' తప్పనిసరి." },
-              { format: "mcq", prompt: "She ___ dinner when I arrived.",
-                options: ["cooked", "was cooking", "cooks"],
-                answer: "was cooking",
-                explanationEn: "An action in progress at a past moment, interrupted by another event, uses Past Continuous.",
-                explanationTe: "గతంలో జరుగుతున్న పని, మరో సంఘటన దాన్ని అంతరాయం చేస్తే, Past Continuous వాడతారు." }
+                options: ["He is having a car.", "He has a car."],
+                answer: "He has a car.",
+                explanationEn: "'Have' meaning possess is stative and does not take the continuous form.",
+                explanationTe: "'కలిగి ఉండటం' అనే అర్థంలో 'have' stative verb, దీనికి continuous రూపం వాడకూడదు." }
             ]}
           ]},
-          { id: "future-forms", title: "Future: will / going to / shall", cards: [
-            { type: "concept", title: "will vs going to vs shall",
-              english: "Use 'going to' for plans already decided before speaking ('I am going to join a gym next month'). Use 'will' for decisions made at the moment of speaking, predictions, or promises ('I will help you now'). 'shall' is formal, mainly used with 'I/we' for offers or suggestions ('Shall we begin?'). A common mistake is using 'will' for a plan you already decided earlier — 'going to' is more natural there.",
-              telugu: "మాట్లాడే ముందు నుండే నిర్ణయించుకున్న ప్రణాళికలకు 'going to' వాడాలి ('I am going to join a gym next month'). మాట్లాడే క్షణంలో తీసుకున్న నిర్ణయాలకు, భవిష్యత్ అంచనాలకు, వాగ్దానాలకు 'will' వాడాలి ('I will help you now'). 'shall' అనేది మర్యాదపూర్వకం, ముఖ్యంగా 'I/we' తో ఆఫర్లు/సలహాలకు వాడతారు ('Shall we begin?'). ముందుగానే నిర్ణయించుకున్న ప్రణాళికకు 'will' వాడటం సాధారణ తప్పు — అక్కడ 'going to' సహజం.",
-              examples: [
-                { text: "I am going to start my own business next year. (already decided)" },
-                { text: "Okay, I will call the client right now. (decided this moment)" },
-                { text: "Shall we schedule the review for Friday?" }
-              ]
-            },
-            { type: "example", pattern: "'going to' for pre-decided plans",
-              sentences: [ { text: "We are going to launch the new app in July." }, { text: "She is going to attend the conference in Delhi." } ]
-            },
-            { type: "mistake",
-              wrong: "I will join a gym next month. (already planned earlier)",
-              right: "I am going to join a gym next month.",
-              whyEn: "Since this plan was decided before speaking, 'going to' is correct. 'will' suggests a fresh, on-the-spot decision, which does not fit here.",
-              whyTe: "ఈ ప్రణాళిక మాట్లాడే ముందు నుండే నిర్ణయించుకున్నారు కాబట్టి 'going to' సరైనది. 'will' అనేది ఆ క్షణంలో తీసుకున్న కొత్త నిర్ణయాన్ని సూచిస్తుంది, ఇక్కడ అది సరిపోదు."
-            },
+          { id: "past-simple", title: "Past Simple Tense", cards: [
+            { type: "concept", title: "Past Simple: Completed Actions at a Definite Time",
+              intro: "The past simple describes actions that started and finished at a definite time in the past.",
+              introTe: "Past simple గతంలో ఒక నిర్దిష్ట సమయంలో మొదలై పూర్తయిన చర్యలను తెలియజేస్తుంది.",
+              points: [
+                { rule: "Use the past simple for completed actions at a definite past time (yesterday, last week, in 2020).",
+                  ruleTe: "గతంలో ఒక నిర్దిష్ట సమయంలో (yesterday, last week, in 2020) పూర్తయిన చర్యలకు past simple వాడండి.",
+                  examples: [
+                    { text: "I finished the report yesterday." },
+                    { text: "We submitted the proposal last week." },
+                    { text: "She joined the company in 2020." },
+                    { text: "He called the client this morning." }
+                  ] },
+                { rule: "Regular verbs form the past simple by adding -ed to the base verb.",
+                  ruleTe: "Regular verbs కి past simple కోసం base verb కి -ed చేరుస్తారు.",
+                  examples: [
+                    { text: "I worked late last night." },
+                    { text: "She emailed the client." },
+                    { text: "We reviewed the design." },
+                    { text: "They completed the task." }
+                  ] },
+                { rule: "Many common verbs are irregular and do not follow the -ed rule — their past forms must be learned separately.",
+                  ruleTe: "చాలా common verbs అసాధారణమైనవి (irregular), వాటికి -ed నియమం వర్తించదు — వాటి past forms విడిగా నేర్చుకోవాలి.",
+                  examples: [
+                    { text: "I go to the office. Yesterday, I went to the office." },
+                    { text: "She sees the manager daily. Yesterday, she saw him." },
+                    { text: "We buy supplies every month. Last month, we bought a printer." },
+                    { text: "He takes the metro. Yesterday, he took a cab." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Past simple in real sentences",
+              sentences: [
+                { text: "We launched the product last year." },
+                { text: "She went to Delhi for the conference." },
+                { text: "They bought new laptops for the team." }
+              ] },
+            { type: "mistake", wrong: "Yesterday I go to the market.", right: "Yesterday I went to the market.",
+              whyEn: "A definite past time word like 'yesterday' needs the past simple form of the verb. 'Go' is irregular, so its past form is 'went', not 'goed'.",
+              whyTe: "'Yesterday' లాంటి నిర్దిష్ట గత సమయ పదానికి verb యొక్క past simple రూపం అవసరం. 'Go' అసాధారణం (irregular), దీని past రూపం 'went', 'goed' కాదు." },
             { type: "quiz", questions: [
-              { format: "choose-sentence", prompt: "Choose the correct sentence (plan decided last week):",
-                options: ["We will move to a new office next quarter.", "We are going to move to a new office next quarter."],
-                answer: "We are going to move to a new office next quarter.",
-                explanationEn: "A plan decided earlier uses 'going to', not 'will'.",
-                explanationTe: "ముందుగా నిర్ణయించుకున్న ప్రణాళికకు 'going to' వాడాలి, 'will' కాదు." },
-              { format: "fill", prompt: "The phone is ringing — I ___ (will) answer it. (decision right now)",
-                answer: "will",
-                explanationEn: "A decision made at the moment of speaking uses 'will'.",
-                explanationTe: "మాట్లాడే క్షణంలో తీసుకున్న నిర్ణయానికి 'will' వాడతారు." },
-              { format: "mcq", prompt: "___ we start the presentation now? (polite suggestion)",
-                options: ["Will", "Shall", "Going to"],
-                answer: "Shall",
-                explanationEn: "'Shall we…?' is the standard polite suggestion form.",
-                explanationTe: "మర్యాదపూర్వక సలహాకు 'Shall we…?' ప్రామాణిక రూపం." }
-            ]}
-          ]},
-          { id: "perfect-tenses", title: "Present Perfect & Past Perfect", cards: [
-            { type: "concept", title: "have/has + past participle; had + past participle",
-              english: "Present Perfect (have/has + past participle) connects the past to the present — for experiences, completed actions with present relevance, or things that started in the past and continue ('I have worked here for five years', 'She has already left'). Past Perfect (had + past participle) describes an action completed before another past action ('I had finished the report before the meeting started').",
-              telugu: "Present Perfect (have/has + past participle) గతాన్ని వర్తమానంతో కలుపుతుంది — అనుభవాలు, వర్తమానానికి సంబంధించిన పూర్తయిన పనులు, లేదా గతంలో మొదలై కొనసాగుతున్న పనులకు ('I have worked here for five years', 'She has already left'). Past Perfect (had + past participle) మరో గత సంఘటనకు ముందు పూర్తయిన పనిని చెబుతుంది ('I had finished the report before the meeting started').",
-              examples: [
-                { text: "I have visited Japan twice." },
-                { text: "He has already submitted the form." },
-                { text: "By the time I arrived, the meeting had already started." }
-              ]
-            },
-            { type: "example", pattern: "Past Perfect for 'earlier than another past event'",
-              sentences: [ { text: "She had left the office before I called." }, { text: "We had completed the testing before the deadline." } ]
-            },
-            { type: "mistake",
-              wrong: "I did not saw the email.",
-              right: "I have not seen the email. / I did not see the email.",
-              whyEn: "'did' (past simple auxiliary) cannot combine with 'saw' (past simple form) — only one past marker is needed. Either use Present Perfect ('have not seen') for a recent, present-relevant fact, or Past Simple ('did not see') for a specific past time, but never mix 'did' with a past-tense verb.",
-              whyTe: "'did' (past simple auxiliary) తో 'saw' (past simple రూపం) కలపకూడదు — ఒక్క past marker మాత్రమే అవసరం. ఇప్పటికీ సంబంధించిన విషయానికి Present Perfect ('have not seen') వాడాలి, లేదా నిర్దిష్ట గత సమయానికి Past Simple ('did not see') వాడాలి — కానీ 'did' ను past-tense క్రియతో కలపకూడదు."
-            },
-            { type: "quiz", questions: [
+              { format: "fill", prompt: "Yesterday, I ___ (go) to the market.", answer: "went",
+                explanationEn: "'Go' is irregular; its past simple form is 'went'.",
+                explanationTe: "'Go' అసాధారణం; దీని past simple రూపం 'went'." },
+              { format: "mcq", prompt: "Last week, she ___ (see) the client in Mumbai.", options: ["see", "seen", "saw"], answer: "saw",
+                explanationEn: "The irregular past form of 'see' is 'saw'.",
+                explanationTe: "'See' యొక్క అసాధారణ past రూపం 'saw'." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["I did not saw the email.", "I did not see the email."],
-                answer: "I did not see the email.",
-                explanationEn: "'did' takes the base form of the verb ('see'), not the past form ('saw').",
-                explanationTe: "'did' తర్వాత క్రియ base రూపం ('see') రావాలి, past రూపం ('saw') కాదు." },
-              { format: "fill", prompt: "She ___ (already/finish) the project. (relevant to now)",
-                answer: "has already finished",
-                explanationEn: "Present Perfect links a completed action to present relevance.",
-                explanationTe: "వర్తమానానికి సంబంధించిన పూర్తయిన పనికి Present Perfect వాడతారు." },
-              { format: "mcq", prompt: "By the time the manager arrived, the team ___ the report.",
-                options: ["has finished", "had finished", "finished"],
-                answer: "had finished",
-                explanationEn: "An action completed before another past action uses Past Perfect.",
-                explanationTe: "మరో గత సంఘటనకు ముందు పూర్తయిన పనికి Past Perfect వాడతారు." }
+                options: ["Yesterday I go to the market.", "Yesterday I went to the market."],
+                answer: "Yesterday I went to the market.",
+                explanationEn: "'Yesterday' needs the past simple form 'went', not the present form 'go'.",
+                explanationTe: "'Yesterday' కి past simple రూపం 'went' అవసరం, present రూపం 'go' కాదు." }
             ]}
           ]},
-          { id: "modals-can-may", title: "Modals: can/could, may/might", cards: [
-            { type: "concept", title: "can/could for ability, may/might for permission and possibility",
-              english: "'can' expresses ability or informal permission ('I can speak three languages', 'Can I leave early?'). 'could' is the past of 'can' or a more polite/tentative form ('Could you help me?'). 'may' expresses formal permission or possibility ('May I come in?', 'It may rain today'). 'might' expresses a weaker possibility ('It might rain'). Note: after a modal, always use the base verb — no 'to'.",
-              telugu: "'can' సామర్థ్యం లేదా అనధికారిక అనుమతిని సూచిస్తుంది ('I can speak three languages', 'Can I leave early?'). 'could' అనేది 'can' యొక్క past రూపం లేదా మర్యాదపూర్వకమైన/సందేహాత్మక రూపం ('Could you help me?'). 'may' అధికారిక అనుమతి లేదా సాధ్యతను సూచిస్తుంది ('May I come in?', 'It may rain today'). 'might' అనేది తక్కువ నిశ్చయత గల సాధ్యతను సూచిస్తుంది ('It might rain'). గమనిక: modal తర్వాత ఎప్పుడూ క్రియ base రూపమే వస్తుంది — 'to' రాదు.",
-              examples: [
-                { text: "She can drive a car." },
-                { text: "May I ask a question?" },
-                { text: "It might rain this evening, so carry an umbrella." }
-              ]
-            },
-            { type: "example", pattern: "Polite requests with 'Could' and formal permission with 'May'",
-              sentences: [ { text: "Could you please send the file?" }, { text: "May I use your phone for a minute?" } ]
-            },
-            { type: "mistake",
-              wrong: "Can I to go?",
-              right: "Can I go?",
-              whyEn: "Modals like 'can', 'may', 'could', 'might' are always followed directly by the base verb — never by 'to'. Adding 'to' is a common carryover from other verb patterns like 'want to go'.",
-              whyTe: "'can', 'may', 'could', 'might' వంటి modals తర్వాత నేరుగా క్రియ base రూపమే వస్తుంది — 'to' ఎప్పుడూ రాదు. 'want to go' వంటి patterns నుండి 'to' ను ఇక్కడ కూడా వాడేయడం సాధారణ తప్పు."
-            },
+          { id: "past-continuous", title: "Past Continuous Tense", cards: [
+            { type: "concept", title: "Past Continuous: Actions in Progress in the Past",
+              intro: "The past continuous (was/were + verb-ing) describes an action that was in progress at a certain time in the past.",
+              introTe: "Past continuous (was/were + verb-ing) గతంలో ఒక సమయంలో జరుగుతున్న చర్యను తెలియజేస్తుంది.",
+              points: [
+                { rule: "Use was/were + verb-ing for an action that was in progress at a specific past moment.",
+                  ruleTe: "గతంలో ఒక నిర్దిష్ట సమయంలో జరుగుతున్న చర్యకు was/were + verb-ing వాడండి.",
+                  examples: [
+                    { text: "I was working at 9 pm last night." },
+                    { text: "They were discussing the budget at that time." },
+                    { text: "She was preparing the slides all morning." },
+                    { text: "We were testing the app when the server crashed." }
+                  ] },
+                { rule: "Use the past continuous for a longer, ongoing action that was interrupted by a shorter action (often with 'when').",
+                  ruleTe: "ఒక పొడవైన, జరుగుతున్న చర్యను ఒక చిన్న చర్య అంతరాయం చేసినప్పుడు (సాధారణంగా 'when' తో) past continuous వాడండి.",
+                  examples: [
+                    { text: "I was cooking when he called." },
+                    { text: "She was presenting when the projector stopped working." },
+                    { text: "We were driving to the airport when it started raining." },
+                    { text: "He was sleeping when the alarm rang." }
+                  ] },
+                { rule: "Use the past continuous to set the scene or background for a story before mentioning what happened.",
+                  ruleTe: "ఒక కథలో ఏమి జరిగిందో చెప్పే ముందు నేపథ్యాన్ని (scene) చూపడానికి past continuous వాడండి.",
+                  examples: [
+                    { text: "It was raining heavily when we left the office." },
+                    { text: "Everyone was waiting when the manager finally arrived." },
+                    { text: "The team was celebrating when the news broke." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Past continuous in real sentences",
+              sentences: [
+                { text: "I was reviewing the code when the client called." },
+                { text: "We were having lunch when the fire alarm rang." },
+                { text: "She was traveling last week, so she missed the meeting." }
+              ] },
+            { type: "mistake", wrong: "While I cooked, the phone rang.", right: "While I was cooking, the phone rang.",
+              whyEn: "The longer, ongoing action ('cooking') needs the past continuous, while the shorter interrupting action ('rang') stays in the past simple. Using the past simple for both loses the sense of one action interrupting another.",
+              whyTe: "పొడవైన, జరుగుతున్న చర్య ('cooking') కి past continuous అవసరం, చిన్న అంతరాయం చర్య ('rang') past simple లోనే ఉంటుంది. రెండింటికీ past simple వాడితే ఒక చర్య మరోదాన్ని అంతరాయం చేసిన భావం తప్పిపోతుంది." },
             { type: "quiz", questions: [
+              { format: "mcq", prompt: "I ___ (work) when the power went out.", options: ["worked", "was working", "work"], answer: "was working",
+                explanationEn: "The longer ongoing action needs the past continuous: was working.",
+                explanationTe: "పొడవైన, జరుగుతున్న చర్యకు past continuous అవసరం: was working." },
+              { format: "fill", prompt: "She ___ (present) the report when her laptop crashed.", answer: "was presenting",
+                explanationEn: "The ongoing action interrupted by a shorter one needs the past continuous: was presenting.",
+                explanationTe: "చిన్న చర్య అంతరాయం చేసిన జరుగుతున్న చర్యకు past continuous అవసరం: was presenting." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["Can I to leave now?", "Can I leave now?"],
-                answer: "Can I leave now?",
-                explanationEn: "No 'to' after the modal 'can'.",
-                explanationTe: "'can' modal తర్వాత 'to' రాదు." },
-              { format: "fill", prompt: "___ I borrow your pen, please? (polite, formal permission)",
-                answer: "May",
-                explanationEn: "'May I…?' is the standard formal permission request.",
-                explanationTe: "అధికారిక అనుమతి కోరేటప్పుడు 'May I…?' ప్రామాణిక రూపం." },
-              { format: "mcq", prompt: "He ___ swim across the river when he was young. (past ability)",
-                options: ["can", "could", "may"],
-                answer: "could",
-                explanationEn: "'could' is the past form of 'can' for past ability.",
-                explanationTe: "గత సామర్థ్యానికి 'can' యొక్క past రూపం 'could' వాడతారు." }
+                options: ["While I cooked, the phone rang.", "While I was cooking, the phone rang."],
+                answer: "While I was cooking, the phone rang.",
+                explanationEn: "The ongoing action 'cooking' needs the past continuous to show it was interrupted by the shorter action 'rang'.",
+                explanationTe: "'Cooking' అనే జరుగుతున్న చర్యకు past continuous అవసరం, ఇది చిన్న చర్య 'rang' చేత అంతరాయం పొందిందని చూపడానికి." }
             ]}
           ]},
-          { id: "modals-must-should", title: "Modals: must / should / have to / ought to", cards: [
-            { type: "concept", title: "must, have to (obligation) vs should, ought to (advice)",
-              english: "'must' and 'have to' express obligation or necessity ('You must submit the form by Friday', 'I have to attend the meeting'). 'must' often comes from the speaker's own authority/feeling; 'have to' often comes from an external rule. 'should' and 'ought to' express advice or recommendation, not strict obligation ('You should exercise daily', 'You ought to apologize'). Like other modals, none of these are followed by 'to' + verb, except 'have to' and 'ought to' themselves, which already include 'to'.",
-              telugu: "'must' మరియు 'have to' బాధ్యత లేదా అవసరాన్ని సూచిస్తాయి ('You must submit the form by Friday', 'I have to attend the meeting'). 'must' సాధారణంగా మాట్లాడే వ్యక్తి యొక్క అభిప్రాయం నుండి వస్తుంది; 'have to' బాహ్య నియమం నుండి వస్తుంది. 'should' మరియు 'ought to' సలహాను సూచిస్తాయి, ఖచ్చితమైన బాధ్యతను కాదు ('You should exercise daily', 'You ought to apologize'). ఇతర modals లాగే, వీటికి కూడా 'to' + క్రియ రాదు — 'have to' మరియు 'ought to' లో 'to' అప్పటికే ఉంది.",
-              examples: [
-                { text: "You must wear a helmet while riding." },
-                { text: "I have to finish this by tomorrow." },
-                { text: "You should drink more water." }
-              ]
-            },
-            { type: "example", pattern: "'should'/'ought to' for advice, not strict rules",
-              sentences: [ { text: "You should back up your files regularly." }, { text: "We ought to review the plan before submitting it." } ]
-            },
-            { type: "mistake",
-              wrong: "You must to finish the report today.",
-              right: "You must finish the report today.",
-              whyEn: "'must' is followed directly by the base verb, with no 'to'. Only 'have to' and 'ought to' already contain 'to' as part of the fixed phrase.",
-              whyTe: "'must' తర్వాత నేరుగా క్రియ base రూపమే వస్తుంది, 'to' రాదు. 'have to' మరియు 'ought to' లో మాత్రమే 'to' ఆ స్థిర పదబంధంలో భాగంగా ఉంటుంది."
-            },
+          { id: "future-forms", title: "Future: will / going to / present continuous", cards: [
+            { type: "concept", title: "Talking About the Future",
+              intro: "English uses several forms to talk about the future, depending on whether it is a quick decision, a plan, or a fixed arrangement.",
+              introTe: "ఇది తక్షణ నిర్ణయమా, ప్రణాళికా, లేదా నిర్ధారించిన ఏర్పాటా అనే దాన్ని బట్టి ఇంగ్లీష్ future గురించి చెప్పడానికి వివిధ రూపాలను వాడుతుంది.",
+              points: [
+                { rule: "Use 'will' for instant decisions made at the moment of speaking, and for predictions.",
+                  ruleTe: "మాట్లాడే సమయంలో తక్షణ నిర్ణయాలకు, మరియు అంచనాలకు (predictions) 'will' వాడండి.",
+                  examples: [
+                    { text: "I will call the client right now." },
+                    { text: "It will probably rain this evening." },
+                    { text: "The team will finish on time, I think." },
+                    { text: "I'm hungry — I will order lunch." }
+                  ] },
+                { rule: "Use 'going to' for plans and intentions that were already decided before now.",
+                  ruleTe: "ఇప్పటికే ముందుగా నిర్ణయించుకున్న ప్రణాళికలు, ఉద్దేశాలకు 'going to' వాడండి.",
+                  examples: [
+                    { text: "We are going to launch the app next month." },
+                    { text: "She is going to join a new company." },
+                    { text: "I am going to visit my parents this weekend." },
+                    { text: "They are going to upgrade the servers." }
+                  ] },
+                { rule: "Use the present continuous for fixed arrangements — plans with a confirmed time and place, often already in a calendar.",
+                  ruleTe: "నిర్ధారించిన ఏర్పాట్లకు — సమయం, స్థలం ఖరారైన ప్రణాళికలకు, తరచుగా క్యాలెండర్‌లో ఉన్నవి — present continuous వాడండి.",
+                  examples: [
+                    { text: "I'm meeting the client at 3 pm." },
+                    { text: "We're flying to Bangalore on Monday." },
+                    { text: "She's starting her new job next week." },
+                    { text: "They're presenting the results tomorrow." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Future forms in real sentences",
+              sentences: [
+                { text: "I will check the server logs now." },
+                { text: "We are going to redesign the website this quarter." },
+                { text: "I'm meeting the vendor at 10 am tomorrow." }
+              ] },
+            { type: "mistake", wrong: "I will meet him tomorrow. (when it is already arranged)", right: "I'm meeting him tomorrow.",
+              whyEn: "When a plan is already fixed and arranged (a set time and place), use the present continuous or 'going to', not 'will'. 'Will' suggests a decision made right now, not a pre-made plan.",
+              whyTe: "ప్రణాళిక ఇప్పటికే నిర్ధారించబడి, ఏర్పాటు చేయబడితే (నిర్ధిష్ట సమయం, స్థలం), present continuous లేదా 'going to' వాడాలి, 'will' కాదు. 'Will' ఇప్పుడే తీసుకున్న నిర్ణయాన్ని సూచిస్తుంది, ముందుగా చేసిన ప్రణాళికను కాదు." },
             { type: "quiz", questions: [
+              { format: "mcq", prompt: "I'm thirsty — I ___ (get) some water. (decision now)", options: ["will get", "am getting", "get"], answer: "will get",
+                explanationEn: "An instant decision made right now uses 'will'.",
+                explanationTe: "ఇప్పుడే తీసుకున్న తక్షణ నిర్ణయానికి 'will' వాడతారు." },
+              { format: "fill", prompt: "We already booked the tickets — we ___ (fly) to Delhi on Friday.", answer: "are flying",
+                explanationEn: "A fixed, already-arranged plan uses the present continuous: are flying.",
+                explanationTe: "ఖరారైన, ముందుగా ఏర్పాటు చేసిన ప్రణాళికకు present continuous వాడతారు: are flying." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence (plan already arranged):",
+                options: ["I will meet him tomorrow.", "I'm meeting him tomorrow."],
+                answer: "I'm meeting him tomorrow.",
+                explanationEn: "Since the meeting is already arranged, the present continuous is correct, not 'will'.",
+                explanationTe: "మీటింగ్ ఇప్పటికే ఏర్పాటు చేయబడింది కాబట్టి, present continuous సరైనది, 'will' కాదు." }
+            ]}
+          ]},
+          { id: "present-perfect", title: "Present Perfect Tense", cards: [
+            { type: "concept", title: "Present Perfect: Past Actions That Connect to Now",
+              intro: "The present perfect (have/has + past participle) links a past action to the present moment.",
+              introTe: "Present perfect (have/has + past participle) గత చర్యను వర్తమాన సమయానికి కలుపుతుంది.",
+              points: [
+                { rule: "Use have/has + past participle to form the present perfect.",
+                  ruleTe: "Present perfect ఏర్పరచడానికి have/has + past participle వాడండి.",
+                  examples: [
+                    { text: "I have finished the report." },
+                    { text: "She has completed the training." },
+                    { text: "They have submitted the proposal." },
+                    { text: "We have updated the documentation." }
+                  ] },
+                { rule: "Use the present perfect for life experiences with no specific time mentioned.",
+                  ruleTe: "నిర్దిష్ట సమయం చెప్పకుండా జీవితంలోని అనుభవాలకు present perfect వాడండి.",
+                  examples: [
+                    { text: "I have visited Delhi." },
+                    { text: "She has worked in three countries." },
+                    { text: "We have used this tool before." },
+                    { text: "He has never missed a deadline." }
+                  ] },
+                { rule: "Use the present perfect when a past action has a result that matters right now.",
+                  ruleTe: "గత చర్య యొక్క ఫలితం ఇప్పుడు ప్రాముఖ్యత ఉన్నప్పుడు present perfect వాడండి.",
+                  examples: [
+                    { text: "I have finished the report, so you can review it now." },
+                    { text: "She has fixed the bug, so the app is working again." },
+                    { text: "They have left the office, so the meeting room is free." },
+                    { text: "We have updated the server, so it should be faster now." }
+                  ] },
+                { rule: "The present perfect often appears with time words like already, yet, ever, just, since, and for, which connect the past to now.",
+                  ruleTe: "Already, yet, ever, just, since, for లాంటి సమయ పదాలతో present perfect తరచుగా వస్తుంది, ఇవి గతాన్ని ఇప్పటికి కలుపుతాయి.",
+                  examples: [
+                    { text: "I have already sent the invoice." },
+                    { text: "Have you finished the report yet?" },
+                    { text: "Have you ever used this software?" },
+                    { text: "She has just joined the call." },
+                    { text: "We have worked together for five years." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Present perfect in real sentences",
+              sentences: [
+                { text: "I have not seen the email yet." },
+                { text: "He has already left for the airport." },
+                { text: "We have known each other since college." }
+              ] },
+            { type: "mistake", wrong: "I did not saw the email.", right: "I have not seen the email.",
+              whyEn: "'Did' (past simple) cannot combine with the past participle 'saw' — mixing tenses this way is incorrect. Use the present perfect 'have not seen' when the result matters now, or the plain past simple 'did not see'.",
+              whyTe: "'Did' (past simple) ని past participle 'saw' తో కలపకూడదు — ఇలా tenses కలపడం తప్పు. ఫలితం ఇప్పుడు ప్రాముఖ్యత ఉంటే present perfect 'have not seen' వాడండి, లేదా plain past simple 'did not see' వాడండి." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ you ever visited Japan?", options: ["Did", "Have", "Do"], answer: "Have",
+                explanationEn: "Life experience with no specific time uses the present perfect: Have you visited...",
+                explanationTe: "నిర్దిష్ట సమయం లేని జీవిత అనుభవానికి present perfect వాడతారు: Have you visited..." },
+              { format: "fill", prompt: "I ___ (already / finish) the report.", answer: "have already finished",
+                explanationEn: "A past action with a result that matters now uses the present perfect: have already finished.",
+                explanationTe: "ఫలితం ఇప్పుడు ప్రాముఖ్యత ఉన్న గత చర్యకు present perfect వాడతారు: have already finished." },
               { format: "choose-sentence", prompt: "Choose the correct sentence:",
-                options: ["You must to finish the report today.", "You must finish the report today."],
-                answer: "You must finish the report today.",
-                explanationEn: "'must' is never followed by 'to'.",
-                explanationTe: "'must' తర్వాత 'to' ఎప్పుడూ రాదు." },
-              { format: "fill", prompt: "You ___ (advice) apologize to her for being late.",
-                answer: "should",
-                explanationEn: "'should' expresses advice, not strict obligation.",
-                explanationTe: "సలహా ఇచ్చేటప్పుడు 'should' వాడతారు, ఖచ్చితమైన బాధ్యతకు కాదు." },
-              { format: "mcq", prompt: "According to company policy, all employees ___ wear ID badges.",
-                options: ["should", "have to", "might"],
-                answer: "have to",
-                explanationEn: "An external rule/policy creates obligation, expressed with 'have to'.",
-                explanationTe: "బాహ్య నియమం/పాలసీ బాధ్యతను కలిగిస్తుంది, దీనికి 'have to' వాడతారు." }
+                options: ["I did not saw the email.", "I have not seen the email."],
+                answer: "I have not seen the email.",
+                explanationEn: "'Did' cannot combine with the past participle 'saw'; use the present perfect 'have not seen' instead.",
+                explanationTe: "'Did' ని past participle 'saw' తో కలపకూడదు; బదులుగా present perfect 'have not seen' వాడండి." }
+            ]}
+          ]},
+          { id: "past-perfect", title: "Past Perfect Tense", cards: [
+            { type: "concept", title: "Past Perfect: The Earlier of Two Past Actions",
+              intro: "The past perfect (had + past participle) shows that one action happened before another action in the past.",
+              introTe: "Past perfect (had + past participle) గతంలో ఒక చర్య మరొక చర్య కంటే ముందు జరిగిందని చూపిస్తుంది.",
+              points: [
+                { rule: "Use had + past participle for an action completed before another past action.",
+                  ruleTe: "గతంలోని మరొక చర్యకు ముందు పూర్తయిన చర్య కోసం had + past participle వాడండి.",
+                  examples: [
+                    { text: "The train had left before I reached the station." },
+                    { text: "She had finished the report before the meeting started." },
+                    { text: "They had already left when we arrived." },
+                    { text: "We had submitted the proposal before the deadline." }
+                  ] },
+                { rule: "The past perfect makes the sequence of two past events clear — it shows which one happened first.",
+                  ruleTe: "Past perfect రెండు గత సంఘటనల క్రమాన్ని స్పష్టం చేస్తుంది — ఏది ముందు జరిగిందో చూపిస్తుంది.",
+                  examples: [
+                    { text: "I had eaten lunch before he called." },
+                    { text: "The manager had approved the budget before I joined." },
+                    { text: "She had learned English before she moved to the US." },
+                    { text: "The system had crashed before the backup ran." }
+                  ] },
+                { rule: "The past perfect is common with 'before', 'after', and 'by the time'.",
+                  ruleTe: "Past perfect 'before', 'after', 'by the time' పదాలతో సాధారణంగా వస్తుంది.",
+                  examples: [
+                    { text: "By the time I called, she had already left." },
+                    { text: "After he had checked the logs, he restarted the server." },
+                    { text: "Before we signed the contract, we had reviewed it twice." },
+                    { text: "By the time the client arrived, we had prepared the slides." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Past perfect in real sentences",
+              sentences: [
+                { text: "The train had left before I reached the station." },
+                { text: "She had already sent the email when I called her." },
+                { text: "We had finished the project by the time the client visited." }
+              ] },
+            { type: "mistake", wrong: "When I reached, the train already left.", right: "When I reached, the train had already left.",
+              whyEn: "To show that the train's departure happened before you reached the station, English needs the past perfect 'had left', not the simple past 'left'.",
+              whyTe: "రైలు వెళ్లిపోవడం మీరు స్టేషన్‌కి చేరుకోవడం కంటే ముందు జరిగిందని చూపించడానికి, ఇంగ్లీష్‌లో past perfect 'had left' అవసరం, simple past 'left' కాదు." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "By the time I arrived, the meeting ___ already ___.", options: ["has / started", "had / started", "did / start"], answer: "had / started",
+                explanationEn: "An action completed before another past action uses the past perfect: had started.",
+                explanationTe: "మరొక గత చర్యకు ముందు పూర్తయిన చర్యకు past perfect వాడతారు: had started." },
+              { format: "fill", prompt: "She ___ (finish) the report before the boss asked for it.", answer: "had finished",
+                explanationEn: "The report was completed before the boss asked, so the past perfect 'had finished' is correct.",
+                explanationTe: "బాస్ అడగడానికి ముందే రిపోర్ట్ పూర్తయింది, కాబట్టి past perfect 'had finished' సరైనది." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["When I reached, the train already left.", "When I reached, the train had already left."],
+                answer: "When I reached, the train had already left.",
+                explanationEn: "The train's departure happened before you reached, so the past perfect 'had left' is needed.",
+                explanationTe: "రైలు వెళ్లిపోవడం మీరు చేరుకోవడానికి ముందు జరిగింది, కాబట్టి past perfect 'had left' అవసరం." }
+            ]}
+          ]},
+          { id: "subject-verb-agreement", title: "Subject–Verb Agreement", cards: [
+            { type: "concept", title: "Making the Verb Match the Subject",
+              intro: "The verb in a sentence must agree in number with its subject — singular subjects take singular verbs, plural subjects take plural verbs.",
+              introTe: "వాక్యంలో verb దాని subject తో సంఖ్యలో సరిపోలాలి — ఏకవచన subject కి ఏకవచన verb, బహువచన subject కి బహువచన verb వస్తాయి.",
+              points: [
+                { rule: "A singular subject takes a singular verb; a plural subject takes a plural verb.",
+                  ruleTe: "ఏకవచన subject కి ఏకవచన verb వస్తుంది; బహువచన subject కి బహువచన verb వస్తుంది.",
+                  examples: [
+                    { text: "The manager approves the budget." },
+                    { text: "The managers approve the budget." },
+                    { text: "My sister works in Chennai." },
+                    { text: "My sisters work in Chennai." }
+                  ] },
+                { rule: "He, she, and it take the -s verb form in the simple present.",
+                  ruleTe: "He, she, it లతో simple present లో verb -s రూపం తీసుకుంటుంది.",
+                  examples: [
+                    { text: "He writes the report every week." },
+                    { text: "She checks the email first thing." },
+                    { text: "It works fine on my laptop." },
+                    { text: "The system sends an alert automatically." }
+                  ] },
+                { rule: "Indefinite subjects like everyone, everybody, each, and nobody are always singular.",
+                  ruleTe: "Everyone, everybody, each, nobody లాంటి indefinite subjects ఎప్పుడూ ఏకవచనం.",
+                  examples: [
+                    { text: "Everyone is here." },
+                    { text: "Everybody agrees with the plan." },
+                    { text: "Each employee has a badge." },
+                    { text: "Nobody knows the answer." }
+                  ] },
+                { rule: "Don't let the words between the subject and the verb confuse you — find the true subject and match the verb to it.",
+                  ruleTe: "Subject కి verb కి మధ్య ఉన్న పదాలు మీను గందరగోళపరచనివ్వకండి — నిజమైన subject ను కనుక్కొని దానికి verb సరిపోల్చండి.",
+                  examples: [
+                    { text: "The list of items is long." },
+                    { text: "The box of pens is on the table." },
+                    { text: "One of the reports is missing." },
+                    { text: "The team, along with the manager, is attending the call." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Subject-verb agreement in real sentences",
+              sentences: [
+                { text: "The list of items is long." },
+                { text: "Everyone in the office knows the new policy." },
+                { text: "Each of the departments submits its own report." }
+              ] },
+            { type: "mistake", wrong: "The list of items are long.", right: "The list of items is long.",
+              whyEn: "The true subject is 'list' (singular), not 'items'. The phrase 'of items' sits between the subject and verb but does not change the verb's number.",
+              whyTe: "నిజమైన subject 'list' (ఏకవచనం), 'items' కాదు. 'of items' అనే పదబంధం subject కి verb కి మధ్య ఉన్నా verb సంఖ్యను మార్చదు." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Everyone in the team ___ the new process.", options: ["know", "knows", "knowing"], answer: "knows",
+                explanationEn: "'Everyone' is always singular, so it takes the -s verb form: knows.",
+                explanationTe: "'Everyone' ఎప్పుడూ ఏకవచనం, కాబట్టి -s verb రూపం వస్తుంది: knows." },
+              { format: "fill", prompt: "The box of files ___ (be) on the shelf.", answer: "is",
+                explanationEn: "The true subject is 'box' (singular), so the verb is 'is', not 'are'.",
+                explanationTe: "నిజమైన subject 'box' (ఏకవచనం), కాబట్టి verb 'is', 'are' కాదు." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["The list of items are long.", "The list of items is long."],
+                answer: "The list of items is long.",
+                explanationEn: "The subject 'list' is singular, so the correct verb is 'is'.",
+                explanationTe: "Subject 'list' ఏకవచనం, కాబట్టి సరైన verb 'is'." }
+            ]}
+          ]},
+          { id: "questions-negatives", title: "Questions & Negatives", cards: [
+            { type: "concept", title: "Forming Questions and Negatives with Do/Does/Did",
+              intro: "In the simple tenses, English uses do, does, or did to form questions and negatives — the main verb itself does not change.",
+              introTe: "Simple tenses లో ప్రశ్నలు మరియు negatives ఏర్పరచడానికి ఇంగ్లీష్ do, does, లేదా did వాడుతుంది — ముఖ్య verb మారదు.",
+              points: [
+                { rule: "Use do/does (present) or did (past) to form questions and negatives in the simple tenses.",
+                  ruleTe: "Simple tenses లో ప్రశ్నలు, negatives ఏర్పరచడానికి do/does (present) లేదా did (past) వాడండి.",
+                  examples: [
+                    { text: "Do you work on Saturdays?" },
+                    { text: "Does she know the answer?" },
+                    { text: "Did they finish the project?" },
+                    { text: "I do not agree with the plan." }
+                  ] },
+                { rule: "The main verb stays in its base form after do/does/did — it never takes -s or a past ending.",
+                  ruleTe: "Do/does/did తర్వాత ముఖ్య verb base రూపంలోనే ఉంటుంది — దీనికి -s లేదా past ending రావు.",
+                  examples: [
+                    { text: "She does not know the schedule." },
+                    { text: "He did not attend the meeting." },
+                    { text: "Does he work here?" },
+                    { text: "Did she call you yesterday?" }
+                  ] },
+                { rule: "For question word order, use: question word + auxiliary + subject + verb.",
+                  ruleTe: "Question word order: question word + auxiliary + subject + verb.",
+                  examples: [
+                    { text: "Where are you going?" },
+                    { text: "What did you say?" },
+                    { text: "Why does he leave early?" },
+                    { text: "When will they arrive?" }
+                  ] }
+              ] },
+            { type: "example", pattern: "Questions and negatives in real sentences",
+              sentences: [
+                { text: "Where are you going?" },
+                { text: "He doesn't like tea." },
+                { text: "Did you send the invoice yesterday?" }
+              ] },
+            { type: "mistake", wrong: "Where you are going?", right: "Where are you going?",
+              whyEn: "In questions, the auxiliary verb (are) must come before the subject (you): question word + auxiliary + subject + verb.",
+              whyTe: "ప్రశ్నల్లో auxiliary verb (are) subject (you) కి ముందు రావాలి: question word + auxiliary + subject + verb." },
+            { type: "mistake", wrong: "He don't like tea.", right: "He doesn't like tea.",
+              whyEn: "With he/she/it, the negative auxiliary is 'doesn't', not 'don't'. The main verb 'like' stays in its base form.",
+              whyTe: "He/she/it తో negative auxiliary 'doesn't', 'don't' కాదు. ముఖ్య verb 'like' base రూపంలోనే ఉంటుంది." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ she work on weekends?", options: ["Do", "Does", "Is"], answer: "Does",
+                explanationEn: "With 'she', the question auxiliary is 'Does'.",
+                explanationTe: "'She' తో question auxiliary 'Does'." },
+              { format: "fill", prompt: "He ___ (not / like) coffee.", answer: "does not like",
+                explanationEn: "With 'he', the negative is 'does not' + base verb: does not like.",
+                explanationTe: "'He' తో negative 'does not' + base verb: does not like." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["Where you are going?", "Where are you going?"],
+                answer: "Where are you going?",
+                explanationEn: "The auxiliary 'are' must come before the subject 'you' in a question.",
+                explanationTe: "ప్రశ్నలో auxiliary 'are' subject 'you' కి ముందు రావాలి." }
+            ]}
+          ]},
+          { id: "prepositions", title: "Prepositions: in / on / at, to / for", cards: [
+            { type: "concept", title: "Prepositions of Time: at, on, in",
+              intro: "English uses different prepositions for different kinds of time expressions.",
+              introTe: "వివిధ రకాల సమయ వ్యక్తీకరణలకు ఇంగ్లీష్ వేర్వేరు prepositions వాడుతుంది.",
+              points: [
+                { rule: "Use 'at' with a specific clock time.",
+                  ruleTe: "నిర్దిష్ట గడియార సమయంతో 'at' వాడండి.",
+                  examples: [
+                    { text: "The meeting starts at 10 o'clock." },
+                    { text: "I wake up at 6 a.m." },
+                    { text: "We will call you at 3 p.m." },
+                    { text: "The office closes at midnight." }
+                  ] },
+                { rule: "Use 'on' with days and dates.",
+                  ruleTe: "రోజులు మరియు తేదీలతో 'on' వాడండి.",
+                  examples: [
+                    { text: "The report is due on Friday." },
+                    { text: "We joined the company on 1st March." },
+                    { text: "The event is on Monday." },
+                    { text: "She was born on 15th August." }
+                  ] },
+                { rule: "Use 'in' with months, years, and parts of the day.",
+                  ruleTe: "నెలలు, సంవత్సరాలు, మరియు రోజులోని భాగాలతో 'in' వాడండి.",
+                  examples: [
+                    { text: "The project starts in June." },
+                    { text: "She joined in 2019." },
+                    { text: "I usually work in the morning." },
+                    { text: "We have a call in the evening." }
+                  ] }
+              ] },
+            { type: "concept", title: "Prepositions of Place, and 'to' vs 'for'",
+              intro: "Prepositions of place show position, and 'to' and 'for' show direction versus purpose.",
+              introTe: "Place prepositions స్థానాన్ని చూపిస్తాయి, మరియు 'to', 'for' దిక్కు (direction) మరియు ఉద్దేశ్యాన్ని (purpose) చూపిస్తాయి.",
+              points: [
+                { rule: "Use 'at' for a specific point, 'on' for a surface, and 'in' for an enclosed space.",
+                  ruleTe: "నిర్దిష్ట బిందువుకు 'at', ఉపరితలానికి 'on', మరియు మూసిన స్థలానికి 'in' వాడండి.",
+                  examples: [
+                    { text: "She is waiting at the bus stop." },
+                    { text: "The file is on the desk." },
+                    { text: "The documents are in the drawer." },
+                    { text: "We met at the entrance." }
+                  ] },
+                { rule: "Use 'to' for direction or destination, and 'for' for purpose or benefit.",
+                  ruleTe: "దిక్కు లేదా గమ్యస్థానానికి 'to' వాడండి, ఉద్దేశ్యం లేదా ప్రయోజనానికి 'for' వాడండి.",
+                  examples: [
+                    { text: "I am going to the office." },
+                    { text: "She sent the file to the client." },
+                    { text: "This laptop is for work." },
+                    { text: "We bought this software for the new project." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Prepositions in real sentences",
+              sentences: [
+                { text: "The meeting is at 10 a.m. on Monday in June." },
+                { text: "He is at the airport, waiting for his flight to Chennai." },
+                { text: "I will discuss the plan with the team in the morning." }
+              ] },
+            { type: "mistake", wrong: "I will discuss about the plan.", right: "I will discuss the plan.",
+              whyEn: "The verb 'discuss' already means 'to talk about', so it never takes 'about' after it — 'discuss' is followed directly by the object.",
+              whyTe: "'Discuss' verb కి అర్థమే 'about మాట్లాడటం', కాబట్టి దీని తర్వాత 'about' ఎప్పుడూ రాదు — 'discuss' తర్వాత నేరుగా object వస్తుంది." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "The training starts ___ 9 a.m. ___ Monday.", options: ["at / on", "on / at", "in / on"], answer: "at / on",
+                explanationEn: "Use 'at' with clock times and 'on' with days: at 9 a.m. on Monday.",
+                explanationTe: "గడియార సమయాలతో 'at', రోజులతో 'on' వాడతారు: at 9 a.m. on Monday." },
+              { format: "fill", prompt: "She joined the company ___ 2020. (fill the preposition)", answer: "in",
+                explanationEn: "Use 'in' with years: in 2020.",
+                explanationTe: "సంవత్సరాలతో 'in' వాడతారు: in 2020." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I will discuss about the plan.", "I will discuss the plan."],
+                answer: "I will discuss the plan.",
+                explanationEn: "'Discuss' is never followed by 'about'.",
+                explanationTe: "'Discuss' తర్వాత ఎప్పుడూ 'about' రాదు." }
+            ]}
+          ]},
+          { id: "modals-can-may", title: "Modals: can / could, may / might", cards: [
+            { type: "concept", title: "Ability, Permission, and Possibility with Modals",
+              intro: "Modal verbs like can, could, may, and might add meanings such as ability, permission, and possibility to the main verb.",
+              introTe: "Can, could, may, might లాంటి modal verbs ముఖ్య verb కి ability (సామర్థ్యం), permission (అనుమతి), possibility (సంభావ్యత) లాంటి అర్థాలను చేరుస్తాయి.",
+              points: [
+                { rule: "Use can/could to talk about ability.",
+                  ruleTe: "Ability (సామర్థ్యం) గురించి చెప్పడానికి can/could వాడండి.",
+                  examples: [
+                    { text: "I can drive." },
+                    { text: "She can speak three languages." },
+                    { text: "He could swim when he was five." },
+                    { text: "We can finish this by tomorrow." }
+                  ] },
+                { rule: "Use can/could for informal permission and requests.",
+                  ruleTe: "అనధికారిక అనుమతి మరియు అభ్యర్థనలకు can/could వాడండి.",
+                  examples: [
+                    { text: "Can I leave early today?" },
+                    { text: "Could you send me the file?" },
+                    { text: "Can we reschedule the call?" },
+                    { text: "Could I ask you something?" }
+                  ] },
+                { rule: "Use may/might for formal permission and for possibility.",
+                  ruleTe: "అధికారిక అనుమతి మరియు possibility (సంభావ్యత) కోసం may/might వాడండి.",
+                  examples: [
+                    { text: "May I come in?" },
+                    { text: "You may leave the meeting now." },
+                    { text: "It may rain this evening." },
+                    { text: "She might join us later." }
+                  ] },
+                { rule: "A modal verb is always followed by the base form of the verb — never 'to', never an -s ending.",
+                  ruleTe: "Modal verb తర్వాత ఎప్పుడూ verb base రూపం వస్తుంది — 'to' రాదు, -s ending రాదు.",
+                  examples: [
+                    { text: "Can I go now?" },
+                    { text: "She may join later." },
+                    { text: "He can finish it today." },
+                    { text: "They might come to the office." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Modals in real sentences",
+              sentences: [
+                { text: "Can I leave early today?" },
+                { text: "It may rain, so take an umbrella." },
+                { text: "She could not attend the meeting yesterday." }
+              ] },
+            { type: "mistake", wrong: "Can I to go now?", right: "Can I go now?",
+              whyEn: "A modal verb like 'can' is always followed directly by the base verb — 'to' never appears after a modal.",
+              whyTe: "'Can' లాంటి modal verb తర్వాత ఎప్పుడూ నేరుగా base verb వస్తుంది — modal తర్వాత 'to' ఎప్పుడూ రాదు." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ I ask you a question?", options: ["Can", "Cans", "Canning"], answer: "Can",
+                explanationEn: "The modal 'Can' is used as-is; modals never take -s or -ing.",
+                explanationTe: "Modal 'Can' అలాగే వాడతారు; modals కి ఎప్పుడూ -s లేదా -ing రావు." },
+              { format: "fill", prompt: "It ___ (may / rain) tomorrow.", answer: "may rain",
+                explanationEn: "'May' expresses possibility and is followed by the base verb: may rain.",
+                explanationTe: "'May' possibility ను తెలియజేస్తుంది, తర్వాత base verb వస్తుంది: may rain." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["Can I to go now?", "Can I go now?"],
+                answer: "Can I go now?",
+                explanationEn: "No 'to' ever follows a modal verb like 'can'.",
+                explanationTe: "'Can' లాంటి modal verb తర్వాత ఎప్పుడూ 'to' రాదు." }
+            ]}
+          ]},
+          { id: "modals-shall-will", title: "Modals: shall / will / would", cards: [
+            { type: "concept", title: "Future Facts, Offers, and Polite Requests with Modals",
+              intro: "Will, shall, and would are modal verbs used for future predictions, offers, and polite or hypothetical situations. Each has its own role in professional English.",
+              introTe: "Will, shall, would ఇవి future predictions (భవిష్యత్తు అంచనాలు), offers (ఆఫర్లు), polite/hypothetical situations కోసం వాడే modal verbs. Professional English లో వీటికి వేరువేరు పాత్రలు ఉంటాయి.",
+              points: [
+                { rule: "Use 'will' for future facts, predictions, and instant decisions.",
+                  ruleTe: "Future facts (భవిష్యత్ వాస్తవాలు), predictions (అంచనాలు), instant decisions (తక్షణ నిర్ణయాలు) కోసం 'will' వాడండి.",
+                  examples: [
+                    { text: "The meeting will start at 10 AM." },
+                    { text: "Sales will increase next quarter." },
+                    { text: "I will call the client right now." },
+                    { text: "It will probably rain this evening." }
+                  ] },
+                { rule: "Use 'shall' for offers and suggestions, mainly with I / we.",
+                  ruleTe: "Offers (ఆఫర్లు), suggestions (సూచనలు) కోసం, ముఖ్యంగా I / we తో, 'shall' వాడండి.",
+                  examples: [
+                    { text: "Shall I send you the report now?" },
+                    { text: "Shall we begin the meeting?" },
+                    { text: "Shall I book the tickets for the team?" },
+                    { text: "Shall we discuss this over lunch?" }
+                  ] },
+                { rule: "Use 'would' for polite requests, hypothetical situations, and past habits.",
+                  ruleTe: "Polite requests (మర్యాదపూర్వక అభ్యర్థనలు), hypothetical situations (ఊహాజనిత పరిస్థితులు), past habits (గత అలవాట్లు) కోసం 'would' వాడండి.",
+                  examples: [
+                    { text: "I would like a cup of coffee, please." },
+                    { text: "Would you mind sharing the file?" },
+                    { text: "If I had the budget, I would hire two more engineers." },
+                    { text: "When I was young, I would read a lot of books." }
+                  ] },
+                { rule: "Never stack two modal verbs together — use only one modal per verb phrase.",
+                  ruleTe: "ఎప్పుడూ రెండు modal verbs ను కలిపి వాడకండి — ఒక verb phrase లో ఒక్క modal మాత్రమే వాడండి.",
+                  examples: [
+                    { text: "I will be able to help you tomorrow." },
+                    { text: "She will have to attend the training." },
+                    { text: "We would like to reschedule the call." },
+                    { text: "He will need to submit the form again." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Shall / will / would in real sentences",
+              sentences: [
+                { text: "Shall I close the window?" },
+                { text: "The new policy will apply from next month." },
+                { text: "Would you like some tea?" }
+              ] },
+            { type: "mistake", wrong: "I will can help you tomorrow.", right: "I will be able to help you tomorrow.",
+              whyEn: "Two modal verbs cannot be stacked together. To express future ability, use 'will be able to' instead of 'will can'.",
+              whyTe: "రెండు modal verbs ను కలిపి వాడలేము. Future ability ను చెప్పడానికి 'will can' కాకుండా 'will be able to' వాడాలి." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ I open the door for you?", options: ["Shall", "Will to", "Woulding"], answer: "Shall",
+                explanationEn: "'Shall I...?' is the standard way to make a polite offer.",
+                explanationTe: "మర్యాదపూర్వక ఆఫర్ చేయడానికి 'Shall I...?' standard విధానం." },
+              { format: "fill", prompt: "If I had more time, I ___ (would / learn) a new language.", answer: "would learn",
+                explanationEn: "The hypothetical situation needs 'would' followed by the base verb: would learn.",
+                explanationTe: "Hypothetical situation కి 'would' తర్వాత base verb వస్తుంది: would learn." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I will can help you tomorrow.", "I will be able to help you tomorrow."],
+                answer: "I will be able to help you tomorrow.",
+                explanationEn: "Two modals cannot be stacked; 'will be able to' correctly expresses future ability.",
+                explanationTe: "రెండు modals ను కలిపి వాడలేము; 'will be able to' future ability ను సరిగ్గా తెలియజేస్తుంది." }
+            ]}
+          ]},
+          { id: "modals-must-should", title: "Modals: must / should / have to", cards: [
+            { type: "concept", title: "Obligation, Advice, and Prohibition",
+              intro: "Must, have to, and should express different levels of obligation and advice. Choosing the right one matters, especially in workplace communication.",
+              introTe: "Must, have to, should ఇవి వేరువేరు స్థాయిల obligation (బాధ్యత) మరియు advice (సలహా) ను తెలియజేస్తాయి. వీటిలో సరైనది ఎంచుకోవడం, ముఖ్యంగా workplace communication లో, ముఖ్యం.",
+              points: [
+                { rule: "Use 'must' for strong obligation that comes from the speaker's own judgment.",
+                  ruleTe: "మాట్లాడేవారి స్వంత అభిప్రాయం నుండి వచ్చే strong obligation (గట్టి బాధ్యత) కోసం 'must' వాడండి.",
+                  examples: [
+                    { text: "You must submit this report today." },
+                    { text: "We must fix this bug before release." },
+                    { text: "I must call the client back immediately." },
+                    { text: "You must double-check these numbers." }
+                  ] },
+                { rule: "Use 'have to' for obligation that comes from an outside rule or authority.",
+                  ruleTe: "బయటి నియమం లేదా authority నుండి వచ్చే obligation కోసం 'have to' వాడండి.",
+                  examples: [
+                    { text: "I have to wear a badge at work." },
+                    { text: "Employees have to log in by 9 AM." },
+                    { text: "We have to follow the company's security policy." },
+                    { text: "She has to renew her visa every year." }
+                  ] },
+                { rule: "Use 'should' or 'ought to' for advice and recommendations, not firm obligation.",
+                  ruleTe: "Firm obligation కాకుండా advice (సలహా), recommendations (సూచనలు) కోసం 'should' లేదా 'ought to' వాడండి.",
+                  examples: [
+                    { text: "You should back up your files regularly." },
+                    { text: "We should review the design before coding." },
+                    { text: "You ought to inform your manager first." },
+                    { text: "They should test this on a staging server." }
+                  ] },
+                { rule: "'Must not' means prohibition, but 'don't have to' means there is no necessity — these are different.",
+                  ruleTe: "'Must not' అంటే prohibition (నిషేధం), కానీ 'don't have to' అంటే అవసరం లేదు — ఇవి రెండూ వేరు.",
+                  examples: [
+                    { text: "You must not share this password with anyone." },
+                    { text: "You don't have to attend the call if you're busy." },
+                    { text: "Visitors must not enter this area." },
+                    { text: "You don't have to bring your laptop; we have spares." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Must / have to / should in real sentences",
+              sentences: [
+                { text: "All employees must wear their ID cards." },
+                { text: "You don't have to reply right now; tomorrow is fine." },
+                { text: "You should talk to HR about this." }
+              ] },
+            { type: "mistake", wrong: "You must to finish the report.", right: "You must finish the report.",
+              whyEn: "A modal verb like 'must' is never followed by 'to' — it goes directly before the base verb.",
+              whyTe: "'Must' లాంటి modal verb తర్వాత ఎప్పుడూ 'to' రాదు — నేరుగా base verb వస్తుంది." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Employees ___ swipe their card to enter the building.", options: ["have to", "must to", "shoulding"], answer: "have to",
+                explanationEn: "This obligation comes from a company rule, so 'have to' is correct.",
+                explanationTe: "ఈ obligation కంపెనీ నియమం నుండి వస్తుంది, కాబట్టి 'have to' సరైనది." },
+              { format: "fill", prompt: "You ___ (should / check) your email before the meeting.", answer: "should check",
+                explanationEn: "Advice is expressed with 'should' followed by the base verb: should check.",
+                explanationTe: "Advice ను 'should' తర్వాత base verb తో చెప్తారు: should check." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["You must to finish the report.", "You must finish the report."],
+                answer: "You must finish the report.",
+                explanationEn: "No 'to' ever follows the modal 'must'.",
+                explanationTe: "'Must' అనే modal తర్వాత ఎప్పుడూ 'to' రాదు." }
+            ]}
+          ]},
+          { id: "conjunctions", title: "Conjunctions & Linking Ideas", cards: [
+            { type: "concept", title: "Joining Words, Clauses, and Sentences",
+              intro: "Conjunctions and linking words connect ideas smoothly. Using the right type makes your writing and speech clearer, especially in professional reports and emails.",
+              introTe: "Conjunctions మరియు linking words ఆలోచనలను స్పష్టంగా కలుపుతాయి. సరైన రకాన్ని వాడితే, ముఖ్యంగా professional reports, emails లో, రాయడం, మాట్లాడం స్పష్టంగా ఉంటుంది.",
+              points: [
+                { rule: "Coordinating conjunctions (and, but, or, so) join two equal ideas.",
+                  ruleTe: "Coordinating conjunctions (and, but, or, so) రెండు సమాన ఆలోచనలను కలుపుతాయి.",
+                  examples: [
+                    { text: "She finished the code and tested it." },
+                    { text: "The design is good, but the deadline is tight." },
+                    { text: "We can call today, or we can email tomorrow." },
+                    { text: "The server was down, so we restarted it." }
+                  ] },
+                { rule: "Subordinating conjunctions (because, although, when, if) start a dependent clause that needs a main clause.",
+                  ruleTe: "Subordinating conjunctions (because, although, when, if) ఒక dependent clause ను మొదలుపెడతాయి, దానికి ఒక main clause అవసరం.",
+                  examples: [
+                    { text: "Because the server crashed, we lost some data." },
+                    { text: "Although it was late, we continued the meeting." },
+                    { text: "When the client calls, please transfer it to me." },
+                    { text: "If the budget is approved, we will start next week." }
+                  ] },
+                { rule: "Linking or transition words (however, therefore, for example) connect separate sentences in writing.",
+                  ruleTe: "Linking లేదా transition words (however, therefore, for example) రాతలో వేర్వేరు వాక్యాలను కలుపుతాయి.",
+                  examples: [
+                    { text: "The plan was solid. However, it needed more testing." },
+                    { text: "The client was unhappy. Therefore, we offered a refund." },
+                    { text: "We support many formats; for example, PDF and CSV." },
+                    { text: "Sales dropped last month. Nevertheless, the team stayed positive." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Conjunctions in real sentences",
+              sentences: [
+                { text: "Although the deadline was tight, the team delivered on time." },
+                { text: "We reviewed the code, and we approved the merge." },
+                { text: "The report was late; however, the quality was excellent." }
+              ] },
+            { type: "mistake", wrong: "Although it was late, but we continued.", right: "Although it was late, we continued.",
+              whyEn: "Use only one connector per sentence. 'Although' already links the two clauses, so 'but' is unnecessary and incorrect here.",
+              whyTe: "ఒక వాక్యంలో ఒక్క connector మాత్రమే వాడాలి. 'Although' ఇప్పటికే రెండు clauses ను కలుపుతుంది, కాబట్టి 'but' అవసరం లేదు, తప్పు." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ the report was late, the manager was satisfied with it.", options: ["Although", "So", "And"], answer: "Although",
+                explanationEn: "'Although' introduces a contrast between being late and being satisfactory.",
+                explanationTe: "'Although' late గా ఉండటానికి, satisfactory గా ఉండటానికి మధ్య వ్యత్యాసాన్ని చూపిస్తుంది." },
+              { format: "fill", prompt: "The server crashed, ___ we restarted it immediately.", answer: "so", explanationEn: "'So' shows the result of the server crashing.",
+                explanationTe: "'So' server crash అయినందుకు వచ్చిన ఫలితాన్ని చూపిస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["Although it was late, but we continued.", "Although it was late, we continued."],
+                answer: "Although it was late, we continued.",
+                explanationEn: "Only one connector is needed; using both 'although' and 'but' together is incorrect.",
+                explanationTe: "ఒక connector మాత్రమే అవసరం; 'although', 'but' రెండూ కలిపి వాడటం తప్పు." }
+            ]}
+          ]},
+          { id: "adjectives-adverbs", title: "Adjectives, Adverbs & Comparatives", cards: [
+            { type: "concept", title: "Describing Nouns, Verbs, and Comparing Things",
+              intro: "Adjectives describe nouns, while adverbs describe verbs. Comparatives and superlatives let you compare people, things, and performance.",
+              introTe: "Adjectives nouns ను వివరిస్తాయి, adverbs verbs ను వివరిస్తాయి. Comparatives, superlatives ద్వారా వ్యక్తులను, వస్తువులను, performance ను పోల్చవచ్చు.",
+              points: [
+                { rule: "Adjectives describe nouns — they come before the noun, or after 'be' and similar verbs.",
+                  ruleTe: "Adjectives nouns ను వివరిస్తాయి — ఇవి noun కి ముందు, లేదా 'be' లాంటి verbs తర్వాత వస్తాయి.",
+                  examples: [
+                    { text: "She is a careful engineer." },
+                    { text: "The engineer is careful." },
+                    { text: "This is an important decision." },
+                    { text: "The team seems confident." }
+                  ] },
+                { rule: "Adverbs describe verbs (how something is done), and are often formed by adding -ly to an adjective.",
+                  ruleTe: "Adverbs verbs ను వివరిస్తాయి (ఏదైనా ఎలా చేస్తారో చెప్తాయి), తరచుగా adjective కి -ly చేర్చి తయారవుతాయి.",
+                  examples: [
+                    { text: "She works carefully." },
+                    { text: "He explained the issue clearly." },
+                    { text: "They responded quickly to the client." },
+                    { text: "The team handled the crisis calmly." }
+                  ] },
+                { rule: "For comparatives and superlatives: short words add -er/-est; longer words use more/most.",
+                  ruleTe: "Comparatives, superlatives కోసం: short words కి -er/-est చేర్చాలి; longer words తో more/most వాడాలి.",
+                  examples: [
+                    { text: "This laptop is faster than the old one." },
+                    { text: "She is the fastest typist on the team." },
+                    { text: "This approach is more careful than the last one." },
+                    { text: "He is the most careful reviewer we have." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Adjectives and adverbs in real sentences",
+              sentences: [
+                { text: "He gave a clear presentation." },
+                { text: "He presented the results clearly." },
+                { text: "This solution is more efficient than the previous one." }
+              ] },
+            { type: "mistake", wrong: "She explained the plan very clear.", right: "She explained the plan very clearly.",
+              whyEn: "The verb 'explained' needs an adverb, not an adjective. 'Clearly' describes how she explained, so it must end in -ly.",
+              whyTe: "'Explained' అనే verb కి adverb అవసరం, adjective కాదు. ఆమె ఎలా explain చేసిందో చెప్పడానికి 'clearly' వాడాలి, అది -ly తో ముగియాలి." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "This new process is ___ than the old one.", options: ["more better", "better", "gooder"], answer: "better",
+                explanationEn: "'Better' is the irregular comparative of 'good'; 'more better' is incorrect double comparison.",
+                explanationTe: "'Better' అనేది 'good' యొక్క irregular comparative; 'more better' తప్పు double comparison." },
+              { format: "fill", prompt: "He answered the question ___ (quick).", answer: "quickly",
+                explanationEn: "The verb 'answered' needs the adverb form: quickly.",
+                explanationTe: "'Answered' అనే verb కి adverb రూపం అవసరం: quickly." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["She explained the plan very clear.", "She explained the plan very clearly."],
+                answer: "She explained the plan very clearly.",
+                explanationEn: "An adverb is needed to describe how she explained the plan.",
+                explanationTe: "ఆమె ఎలా plan ను explain చేసిందో చెప్పడానికి adverb అవసరం." }
+            ]}
+          ]},
+          { id: "conditionals", title: "Conditionals (If-sentences)", cards: [
+            { type: "concept", title: "Talking About Conditions and Their Results",
+              intro: "Conditional sentences describe a condition and its result, using 'if'. Different conditionals express general truths, real future possibilities, and unreal or hypothetical situations.",
+              introTe: "Conditional sentences 'if' వాడి ఒక condition (పరిస్థితి) మరియు దాని result (ఫలితం) ను వివరిస్తాయి. వేర్వేరు conditionals general truths (సాధారణ నిజాలు), real future possibilities (వాస్తవ భవిష్యత్ అవకాశాలు), unreal/hypothetical situations (ఊహాజనిత పరిస్థితులు) ను తెలియజేస్తాయి.",
+              points: [
+                { rule: "Zero conditional (if + present, present) describes general truths and facts.",
+                  ruleTe: "Zero conditional (if + present, present) general truths, facts ను వివరిస్తుంది.",
+                  examples: [
+                    { text: "If you heat water, it boils." },
+                    { text: "If you press this button, the screen turns on." },
+                    { text: "If employees log in late, the system flags it." },
+                    { text: "If the server overloads, it slows down." }
+                  ] },
+                { rule: "First conditional (if + present, will + base verb) describes real future possibilities.",
+                  ruleTe: "First conditional (if + present, will + base verb) real future possibilities ను వివరిస్తుంది.",
+                  examples: [
+                    { text: "If it rains, we will stay inside." },
+                    { text: "If the client approves the design, we will start development." },
+                    { text: "If you finish early, you will get extra time for review." },
+                    { text: "If the meeting runs late, I will call you afterward." }
+                  ] },
+                { rule: "Second conditional (if + past, would + base verb) describes unreal or hypothetical situations.",
+                  ruleTe: "Second conditional (if + past, would + base verb) unreal లేదా hypothetical situations ను వివరిస్తుంది.",
+                  examples: [
+                    { text: "If I had more time, I would learn French." },
+                    { text: "If she worked in sales, she would travel more." },
+                    { text: "If we had a bigger budget, we would hire more engineers." },
+                    { text: "If he were the manager, he would change the process." }
+                  ] },
+                { rule: "Never use 'will' inside the if-clause — the if-clause uses present or past tense, not 'will'.",
+                  ruleTe: "If-clause లో ఎప్పుడూ 'will' వాడకండి — if-clause present లేదా past tense వాడుతుంది, 'will' కాదు.",
+                  examples: [
+                    { text: "If I have time, I will call you." },
+                    { text: "If she finishes the report, she will send it." },
+                    { text: "If they agree, we will sign the contract." },
+                    { text: "If it works, we will roll it out to everyone." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Conditionals in real sentences",
+              sentences: [
+                { text: "If you save the file, it appears in the shared folder." },
+                { text: "If the client signs today, we will begin next week." },
+                { text: "If I were you, I would ask for an extension." }
+              ] },
+            { type: "mistake", wrong: "If I will have time, I will call you.", right: "If I have time, I will call you.",
+              whyEn: "The if-clause in a first conditional uses the present tense, not 'will'. 'Will' belongs only in the result clause.",
+              whyTe: "First conditional లో if-clause present tense వాడుతుంది, 'will' కాదు. 'Will' result clause లో మాత్రమే వస్తుంది." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "If water reaches 100°C, it ___.", options: ["boils", "will boil", "boiled"], answer: "boils",
+                explanationEn: "This is a zero conditional describing a general scientific fact, so present tense is used in both clauses.",
+                explanationTe: "ఇది zero conditional, ఒక general scientific fact ను వివరిస్తుంది, కాబట్టి రెండు clauses లో present tense వాడతారు." },
+              { format: "fill", prompt: "If I ___ (have) more experience, I would apply for that role.", answer: "had",
+                explanationEn: "This is a second conditional (hypothetical), so the if-clause uses the past tense: had.",
+                explanationTe: "ఇది second conditional (hypothetical), కాబట్టి if-clause past tense వాడుతుంది: had." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["If I will have time, I will call you.", "If I have time, I will call you."],
+                answer: "If I have time, I will call you.",
+                explanationEn: "The if-clause never uses 'will'; it should use the present tense 'have'.",
+                explanationTe: "If-clause లో ఎప్పుడూ 'will' రాదు; అది present tense 'have' వాడాలి." }
             ]}
           ]}
         ]},
@@ -1104,11 +1937,28 @@
       _conceptCard(card) {
         const c = this.el("div", { class: "card" });
         c.appendChild(this.el("h3", {}, card.title));
-        c.appendChild(this.el("p", {}, card.english));
+        if (Array.isArray(card.points)) {
+          if (card.intro) c.appendChild(this.el("p", { class: "concept-intro" }, card.intro));
+          if (card.introTe) c.appendChild(this._teluguReveal(card.introTe));
+          const ul = this.el("ul", { class: "rules" });
+          card.points.forEach(pt => {
+            const li = this.el("li", { class: "rule" });
+            li.appendChild(this.el("div", { class: "rule-text" }, pt.rule));
+            if (pt.ruleTe) li.appendChild(this._teluguReveal(pt.ruleTe));
+            (pt.examples || []).forEach(ex => {
+              li.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
+              if (ex.telugu) li.appendChild(this._teluguReveal(ex.telugu));
+            });
+            ul.appendChild(li);
+          });
+          c.appendChild(ul);
+          return c;
+        }
+        // legacy fallback
+        if (card.english) c.appendChild(this.el("p", {}, card.english));
         c.appendChild(this._teluguReveal(card.telugu));
         (card.examples || []).forEach(ex => {
-          const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text));
-          c.appendChild(line);
+          c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
           if (ex.telugu) c.appendChild(this._teluguReveal(ex.telugu));
         });
         return c;
