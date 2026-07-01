@@ -73,6 +73,12 @@
     .role-b { background:transparent; border:1px solid var(--line); }
     .shadow { margin-top:12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
       border-top:1px dashed var(--line); padding-top:10px; }
+    .cta { background:var(--accent); color:#fff; border:none; border-radius:10px;
+      padding:12px 18px; font-size:16px; margin:12px 0; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin:12px 0; }
+    .stat { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      padding:14px; cursor:pointer; }
+    .stat-icon { font-size:24px; }
   </style>
 </head>
 <body>
@@ -320,7 +326,43 @@
           "తెలుగులో చూడండి");
         return this.el("div", { class: "te-wrap" }, btn, body);
       },
-      _dashboard() { return this.el("div", {}, "Dashboard — coming in a later task"); },
+      _lastLesson() {
+        const keys = Object.keys(this.state.progress);
+        if (!keys.length) return null;
+        const key = keys[keys.length - 1];
+        const [phaseId, lessonId] = key.split("/");
+        return { phaseId, lessonId };
+      },
+      _dashboard() {
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, "🏠 Welcome back"));
+        const last = this._lastLesson();
+        if (last && CourseData.lesson(last.phaseId, last.lessonId)) {
+          const l = CourseData.lesson(last.phaseId, last.lessonId);
+          wrap.appendChild(this.el("button", { class: "cta",
+            onclick: () => { Router.state.phaseId = last.phaseId; Router.openLesson(last.lessonId); } },
+            "▸ Continue: " + l.title));
+        }
+        const grid = this.el("div", { class: "stat-grid" });
+        CourseData.phases.filter(p => !["dashboard", "review"].includes(p.id)).forEach(p => {
+          let done = 0;
+          p.lessons.forEach(l => {
+            const pr = this._lessonProgress(p.id, l.id);
+            if (pr.cardsDone.length === l.cards.length && pr.quizAttempted) done++;
+          });
+          const total = p.lessons.length || 0;
+          grid.appendChild(this.el("div", { class: "stat", onclick: () => Router.goPhase(p.id) },
+            this.el("div", { class: "stat-icon" }, p.icon),
+            this.el("div", {}, p.title),
+            this.el("div", { class: "muted" }, total ? (done + " / " + total + " lessons") : "coming soon")));
+        });
+        wrap.appendChild(grid);
+        wrap.appendChild(this.el("div", { class: "muted" },
+          "Review queue: " + this.state.review.wrongQuestions.length + " questions, " +
+          this.state.review.learningWords.length + " words. ",
+          this.el("button", { class: "opt", onclick: () => Router.goPhase("review") }, "Go to Review 🔁")));
+        return wrap;
+      },
       _lessonProgress(phaseId, lessonId) {
         const key = phaseId + "/" + lessonId;
         return this.state.progress[key] || { cardsDone: [], quizAttempted: false, quizScore: 0 };
