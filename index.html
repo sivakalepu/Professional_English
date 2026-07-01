@@ -56,6 +56,14 @@
     .dots { display:flex; gap:6px; }
     .dot { width:8px; height:8px; border-radius:50%; background:var(--panel-2); }
     .dot.on { background:var(--accent); }
+    .q { border-top:1px solid var(--line); padding:12px 0; }
+    .q-prompt { font-weight:600; margin-bottom:8px; }
+    .opt { margin:4px 6px 4px 0; }
+    .fill { padding:6px 10px; border-radius:8px; border:1px solid var(--line);
+      background:var(--panel-2); color:var(--text); }
+    .q-feedback { margin-top:8px; }
+    .q-feedback.ok { color:var(--good); }
+    .q-feedback.bad { color:var(--warn); }
   </style>
 </head>
 <body>
@@ -391,6 +399,50 @@
         c.appendChild(this.el("p", { class: "why" }, card.whyEn));
         c.appendChild(this._teluguReveal(card.whyTe));
         return c;
+      },
+      _quizCard(card, phaseId, lessonId) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, "Quiz"));
+        let correct = 0, answered = 0;
+        const total = card.questions.length;
+        const status = this.el("div", { class: "muted" }, "0 / " + total + " answered");
+        card.questions.forEach(q => {
+          const qWrap = this.el("div", { class: "q" });
+          qWrap.appendChild(this.el("div", { class: "q-prompt" }, q.prompt));
+          const feedback = this.el("div", { class: "q-feedback" });
+          const commit = given => {
+            if (qWrap.dataset.done) return;
+            qWrap.dataset.done = "1"; answered++;
+            const ok = Quiz.check(q, given);
+            if (ok) { correct++; feedback.className = "q-feedback ok"; feedback.textContent = "✓ Correct. " + q.explanationEn; }
+            else {
+              feedback.className = "q-feedback bad";
+              feedback.textContent = "✗ Answer: " + q.answer + ". " + q.explanationEn;
+              Quiz.recordWrong(this.state, phaseId, lessonId, q);
+            }
+            if (q.explanationTe) feedback.appendChild(this._teluguReveal(q.explanationTe));
+            status.textContent = answered + " / " + total + " answered";
+            this._saveQuizScore(phaseId, lessonId, correct, total);
+          };
+          if (q.format === "mcq" || q.format === "choose-sentence") {
+            q.options.forEach(opt => qWrap.appendChild(
+              this.el("button", { class: "opt", onclick: () => commit(opt) }, opt)));
+          } else if (q.format === "fill") {
+            const inp = this.el("input", { type: "text", class: "fill", placeholder: "type your answer" });
+            qWrap.appendChild(inp);
+            qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(inp.value) }, "Check"));
+          }
+          qWrap.appendChild(feedback);
+          c.appendChild(qWrap);
+        });
+        c.appendChild(status);
+        return c;
+      },
+      _saveQuizScore(phaseId, lessonId, correct, total) {
+        const key = phaseId + "/" + lessonId;
+        const pr = this._lessonProgress(phaseId, lessonId);
+        pr.quizAttempted = true; pr.quizScore = Math.round((correct / total) * 100);
+        this.state.progress[key] = pr; this.save();
       },
       _reviewView() { return this.el("div", {}, "Review — coming in a later task"); },
       _exportProgress() {},
