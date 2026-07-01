@@ -435,7 +435,166 @@
         ]},
         { id: "vocabulary", title: "Vocabulary", icon: "📗", lessons: [] },
         { id: "speaking", title: "Speaking", icon: "🗣", lessons: [] },
-        { id: "situations", title: "Situations", icon: "🎬", lessons: [] },
+        { id: "situations", title: "Situations", icon: "🎬", lessons: [
+          { id: "restaurant", title: "At a Restaurant", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "Could I see the menu, please?", telugu: "మెనూ చూడవచ్చా, దయచేసి?" },
+                { text: "I'd like to order now.", telugu: "నేను ఇప్పుడు ఆర్డర్ చేయాలనుకుంటున్నాను." },
+                { text: "Could we get a table for two?", telugu: "మాకు ఇద్దరికి ఒక టేబుల్ ఇవ్వగలరా?" },
+                { text: "Is this dish spicy?", telugu: "ఈ వంటకం మసాలాగా ఉంటుందా?" },
+                { text: "Could we get the bill, please?", telugu: "బిల్లు తీసుకురాగలరా, దయచేసి?" },
+                { text: "Everything was delicious, thank you.", telugu: "అన్నీ చాలా బాగున్నాయి, ధన్యవాదాలు." }
+              ] },
+            { type: "dialogue", roles: ["Waiter", "You"], lines: [
+              { role: "Waiter", text: "Good evening! Do you have a reservation?" },
+              { role: "You", text: "No, we don't. Could we get a table for two?" },
+              { role: "Waiter", text: "Of course, right this way. Here's the menu." },
+              { role: "You", text: "Thank you. Could you tell me if this dish is spicy?" },
+              { role: "Waiter", text: "It's medium spicy — we can make it milder if you like." },
+              { role: "You", text: "That's fine. I'd like to order the grilled chicken, please." },
+              { role: "Waiter", text: "Certainly. Anything to drink?" },
+              { role: "You", text: "Just water for now. And could we get the bill when we're done?" }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "The waiter asks 'Are you ready to order?' A natural reply is:",
+                options: ["Yes, I'd like the grilled chicken.", "I am having hunger.", "Give food."],
+                answer: "Yes, I'd like the grilled chicken.",
+                explanationEn: "'I'd like…' is the polite, natural ordering form.",
+                explanationTe: "'I'd like…' మర్యాదపూర్వక, సహజమైన ఆర్డర్ రూపం." },
+              { format: "choose-sentence", prompt: "You want the check at the end of the meal. Choose the correct sentence:",
+                options: ["Give me bill fast.", "Could we get the bill, please?"],
+                answer: "Could we get the bill, please?",
+                explanationEn: "'Could we get…, please?' is the polite way to request the bill.",
+                explanationTe: "బిల్లు అడిగేటప్పుడు 'Could we get…, please?' మర్యాదపూర్వక రూపం." },
+              { format: "fill", prompt: "___ I see the menu, please? (polite request)",
+                answer: "Could",
+                explanationEn: "'Could I…, please?' is the standard polite request form.",
+                explanationTe: "మర్యాదపూర్వక అభ్యర్థనకు 'Could I…, please?' ప్రామాణిక రూపం." }
+            ]}
+          ]},
+          { id: "airport", title: "At the Airport", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "I'd like to check in for my flight, please.", telugu: "నా విమానానికి చెక్-ఇన్ చేయాలనుకుంటున్నాను, దయచేసి." },
+                { text: "Could I have a window seat, please?", telugu: "నాకు కిటికీ సీటు ఇవ్వగలరా, దయచేసి?" },
+                { text: "How many bags am I allowed to check in?", telugu: "నేను ఎన్ని బ్యాగులు చెక్-ఇన్ చేయవచ్చు?" },
+                { text: "Which gate is the flight boarding from?", telugu: "విమానం ఏ గేటు నుండి బోర్డింగ్ అవుతుంది?" },
+                { text: "Is my flight on time?", telugu: "నా విమానం సమయానికి ఉందా?" },
+                { text: "Could you please remove your laptop from the bag?", telugu: "దయచేసి మీ ల్యాప్‌టాప్‌ను బ్యాగ్ నుండి తీయండి." }
+              ] },
+            { type: "dialogue", roles: ["Agent", "You"], lines: [
+              { role: "You", text: "Good morning. I'd like to check in for my flight to Chennai." },
+              { role: "Agent", text: "Sure, may I see your passport and ticket, please?" },
+              { role: "You", text: "Here you go. Could I have a window seat, please?" },
+              { role: "Agent", text: "Let me check... yes, seat 14A is available." },
+              { role: "You", text: "Great, thank you. How many bags am I allowed to check in?" },
+              { role: "Agent", text: "You're allowed one checked bag up to 20 kilos." },
+              { role: "You", text: "That works. Which gate does the flight board from?" },
+              { role: "Agent", text: "Gate 12. Boarding starts at 9:40, so please be there by 9:15." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "At the check-in counter, the most natural way to start is:",
+                options: ["I'd like to check in for my flight, please.", "I want fly now.", "Give me ticket."],
+                answer: "I'd like to check in for my flight, please.",
+                explanationEn: "'I'd like to…, please' is the polite, standard way to make this request.",
+                explanationTe: "ఈ అభ్యర్థన చేసేటప్పుడు 'I'd like to…, please' మర్యాదపూర్వక, ప్రామాణిక రూపం." },
+              { format: "choose-sentence", prompt: "You want to know your departure gate. Choose the correct sentence:",
+                options: ["Which gate is the flight boarding from?", "Flight gate where is?"],
+                answer: "Which gate is the flight boarding from?",
+                explanationEn: "This follows correct English question word order: question word + auxiliary + subject.",
+                explanationTe: "ఇది సరైన ఇంగ్లీష్ ప్రశ్న క్రమాన్ని అనుసరిస్తుంది: ప్రశ్న పదం + auxiliary + కర్త." },
+              { format: "fill", prompt: "___ I have an aisle seat instead? (polite request)",
+                answer: "Could",
+                explanationEn: "'Could I…?' politely requests a change or preference.",
+                explanationTe: "మార్పు లేదా ప్రాధాన్యతను మర్యాదపూర్వకంగా అడగడానికి 'Could I…?' వాడతారు." },
+              { format: "mcq", prompt: "At the security check, the officer says 'Please remove your laptop.' The best response is:",
+                options: ["Sure, one moment.", "No, why?", "Laptop is mine only."],
+                answer: "Sure, one moment.",
+                explanationEn: "A short, cooperative reply is the natural response to a security instruction.",
+                explanationTe: "సెక్యూరిటీ సూచనకు చిన్నదైన, సహకార సమాధానం సహజంగా సరిపోతుంది." }
+            ]}
+          ]},
+          { id: "workplace", title: "At the Workplace", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "Good morning! How was your weekend?", telugu: "గుడ్ మార్నింగ్! మీ వీకెండ్ ఎలా గడిచింది?" },
+                { text: "Could you help me with something, when you have a minute?", telugu: "మీకు కొంచెం సమయం ఉన్నప్పుడు, నాకు ఒక దానిలో సహాయం చేయగలరా?" },
+                { text: "I'm a bit stuck on this — could you take a look?", telugu: "నేను దీనిలో ఇరుక్కుపోయాను — మీరు ఒకసారి చూడగలరా?" },
+                { text: "I just wanted to give you a quick update.", telugu: "నేను మీకు ఒక చిన్న అప్డేట్ ఇవ్వాలనుకున్నాను." },
+                { text: "I'm on track to finish this by Friday.", telugu: "నేను శుక్రవారానికి దీన్ని పూర్తి చేయగలుగుతాను." },
+                { text: "Let me know if you need anything from my end.", telugu: "నా వైపు నుండి ఏదైనా అవసరమైతే చెప్పండి." }
+              ] },
+            { type: "dialogue", roles: ["Colleague", "You"], lines: [
+              { role: "Colleague", text: "Good morning! How was your weekend?" },
+              { role: "You", text: "Pretty good, thanks. How about yours?" },
+              { role: "Colleague", text: "Relaxing, thank you. Are you free for a minute?" },
+              { role: "You", text: "Sure, what's up?" },
+              { role: "Colleague", text: "I'm a bit stuck on the deployment script — could you take a look?" },
+              { role: "You", text: "Of course, send it over and I'll check it after this call." },
+              { role: "Colleague", text: "Thanks, I appreciate it. By the way, how's the migration going?" },
+              { role: "You", text: "Good progress — I'm on track to finish it by Friday." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "You want to ask a colleague for help without sounding demanding. The best phrasing is:",
+                options: ["Could you help me with something, when you have a minute?", "You help me now.", "Do my work please."],
+                answer: "Could you help me with something, when you have a minute?",
+                explanationEn: "This is polite and gives the colleague flexibility on timing.",
+                explanationTe: "ఇది మర్యాదపూర్వకంగా ఉంటుంది మరియు సమయం విషయంలో సహోద్యోగికి వెసులుబాటు ఇస్తుంది." },
+              { format: "choose-sentence", prompt: "You want to give a short status update. Choose the correct sentence:",
+                options: ["I am on track to finish this by Friday.", "I finishing Friday this."],
+                answer: "I am on track to finish this by Friday.",
+                explanationEn: "This is grammatically correct and uses the natural workplace phrase 'on track to'.",
+                explanationTe: "ఇది వ్యాకరణపరంగా సరైనది మరియు 'on track to' అనే సహజమైన ఆఫీసు పదబంధాన్ని వాడుతుంది." },
+              { format: "fill", prompt: "I'm a bit stuck on this — ___ you take a look? (polite request)",
+                answer: "could",
+                explanationEn: "'Could you…?' is the polite way to request help from a colleague.",
+                explanationTe: "సహోద్యోగి నుండి సహాయం అడగడానికి 'Could you…?' మర్యాదపూర్వక రూపం." }
+            ]}
+          ]},
+          { id: "conference", title: "In a Meeting / Conference", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "Sorry I'm a couple of minutes late — please continue.", telugu: "క్షమించండి, నేను కొన్ని నిమిషాలు లేటుగా వచ్చాను — దయచేసి కొనసాగించండి." },
+                { text: "Could I add a point here?", telugu: "నేను ఇక్కడ ఒక విషయం చేర్చవచ్చా?" },
+                { text: "I see it a bit differently, if I may.", telugu: "నేను దీన్ని కొంచెం వేరేలా చూస్తున్నాను, అనుమతి ఉంటే." },
+                { text: "That's a fair point, but have we considered the cost impact?", telugu: "అది సబబైన అభిప్రాయమే, కానీ మనం ఖర్చు ప్రభావాన్ని పరిగణించామా?" },
+                { text: "Let's park this and take it offline.", telugu: "దీన్ని ఇక్కడ ఆపి, తర్వాత విడిగా చర్చిద్దాం." },
+                { text: "To summarize, here are the next steps.", telugu: "సంగ్రహంగా, ఇవి తదుపరి చర్యలు." }
+              ] },
+            { type: "dialogue", roles: ["Chair", "You"], lines: [
+              { role: "Chair", text: "Let's get started. We're missing one person, but let's not wait." },
+              { role: "You", text: "Sorry I'm a couple of minutes late — please continue." },
+              { role: "Chair", text: "No problem. We were discussing the Q3 roadmap." },
+              { role: "You", text: "Could I add a point here? I think we're underestimating the timeline." },
+              { role: "Chair", text: "Go ahead, what's your concern?" },
+              { role: "You", text: "I see it a bit differently — the integration alone could take three weeks, not one." },
+              { role: "Chair", text: "That's fair. Let's park the exact dates and take it offline with the team." },
+              { role: "You", text: "Sounds good. To summarize, I'll share a revised timeline by tomorrow." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "You arrive a few minutes late to a meeting already in progress. The most professional thing to say is:",
+                options: ["Sorry I'm a couple of minutes late — please continue.", "Why you started without me?", "I am late, sorry sorry."],
+                answer: "Sorry I'm a couple of minutes late — please continue.",
+                explanationEn: "A brief apology followed by inviting the group to continue is professional and unobtrusive.",
+                explanationTe: "క్లుప్తమైన క్షమాపణ తర్వాత గ్రూప్‌ను కొనసాగించమనడం ప్రొఫెషనల్‌గా, ఆటంకం లేకుండా ఉంటుంది." },
+              { format: "choose-sentence", prompt: "You disagree with a point but want to stay polite. Choose the correct sentence:",
+                options: ["I see it a bit differently, if I may.", "You are wrong about this."],
+                answer: "I see it a bit differently, if I may.",
+                explanationEn: "This disagrees with the idea, not the person, and softens the pushback with 'if I may'.",
+                explanationTe: "ఇది వ్యక్తిని కాదు, అభిప్రాయాన్ని మాత్రమే విభేదిస్తుంది, మరియు 'if I may' తో విభేదాన్ని మృదువుగా చేస్తుంది." },
+              { format: "fill", prompt: "___ I add a point here, before we move on? (polite interruption)",
+                answer: "Could",
+                explanationEn: "'Could I…?' is the polite way to ask permission to speak in a meeting.",
+                explanationTe: "మీటింగ్‌లో మాట్లాడటానికి అనుమతి అడగడానికి 'Could I…?' మర్యాదపూర్వక రూపం." },
+              { format: "mcq", prompt: "To close a discussion and move to action items, a Head-level phrase to use is:",
+                options: ["To summarize, here are the next steps.", "Okay bye, meeting over.", "Discussion finished now."],
+                answer: "To summarize, here are the next steps.",
+                explanationEn: "This signals closure and transitions the group toward concrete action items, fitting a leadership tone.",
+                explanationTe: "ఇది చర్చను ముగించి, గ్రూప్‌ను నిర్దిష్ట చర్యలవైపు నడిపిస్తుంది — నాయకత్వ స్థాయికి సరిపోతుంది." }
+            ]}
+          ]}
+        ] },
         { id: "professional", title: "Professional", icon: "💼", lessons: [] },
         { id: "review", title: "Review", icon: "🔁", lessons: [] }
       ],
