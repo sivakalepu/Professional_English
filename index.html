@@ -68,6 +68,11 @@
     .vocab-head h3 { margin:0; }
     .pos { color:var(--muted); font-style:italic; }
     .rate { margin-top:12px; }
+    .dline { padding:6px 8px; border-radius:8px; margin:6px 0; }
+    .role-a { background:var(--panel-2); }
+    .role-b { background:transparent; border:1px solid var(--line); }
+    .shadow { margin-top:12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+      border-top:1px dashed var(--line); padding-top:10px; }
   </style>
 </head>
 <body>
@@ -432,6 +437,39 @@
         if (learning && i < 0) list.push({ word: card.word, meaningEn: card.meaningEn, meaningTe: card.meaningTe || null });
         if (!learning && i >= 0) list.splice(i, 1);
         this.save(); this.render();
+      },
+      _shadowControl(modelText) {
+        const btn = this.el("button", { class: "opt" }, "🎙 Record");
+        if (!Recorder.supported) return this.el("span", { class: "muted" }, "🎙 (recording not supported)");
+        let recording = false;
+        const playMine = this.el("button", { class: "opt", style: "display:none", onclick: () => Recorder.play() }, "▶ My voice");
+        const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
+        btn.onclick = async () => {
+          if (!recording) {
+            try { await Recorder.start(); recording = true; btn.textContent = "⏹ Stop"; }
+            catch (e) { btn.textContent = "🎙 (mic blocked)"; btn.disabled = true; }
+          } else {
+            await Recorder.stop(); recording = false; btn.textContent = "🎙 Record again";
+            playMine.style.display = "";
+          }
+        };
+        return this.el("div", { class: "shadow" },
+          this.el("span", { class: "muted" }, "Your turn — repeat it:"), playModel, btn, playMine);
+      },
+      _dialogueCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, "Dialogue"));
+        const roleClass = {}; card.roles.forEach((r, i) => roleClass[r] = i === 0 ? "role-a" : "role-b");
+        const allText = card.lines.map(l => l.text).join(" ");
+        c.appendChild(this.el("button", { class: "opt", onclick: () => TTS.speak(allText, this.state) }, "▶ Play whole conversation"));
+        card.lines.forEach(line => {
+          c.appendChild(this.el("div", { class: "dline " + roleClass[line.role] },
+            this._speakBtn(line.text),
+            this.el("b", {}, line.role + ": "),
+            this.el("span", {}, line.text)));
+        });
+        c.appendChild(this._shadowControl(card.lines[0].text));
+        return c;
       },
       _quizCard(card, phaseId, lessonId) {
         const c = this.el("div", { class: "card" });
