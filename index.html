@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>English Path — Foundations to Pro</title>
+  <style>
+    :root {
+      --bg: #14171c; --panel: #1e232b; --panel-2: #262d37;
+      --text: #e8ecf1; --muted: #9aa4b2; --accent: #4A90D9;
+      --good: #7BAA50; --warn: #D97A4A; --line: #333b47;
+      --radius: 12px; --maxw: 1100px;
+    }
+    :root[data-theme="light"] {
+      --bg: #f4f6f9; --panel: #ffffff; --panel-2: #eef1f5;
+      --text: #1b2027; --muted: #5b6675; --line: #d8dee7;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.6 system-ui, "Segoe UI", Roboto, sans-serif; }
+    #app { max-width: var(--maxw); margin: 0 auto; padding: 16px; }
+    button { font: inherit; cursor: pointer; }
+    .telugu { font-family: "Nirmala UI", "Gautami", system-ui; }
+    .hdr { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+      padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:12px; }
+    .hdr h1 { font-size:20px; margin:0; }
+    .hdr-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .muted { color:var(--muted); font-size:13px; }
+    .tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:10px; }
+    .tab { background:var(--panel); color:var(--text); border:1px solid var(--line);
+      border-radius:999px; padding:8px 14px; white-space:nowrap; }
+    .tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+    button, .btnlike { background:var(--panel); color:var(--text); border:1px solid var(--line);
+      border-radius:8px; padding:6px 10px; }
+    .icon { border:none; background:transparent; font-size:16px; padding:2px 6px; }
+    .te-wrap { margin:8px 0; }
+    .te-btn { background:var(--panel-2); border:1px dashed var(--accent); color:var(--accent);
+      border-radius:8px; padding:4px 10px; font-size:14px; }
+    .te-body { margin-top:6px; padding:8px 10px; background:var(--panel-2);
+      border-left:3px solid var(--accent); border-radius:6px; }
+    .telugu { font-size:17px; }
+    .lesson-list { display:flex; flex-direction:column; gap:8px; }
+    .lesson-item { display:flex; justify-content:space-between; align-items:center; gap:12px; text-align:left; }
+    .bar { width:120px; height:8px; background:var(--panel-2); border-radius:99px; overflow:hidden; }
+    .bar-fill { display:block; height:100%; background:var(--good); }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      padding:18px; margin:12px 0; }
+    .card h3 { margin-top:0; }
+    .ex { display:flex; align-items:center; gap:6px; margin:6px 0; }
+    .card.mistake { border-left:4px solid var(--warn); }
+    .mistake .wrong { color:var(--warn); text-decoration:line-through; }
+    .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px; }
+    .mistake .why { color:var(--muted); }
+    .back { margin-bottom:8px; }
+    .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+    .dots { display:flex; gap:6px; }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--panel-2); }
+    .dot.on { background:var(--accent); }
+    .q { border-top:1px solid var(--line); padding:12px 0; }
+    .q-prompt { font-weight:600; margin-bottom:8px; }
+    .opt { margin:4px 6px 4px 0; }
+    .fill { padding:6px 10px; border-radius:8px; border:1px solid var(--line);
+      background:var(--panel-2); color:var(--text); }
+    .q-feedback { margin-top:8px; }
+    .q-feedback.ok { color:var(--good); }
+    .q-feedback.bad { color:var(--warn); }
+    .vocab-head { display:flex; align-items:center; gap:8px; }
+    .vocab-head h3 { margin:0; }
+    .pos { color:var(--muted); font-style:italic; }
+    .rate { margin-top:12px; }
+    .dline { padding:6px 8px; border-radius:8px; margin:6px 0; }
+    .role-a { background:var(--panel-2); }
+    .role-b { background:transparent; border:1px solid var(--line); }
+    .shadow { margin-top:12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+      border-top:1px dashed var(--line); padding-top:10px; }
+    .cta { background:var(--accent); color:#fff; border:none; border-radius:10px;
+      padding:12px 18px; font-size:16px; margin:12px 0; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin:12px 0; }
+    .stat { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      padding:14px; cursor:pointer; }
+    .stat-icon { font-size:24px; }
+    @media (max-width: 640px) {
+      .hdr { flex-direction:column; align-items:flex-start; }
+      .lesson-item { flex-direction:column; align-items:flex-start; gap:4px; }
+      .bar { width:100%; }
+      .stepper { gap:8px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Loading…</div>
+  <script>
+    "use strict";
+    const Storage = {
+      KEY: "englishAppState",
+      _defaults() {
+        return {
+          progress: {},
+          settings: { theme: "dark", voiceRate: 0.9, voiceName: null },
+          review: { wrongQuestions: [], learningWords: [] }
+        };
+      },
+      load() {
+        try {
+          const raw = localStorage.getItem(this.KEY);
+          if (!raw) return this._defaults();
+          return Object.assign(this._defaults(), JSON.parse(raw));
+        } catch (e) { return this._defaults(); }
+      },
+      save(state) {
+        try { localStorage.setItem(this.KEY, JSON.stringify(state)); }
+        catch (e) { console.warn("save failed", e); }
+      }
+    };
+    const CourseData = {
+      phases: [
+        { id: "dashboard", title: "Dashboard", icon: "🏠", lessons: [] },
+        { id: "grammar", title: "Grammar", icon: "📘", lessons: [
+          { id: "modals-shall-will", title: "Modals: shall / will / would", cards: [
+            { type: "concept", title: "shall vs will vs would",
+              english: "Use 'will' for future facts and decisions ('I will call you'). 'shall' is formal or for offers/suggestions ('Shall I open the window?'). 'would' is for polite requests, hypotheticals, and past habits ('I would like tea', 'If I had time, I would travel').",
+              telugu: "'will' — భవిష్యత్తు, నిర్ణయాలకు. 'shall' — మర్యాదపూర్వకంగా లేదా సలహా/ఆఫర్ ఇచ్చేటప్పుడు. 'would' — మర్యాదపూర్వక అభ్యర్థనలు, ఊహాత్మక వాక్యాలు, గత అలవాట్లకు.",
+              examples: [
+                { text: "I will finish the report by evening." },
+                { text: "Shall we start the meeting?" },
+                { text: "I would like a glass of water, please." }
+              ]
+            },
+            { type: "example", pattern: "Offers & suggestions with 'shall'",
+              sentences: [
+                { text: "Shall I carry that for you?" },
+                { text: "Shall we go now?" }
+              ]
+            },
+            { type: "mistake",
+              wrong: "I will can help you tomorrow.",
+              right: "I will be able to help you tomorrow.",
+              whyEn: "Two modals ('will' + 'can') can't stack. Replace the second with 'be able to'.",
+              whyTe: "రెండు modal verbs ('will' + 'can') కలిపి వాడకూడదు. 'can' బదులు 'be able to' వాడండి."
+            },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "___ I open the window? (offering)",
+                options: ["Will", "Shall", "Would"], answer: "Shall",
+                explanationEn: "'Shall I…?' is the natural form for offers.",
+                explanationTe: "ఆఫర్ ఇచ్చేటప్పుడు 'Shall I…?' సహజమైన రూపం." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I will can join.", "I will be able to join."],
+                answer: "I will be able to join.",
+                explanationEn: "Modals don't stack; use 'be able to'.",
+                explanationTe: "Modals ని కలపకూడదు; 'be able to' వాడండి." },
+              { format: "fill", prompt: "___ you like some coffee? (polite offer)",
+                answer: "Would",
+                explanationEn: "'Would you like…?' is the polite offer form.",
+                explanationTe: "'Would you like…?' మర్యాదపూర్వక ఆఫర్ రూపం." }
+            ]}
+          ]},
+          { id: "sentence-basics", title: "Sentence Basics: Subject–Verb–Object", cards: [
+            { type: "concept", title: "English word order: Subject–Verb–Object",
+              english: "English sentences normally follow Subject–Verb–Object (SVO) order: 'I (subject) eat (verb) rice (object)'. Telugu follows Subject–Object–Verb (SOV) order, so the verb comes last in Telugu. When you translate directly from Telugu, the verb often gets pushed to the end in English too — that is incorrect.",
+              telugu: "ఇంగ్లీష్ వాక్యాలు సాధారణంగా Subject–Verb–Object (SVO) క్రమంలో ఉంటాయి: 'I (కర్త) eat (క్రియ) rice (కర్మ)'. తెలుగు Subject–Object–Verb (SOV) క్రమాన్ని అనుసరిస్తుంది, అంటే క్రియ చివర వస్తుంది. తెలుగు నుండి నేరుగా అనువదించినప్పుడు, ఇంగ్లీష్‌లో కూడా క్రియను చివరకు పెట్టేస్తారు — అది తప్పు.",
+              examples: [
+                { text: "I eat rice. (NOT: I rice eat.)" },
+                { text: "She reads the report every morning." },
+                { text: "We completed the project on time." }
+              ]
+            },
+            { type: "example", pattern: "Subject + Verb + Object, in that fixed order",
+              sentences: [
+                { text: "The manager approved the budget." },
+                { text: "Our team finished the migration last week." }
+              ]
+            },
+            { type: "mistake",
+              wrong: "I rice eat.",
+              right: "I eat rice.",
+              whyEn: "This is a word-for-word translation from Telugu SOV order. English needs the verb right after the subject, before the object.",
+              whyTe: "ఇది తెలుగు SOV క్రమం నుండి పదానికి-పదం అనువాదం. ఇంగ్లీష్‌లో కర్త తర్వాత వెంటనే క్రియ రావాలి, కర్మ దాని తర్వాత రావాలి."
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["He the email sent.", "He sent the email."],
+                answer: "He sent the email.",
+                explanationEn: "English follows Subject–Verb–Object; the verb cannot move to the end.",
+                explanationTe: "ఇంగ్లీష్ Subject–Verb–Object క్రమాన్ని అనుసరిస్తుంది; క్రియను చివరకు మార్చకూడదు." },
+              { format: "fill", prompt: "She ___ (write) the report yesterday.",
+                answer: "wrote",
+                explanationEn: "Subject 'She' + verb 'wrote' + object 'the report', in that order.",
+                explanationTe: "కర్త 'She' + క్రియ 'wrote' + కర్మ 'the report', ఈ క్రమంలో." },
+              { format: "mcq", prompt: "Which order is correct in English?",
+                options: ["Subject–Object–Verb", "Subject–Verb–Object", "Object–Subject–Verb"],
+                answer: "Subject–Verb–Object",
+                explanationEn: "English is an SVO language, unlike Telugu which is SOV.",
+                explanationTe: "ఇంగ్లీష్ SVO భాష; తెలుగు SOV భాష — ఈ తేడా గుర్తుంచుకోవాలి." }
+            ]}
+          ]},
+          { id: "articles", title: "Articles: a / an / the", cards: [
+            { type: "concept", title: "When to use a, an, the",
+              english: "'a/an' introduce one non-specific singular thing ('a car', 'an hour'). 'the' points to a specific thing both speaker and listener know ('the car I bought'). Use no article for general plurals/uncountables ('Cars are useful', 'Water is life').",
+              telugu: "'a/an' — నిర్దిష్టం కాని ఒక వస్తువు గురించి మొదటిసారి చెప్పేటప్పుడు. 'the' — ఇద్దరికీ తెలిసిన నిర్దిష్ట వస్తువు గురించి. సాధారణ బహువచనం/అగణనీయ నామవాచకాలకు article అవసరం లేదు.",
+              examples: [ { text: "I bought a phone. The phone is excellent." }, { text: "She is an engineer." } ] },
+            { type: "example", pattern: "'the' for known/unique things",
+              sentences: [ { text: "Please close the door." }, { text: "The sun rises in the east." } ] },
+            { type: "mistake", wrong: "I am going to office.", right: "I am going to the office.",
+              whyEn: "A specific workplace takes 'the'. Telugu has no articles, so they are easy to drop.",
+              whyTe: "నిర్దిష్ట కార్యాలయానికి 'the' వాడాలి. తెలుగులో articles లేవు కాబట్టి వీటిని మర్చిపోవడం సహజం." },
+            { type: "quiz", questions: [
+              { format: "fill", prompt: "I saw ___ elephant at the zoo.", answer: "an",
+                explanationEn: "'an' before a vowel sound.", explanationTe: "అచ్చు ధ్వని ముందు 'an'." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I am going to school by the bus.", "I am going to school by bus."],
+                answer: "I am going to school by bus.",
+                explanationEn: "Fixed transport phrases ('by bus') take no article.",
+                explanationTe: "'by bus' లాంటి స్థిర పదబంధాలకు article ఉండదు." },
+              { format: "mcq", prompt: "___ water is essential for life.", options: ["The", "A", "(no article)"],
+                answer: "(no article)", explanationEn: "General uncountable nouns take no article.",
+                explanationTe: "సాధారణ అగణనీయ నామవాచకాలకు article ఉండదు." }
+            ]}
+          ]},
+          { id: "present-simple-continuous", title: "Present Simple vs Continuous", cards: [
+            { type: "concept", title: "Present Simple vs Present Continuous",
+              english: "Present Simple describes habits, facts, and permanent states ('I work in Hyderabad', 'Water boils at 100°C'). Present Continuous (am/is/are + -ing) describes actions happening right now or temporary situations ('I am working on a report right now'). Some verbs — called stative verbs (have, know, want, like, believe, own) — describe states, not actions, and are normally NOT used with -ing when they mean possession, knowledge, or emotion.",
+              telugu: "Present Simple అలవాట్లు, వాస్తవాలు, శాశ్వత స్థితులను చెబుతుంది ('I work in Hyderabad', 'Water boils at 100°C'). Present Continuous (am/is/are + -ing) ఇప్పుడు జరుగుతున్న పని లేదా తాత్కాలిక పరిస్థితిని చెబుతుంది ('I am working on a report right now'). Stative verbs (have, know, want, like, believe, own వంటివి) స్థితిని చెబుతాయి, పనిని కాదు — వీటిని ఆ అర్థంలో -ing తో వాడకూడదు.",
+              examples: [
+                { text: "I usually start work at 9 AM. (habit)" },
+                { text: "Right now, I am attending a meeting. (happening now)" },
+                { text: "I have a car. (NOT: I am having a car.)" }
+              ]
+            },
+            { type: "example", pattern: "Stative verbs stay in simple form",
+              sentences: [ { text: "She knows the answer." }, { text: "I like this design." }, { text: "He owns two houses." } ]
+            },
+            { type: "mistake",
+              wrong: "He is having a car.",
+              right: "He has a car.",
+              whyEn: "'have' meaning possession is a stative verb and does not take '-ing'. Use '-ing' with 'have' only in idioms like 'having lunch' or 'having a problem' (an action/experience), not for ownership.",
+              whyTe: "యజమాన్యం (possession) అర్థంలో 'have' ఒక stative verb — దీనికి '-ing' రాదు. 'having lunch' లేదా 'having a problem' లాంటి actions/experiences కు మాత్రమే '-ing' వాడాలి, యజమాన్యానికి కాదు."
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I am knowing his name.", "I know his name."],
+                answer: "I know his name.",
+                explanationEn: "'know' is a stative verb and is not used in continuous form.",
+                explanationTe: "'know' ఒక stative verb — దీన్ని continuous రూపంలో వాడకూడదు." },
+              { format: "fill", prompt: "Water ___ (boil) at 100 degrees Celsius. (general fact)",
+                answer: "boils",
+                explanationEn: "Permanent scientific facts use Present Simple.",
+                explanationTe: "శాశ్వత శాస్త్రీయ వాస్తవాలకు Present Simple వాడతారు." },
+              { format: "mcq", prompt: "Right now, she ___ a report.",
+                options: ["writes", "is writing", "write"],
+                answer: "is writing",
+                explanationEn: "An action happening at this moment uses Present Continuous.",
+                explanationTe: "ఇప్పుడు జరుగుతున్న పనికి Present Continuous వాడతారు." }
+            ]}
+          ]},
+          { id: "past-tense", title: "Past Tense (simple & continuous)", cards: [
+            { type: "concept", title: "Past Simple vs Past Continuous",
+              english: "Past Simple describes a completed action at a specific past time ('Yesterday I went to the office'). Past Continuous (was/were + -ing) describes an action in progress at a past moment, often interrupted by another action ('I was working when the power went off'). Regular verbs add '-ed' (worked, called); irregular verbs change form (go → went, eat → ate).",
+              telugu: "Past Simple గత కాలంలో పూర్తయిన పనిని చెబుతుంది ('Yesterday I went to the office'). Past Continuous (was/were + -ing) గత కాలంలో ఒక సమయంలో జరుగుతున్న పనిని చెబుతుంది, చాలాసార్లు మరో పని దాన్ని అంతరాయం చేస్తుంది ('I was working when the power went off'). Regular verbs కు '-ed' చేరుస్తారు (worked, called); irregular verbs రూపం మారుతుంది (go → went, eat → ate).",
+              examples: [
+                { text: "I visited my parents last weekend." },
+                { text: "She was cooking dinner when I called her." },
+                { text: "They went to Goa in December." }
+              ]
+            },
+            { type: "example", pattern: "Past Continuous for an interrupted action",
+              sentences: [ { text: "I was reading a book when the phone rang." }, { text: "We were driving to work when it started raining." } ]
+            },
+            { type: "mistake",
+              wrong: "Yesterday I go to the market.",
+              right: "Yesterday I went to the market.",
+              whyEn: "A past time word ('yesterday') needs a past-tense verb. 'go' must change to its past form 'went'; the present-tense form is a common carryover from thinking in Telugu, where the time word alone can feel like enough context.",
+              whyTe: "గత కాల పదం ('yesterday') ఉన్నప్పుడు క్రియ కూడా past tense లో ఉండాలి. 'go' ను 'went' గా మార్చాలి. తెలుగులో ఆలోచించేటప్పుడు కాల పదం ఒక్కటే సరిపోతుందని అనిపించడం వల్ల ఈ తప్పు జరుగుతుంది."
+            },
+            { type: "quiz", questions: [
+              { format: "fill", prompt: "Yesterday I ___ (go) to the market.",
+                answer: "went",
+                explanationEn: "'go' is irregular; its past form is 'went'.",
+                explanationTe: "'go' ఒక irregular verb; దీని past రూపం 'went'." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["Last night, I was sleeping when the phone rang.", "Last night, I sleeping when the phone rang."],
+                answer: "Last night, I was sleeping when the phone rang.",
+                explanationEn: "Past Continuous needs 'was/were' before the '-ing' verb.",
+                explanationTe: "Past Continuous లో '-ing' క్రియ ముందు 'was/were' తప్పనిసరి." },
+              { format: "mcq", prompt: "She ___ dinner when I arrived.",
+                options: ["cooked", "was cooking", "cooks"],
+                answer: "was cooking",
+                explanationEn: "An action in progress at a past moment, interrupted by another event, uses Past Continuous.",
+                explanationTe: "గతంలో జరుగుతున్న పని, మరో సంఘటన దాన్ని అంతరాయం చేస్తే, Past Continuous వాడతారు." }
+            ]}
+          ]},
+          { id: "future-forms", title: "Future: will / going to / shall", cards: [
+            { type: "concept", title: "will vs going to vs shall",
+              english: "Use 'going to' for plans already decided before speaking ('I am going to join a gym next month'). Use 'will' for decisions made at the moment of speaking, predictions, or promises ('I will help you now'). 'shall' is formal, mainly used with 'I/we' for offers or suggestions ('Shall we begin?'). A common mistake is using 'will' for a plan you already decided earlier — 'going to' is more natural there.",
+              telugu: "మాట్లాడే ముందు నుండే నిర్ణయించుకున్న ప్రణాళికలకు 'going to' వాడాలి ('I am going to join a gym next month'). మాట్లాడే క్షణంలో తీసుకున్న నిర్ణయాలకు, భవిష్యత్ అంచనాలకు, వాగ్దానాలకు 'will' వాడాలి ('I will help you now'). 'shall' అనేది మర్యాదపూర్వకం, ముఖ్యంగా 'I/we' తో ఆఫర్లు/సలహాలకు వాడతారు ('Shall we begin?'). ముందుగానే నిర్ణయించుకున్న ప్రణాళికకు 'will' వాడటం సాధారణ తప్పు — అక్కడ 'going to' సహజం.",
+              examples: [
+                { text: "I am going to start my own business next year. (already decided)" },
+                { text: "Okay, I will call the client right now. (decided this moment)" },
+                { text: "Shall we schedule the review for Friday?" }
+              ]
+            },
+            { type: "example", pattern: "'going to' for pre-decided plans",
+              sentences: [ { text: "We are going to launch the new app in July." }, { text: "She is going to attend the conference in Delhi." } ]
+            },
+            { type: "mistake",
+              wrong: "I will join a gym next month. (already planned earlier)",
+              right: "I am going to join a gym next month.",
+              whyEn: "Since this plan was decided before speaking, 'going to' is correct. 'will' suggests a fresh, on-the-spot decision, which does not fit here.",
+              whyTe: "ఈ ప్రణాళిక మాట్లాడే ముందు నుండే నిర్ణయించుకున్నారు కాబట్టి 'going to' సరైనది. 'will' అనేది ఆ క్షణంలో తీసుకున్న కొత్త నిర్ణయాన్ని సూచిస్తుంది, ఇక్కడ అది సరిపోదు."
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the correct sentence (plan decided last week):",
+                options: ["We will move to a new office next quarter.", "We are going to move to a new office next quarter."],
+                answer: "We are going to move to a new office next quarter.",
+                explanationEn: "A plan decided earlier uses 'going to', not 'will'.",
+                explanationTe: "ముందుగా నిర్ణయించుకున్న ప్రణాళికకు 'going to' వాడాలి, 'will' కాదు." },
+              { format: "fill", prompt: "The phone is ringing — I ___ (will) answer it. (decision right now)",
+                answer: "will",
+                explanationEn: "A decision made at the moment of speaking uses 'will'.",
+                explanationTe: "మాట్లాడే క్షణంలో తీసుకున్న నిర్ణయానికి 'will' వాడతారు." },
+              { format: "mcq", prompt: "___ we start the presentation now? (polite suggestion)",
+                options: ["Will", "Shall", "Going to"],
+                answer: "Shall",
+                explanationEn: "'Shall we…?' is the standard polite suggestion form.",
+                explanationTe: "మర్యాదపూర్వక సలహాకు 'Shall we…?' ప్రామాణిక రూపం." }
+            ]}
+          ]},
+          { id: "perfect-tenses", title: "Present Perfect & Past Perfect", cards: [
+            { type: "concept", title: "have/has + past participle; had + past participle",
+              english: "Present Perfect (have/has + past participle) connects the past to the present — for experiences, completed actions with present relevance, or things that started in the past and continue ('I have worked here for five years', 'She has already left'). Past Perfect (had + past participle) describes an action completed before another past action ('I had finished the report before the meeting started').",
+              telugu: "Present Perfect (have/has + past participle) గతాన్ని వర్తమానంతో కలుపుతుంది — అనుభవాలు, వర్తమానానికి సంబంధించిన పూర్తయిన పనులు, లేదా గతంలో మొదలై కొనసాగుతున్న పనులకు ('I have worked here for five years', 'She has already left'). Past Perfect (had + past participle) మరో గత సంఘటనకు ముందు పూర్తయిన పనిని చెబుతుంది ('I had finished the report before the meeting started').",
+              examples: [
+                { text: "I have visited Japan twice." },
+                { text: "He has already submitted the form." },
+                { text: "By the time I arrived, the meeting had already started." }
+              ]
+            },
+            { type: "example", pattern: "Past Perfect for 'earlier than another past event'",
+              sentences: [ { text: "She had left the office before I called." }, { text: "We had completed the testing before the deadline." } ]
+            },
+            { type: "mistake",
+              wrong: "I did not saw the email.",
+              right: "I have not seen the email. / I did not see the email.",
+              whyEn: "'did' (past simple auxiliary) cannot combine with 'saw' (past simple form) — only one past marker is needed. Either use Present Perfect ('have not seen') for a recent, present-relevant fact, or Past Simple ('did not see') for a specific past time, but never mix 'did' with a past-tense verb.",
+              whyTe: "'did' (past simple auxiliary) తో 'saw' (past simple రూపం) కలపకూడదు — ఒక్క past marker మాత్రమే అవసరం. ఇప్పటికీ సంబంధించిన విషయానికి Present Perfect ('have not seen') వాడాలి, లేదా నిర్దిష్ట గత సమయానికి Past Simple ('did not see') వాడాలి — కానీ 'did' ను past-tense క్రియతో కలపకూడదు."
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I did not saw the email.", "I did not see the email."],
+                answer: "I did not see the email.",
+                explanationEn: "'did' takes the base form of the verb ('see'), not the past form ('saw').",
+                explanationTe: "'did' తర్వాత క్రియ base రూపం ('see') రావాలి, past రూపం ('saw') కాదు." },
+              { format: "fill", prompt: "She ___ (already/finish) the project. (relevant to now)",
+                answer: "has already finished",
+                explanationEn: "Present Perfect links a completed action to present relevance.",
+                explanationTe: "వర్తమానానికి సంబంధించిన పూర్తయిన పనికి Present Perfect వాడతారు." },
+              { format: "mcq", prompt: "By the time the manager arrived, the team ___ the report.",
+                options: ["has finished", "had finished", "finished"],
+                answer: "had finished",
+                explanationEn: "An action completed before another past action uses Past Perfect.",
+                explanationTe: "మరో గత సంఘటనకు ముందు పూర్తయిన పనికి Past Perfect వాడతారు." }
+            ]}
+          ]},
+          { id: "modals-can-may", title: "Modals: can/could, may/might", cards: [
+            { type: "concept", title: "can/could for ability, may/might for permission and possibility",
+              english: "'can' expresses ability or informal permission ('I can speak three languages', 'Can I leave early?'). 'could' is the past of 'can' or a more polite/tentative form ('Could you help me?'). 'may' expresses formal permission or possibility ('May I come in?', 'It may rain today'). 'might' expresses a weaker possibility ('It might rain'). Note: after a modal, always use the base verb — no 'to'.",
+              telugu: "'can' సామర్థ్యం లేదా అనధికారిక అనుమతిని సూచిస్తుంది ('I can speak three languages', 'Can I leave early?'). 'could' అనేది 'can' యొక్క past రూపం లేదా మర్యాదపూర్వకమైన/సందేహాత్మక రూపం ('Could you help me?'). 'may' అధికారిక అనుమతి లేదా సాధ్యతను సూచిస్తుంది ('May I come in?', 'It may rain today'). 'might' అనేది తక్కువ నిశ్చయత గల సాధ్యతను సూచిస్తుంది ('It might rain'). గమనిక: modal తర్వాత ఎప్పుడూ క్రియ base రూపమే వస్తుంది — 'to' రాదు.",
+              examples: [
+                { text: "She can drive a car." },
+                { text: "May I ask a question?" },
+                { text: "It might rain this evening, so carry an umbrella." }
+              ]
+            },
+            { type: "example", pattern: "Polite requests with 'Could' and formal permission with 'May'",
+              sentences: [ { text: "Could you please send the file?" }, { text: "May I use your phone for a minute?" } ]
+            },
+            { type: "mistake",
+              wrong: "Can I to go?",
+              right: "Can I go?",
+              whyEn: "Modals like 'can', 'may', 'could', 'might' are always followed directly by the base verb — never by 'to'. Adding 'to' is a common carryover from other verb patterns like 'want to go'.",
+              whyTe: "'can', 'may', 'could', 'might' వంటి modals తర్వాత నేరుగా క్రియ base రూపమే వస్తుంది — 'to' ఎప్పుడూ రాదు. 'want to go' వంటి patterns నుండి 'to' ను ఇక్కడ కూడా వాడేయడం సాధారణ తప్పు."
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["Can I to leave now?", "Can I leave now?"],
+                answer: "Can I leave now?",
+                explanationEn: "No 'to' after the modal 'can'.",
+                explanationTe: "'can' modal తర్వాత 'to' రాదు." },
+              { format: "fill", prompt: "___ I borrow your pen, please? (polite, formal permission)",
+                answer: "May",
+                explanationEn: "'May I…?' is the standard formal permission request.",
+                explanationTe: "అధికారిక అనుమతి కోరేటప్పుడు 'May I…?' ప్రామాణిక రూపం." },
+              { format: "mcq", prompt: "He ___ swim across the river when he was young. (past ability)",
+                options: ["can", "could", "may"],
+                answer: "could",
+                explanationEn: "'could' is the past form of 'can' for past ability.",
+                explanationTe: "గత సామర్థ్యానికి 'can' యొక్క past రూపం 'could' వాడతారు." }
+            ]}
+          ]},
+          { id: "modals-must-should", title: "Modals: must / should / have to / ought to", cards: [
+            { type: "concept", title: "must, have to (obligation) vs should, ought to (advice)",
+              english: "'must' and 'have to' express obligation or necessity ('You must submit the form by Friday', 'I have to attend the meeting'). 'must' often comes from the speaker's own authority/feeling; 'have to' often comes from an external rule. 'should' and 'ought to' express advice or recommendation, not strict obligation ('You should exercise daily', 'You ought to apologize'). Like other modals, none of these are followed by 'to' + verb, except 'have to' and 'ought to' themselves, which already include 'to'.",
+              telugu: "'must' మరియు 'have to' బాధ్యత లేదా అవసరాన్ని సూచిస్తాయి ('You must submit the form by Friday', 'I have to attend the meeting'). 'must' సాధారణంగా మాట్లాడే వ్యక్తి యొక్క అభిప్రాయం నుండి వస్తుంది; 'have to' బాహ్య నియమం నుండి వస్తుంది. 'should' మరియు 'ought to' సలహాను సూచిస్తాయి, ఖచ్చితమైన బాధ్యతను కాదు ('You should exercise daily', 'You ought to apologize'). ఇతర modals లాగే, వీటికి కూడా 'to' + క్రియ రాదు — 'have to' మరియు 'ought to' లో 'to' అప్పటికే ఉంది.",
+              examples: [
+                { text: "You must wear a helmet while riding." },
+                { text: "I have to finish this by tomorrow." },
+                { text: "You should drink more water." }
+              ]
+            },
+            { type: "example", pattern: "'should'/'ought to' for advice, not strict rules",
+              sentences: [ { text: "You should back up your files regularly." }, { text: "We ought to review the plan before submitting it." } ]
+            },
+            { type: "mistake",
+              wrong: "You must to finish the report today.",
+              right: "You must finish the report today.",
+              whyEn: "'must' is followed directly by the base verb, with no 'to'. Only 'have to' and 'ought to' already contain 'to' as part of the fixed phrase.",
+              whyTe: "'must' తర్వాత నేరుగా క్రియ base రూపమే వస్తుంది, 'to' రాదు. 'have to' మరియు 'ought to' లో మాత్రమే 'to' ఆ స్థిర పదబంధంలో భాగంగా ఉంటుంది."
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["You must to finish the report today.", "You must finish the report today."],
+                answer: "You must finish the report today.",
+                explanationEn: "'must' is never followed by 'to'.",
+                explanationTe: "'must' తర్వాత 'to' ఎప్పుడూ రాదు." },
+              { format: "fill", prompt: "You ___ (advice) apologize to her for being late.",
+                answer: "should",
+                explanationEn: "'should' expresses advice, not strict obligation.",
+                explanationTe: "సలహా ఇచ్చేటప్పుడు 'should' వాడతారు, ఖచ్చితమైన బాధ్యతకు కాదు." },
+              { format: "mcq", prompt: "According to company policy, all employees ___ wear ID badges.",
+                options: ["should", "have to", "might"],
+                answer: "have to",
+                explanationEn: "An external rule/policy creates obligation, expressed with 'have to'.",
+                explanationTe: "బాహ్య నియమం/పాలసీ బాధ్యతను కలిగిస్తుంది, దీనికి 'have to' వాడతారు." }
+            ]}
+          ]}
+        ]},
+        { id: "vocabulary", title: "Vocabulary", icon: "📗", lessons: [
+          { id: "everyday-essentials", title: "Everyday Essentials", cards: [
+            { type: "vocab", word: "deadline", pos: "noun",
+              meaningEn: "the latest time or date by which something must be finished",
+              meaningTe: "ఏదైనా పని పూర్తి చేయాల్సిన చివరి తేదీ లేదా సమయం.",
+              examples: [ { text: "The deadline for the proposal is next Monday." } ] },
+            { type: "vocab", word: "reliable", pos: "adjective",
+              meaningEn: "able to be trusted to do what is needed; consistent and dependable",
+              meaningTe: "అవసరమైనది చేస్తుందని నమ్మదగినది; స్థిరంగా, ఆధారపడదగినది.",
+              examples: [ { text: "She is a reliable team member who always delivers on time." } ] },
+            { type: "vocab", word: "priority", pos: "noun",
+              meaningEn: "something that is more important than other things and should be dealt with first",
+              meaningTe: "ఇతర విషయాల కంటే ఎక్కువ ప్రాధాన్యత ఉన్నది, మొదట చూడవలసినది.",
+              examples: [ { text: "Fixing the login bug is our top priority this week." } ] },
+            { type: "vocab", word: "flexible", pos: "adjective",
+              meaningEn: "able to change or adapt easily to different situations or demands",
+              meaningTe: "వేర్వేరు పరిస్థితులు లేదా అవసరాలకు తేలికగా మారే/అలవడే గుణం కలిగినది.",
+              examples: [ { text: "Our schedule is flexible, so we can move the call if needed." } ] },
+            { type: "vocab", word: "efficient", pos: "adjective",
+              meaningEn: "achieving a result with the least waste of time, effort, or resources",
+              meaningTe: "సమయం, శ్రమ లేదా వనరులను తక్కువగా వృధా చేస్తూ ఫలితం సాధించడం.",
+              examples: [ { text: "The new process is more efficient than the old one." } ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which word means 'the latest time by which something must be done'?",
+                options: ["priority", "deadline", "flexible"],
+                answer: "deadline",
+                explanationEn: "'deadline' refers to the final time limit for completing a task.",
+                explanationTe: "'deadline' అంటే ఒక పని పూర్తి చేయాల్సిన చివరి సమయ పరిమితి." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["He is very reliable person, always help.", "He is a very reliable person who always helps."],
+                answer: "He is a very reliable person who always helps.",
+                explanationEn: "This sentence uses correct articles and grammar around the adjective 'reliable'.",
+                explanationTe: "ఈ వాక్యం 'reliable' అనే adjective చుట్టూ సరైన articles మరియు వ్యాకరణాన్ని వాడుతుంది." },
+              { format: "fill", prompt: "We need to be more ___ (waste less time/effort) with our resources.",
+                answer: "efficient",
+                explanationEn: "'efficient' describes doing something well without wasting time or effort.",
+                explanationTe: "సమయం లేదా శ్రమను వృధా చేయకుండా పని చేయడాన్ని 'efficient' అంటారు." },
+              { format: "mcq", prompt: "Our top ___ this quarter is improving customer support response time.",
+                options: ["priority", "deadline", "reliable"],
+                answer: "priority",
+                explanationEn: "'priority' fits here as the most important item to focus on.",
+                explanationTe: "ఇక్కడ 'priority' అనేది దృష్టి పెట్టవలసిన అతి ముఖ్యమైన విషయాన్ని సూచిస్తుంది." }
+            ]}
+          ]},
+          { id: "connecting-words", title: "Connecting Words", cards: [
+            { type: "vocab", word: "however", pos: "adverb",
+              meaningEn: "used to add a contrasting idea; 'but' in a more formal way",
+              meaningTe: "విరుద్ధమైన భావాన్ని జోడించడానికి; 'కానీ' అనే అర్థంలో మరింత మర్యాదపూర్వకంగా.",
+              examples: [ { text: "The plan is risky. However, it could work." } ] },
+            { type: "vocab", word: "therefore", pos: "adverb",
+              meaningEn: "used to introduce a result or conclusion; 'so' in a more formal way",
+              meaningTe: "ఒక ఫలితం లేదా నిర్ణయాన్ని పరిచయం చేయడానికి; 'so' అనే అర్థంలో మరింత అధికారికంగా.",
+              examples: [ { text: "The server was down; therefore, the deployment was delayed." } ] },
+            { type: "vocab", word: "meanwhile", pos: "adverb",
+              meaningEn: "used to describe something happening at the same time as something else",
+              meaningTe: "ఒక విషయం జరుగుతున్న సమయంలోనే మరొక విషయం జరగడాన్ని వివరించడానికి.",
+              examples: [ { text: "I'll review the design. Meanwhile, could you update the tickets?" } ] },
+            { type: "vocab", word: "nevertheless", pos: "adverb",
+              meaningEn: "used to say that something happens or is true despite what was just mentioned; 'even so'",
+              meaningTe: "ముందు చెప్పిన విషయం ఉన్నప్పటికీ ఏదైనా జరుగుతుందని లేదా నిజమని చెప్పడానికి; 'అయినప్పటికీ'.",
+              examples: [ { text: "The budget is tight. Nevertheless, we will try to hire two more engineers." } ] },
+            { type: "vocab", word: "moreover", pos: "adverb",
+              meaningEn: "used to add extra supporting information to a point already made; 'in addition'",
+              meaningTe: "ఇప్పటికే చెప్పిన విషయానికి మరింత సమాచారాన్ని జోడించడానికి; 'అదనంగా'.",
+              examples: [ { text: "The candidate has strong technical skills. Moreover, she has led two teams." } ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which word means 'but', used in a more formal way?",
+                options: ["however", "meanwhile", "moreover"],
+                answer: "however",
+                explanationEn: "'however' introduces a contrast, similar to 'but' but more formal.",
+                explanationTe: "'however' అనేది 'but' లాగా విరుద్ధతను సూచిస్తుంది, కానీ మరింత అధికారికంగా." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence for adding a supporting point:",
+                options: ["He is skilled. Moreover, he mentors juniors well.", "He is skilled. Meanwhile, he mentors juniors well."],
+                answer: "He is skilled. Moreover, he mentors juniors well.",
+                explanationEn: "'Moreover' adds supporting information; 'meanwhile' is for parallel timing, not supporting points.",
+                explanationTe: "'Moreover' మద్దతు సమాచారాన్ని జోడిస్తుంది; 'meanwhile' అనేది సమాంతర సమయాన్ని సూచించడానికి, మద్దతు పాయింట్లకు కాదు." },
+              { format: "fill", prompt: "The tests failed. ___ (so/as a result), we postponed the release.",
+                answer: "Therefore",
+                explanationEn: "'Therefore' introduces the result or conclusion of the previous statement.",
+                explanationTe: "'Therefore' అనేది ముందు వాక్యం యొక్క ఫలితం లేదా నిర్ణయాన్ని పరిచయం చేస్తుంది." },
+              { format: "mcq", prompt: "The market is uncertain. ___, we plan to proceed with the launch. (despite that)",
+                options: ["Meanwhile", "Nevertheless", "Therefore"],
+                answer: "Nevertheless",
+                explanationEn: "'Nevertheless' means 'despite that', showing the action happens anyway.",
+                explanationTe: "'Nevertheless' అంటే 'అయినప్పటికీ' — అంటే ఆ చర్య ఏమైనా జరుగుతుందని సూచిస్తుంది." }
+            ]}
+          ]}
+        ] },
+        { id: "speaking", title: "Speaking", icon: "🗣", lessons: [
+          { id: "pronunciation-basics", title: "Pronunciation Basics", cards: [
+            { type: "concept", title: "Word stress and tricky sounds for Telugu speakers",
+              english: "English words have one syllable that is stressed (said louder/longer) — for example, PRE-sent (noun) vs pre-SENT (verb). Getting the stress wrong can make a word hard to understand even if every letter is pronounced correctly. Two sounds often mixed up by Telugu speakers: 'v' and 'w' (very vs. wary — the lower lip touches the upper teeth for 'v', but not for 'w'), and 'th' (think, this — the tongue tip touches behind the upper teeth, unlike 't' or 'd').",
+              telugu: "ఇంగ్లీష్ పదాలలో ఒక syllable ఎక్కువ ఒత్తిడితో (గట్టిగా/ఎక్కువ సేపు) పలకబడుతుంది — ఉదాహరణకు PRE-sent (నామవాచకం) vs pre-SENT (క్రియ). ప్రతి అక్షరం సరిగ్గా పలికినా, ఒత్తిడి తప్పుగా ఉంటే అర్థం చేసుకోవడం కష్టం. తెలుగు వారు తరచుగా కలగలిపే రెండు ధ్వనులు: 'v' మరియు 'w' (very vs. wary — 'v' కు కింది పెదవి పై పళ్ళను తాకుతుంది, 'w' కు తాకదు), మరియు 'th' (think, this — నాలుక కొన పై పళ్ళ వెనుక తాకుతుంది, 't' లేదా 'd' లాగా కాదు).",
+              examples: [
+                { text: "record (noun: REC-ord) vs record (verb: re-CORD)" },
+                { text: "very / wary — lip touches teeth only for 'v'" },
+                { text: "think / this — tongue tip touches behind the upper teeth" }
+              ]
+            },
+            { type: "example", pattern: "Practice words and sentences for tricky sounds",
+              sentences: [
+                { text: "very well, wary of, village, wine" },
+                { text: "think, this, three, thank you" },
+                { text: "I think this village makes very good wine." },
+                { text: "We will review the record before the meeting starts." }
+              ]
+            },
+            { type: "dialogue", roles: ["Coach", "You"], lines: [
+              { role: "Coach", text: "Let's practice. Say: 'very well, thank you.'" },
+              { role: "You", text: "Very well, thank you." },
+              { role: "Coach", text: "Good. Now: 'I will think about this.'" },
+              { role: "You", text: "I will think about this." },
+              { role: "Coach", text: "Nice. One more: 'We reviewed the record together.'" },
+              { role: "You", text: "We reviewed the record together." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which sound uses the tongue tip touching behind the upper teeth?",
+                options: ["'v' as in very", "'th' as in think", "'w' as in wary"],
+                answer: "'th' as in think",
+                explanationEn: "'th' requires the tongue tip to touch behind the upper teeth, unlike 't', 'd', or 'v'.",
+                explanationTe: "'th' పలికేటప్పుడు నాలుక కొన పై పళ్ళ వెనుక తాకుతుంది, 't', 'd', లేదా 'v' లాగా కాదు." },
+              { format: "mcq", prompt: "In the noun 'record' (a music record), which syllable is stressed?",
+                options: ["The first syllable (REC-ord)", "The second syllable (re-CORD)", "Both equally"],
+                answer: "The first syllable (REC-ord)",
+                explanationEn: "As a noun, 'record' stresses the first syllable; as a verb, it stresses the second.",
+                explanationTe: "నామవాచకంగా 'record' మొదటి syllable పై ఒత్తిడి పెడుతుంది; క్రియగా రెండవ syllable పై పెడుతుంది." }
+            ]}
+          ]},
+          { id: "fluency-fillers", title: "Fluency Fillers", cards: [
+            { type: "concept", title: "Natural fillers instead of 'umm'",
+              english: "When you need a moment to think while speaking, natural filler phrases sound more professional than repeating 'umm' or 'aa'. Phrases like 'Let me think about that for a second', 'That's a good question', or 'What I mean is…' buy you time while sounding confident and composed.",
+              telugu: "మాట్లాడుతున్నప్పుడు ఆలోచించడానికి క్షణం అవసరమైతే, సహజమైన filler పదబంధాలు 'umm' లేదా 'aa' అని పదేపదే అనడం కంటే మరింత professional గా వినిపిస్తాయి. 'Let me think about that for a second', 'That's a good question', లేదా 'What I mean is…' వంటి పదబంధాలు ఆత్మవిశ్వాసంతో, స్థిరంగా ఉంటూ సమయాన్ని ఇస్తాయి.",
+              examples: [
+                { text: "Let me think about that for a second." },
+                { text: "That's a good question." },
+                { text: "What I mean is, we should prioritize stability first." }
+              ]
+            },
+            { type: "example", pattern: "Natural fillers to buy thinking time",
+              sentences: [
+                { text: "Let me think about that for a second." },
+                { text: "That's a good question." },
+                { text: "Give me a moment to gather my thoughts." },
+                { text: "How can I put this..." }
+              ]
+            },
+            { type: "dialogue", roles: ["Interviewer", "You"], lines: [
+              { role: "Interviewer", text: "Why do you want to move into a leadership role?" },
+              { role: "You", text: "That's a good question. Let me think about that for a second." },
+              { role: "You", text: "What I mean is, I enjoy helping the team grow, not just writing code myself." },
+              { role: "Interviewer", text: "Can you give an example?" },
+              { role: "You", text: "Sure — give me a moment to gather my thoughts on the best example." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which is a natural way to buy time before answering, instead of saying 'umm'?",
+                options: ["That's a good question.", "Umm umm umm.", "I don't know say something."],
+                answer: "That's a good question.",
+                explanationEn: "This phrase sounds composed and professional while giving you a moment to think.",
+                explanationTe: "ఈ పదబంధం ఆత్మవిశ్వాసంతో, professional గా వినిపిస్తుంది మరియు ఆలోచించడానికి క్షణం ఇస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the more natural filler phrase:",
+                options: ["Give me a moment to gather my thoughts.", "Wait wait, my brain thinking now."],
+                answer: "Give me a moment to gather my thoughts.",
+                explanationEn: "This is a natural, professional way to ask for a brief pause before answering.",
+                explanationTe: "ఇది సమాధానం ఇచ్చే ముందు కొద్దిసేపు ఆలోచించడానికి సమయం అడగడానికి సహజమైన, professional విధానం." }
+            ]}
+          ]}
+        ] },
+        { id: "situations", title: "Situations", icon: "🎬", lessons: [
+          { id: "restaurant", title: "At a Restaurant", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "Could I see the menu, please?", telugu: "మెనూ చూడవచ్చా, దయచేసి?" },
+                { text: "I'd like to order now.", telugu: "నేను ఇప్పుడు ఆర్డర్ చేయాలనుకుంటున్నాను." },
+                { text: "Could we get a table for two?", telugu: "మాకు ఇద్దరికి ఒక టేబుల్ ఇవ్వగలరా?" },
+                { text: "Is this dish spicy?", telugu: "ఈ వంటకం మసాలాగా ఉంటుందా?" },
+                { text: "Could we get the bill, please?", telugu: "బిల్లు తీసుకురాగలరా, దయచేసి?" },
+                { text: "Everything was delicious, thank you.", telugu: "అన్నీ చాలా బాగున్నాయి, ధన్యవాదాలు." }
+              ] },
+            { type: "dialogue", roles: ["Waiter", "You"], lines: [
+              { role: "Waiter", text: "Good evening! Do you have a reservation?" },
+              { role: "You", text: "No, we don't. Could we get a table for two?" },
+              { role: "Waiter", text: "Of course, right this way. Here's the menu." },
+              { role: "You", text: "Thank you. Could you tell me if this dish is spicy?" },
+              { role: "Waiter", text: "It's medium spicy — we can make it milder if you like." },
+              { role: "You", text: "That's fine. I'd like to order the grilled chicken, please." },
+              { role: "Waiter", text: "Certainly. Anything to drink?" },
+              { role: "You", text: "Just water for now. And could we get the bill when we're done?" }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "The waiter asks 'Are you ready to order?' A natural reply is:",
+                options: ["Yes, I'd like the grilled chicken.", "I am having hunger.", "Give food."],
+                answer: "Yes, I'd like the grilled chicken.",
+                explanationEn: "'I'd like…' is the polite, natural ordering form.",
+                explanationTe: "'I'd like…' మర్యాదపూర్వక, సహజమైన ఆర్డర్ రూపం." },
+              { format: "choose-sentence", prompt: "You want the check at the end of the meal. Choose the correct sentence:",
+                options: ["Give me bill fast.", "Could we get the bill, please?"],
+                answer: "Could we get the bill, please?",
+                explanationEn: "'Could we get…, please?' is the polite way to request the bill.",
+                explanationTe: "బిల్లు అడిగేటప్పుడు 'Could we get…, please?' మర్యాదపూర్వక రూపం." },
+              { format: "fill", prompt: "___ I see the menu, please? (polite request)",
+                answer: "Could",
+                explanationEn: "'Could I…, please?' is the standard polite request form.",
+                explanationTe: "మర్యాదపూర్వక అభ్యర్థనకు 'Could I…, please?' ప్రామాణిక రూపం." }
+            ]}
+          ]},
+          { id: "airport", title: "At the Airport", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "I'd like to check in for my flight, please.", telugu: "నా విమానానికి చెక్-ఇన్ చేయాలనుకుంటున్నాను, దయచేసి." },
+                { text: "Could I have a window seat, please?", telugu: "నాకు కిటికీ సీటు ఇవ్వగలరా, దయచేసి?" },
+                { text: "How many bags am I allowed to check in?", telugu: "నేను ఎన్ని బ్యాగులు చెక్-ఇన్ చేయవచ్చు?" },
+                { text: "Which gate is the flight boarding from?", telugu: "విమానం ఏ గేటు నుండి బోర్డింగ్ అవుతుంది?" },
+                { text: "Is my flight on time?", telugu: "నా విమానం సమయానికి ఉందా?" },
+                { text: "Could you please remove your laptop from the bag?", telugu: "దయచేసి మీ ల్యాప్‌టాప్‌ను బ్యాగ్ నుండి తీయండి." }
+              ] },
+            { type: "dialogue", roles: ["Agent", "You"], lines: [
+              { role: "You", text: "Good morning. I'd like to check in for my flight to Chennai." },
+              { role: "Agent", text: "Sure, may I see your passport and ticket, please?" },
+              { role: "You", text: "Here you go. Could I have a window seat, please?" },
+              { role: "Agent", text: "Let me check... yes, seat 14A is available." },
+              { role: "You", text: "Great, thank you. How many bags am I allowed to check in?" },
+              { role: "Agent", text: "You're allowed one checked bag up to 20 kilos." },
+              { role: "You", text: "That works. Which gate does the flight board from?" },
+              { role: "Agent", text: "Gate 12. Boarding starts at 9:40, so please be there by 9:15." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "At the check-in counter, the most natural way to start is:",
+                options: ["I'd like to check in for my flight, please.", "I want fly now.", "Give me ticket."],
+                answer: "I'd like to check in for my flight, please.",
+                explanationEn: "'I'd like to…, please' is the polite, standard way to make this request.",
+                explanationTe: "ఈ అభ్యర్థన చేసేటప్పుడు 'I'd like to…, please' మర్యాదపూర్వక, ప్రామాణిక రూపం." },
+              { format: "choose-sentence", prompt: "You want to know your departure gate. Choose the correct sentence:",
+                options: ["Which gate is the flight boarding from?", "Flight gate where is?"],
+                answer: "Which gate is the flight boarding from?",
+                explanationEn: "This follows correct English question word order: question word + auxiliary + subject.",
+                explanationTe: "ఇది సరైన ఇంగ్లీష్ ప్రశ్న క్రమాన్ని అనుసరిస్తుంది: ప్రశ్న పదం + auxiliary + కర్త." },
+              { format: "fill", prompt: "___ I have an aisle seat instead? (polite request)",
+                answer: "Could",
+                explanationEn: "'Could I…?' politely requests a change or preference.",
+                explanationTe: "మార్పు లేదా ప్రాధాన్యతను మర్యాదపూర్వకంగా అడగడానికి 'Could I…?' వాడతారు." },
+              { format: "mcq", prompt: "At the security check, the officer says 'Please remove your laptop.' The best response is:",
+                options: ["Sure, one moment.", "No, why?", "Laptop is mine only."],
+                answer: "Sure, one moment.",
+                explanationEn: "A short, cooperative reply is the natural response to a security instruction.",
+                explanationTe: "సెక్యూరిటీ సూచనకు చిన్నదైన, సహకార సమాధానం సహజంగా సరిపోతుంది." }
+            ]}
+          ]},
+          { id: "workplace", title: "At the Workplace", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "Good morning! How was your weekend?", telugu: "గుడ్ మార్నింగ్! మీ వీకెండ్ ఎలా గడిచింది?" },
+                { text: "Could you help me with something, when you have a minute?", telugu: "మీకు కొంచెం సమయం ఉన్నప్పుడు, నాకు ఒక దానిలో సహాయం చేయగలరా?" },
+                { text: "I'm a bit stuck on this — could you take a look?", telugu: "నేను దీనిలో ఇరుక్కుపోయాను — మీరు ఒకసారి చూడగలరా?" },
+                { text: "I just wanted to give you a quick update.", telugu: "నేను మీకు ఒక చిన్న అప్డేట్ ఇవ్వాలనుకున్నాను." },
+                { text: "I'm on track to finish this by Friday.", telugu: "నేను శుక్రవారానికి దీన్ని పూర్తి చేయగలుగుతాను." },
+                { text: "Let me know if you need anything from my end.", telugu: "నా వైపు నుండి ఏదైనా అవసరమైతే చెప్పండి." }
+              ] },
+            { type: "dialogue", roles: ["Colleague", "You"], lines: [
+              { role: "Colleague", text: "Good morning! How was your weekend?" },
+              { role: "You", text: "Pretty good, thanks. How about yours?" },
+              { role: "Colleague", text: "Relaxing, thank you. Are you free for a minute?" },
+              { role: "You", text: "Sure, what's up?" },
+              { role: "Colleague", text: "I'm a bit stuck on the deployment script — could you take a look?" },
+              { role: "You", text: "Of course, send it over and I'll check it after this call." },
+              { role: "Colleague", text: "Thanks, I appreciate it. By the way, how's the migration going?" },
+              { role: "You", text: "Good progress — I'm on track to finish it by Friday." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "You want to ask a colleague for help without sounding demanding. The best phrasing is:",
+                options: ["Could you help me with something, when you have a minute?", "You help me now.", "Do my work please."],
+                answer: "Could you help me with something, when you have a minute?",
+                explanationEn: "This is polite and gives the colleague flexibility on timing.",
+                explanationTe: "ఇది మర్యాదపూర్వకంగా ఉంటుంది మరియు సమయం విషయంలో సహోద్యోగికి వెసులుబాటు ఇస్తుంది." },
+              { format: "choose-sentence", prompt: "You want to give a short status update. Choose the correct sentence:",
+                options: ["I am on track to finish this by Friday.", "I finishing Friday this."],
+                answer: "I am on track to finish this by Friday.",
+                explanationEn: "This is grammatically correct and uses the natural workplace phrase 'on track to'.",
+                explanationTe: "ఇది వ్యాకరణపరంగా సరైనది మరియు 'on track to' అనే సహజమైన ఆఫీసు పదబంధాన్ని వాడుతుంది." },
+              { format: "fill", prompt: "I'm a bit stuck on this — ___ you take a look? (polite request)",
+                answer: "could",
+                explanationEn: "'Could you…?' is the polite way to request help from a colleague.",
+                explanationTe: "సహోద్యోగి నుండి సహాయం అడగడానికి 'Could you…?' మర్యాదపూర్వక రూపం." }
+            ]}
+          ]},
+          { id: "conference", title: "In a Meeting / Conference", cards: [
+            { type: "example", pattern: "Key phrases (with meaning)",
+              sentences: [
+                { text: "Sorry I'm a couple of minutes late — please continue.", telugu: "క్షమించండి, నేను కొన్ని నిమిషాలు లేటుగా వచ్చాను — దయచేసి కొనసాగించండి." },
+                { text: "Could I add a point here?", telugu: "నేను ఇక్కడ ఒక విషయం చేర్చవచ్చా?" },
+                { text: "I see it a bit differently, if I may.", telugu: "నేను దీన్ని కొంచెం వేరేలా చూస్తున్నాను, అనుమతి ఉంటే." },
+                { text: "That's a fair point, but have we considered the cost impact?", telugu: "అది సబబైన అభిప్రాయమే, కానీ మనం ఖర్చు ప్రభావాన్ని పరిగణించామా?" },
+                { text: "Let's park this and take it offline.", telugu: "దీన్ని ఇక్కడ ఆపి, తర్వాత విడిగా చర్చిద్దాం." },
+                { text: "To summarize, here are the next steps.", telugu: "సంగ్రహంగా, ఇవి తదుపరి చర్యలు." }
+              ] },
+            { type: "dialogue", roles: ["Chair", "You"], lines: [
+              { role: "Chair", text: "Let's get started. We're missing one person, but let's not wait." },
+              { role: "You", text: "Sorry I'm a couple of minutes late — please continue." },
+              { role: "Chair", text: "No problem. We were discussing the Q3 roadmap." },
+              { role: "You", text: "Could I add a point here? I think we're underestimating the timeline." },
+              { role: "Chair", text: "Go ahead, what's your concern?" },
+              { role: "You", text: "I see it a bit differently — the integration alone could take three weeks, not one." },
+              { role: "Chair", text: "That's fair. Let's park the exact dates and take it offline with the team." },
+              { role: "You", text: "Sounds good. To summarize, I'll share a revised timeline by tomorrow." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "You arrive a few minutes late to a meeting already in progress. The most professional thing to say is:",
+                options: ["Sorry I'm a couple of minutes late — please continue.", "Why you started without me?", "I am late, sorry sorry."],
+                answer: "Sorry I'm a couple of minutes late — please continue.",
+                explanationEn: "A brief apology followed by inviting the group to continue is professional and unobtrusive.",
+                explanationTe: "క్లుప్తమైన క్షమాపణ తర్వాత గ్రూప్‌ను కొనసాగించమనడం ప్రొఫెషనల్‌గా, ఆటంకం లేకుండా ఉంటుంది." },
+              { format: "choose-sentence", prompt: "You disagree with a point but want to stay polite. Choose the correct sentence:",
+                options: ["I see it a bit differently, if I may.", "You are wrong about this."],
+                answer: "I see it a bit differently, if I may.",
+                explanationEn: "This disagrees with the idea, not the person, and softens the pushback with 'if I may'.",
+                explanationTe: "ఇది వ్యక్తిని కాదు, అభిప్రాయాన్ని మాత్రమే విభేదిస్తుంది, మరియు 'if I may' తో విభేదాన్ని మృదువుగా చేస్తుంది." },
+              { format: "fill", prompt: "___ I add a point here, before we move on? (polite interruption)",
+                answer: "Could",
+                explanationEn: "'Could I…?' is the polite way to ask permission to speak in a meeting.",
+                explanationTe: "మీటింగ్‌లో మాట్లాడటానికి అనుమతి అడగడానికి 'Could I…?' మర్యాదపూర్వక రూపం." },
+              { format: "mcq", prompt: "To close a discussion and move to action items, a Head-level phrase to use is:",
+                options: ["To summarize, here are the next steps.", "Okay bye, meeting over.", "Discussion finished now."],
+                answer: "To summarize, here are the next steps.",
+                explanationEn: "This signals closure and transitions the group toward concrete action items, fitting a leadership tone.",
+                explanationTe: "ఇది చర్చను ముగించి, గ్రూప్‌ను నిర్దిష్ట చర్యలవైపు నడిపిస్తుంది — నాయకత్వ స్థాయికి సరిపోతుంది." }
+            ]}
+          ]}
+        ] },
+        { id: "professional", title: "Professional", icon: "💼", lessons: [
+          { id: "clear-emails", title: "Writing Clear Emails", cards: [
+            { type: "concept", title: "Opening a professional email",
+              english: "Start with a clear purpose line. 'I'm writing to…' or 'I wanted to follow up on…' set context immediately. Keep the first sentence about why you're writing.",
+              telugu: "స్పష్టమైన ఉద్దేశ్యంతో మొదలుపెట్టండి. 'I'm writing to…' లేదా 'I wanted to follow up on…' వెంటనే సందర్భాన్ని తెలియజేస్తాయి.",
+              examples: [ { text: "I'm writing to confirm our meeting on Thursday." } ] },
+            { type: "concept", title: "Being concise and polite",
+              english: "Keep sentences short and get to the point quickly — busy readers appreciate this. Soften requests with words like 'please', 'could you', or 'when you have a moment', without adding unnecessary extra sentences. Avoid long, over-apologetic openings before the actual request.",
+              telugu: "వాక్యాలను చిన్నగా ఉంచి, త్వరగా విషయానికి రండి — busy readers దీన్ని మెచ్చుకుంటారు. 'please', 'could you', లేదా 'when you have a moment' వంటి పదాలతో అభ్యర్థనలను మృదువుగా చేయండి, కానీ అనవసరమైన అదనపు వాక్యాలు చేర్చకండి. అభ్యర్థనకు ముందు ఎక్కువ క్షమాపణలతో నిండిన వాక్యాలను నివారించండి.",
+              examples: [ { text: "Could you please send the updated file by tomorrow?" } ] },
+            { type: "example", pattern: "Good email sentences",
+              sentences: [
+                { text: "I'm writing to confirm our meeting on Thursday at 3 PM." },
+                { text: "I wanted to follow up on the proposal I sent last week." },
+                { text: "Could you please review the attached document by Friday?" },
+                { text: "Let me know if you have any questions." },
+                { text: "Thanks in advance for your help." }
+              ]
+            },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the clearer opening sentence for a follow-up email:",
+                options: ["I am extremely sorry to disturb you again but I was just wondering maybe if possibly you had time to look at my email.", "I wanted to follow up on the email I sent last week."],
+                answer: "I wanted to follow up on the email I sent last week.",
+                explanationEn: "This is direct and states the purpose immediately, without unnecessary over-apologizing.",
+                explanationTe: "ఇది నేరుగా, అనవసరమైన అధిక క్షమాపణలు లేకుండా ఉద్దేశ్యాన్ని వెంటనే తెలియజేస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the more polite and concise request:",
+                options: ["Send file now.", "Could you please send the file when you have a moment?"],
+                answer: "Could you please send the file when you have a moment?",
+                explanationEn: "This softens the request with 'please' and 'when you have a moment' while staying concise.",
+                explanationTe: "ఇది 'please' మరియు 'when you have a moment' తో అభ్యర్థనను మృదువుగా చేస్తూ క్లుప్తంగా ఉంటుంది." },
+              { format: "mcq", prompt: "The best way to start an email requesting a status update is:",
+                options: ["I'm writing to check on the status of the migration project.", "Hi, so, umm, I was thinking about maybe asking about the thing.", "Status? Now?"],
+                answer: "I'm writing to check on the status of the migration project.",
+                explanationEn: "This states the purpose clearly and professionally in the first sentence.",
+                explanationTe: "ఇది మొదటి వాక్యంలోనే ఉద్దేశ్యాన్ని స్పష్టంగా, professional గా తెలియజేస్తుంది." }
+            ]}
+          ]},
+          { id: "speaking-in-meetings", title: "Speaking Up in Meetings", cards: [
+            { type: "concept", title: "Speaking up, interrupting politely, and giving opinions as a leader",
+              english: "In meetings, use short signal phrases to get the floor without being rude: 'Could I add a point here?' or 'Sorry to jump in, but...'. As a Head-level leader, state opinions with confidence but stay open: 'I think we should prioritize X, but I'm open to other views.' Avoid staying silent when you disagree — silence from a leader can be read as agreement.",
+              telugu: "మీటింగ్‌లలో, మర్యాదగా మాట్లాడటానికి చిన్న signal పదబంధాలు వాడండి: 'Could I add a point here?' లేదా 'Sorry to jump in, but...'. Head-level నాయకుడిగా, ఆత్మవిశ్వాసంతో అభిప్రాయాలను చెప్పండి కానీ ఇతర అభిప్రాయాలకు తెరిచి ఉండండి: 'I think we should prioritize X, but I'm open to other views.' మీరు విభేదిస్తున్నప్పుడు మౌనంగా ఉండటం మానుకోండి — నాయకుడి మౌనాన్ని అంగీకారంగా అర్థం చేసుకోవచ్చు.",
+              examples: [
+                { text: "Could I add a point here before we move on?" },
+                { text: "Sorry to jump in, but I think we're missing a risk here." },
+                { text: "I think we should prioritize the migration, but I'm open to other views." }
+              ]
+            },
+            { type: "dialogue", roles: ["Colleague", "You"], lines: [
+              { role: "Colleague", text: "So the plan is to launch next Friday with the current scope." },
+              { role: "You", text: "Sorry to jump in, but I think that timeline is risky given the open bugs." },
+              { role: "Colleague", text: "What would you suggest instead?" },
+              { role: "You", text: "I think we should push the launch by one week, but I'm open to other views." },
+              { role: "Colleague", text: "That's fair. Let's discuss it with the team." },
+              { role: "You", text: "Could I add one more point? We should also flag this risk to the client early." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "The most polite way to interrupt a discussion to add an important point is:",
+                options: ["Sorry to jump in, but I think we're missing a risk here.", "Stop talking, I have something to say.", "Excuse, excuse, my turn now."],
+                answer: "Sorry to jump in, but I think we're missing a risk here.",
+                explanationEn: "This politely signals an interruption while immediately stating why it matters.",
+                explanationTe: "ఇది మర్యాదగా అంతరాయాన్ని సూచిస్తూ, అది ఎందుకు ముఖ్యమో వెంటనే తెలియజేస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the sentence that gives a confident but open opinion, fitting for a Head-level leader:",
+                options: ["I think we should prioritize the migration, but I'm open to other views.", "Do what I say, no more discussion."],
+                answer: "I think we should prioritize the migration, but I'm open to other views.",
+                explanationEn: "This states a clear opinion while staying open to the team's input, which fits collaborative leadership.",
+                explanationTe: "ఇది స్పష్టమైన అభిప్రాయాన్ని చెబుతూనే బృందం అభిప్రాయాలకు తెరిచి ఉంటుంది — సహకార నాయకత్వానికి ఇది సరిపోతుంది." }
+            ]}
+          ]}
+        ] },
+        { id: "review", title: "Review", icon: "🔁", lessons: [] }
+      ],
+      phase(id) { return this.phases.find(p => p.id === id); },
+      lesson(phaseId, lessonId) {
+        const p = this.phase(phaseId);
+        return p ? p.lessons.find(l => l.id === lessonId) : null;
+      }
+    };
+    const Router = {
+      state: { phaseId: "dashboard", lessonId: null, cardIndex: 0 },
+      goPhase(phaseId) {
+        this.state.phaseId = phaseId; this.state.lessonId = null; this.state.cardIndex = 0;
+        UI.render();
+      },
+      openLesson(lessonId) {
+        this.state.lessonId = lessonId; this.state.cardIndex = 0; UI.render();
+      },
+      nextCard() {
+        const l = CourseData.lesson(this.state.phaseId, this.state.lessonId);
+        if (l && this.state.cardIndex < l.cards.length - 1) { this.state.cardIndex++; UI.render(); }
+      },
+      prevCard() {
+        if (this.state.cardIndex > 0) { this.state.cardIndex--; UI.render(); }
+      }
+    };
+    const TTS = {
+      supported: ("speechSynthesis" in window),
+      _voices: [],
+      init() {
+        if (!this.supported) return;
+        const load = () => { this._voices = speechSynthesis.getVoices(); };
+        load();
+        speechSynthesis.onvoiceschanged = load;
+      },
+      _pickVoice(state) {
+        if (!this._voices.length) this._voices = speechSynthesis.getVoices();
+        const en = this._voices.filter(v => /^en/i.test(v.lang));
+        if (state.settings.voiceName) {
+          const chosen = en.find(v => v.name === state.settings.voiceName);
+          if (chosen) return chosen;
+        }
+        return en[0] || this._voices[0] || null;
+      },
+      speak(text, state) {
+        if (!this.supported || !text) return;
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        const v = this._pickVoice(state);
+        if (v) u.voice = v;
+        u.lang = (v && v.lang) || "en-US";
+        u.rate = state.settings.voiceRate || 0.9;
+        speechSynthesis.speak(u);
+      },
+      stop() { if (this.supported) speechSynthesis.cancel(); }
+    };
+    const Recorder = {
+      supported: !!(navigator.mediaDevices && window.MediaRecorder),
+      _rec: null, _chunks: [], _url: null, _stream: null,
+      async start() {
+        if (!this.supported) throw new Error("unsupported");
+        this._stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        this._chunks = [];
+        this._rec = new MediaRecorder(this._stream);
+        this._rec.ondataavailable = e => { if (e.data.size) this._chunks.push(e.data); };
+        this._rec.start();
+      },
+      stop() {
+        return new Promise(resolve => {
+          if (!this._rec) return resolve(null);
+          this._rec.onstop = () => {
+            const blob = new Blob(this._chunks, { type: "audio/webm" });
+            if (this._url) URL.revokeObjectURL(this._url);
+            this._url = URL.createObjectURL(blob);
+            if (this._stream) this._stream.getTracks().forEach(t => t.stop());
+            resolve(this._url);
+          };
+          this._rec.stop();
+        });
+      },
+      play() { if (this._url) new Audio(this._url).play(); }
+    };
+    const Quiz = {
+      check(question, given) {
+        const norm = s => String(s || "").trim().toLowerCase();
+        return norm(given) === norm(question.answer);
+      },
+      recordWrong(state, phaseId, lessonId, question) {
+        const id = phaseId + "/" + lessonId + "/" + question.prompt;
+        if (!state.review.wrongQuestions.some(q => q.id === id)) {
+          state.review.wrongQuestions.push({
+            id, phaseId, lessonId, prompt: question.prompt,
+            format: question.format, options: question.options || null,
+            answer: question.answer, explanationEn: question.explanationEn,
+            explanationTe: question.explanationTe || null
+          });
+        }
+      },
+      graduate(state, id) {
+        state.review.wrongQuestions = state.review.wrongQuestions.filter(q => q.id !== id);
+      }
+    };
+    const UI = {
+      state: null,
+      el(tag, props = {}, ...kids) {
+        const n = document.createElement(tag);
+        for (const [k, v] of Object.entries(props)) {
+          if (k === "class") n.className = v;
+          else if (k === "html") n.innerHTML = v;
+          else if (k.startsWith("on") && typeof v === "function") n.addEventListener(k.slice(2), v);
+          else if (v !== null && v !== undefined) n.setAttribute(k, v);
+        }
+        for (const kid of kids.flat()) if (kid != null)
+          n.appendChild(typeof kid === "string" ? document.createTextNode(kid) : kid);
+        return n;
+      },
+      save() { Storage.save(this.state); },
+      render() {
+        const root = document.getElementById("app");
+        root.innerHTML = "";
+        root.appendChild(this._header());
+        root.appendChild(this._tabs());
+        root.appendChild(this._body());
+      },
+      _header() {
+        const rate = this.el("input", { type: "range", min: "0.5", max: "1.25", step: "0.05",
+          value: this.state.settings.voiceRate,
+          oninput: e => { this.state.settings.voiceRate = parseFloat(e.target.value); this.save(); } });
+        const theme = this.el("button", { onclick: () => this._toggleTheme() },
+          this.state.settings.theme === "dark" ? "☀ Light" : "🌙 Dark");
+        const backup = this.el("button", { onclick: () => this._exportProgress() }, "⤓ Backup");
+        const restore = this.el("label", { class: "btnlike" }, "⤒ Restore",
+          this.el("input", { type: "file", accept: "application/json", style: "display:none",
+            onchange: e => this._importProgress(e) }));
+        return this.el("header", { class: "hdr" },
+          this.el("h1", {}, "English Path"),
+          this.el("div", { class: "hdr-tools" },
+            this.el("span", { class: "muted" }, "🔊 speed"), rate, theme, backup, restore));
+      },
+      _tabs() {
+        const bar = this.el("nav", { class: "tabs" });
+        CourseData.phases.forEach(p => {
+          const active = Router.state.phaseId === p.id;
+          bar.appendChild(this.el("button",
+            { class: "tab" + (active ? " active" : ""), onclick: () => Router.goPhase(p.id) },
+            p.icon + " " + p.title));
+        });
+        return bar;
+      },
+      _body() {
+        const pid = Router.state.phaseId;
+        if (pid === "dashboard") return this._dashboard();
+        if (pid === "review") return this._reviewView();
+        if (Router.state.lessonId) return this._lessonView();
+        return this._phaseView();
+      },
+      _toggleTheme() {
+        this.state.settings.theme = this.state.settings.theme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", this.state.settings.theme);
+        this.save(); this.render();
+      },
+      _speakBtn(text) {
+        if (!TTS.supported) return document.createTextNode("");
+        return this.el("button", { class: "icon", title: "Read aloud",
+          onclick: () => TTS.speak(text, this.state) }, "🔊");
+      },
+      _teluguReveal(teText) {
+        if (!teText) return document.createTextNode("");
+        const body = this.el("div", { class: "te-body telugu", style: "display:none" }, teText);
+        const btn = this.el("button", { class: "te-btn",
+          onclick: () => { body.style.display = body.style.display === "none" ? "block" : "none"; } },
+          "తెలుగులో చూడండి");
+        return this.el("div", { class: "te-wrap" }, btn, body);
+      },
+      _lastLesson() {
+        const keys = Object.keys(this.state.progress);
+        if (!keys.length) return null;
+        const key = keys[keys.length - 1];
+        const [phaseId, lessonId] = key.split("/");
+        return { phaseId, lessonId };
+      },
+      _dashboard() {
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, "🏠 Welcome back"));
+        const last = this._lastLesson();
+        if (last && CourseData.lesson(last.phaseId, last.lessonId)) {
+          const l = CourseData.lesson(last.phaseId, last.lessonId);
+          wrap.appendChild(this.el("button", { class: "cta",
+            onclick: () => { Router.state.phaseId = last.phaseId; Router.openLesson(last.lessonId); } },
+            "▸ Continue: " + l.title));
+        }
+        const grid = this.el("div", { class: "stat-grid" });
+        CourseData.phases.filter(p => !["dashboard", "review"].includes(p.id)).forEach(p => {
+          let done = 0;
+          p.lessons.forEach(l => {
+            const pr = this._lessonProgress(p.id, l.id);
+            if (pr.cardsDone.length === l.cards.length && pr.quizAttempted) done++;
+          });
+          const total = p.lessons.length || 0;
+          grid.appendChild(this.el("div", { class: "stat", onclick: () => Router.goPhase(p.id) },
+            this.el("div", { class: "stat-icon" }, p.icon),
+            this.el("div", {}, p.title),
+            this.el("div", { class: "muted" }, total ? (done + " / " + total + " lessons") : "coming soon")));
+        });
+        wrap.appendChild(grid);
+        wrap.appendChild(this.el("div", { class: "muted" },
+          "Review queue: " + this.state.review.wrongQuestions.length + " questions, " +
+          this.state.review.learningWords.length + " words. ",
+          this.el("button", { class: "opt", onclick: () => Router.goPhase("review") }, "Go to Review 🔁")));
+        return wrap;
+      },
+      _lessonProgress(phaseId, lessonId) {
+        const key = phaseId + "/" + lessonId;
+        return this.state.progress[key] || { cardsDone: [], quizAttempted: false, quizScore: 0 };
+      },
+      _phaseView() {
+        const phase = CourseData.phase(Router.state.phaseId);
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, phase.icon + " " + phase.title));
+        if (!phase.lessons.length) {
+          wrap.appendChild(this.el("p", { class: "muted" }, "Lessons coming soon in this phase."));
+          return wrap;
+        }
+        const list = this.el("div", { class: "lesson-list" });
+        phase.lessons.forEach(l => {
+          const pr = this._lessonProgress(phase.id, l.id);
+          const pct = Math.round((pr.cardsDone.length / l.cards.length) * 100);
+          const done = pct === 100 && pr.quizAttempted;
+          list.appendChild(this.el("button", { class: "lesson-item", onclick: () => Router.openLesson(l.id) },
+            this.el("span", {}, (done ? "✓ " : "▸ ") + l.title),
+            this.el("span", { class: "bar" }, this.el("span", { class: "bar-fill", style: "width:" + pct + "%" }))));
+        });
+        wrap.appendChild(list);
+        return wrap;
+      },
+      _lessonView() {
+        const phase = CourseData.phase(Router.state.phaseId);
+        const lesson = CourseData.lesson(phase.id, Router.state.lessonId);
+        const idx = Router.state.cardIndex;
+        const card = lesson.cards[idx];
+        const wrap = this.el("div", { class: "lesson" });
+        wrap.appendChild(this.el("button", { class: "back", onclick: () => Router.goPhase(phase.id) }, "← " + phase.title));
+        wrap.appendChild(this.el("h2", {}, lesson.title));
+        wrap.appendChild(this._renderCard(card, phase.id, lesson.id, idx));
+        const dots = this.el("div", { class: "dots" });
+        lesson.cards.forEach((_, i) => dots.appendChild(this.el("span", { class: "dot" + (i === idx ? " on" : "") })));
+        wrap.appendChild(this.el("div", { class: "stepper" },
+          this.el("button", { onclick: () => Router.prevCard(), disabled: idx === 0 ? "" : null }, "◀ Prev"),
+          dots,
+          this.el("button", { onclick: () => Router.nextCard(), disabled: idx === lesson.cards.length - 1 ? "" : null }, "Next ▶")));
+        this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
+        return wrap;
+      },
+      _markCardDone(phaseId, lessonId, idx, total) {
+        const key = phaseId + "/" + lessonId;
+        const pr = this._lessonProgress(phaseId, lessonId);
+        if (!pr.cardsDone.includes(idx)) {
+          pr.cardsDone.push(idx);
+          this.state.progress[key] = pr;
+          this.save();
+        }
+      },
+      _renderCard(card, phaseId, lessonId, idx) {
+        switch (card.type) {
+          case "concept": return this._conceptCard(card);
+          case "example": return this._exampleCard(card);
+          case "mistake": return this._mistakeCard(card);
+          case "vocab": return this._vocabCard(card);
+          case "dialogue": return this._dialogueCard(card);
+          case "quiz": return this._quizCard(card, phaseId, lessonId);
+          default: return this.el("div", {}, "Unknown card");
+        }
+      },
+      _conceptCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, card.title));
+        c.appendChild(this.el("p", {}, card.english));
+        c.appendChild(this._teluguReveal(card.telugu));
+        (card.examples || []).forEach(ex => {
+          const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text));
+          c.appendChild(line);
+          if (ex.telugu) c.appendChild(this._teluguReveal(ex.telugu));
+        });
+        return c;
+      },
+      _exampleCard(card) {
+        const c = this.el("div", { class: "card" });
+        if (card.pattern) c.appendChild(this.el("h3", {}, card.pattern));
+        (card.sentences || []).forEach(s => {
+          c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(s.text), this.el("span", {}, s.text)));
+          if (s.telugu) c.appendChild(this._teluguReveal(s.telugu));
+        });
+        return c;
+      },
+      _mistakeCard(card) {
+        const c = this.el("div", { class: "card mistake" });
+        c.appendChild(this.el("div", { class: "wrong" }, "✗ " + card.wrong));
+        c.appendChild(this.el("div", { class: "right" }, this._speakBtn(card.right), "✓ " + card.right));
+        c.appendChild(this.el("p", { class: "why" }, card.whyEn));
+        c.appendChild(this._teluguReveal(card.whyTe));
+        return c;
+      },
+      _vocabCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("div", { class: "vocab-head" },
+          this._speakBtn(card.word),
+          this.el("h3", {}, card.word),
+          this.el("span", { class: "pos" }, card.pos || "")));
+        c.appendChild(this.el("p", {}, card.meaningEn));
+        c.appendChild(this._teluguReveal(card.meaningTe));
+        (card.examples || []).forEach(ex => {
+          c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
+        });
+        const inLearning = this.state.review.learningWords.some(w => w.word === card.word);
+        const rate = this.el("div", { class: "rate" },
+          this.el("button", { class: "opt", onclick: () => this._rateWord(card, true) }, "Still learning"),
+          this.el("button", { class: "opt", onclick: () => this._rateWord(card, false) }, "Got it ✓"));
+        if (inLearning) rate.appendChild(this.el("span", { class: "muted" }, " (in Review)"));
+        c.appendChild(rate);
+        return c;
+      },
+      _rateWord(card, learning) {
+        const list = this.state.review.learningWords;
+        const i = list.findIndex(w => w.word === card.word);
+        if (learning && i < 0) list.push({ word: card.word, meaningEn: card.meaningEn, meaningTe: card.meaningTe || null });
+        if (!learning && i >= 0) list.splice(i, 1);
+        this.save(); this.render();
+      },
+      _shadowControl(modelText) {
+        const btn = this.el("button", { class: "opt" }, "🎙 Record");
+        if (!Recorder.supported) return this.el("span", { class: "muted" }, "🎙 (recording not supported)");
+        let recording = false;
+        const playMine = this.el("button", { class: "opt", style: "display:none", onclick: () => Recorder.play() }, "▶ My voice");
+        const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
+        btn.onclick = async () => {
+          if (!recording) {
+            try { await Recorder.start(); recording = true; btn.textContent = "⏹ Stop"; }
+            catch (e) { btn.textContent = "🎙 (mic blocked)"; btn.disabled = true; }
+          } else {
+            await Recorder.stop(); recording = false; btn.textContent = "🎙 Record again";
+            playMine.style.display = "";
+          }
+        };
+        return this.el("div", { class: "shadow" },
+          this.el("span", { class: "muted" }, "Your turn — repeat it:"), playModel, btn, playMine);
+      },
+      _dialogueCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, "Dialogue"));
+        const roleClass = {}; card.roles.forEach((r, i) => roleClass[r] = i === 0 ? "role-a" : "role-b");
+        const allText = card.lines.map(l => l.text).join(" ");
+        c.appendChild(this.el("button", { class: "opt", onclick: () => TTS.speak(allText, this.state) }, "▶ Play whole conversation"));
+        card.lines.forEach(line => {
+          c.appendChild(this.el("div", { class: "dline " + roleClass[line.role] },
+            this._speakBtn(line.text),
+            this.el("b", {}, line.role + ": "),
+            this.el("span", {}, line.text)));
+        });
+        c.appendChild(this._shadowControl(card.lines[0].text));
+        return c;
+      },
+      _quizCard(card, phaseId, lessonId) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, "Quiz"));
+        let correct = 0, answered = 0;
+        const total = card.questions.length;
+        const status = this.el("div", { class: "muted" }, "0 / " + total + " answered");
+        card.questions.forEach(q => {
+          const qWrap = this.el("div", { class: "q" });
+          qWrap.appendChild(this.el("div", { class: "q-prompt" }, q.prompt));
+          const feedback = this.el("div", { class: "q-feedback" });
+          const commit = given => {
+            if (qWrap.dataset.done) return;
+            qWrap.dataset.done = "1"; answered++;
+            const ok = Quiz.check(q, given);
+            if (ok) { correct++; feedback.className = "q-feedback ok"; feedback.textContent = "✓ Correct. " + q.explanationEn; }
+            else {
+              feedback.className = "q-feedback bad";
+              feedback.textContent = "✗ Answer: " + q.answer + ". " + q.explanationEn;
+              Quiz.recordWrong(this.state, phaseId, lessonId, q);
+            }
+            if (q.explanationTe) feedback.appendChild(this._teluguReveal(q.explanationTe));
+            status.textContent = answered + " / " + total + " answered";
+            this._saveQuizScore(phaseId, lessonId, correct, total);
+          };
+          if (q.format === "mcq" || q.format === "choose-sentence") {
+            q.options.forEach(opt => qWrap.appendChild(
+              this.el("button", { class: "opt", onclick: () => commit(opt) }, opt)));
+          } else if (q.format === "fill") {
+            const inp = this.el("input", { type: "text", class: "fill", placeholder: "type your answer" });
+            qWrap.appendChild(inp);
+            qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(inp.value) }, "Check"));
+          }
+          qWrap.appendChild(feedback);
+          c.appendChild(qWrap);
+        });
+        c.appendChild(status);
+        return c;
+      },
+      _saveQuizScore(phaseId, lessonId, correct, total) {
+        const key = phaseId + "/" + lessonId;
+        const pr = this._lessonProgress(phaseId, lessonId);
+        pr.quizAttempted = true; pr.quizScore = Math.round((correct / total) * 100);
+        this.state.progress[key] = pr; this.save();
+      },
+      _reviewView() {
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, "🔁 Review"));
+        const wrongs = this.state.review.wrongQuestions;
+        const words = this.state.review.learningWords;
+        if (!wrongs.length && !words.length) {
+          wrap.appendChild(this.el("p", { class: "muted" }, "Nothing to review yet. Wrong quiz answers and words you mark 'Still learning' show up here."));
+          return wrap;
+        }
+        if (wrongs.length) {
+          wrap.appendChild(this.el("h3", {}, "Questions to retry (" + wrongs.length + ")"));
+          wrongs.slice().forEach(q => {
+            const qWrap = this.el("div", { class: "card q" });
+            qWrap.appendChild(this.el("div", { class: "q-prompt" }, q.prompt));
+            const fb = this.el("div", { class: "q-feedback" });
+            const commit = given => {
+              if (qWrap.dataset.done) return; qWrap.dataset.done = "1";
+              if (Quiz.check(q, given)) {
+                fb.className = "q-feedback ok"; fb.textContent = "✓ Correct — graduated out of Review.";
+                Quiz.graduate(this.state, q.id); this.save();
+              } else { fb.className = "q-feedback bad"; fb.textContent = "✗ Answer: " + q.answer + ". " + q.explanationEn; }
+            };
+            if (q.options) q.options.forEach(o => qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(o) }, o)));
+            else {
+              const inp = this.el("input", { type: "text", class: "fill" });
+              qWrap.appendChild(inp);
+              qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(inp.value) }, "Check"));
+            }
+            qWrap.appendChild(fb);
+            wrap.appendChild(qWrap);
+          });
+        }
+        if (words.length) {
+          wrap.appendChild(this.el("h3", {}, "Words to review (" + words.length + ")"));
+          words.slice().forEach(w => {
+            const c = this.el("div", { class: "card" });
+            c.appendChild(this.el("div", { class: "vocab-head" }, this._speakBtn(w.word), this.el("h3", {}, w.word)));
+            c.appendChild(this.el("p", {}, w.meaningEn));
+            c.appendChild(this._teluguReveal(w.meaningTe));
+            c.appendChild(this.el("button", { class: "opt",
+              onclick: () => { this.state.review.learningWords = this.state.review.learningWords.filter(x => x.word !== w.word); this.save(); this.render(); } },
+              "Got it ✓ (remove)"));
+            wrap.appendChild(c);
+          });
+        }
+        return wrap;
+      },
+      _exportProgress() {
+        const blob = new Blob([JSON.stringify(this.state, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = this.el("a", { href: url, download: "english-path-progress.json" });
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      },
+      _importProgress(e) {
+        const file = e.target.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result);
+            this.state = Object.assign(Storage._defaults(), data);
+            this.save();
+            document.documentElement.setAttribute("data-theme", this.state.settings.theme);
+            this.render();
+            alert("Progress restored.");
+          } catch (err) { alert("Could not read that file."); }
+        };
+        reader.readAsText(file);
+      }
+    };
+    UI.state = Storage.load();
+    document.documentElement.setAttribute("data-theme", UI.state.settings.theme);
+    TTS.init();
+    UI.render();
+    document.addEventListener("keydown", e => {
+      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      if (!Router.state.lessonId) return;
+      if (e.key === "ArrowRight") Router.nextCard();
+      if (e.key === "ArrowLeft") Router.prevCard();
+    });
+  </script>
+</body>
+</html>
