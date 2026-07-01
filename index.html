@@ -120,6 +120,36 @@
         if (this.state.cardIndex > 0) { this.state.cardIndex--; UI.render(); }
       }
     };
+    const TTS = {
+      supported: ("speechSynthesis" in window),
+      _voices: [],
+      init() {
+        if (!this.supported) return;
+        const load = () => { this._voices = speechSynthesis.getVoices(); };
+        load();
+        speechSynthesis.onvoiceschanged = load;
+      },
+      _pickVoice(state) {
+        if (!this._voices.length) this._voices = speechSynthesis.getVoices();
+        const en = this._voices.filter(v => /^en/i.test(v.lang));
+        if (state.settings.voiceName) {
+          const chosen = en.find(v => v.name === state.settings.voiceName);
+          if (chosen) return chosen;
+        }
+        return en[0] || this._voices[0] || null;
+      },
+      speak(text, state) {
+        if (!this.supported || !text) return;
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        const v = this._pickVoice(state);
+        if (v) u.voice = v;
+        u.lang = (v && v.lang) || "en-US";
+        u.rate = state.settings.voiceRate || 0.9;
+        speechSynthesis.speak(u);
+      },
+      stop() { if (this.supported) speechSynthesis.cancel(); }
+    };
     // Modules are appended below in subsequent tasks.
     // Bootstrap (defined in the final UI task) runs last.
   </script>
