@@ -21,6 +21,17 @@
     #app { max-width: var(--maxw); margin: 0 auto; padding: 16px; }
     button { font: inherit; cursor: pointer; }
     .telugu { font-family: "Nirmala UI", "Gautami", system-ui; }
+    .hdr { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+      padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:12px; }
+    .hdr h1 { font-size:20px; margin:0; }
+    .hdr-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .muted { color:var(--muted); font-size:13px; }
+    .tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:10px; }
+    .tab { background:var(--panel); color:var(--text); border:1px solid var(--line);
+      border-radius:999px; padding:8px 14px; white-space:nowrap; }
+    .tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+    button, .btnlike { background:var(--panel); color:var(--text); border:1px solid var(--line);
+      border-radius:8px; padding:6px 10px; }
   </style>
 </head>
 <body>
@@ -196,8 +207,76 @@
         state.review.wrongQuestions = state.review.wrongQuestions.filter(q => q.id !== id);
       }
     };
-    // Modules are appended below in subsequent tasks.
-    // Bootstrap (defined in the final UI task) runs last.
+    const UI = {
+      state: null,
+      el(tag, props = {}, ...kids) {
+        const n = document.createElement(tag);
+        for (const [k, v] of Object.entries(props)) {
+          if (k === "class") n.className = v;
+          else if (k === "html") n.innerHTML = v;
+          else if (k.startsWith("on") && typeof v === "function") n.addEventListener(k.slice(2), v);
+          else if (v !== null && v !== undefined) n.setAttribute(k, v);
+        }
+        for (const kid of kids.flat()) if (kid != null)
+          n.appendChild(typeof kid === "string" ? document.createTextNode(kid) : kid);
+        return n;
+      },
+      save() { Storage.save(this.state); },
+      render() {
+        const root = document.getElementById("app");
+        root.innerHTML = "";
+        root.appendChild(this._header());
+        root.appendChild(this._tabs());
+        root.appendChild(this._body());
+      },
+      _header() {
+        const rate = this.el("input", { type: "range", min: "0.5", max: "1.25", step: "0.05",
+          value: this.state.settings.voiceRate,
+          oninput: e => { this.state.settings.voiceRate = parseFloat(e.target.value); this.save(); } });
+        const theme = this.el("button", { onclick: () => this._toggleTheme() },
+          this.state.settings.theme === "dark" ? "☀ Light" : "🌙 Dark");
+        const backup = this.el("button", { onclick: () => this._exportProgress() }, "⤓ Backup");
+        const restore = this.el("label", { class: "btnlike" }, "⤒ Restore",
+          this.el("input", { type: "file", accept: "application/json", style: "display:none",
+            onchange: e => this._importProgress(e) }));
+        return this.el("header", { class: "hdr" },
+          this.el("h1", {}, "English Path"),
+          this.el("div", { class: "hdr-tools" },
+            this.el("span", { class: "muted" }, "🔊 speed"), rate, theme, backup, restore));
+      },
+      _tabs() {
+        const bar = this.el("nav", { class: "tabs" });
+        CourseData.phases.forEach(p => {
+          const active = Router.state.phaseId === p.id;
+          bar.appendChild(this.el("button",
+            { class: "tab" + (active ? " active" : ""), onclick: () => Router.goPhase(p.id) },
+            p.icon + " " + p.title));
+        });
+        return bar;
+      },
+      _body() {
+        const pid = Router.state.phaseId;
+        if (pid === "dashboard") return this._dashboard();
+        if (pid === "review") return this._reviewView();
+        if (Router.state.lessonId) return this._lessonView();
+        return this._phaseView();
+      },
+      _toggleTheme() {
+        this.state.settings.theme = this.state.settings.theme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", this.state.settings.theme);
+        this.save(); this.render();
+      },
+      _dashboard() { return this.el("div", {}, "Dashboard — coming in a later task"); },
+      _phaseView() { return this.el("div", {}, "Phase view — coming in a later task"); },
+      _lessonView() { return this.el("div", {}, "Lesson view — coming in a later task"); },
+      _reviewView() { return this.el("div", {}, "Review — coming in a later task"); },
+      _exportProgress() {},
+      _importProgress() {}
+    };
+    UI.state = Storage.load();
+    document.documentElement.setAttribute("data-theme", UI.state.settings.theme);
+    TTS.init();
+    UI.render();
   </script>
 </body>
 </html>
