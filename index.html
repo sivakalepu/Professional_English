@@ -176,6 +176,26 @@
       },
       play() { if (this._url) new Audio(this._url).play(); }
     };
+    const Quiz = {
+      check(question, given) {
+        const norm = s => String(s || "").trim().toLowerCase();
+        return norm(given) === norm(question.answer);
+      },
+      recordWrong(state, phaseId, lessonId, question) {
+        const id = phaseId + "/" + lessonId + "/" + question.prompt;
+        if (!state.review.wrongQuestions.some(q => q.id === id)) {
+          state.review.wrongQuestions.push({
+            id, phaseId, lessonId, prompt: question.prompt,
+            format: question.format, options: question.options || null,
+            answer: question.answer, explanationEn: question.explanationEn,
+            explanationTe: question.explanationTe || null
+          });
+        }
+      },
+      graduate(state, id) {
+        state.review.wrongQuestions = state.review.wrongQuestions.filter(q => q.id !== id);
+      }
+    };
     // Modules are appended below in subsequent tasks.
     // Bootstrap (defined in the final UI task) runs last.
   </script>
