@@ -39,6 +39,23 @@
     .te-body { margin-top:6px; padding:8px 10px; background:var(--panel-2);
       border-left:3px solid var(--accent); border-radius:6px; }
     .telugu { font-size:17px; }
+    .lesson-list { display:flex; flex-direction:column; gap:8px; }
+    .lesson-item { display:flex; justify-content:space-between; align-items:center; gap:12px; text-align:left; }
+    .bar { width:120px; height:8px; background:var(--panel-2); border-radius:99px; overflow:hidden; }
+    .bar-fill { display:block; height:100%; background:var(--good); }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      padding:18px; margin:12px 0; }
+    .card h3 { margin-top:0; }
+    .ex { display:flex; align-items:center; gap:6px; margin:6px 0; }
+    .card.mistake { border-left:4px solid var(--warn); }
+    .mistake .wrong { color:var(--warn); text-decoration:line-through; }
+    .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px; }
+    .mistake .why { color:var(--muted); }
+    .back { margin-bottom:8px; }
+    .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+    .dots { display:flex; gap:6px; }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--panel-2); }
+    .dot.on { background:var(--accent); }
   </style>
 </head>
 <body>
@@ -287,8 +304,94 @@
         return this.el("div", { class: "te-wrap" }, btn, body);
       },
       _dashboard() { return this.el("div", {}, "Dashboard — coming in a later task"); },
-      _phaseView() { return this.el("div", {}, "Phase view — coming in a later task"); },
-      _lessonView() { return this.el("div", {}, "Lesson view — coming in a later task"); },
+      _lessonProgress(phaseId, lessonId) {
+        const key = phaseId + "/" + lessonId;
+        return this.state.progress[key] || { cardsDone: [], quizAttempted: false, quizScore: 0 };
+      },
+      _phaseView() {
+        const phase = CourseData.phase(Router.state.phaseId);
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, phase.icon + " " + phase.title));
+        if (!phase.lessons.length) {
+          wrap.appendChild(this.el("p", { class: "muted" }, "Lessons coming soon in this phase."));
+          return wrap;
+        }
+        const list = this.el("div", { class: "lesson-list" });
+        phase.lessons.forEach(l => {
+          const pr = this._lessonProgress(phase.id, l.id);
+          const pct = Math.round((pr.cardsDone.length / l.cards.length) * 100);
+          const done = pct === 100 && pr.quizAttempted;
+          list.appendChild(this.el("button", { class: "lesson-item", onclick: () => Router.openLesson(l.id) },
+            this.el("span", {}, (done ? "✓ " : "▸ ") + l.title),
+            this.el("span", { class: "bar" }, this.el("span", { class: "bar-fill", style: "width:" + pct + "%" }))));
+        });
+        wrap.appendChild(list);
+        return wrap;
+      },
+      _lessonView() {
+        const phase = CourseData.phase(Router.state.phaseId);
+        const lesson = CourseData.lesson(phase.id, Router.state.lessonId);
+        const idx = Router.state.cardIndex;
+        const card = lesson.cards[idx];
+        const wrap = this.el("div", { class: "lesson" });
+        wrap.appendChild(this.el("button", { class: "back", onclick: () => Router.goPhase(phase.id) }, "← " + phase.title));
+        wrap.appendChild(this.el("h2", {}, lesson.title));
+        wrap.appendChild(this._renderCard(card, phase.id, lesson.id, idx));
+        const dots = this.el("div", { class: "dots" });
+        lesson.cards.forEach((_, i) => dots.appendChild(this.el("span", { class: "dot" + (i === idx ? " on" : "") })));
+        wrap.appendChild(this.el("div", { class: "stepper" },
+          this.el("button", { onclick: () => Router.prevCard(), disabled: idx === 0 ? "" : null }, "◀ Prev"),
+          dots,
+          this.el("button", { onclick: () => Router.nextCard(), disabled: idx === lesson.cards.length - 1 ? "" : null }, "Next ▶")));
+        this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
+        return wrap;
+      },
+      _markCardDone(phaseId, lessonId, idx, total) {
+        const key = phaseId + "/" + lessonId;
+        const pr = this._lessonProgress(phaseId, lessonId);
+        if (!pr.cardsDone.includes(idx)) pr.cardsDone.push(idx);
+        this.state.progress[key] = pr; this.save();
+      },
+      _renderCard(card, phaseId, lessonId, idx) {
+        switch (card.type) {
+          case "concept": return this._conceptCard(card);
+          case "example": return this._exampleCard(card);
+          case "mistake": return this._mistakeCard(card);
+          case "vocab": return this._vocabCard(card);
+          case "dialogue": return this._dialogueCard(card);
+          case "quiz": return this._quizCard(card, phaseId, lessonId);
+          default: return this.el("div", {}, "Unknown card");
+        }
+      },
+      _conceptCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, card.title));
+        c.appendChild(this.el("p", {}, card.english));
+        c.appendChild(this._teluguReveal(card.telugu));
+        (card.examples || []).forEach(ex => {
+          const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text));
+          c.appendChild(line);
+          if (ex.telugu) c.appendChild(this._teluguReveal(ex.telugu));
+        });
+        return c;
+      },
+      _exampleCard(card) {
+        const c = this.el("div", { class: "card" });
+        if (card.pattern) c.appendChild(this.el("h3", {}, card.pattern));
+        (card.sentences || []).forEach(s => {
+          c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(s.text), this.el("span", {}, s.text)));
+          if (s.telugu) c.appendChild(this._teluguReveal(s.telugu));
+        });
+        return c;
+      },
+      _mistakeCard(card) {
+        const c = this.el("div", { class: "card mistake" });
+        c.appendChild(this.el("div", { class: "wrong" }, "✗ " + card.wrong));
+        c.appendChild(this.el("div", { class: "right" }, this._speakBtn(card.right), "✓ " + card.right));
+        c.appendChild(this.el("p", { class: "why" }, card.whyEn));
+        c.appendChild(this._teluguReveal(card.whyTe));
+        return c;
+      },
       _reviewView() { return this.el("div", {}, "Review — coming in a later task"); },
       _exportProgress() {},
       _importProgress() {}
