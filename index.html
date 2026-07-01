@@ -557,7 +557,53 @@
         pr.quizAttempted = true; pr.quizScore = Math.round((correct / total) * 100);
         this.state.progress[key] = pr; this.save();
       },
-      _reviewView() { return this.el("div", {}, "Review — coming in a later task"); },
+      _reviewView() {
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, "🔁 Review"));
+        const wrongs = this.state.review.wrongQuestions;
+        const words = this.state.review.learningWords;
+        if (!wrongs.length && !words.length) {
+          wrap.appendChild(this.el("p", { class: "muted" }, "Nothing to review yet. Wrong quiz answers and words you mark 'Still learning' show up here."));
+          return wrap;
+        }
+        if (wrongs.length) {
+          wrap.appendChild(this.el("h3", {}, "Questions to retry (" + wrongs.length + ")"));
+          wrongs.slice().forEach(q => {
+            const qWrap = this.el("div", { class: "card q" });
+            qWrap.appendChild(this.el("div", { class: "q-prompt" }, q.prompt));
+            const fb = this.el("div", { class: "q-feedback" });
+            const commit = given => {
+              if (qWrap.dataset.done) return; qWrap.dataset.done = "1";
+              if (Quiz.check(q, given)) {
+                fb.className = "q-feedback ok"; fb.textContent = "✓ Correct — graduated out of Review.";
+                Quiz.graduate(this.state, q.id); this.save();
+              } else { fb.className = "q-feedback bad"; fb.textContent = "✗ Answer: " + q.answer + ". " + q.explanationEn; }
+            };
+            if (q.options) q.options.forEach(o => qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(o) }, o)));
+            else {
+              const inp = this.el("input", { type: "text", class: "fill" });
+              qWrap.appendChild(inp);
+              qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(inp.value) }, "Check"));
+            }
+            qWrap.appendChild(fb);
+            wrap.appendChild(qWrap);
+          });
+        }
+        if (words.length) {
+          wrap.appendChild(this.el("h3", {}, "Words to review (" + words.length + ")"));
+          words.slice().forEach(w => {
+            const c = this.el("div", { class: "card" });
+            c.appendChild(this.el("div", { class: "vocab-head" }, this._speakBtn(w.word), this.el("h3", {}, w.word)));
+            c.appendChild(this.el("p", {}, w.meaningEn));
+            c.appendChild(this._teluguReveal(w.meaningTe));
+            c.appendChild(this.el("button", { class: "opt",
+              onclick: () => { this.state.review.learningWords = this.state.review.learningWords.filter(x => x.word !== w.word); this.save(); this.render(); } },
+              "Got it ✓ (remove)"));
+            wrap.appendChild(c);
+          });
+        }
+        return wrap;
+      },
       _exportProgress() {},
       _importProgress() {}
     };
