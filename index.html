@@ -32,6 +32,13 @@
     .tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
     button, .btnlike { background:var(--panel); color:var(--text); border:1px solid var(--line);
       border-radius:8px; padding:6px 10px; }
+    .icon { border:none; background:transparent; font-size:16px; padding:2px 6px; }
+    .te-wrap { margin:8px 0; }
+    .te-btn { background:var(--panel-2); border:1px dashed var(--accent); color:var(--accent);
+      border-radius:8px; padding:4px 10px; font-size:14px; }
+    .te-body { margin-top:6px; padding:8px 10px; background:var(--panel-2);
+      border-left:3px solid var(--accent); border-radius:6px; }
+    .telugu { font-size:17px; }
   </style>
 </head>
 <body>
@@ -265,6 +272,19 @@
         this.state.settings.theme = this.state.settings.theme === "dark" ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", this.state.settings.theme);
         this.save(); this.render();
+      },
+      _speakBtn(text) {
+        if (!TTS.supported) return document.createTextNode("");
+        return this.el("button", { class: "icon", title: "Read aloud",
+          onclick: () => TTS.speak(text, this.state) }, "🔊");
+      },
+      _teluguReveal(teText) {
+        if (!teText) return document.createTextNode("");
+        const body = this.el("div", { class: "te-body telugu", style: "display:none" }, teText);
+        const btn = this.el("button", { class: "te-btn",
+          onclick: () => { body.style.display = body.style.display === "none" ? "block" : "none"; } },
+          "తెలుగులో చూడండి");
+        return this.el("div", { class: "te-wrap" }, btn, body);
       },
       _dashboard() { return this.el("div", {}, "Dashboard — coming in a later task"); },
       _phaseView() { return this.el("div", {}, "Phase view — coming in a later task"); },
