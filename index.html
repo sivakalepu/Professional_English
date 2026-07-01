@@ -27,6 +27,27 @@
   <div id="app">Loading…</div>
   <script>
     "use strict";
+    const Storage = {
+      KEY: "englishAppState",
+      _defaults() {
+        return {
+          progress: {},
+          settings: { theme: "dark", voiceRate: 0.9, voiceName: null },
+          review: { wrongQuestions: [], learningWords: [] }
+        };
+      },
+      load() {
+        try {
+          const raw = localStorage.getItem(this.KEY);
+          if (!raw) return this._defaults();
+          return Object.assign(this._defaults(), JSON.parse(raw));
+        } catch (e) { return this._defaults(); }
+      },
+      save(state) {
+        try { localStorage.setItem(this.KEY, JSON.stringify(state)); }
+        catch (e) { console.warn("save failed", e); }
+      }
+    };
     // Modules are appended below in subsequent tasks.
     // Bootstrap (defined in the final UI task) runs last.
   </script>
