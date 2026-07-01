@@ -64,6 +64,10 @@
     .q-feedback { margin-top:8px; }
     .q-feedback.ok { color:var(--good); }
     .q-feedback.bad { color:var(--warn); }
+    .vocab-head { display:flex; align-items:center; gap:8px; }
+    .vocab-head h3 { margin:0; }
+    .pos { color:var(--muted); font-style:italic; }
+    .rate { margin-top:12px; }
   </style>
 </head>
 <body>
@@ -357,8 +361,11 @@
       _markCardDone(phaseId, lessonId, idx, total) {
         const key = phaseId + "/" + lessonId;
         const pr = this._lessonProgress(phaseId, lessonId);
-        if (!pr.cardsDone.includes(idx)) pr.cardsDone.push(idx);
-        this.state.progress[key] = pr; this.save();
+        if (!pr.cardsDone.includes(idx)) {
+          pr.cardsDone.push(idx);
+          this.state.progress[key] = pr;
+          this.save();
+        }
       },
       _renderCard(card, phaseId, lessonId, idx) {
         switch (card.type) {
@@ -399,6 +406,32 @@
         c.appendChild(this.el("p", { class: "why" }, card.whyEn));
         c.appendChild(this._teluguReveal(card.whyTe));
         return c;
+      },
+      _vocabCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("div", { class: "vocab-head" },
+          this._speakBtn(card.word),
+          this.el("h3", {}, card.word),
+          this.el("span", { class: "pos" }, card.pos || "")));
+        c.appendChild(this.el("p", {}, card.meaningEn));
+        c.appendChild(this._teluguReveal(card.meaningTe));
+        (card.examples || []).forEach(ex => {
+          c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
+        });
+        const inLearning = this.state.review.learningWords.some(w => w.word === card.word);
+        const rate = this.el("div", { class: "rate" },
+          this.el("button", { class: "opt", onclick: () => this._rateWord(card, true) }, "Still learning"),
+          this.el("button", { class: "opt", onclick: () => this._rateWord(card, false) }, "Got it ✓"));
+        if (inLearning) rate.appendChild(this.el("span", { class: "muted" }, " (in Review)"));
+        c.appendChild(rate);
+        return c;
+      },
+      _rateWord(card, learning) {
+        const list = this.state.review.learningWords;
+        const i = list.findIndex(w => w.word === card.word);
+        if (learning && i < 0) list.push({ word: card.word, meaningEn: card.meaningEn, meaningTe: card.meaningTe || null });
+        if (!learning && i >= 0) list.splice(i, 1);
+        this.save(); this.render();
       },
       _quizCard(card, phaseId, lessonId) {
         const c = this.el("div", { class: "card" });
