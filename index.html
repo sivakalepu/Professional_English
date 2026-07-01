@@ -79,6 +79,12 @@
     .stat { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
       padding:14px; cursor:pointer; }
     .stat-icon { font-size:24px; }
+    @media (max-width: 640px) {
+      .hdr { flex-direction:column; align-items:flex-start; }
+      .lesson-item { flex-direction:column; align-items:flex-start; gap:4px; }
+      .bar { width:100%; }
+      .stepper { gap:8px; }
+    }
   </style>
 </head>
 <body>
@@ -604,13 +610,38 @@
         }
         return wrap;
       },
-      _exportProgress() {},
-      _importProgress() {}
+      _exportProgress() {
+        const blob = new Blob([JSON.stringify(this.state, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = this.el("a", { href: url, download: "english-path-progress.json" });
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      },
+      _importProgress(e) {
+        const file = e.target.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result);
+            this.state = Object.assign(Storage._defaults(), data);
+            this.save();
+            document.documentElement.setAttribute("data-theme", this.state.settings.theme);
+            this.render();
+            alert("Progress restored.");
+          } catch (err) { alert("Could not read that file."); }
+        };
+        reader.readAsText(file);
+      }
     };
     UI.state = Storage.load();
     document.documentElement.setAttribute("data-theme", UI.state.settings.theme);
     TTS.init();
     UI.render();
+    document.addEventListener("keydown", e => {
+      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      if (!Router.state.lessonId) return;
+      if (e.key === "ArrowRight") Router.nextCard();
+      if (e.key === "ArrowLeft") Router.prevCard();
+    });
   </script>
 </body>
 </html>
