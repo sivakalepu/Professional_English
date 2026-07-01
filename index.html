@@ -85,6 +85,10 @@
       .bar { width:100%; }
       .stepper { gap:8px; }
     }
+    .concept-intro { margin-top:0; }
+    ul.rules { list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:16px; }
+    .rule { border-left:3px solid var(--accent); padding:4px 0 4px 12px; }
+    .rule-text { font-weight:600; margin-bottom:6px; }
   </style>
 </head>
 <body>
@@ -1104,11 +1108,28 @@
       _conceptCard(card) {
         const c = this.el("div", { class: "card" });
         c.appendChild(this.el("h3", {}, card.title));
-        c.appendChild(this.el("p", {}, card.english));
+        if (Array.isArray(card.points)) {
+          if (card.intro) c.appendChild(this.el("p", { class: "concept-intro" }, card.intro));
+          if (card.introTe) c.appendChild(this._teluguReveal(card.introTe));
+          const ul = this.el("ul", { class: "rules" });
+          card.points.forEach(pt => {
+            const li = this.el("li", { class: "rule" });
+            li.appendChild(this.el("div", { class: "rule-text" }, pt.rule));
+            if (pt.ruleTe) li.appendChild(this._teluguReveal(pt.ruleTe));
+            (pt.examples || []).forEach(ex => {
+              li.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
+              if (ex.telugu) li.appendChild(this._teluguReveal(ex.telugu));
+            });
+            ul.appendChild(li);
+          });
+          c.appendChild(ul);
+          return c;
+        }
+        // legacy fallback
+        if (card.english) c.appendChild(this.el("p", {}, card.english));
         c.appendChild(this._teluguReveal(card.telugu));
         (card.examples || []).forEach(ex => {
-          const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text));
-          c.appendChild(line);
+          c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
           if (ex.telugu) c.appendChild(this._teluguReveal(ex.telugu));
         });
         return c;
