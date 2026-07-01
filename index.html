@@ -103,6 +103,23 @@
         return p ? p.lessons.find(l => l.id === lessonId) : null;
       }
     };
+    const Router = {
+      state: { phaseId: "dashboard", lessonId: null, cardIndex: 0 },
+      goPhase(phaseId) {
+        this.state.phaseId = phaseId; this.state.lessonId = null; this.state.cardIndex = 0;
+        UI.render();
+      },
+      openLesson(lessonId) {
+        this.state.lessonId = lessonId; this.state.cardIndex = 0; UI.render();
+      },
+      nextCard() {
+        const l = CourseData.lesson(this.state.phaseId, this.state.lessonId);
+        if (l && this.state.cardIndex < l.cards.length - 1) { this.state.cardIndex++; UI.render(); }
+      },
+      prevCard() {
+        if (this.state.cardIndex > 0) { this.state.cardIndex--; UI.render(); }
+      }
+    };
     // Modules are appended below in subsequent tasks.
     // Bootstrap (defined in the final UI task) runs last.
   </script>
