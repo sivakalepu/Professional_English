@@ -8,7 +8,7 @@ Orchestrated by **Sivakumar Kalepu**.
 
 ## Features
 
-- **Staged phases:** 📘 Grammar · 📗 Vocabulary · 🗣 Speaking · 🎬 Situations · 💼 Professional
+- **Staged phases:** 📘 Grammar · 📗 Vocabulary · 🎤 Speaking · 🎬 Situations · 💼 Professional
 - **Grammar (deep):** 20 lessons in beginner order (sentence basics → conditionals), each with bulleted rules, examples, a Telugu-speaker "common mistake" card, and a quiz.
 - **On-demand Telugu (తెలుగు):** every concept rule, vocabulary meaning, and Situations key phrase has a collapsible Telugu explanation — try in English first, confirm in Telugu.
 - **Read-aloud:** 🔊 on any word/sentence via the browser's built-in speech (offline), with an adjustable speed slider.
