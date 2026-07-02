@@ -10440,6 +10440,192 @@
                 explanationTe: "status ను స్పష్టంగా చెప్పి, askను జతచేయడం, red status ను 'small hiccup' గా మెత్తబరచడం కన్నా ఉపయోగకరం." }
             ]}
           ]},
+          { id: "stakeholder-communication", title: "Stakeholder Communication", cards: [
+            { type: "concept", title: "Same fact, different audience",
+              intro: "A Head-level communicator adjusts the same message for engineers, executives, and customers, sets expectations before they're broken, frames pushback as a trade-off rather than a flat no, and makes cross-team asks easy to say yes to.",
+              introTe: "Head-level communicator ఒకే విషయాన్ని engineers, executives, customers కోసం వేర్వేరుగా చెబుతారు, expectations విరిగిపోకముందే వాటిని సెట్ చేస్తారు, పుష్‌బ్యాక్ ను flat no గా కాకుండా trade-off గా చెబుతారు, cross-team asks ను ఒప్పుకోవడం సులభం చేస్తారు.",
+              points: [
+                { rule: "Match the message to the audience — engineers want detail, executives want impact, customers want outcomes.",
+                  ruleTe: "message ను audience కు తగినట్టు మార్చండి — engineers కు detail కావాలి, executives కు impact కావాలి, customers కు outcomes కావాలి.",
+                  detail: "The same underlying fact needs three different framings depending on who's listening: an engineer wants to know the root cause and the fix, an executive wants to know the business impact and timeline, and a customer wants to know what changes for them and when. Giving an executive the root-cause detail wastes their time; giving a customer the technical detail confuses them. The skill is identifying which layer of the fact each audience actually needs.",
+                  detailTe: "వినేవారిని బట్టి, ఒకే అంతర్లీన విషయానికి మూడు వేర్వేరు framings కావాలి: engineer కు root cause, fix తెలుసుకోవాలి; executive కు business impact, timeline తెలుసుకోవాలి; customer కు వారికి ఏం మారుతుంది, ఎప్పుడు మారుతుంది అని తెలుసుకోవాలి. executive కు root-cause detail ఇవ్వడం వారి సమయాన్ని వృధా చేస్తుంది; customer కు technical detail ఇవ్వడం వారిని గందరగోళపరుస్తుంది. ప్రతి audience కు నిజంగా ఏ layer కావాలో గుర్తించడమే నైపుణ్యం.",
+                  examples: [
+                    { text: "To engineers: 'The memory leak was in the caching layer — we patched it and added a monitor.'", note: "root cause + fix" },
+                    { text: "To executives: 'The outage cost us two hours of downtime; the fix is deployed and we've added monitoring to prevent recurrence.'", note: "impact + resolution" },
+                    { text: "To customers: 'You may have noticed slowness earlier today — it's resolved, and we've added safeguards to prevent it happening again.'", note: "outcome, no jargon" }
+                  ] },
+                { rule: "Manage expectations early by saying what won't be in scope as clearly as what will, and use under-promise phrasing instead of firm dates you're not sure of.",
+                  ruleTe: "scope లో ఏముండదో స్పష్టంగా చెప్పడం ద్వారా ముందుగానే expectations ను నిర్వహించండి, మీకు ఖచ్చితంగా తెలియని firm dates కు బదులు under-promise phrasing వాడండి.",
+                  detail: "Stakeholders remember what they assumed was included far more clearly than what you actually promised — if you don't explicitly rule something out, they'll assume it's in. Saying 'This release includes X and Y; Z is planned for the next phase' prevents a painful conversation later. Similarly, 'We're targeting the 15th; I'll confirm by Friday' sets a direction without over-committing to a date you might miss, which protects trust better than a firm date that later slips.",
+                  detailTe: "మీరు ఇచ్చిన వాగ్దానం కన్నా, వారు ఏం included అని అనుకున్నారో stakeholders బాగా గుర్తుంచుకుంటారు — మీరు స్పష్టంగా ఏదైనా exclude చేయకపోతే, అది included అని వారు అనుకుంటారు. 'This release includes X and Y; Z is planned for the next phase' అని చెప్పడం తర్వాత కష్టమైన సంభాషణను నివారిస్తుంది. అలాగే, 'We're targeting the 15th; I'll confirm by Friday' అనేది మీరు మిస్ అయ్యే అవకాశం ఉన్న date కు అతిగా commit చేయకుండా ఒక దిశను ఇస్తుంది — ఇది తర్వాత జారిపోయే firm date కన్నా నమ్మకాన్ని బాగా కాపాడుతుంది.",
+                  examples: [
+                    { text: "This release includes the new dashboard and export feature; the mobile view is planned for phase two." },
+                    { text: "We're targeting the 15th; I'll confirm the exact date by Friday once QA finishes." },
+                    { text: "To be clear about scope — this covers the API migration, not the UI redesign." }
+                  ] },
+                { rule: "Push back on scope without saying a flat no — frame it as a trade-off and let the stakeholder choose.",
+                  ruleTe: "scope పై పుష్‌బ్యాక్ ఇచ్చేటప్పుడు flat no చెప్పకండి — దాన్ని trade-off గా చెప్పి stakeholder నే ఎంచుకోనివ్వండి.",
+                  detail: "A flat 'no, we can't do that' shuts down the conversation and often triggers escalation, because the stakeholder feels unheard. 'We can do that — it moves the launch to the 22nd. Which matters more, the date or the feature?' keeps the door open, shows you've considered it seriously, and puts the actual decision where it belongs — with the person who owns the priority. This works because it's honest: it's rarely truly impossible, just a trade-off against something else.",
+                  detailTe: "ఖచ్చితమైన 'no, we can't do that' చర్చను మూసేస్తుంది, తరచుగా escalation కు దారితీస్తుంది, ఎందుకంటే stakeholder తమను వినలేదు అని భావిస్తారు. 'We can do that — it moves the launch to the 22nd. Which matters more, the date or the feature?' అనేది తలుపు తెరిచే ఉంచుతుంది, మీరు దాన్ని సీరియస్‌గా పరిశీలించారని చూపిస్తుంది, అసలు నిర్ణయాన్ని అది ఎవరిదో వారికే ఇస్తుంది — priority owner కు. ఇది నిజాయితీగా ఉంటుంది కాబట్టి పనిచేస్తుంది: ఇది అరుదుగా నిజంగా అసాధ్యం, కేవలం మరొక దానికి వ్యతిరేకంగా trade-off మాత్రమే.",
+                  examples: [
+                    { text: "We can do that — it moves the launch date to the 22nd. Which matters more to you, the date or the feature?" },
+                    { text: "That's possible, but it means dropping the reporting feature from this release. Your call." },
+                    { text: "We can fit it in, but the team would need to deprioritize the bug backlog for a week — is that acceptable?" }
+                  ] },
+                { rule: "Make cross-team asks easy to accept — one line of context, a specific request, a deadline, and why it matters to them.",
+                  ruleTe: "cross-team asks ను ఒప్పుకోవడం సులభం చేయండి — ఒక వాక్యంలో context, నిర్దిష్ట request, deadline, వారికి ఇది ఎందుకు ముఖ్యమో చెప్పండి.",
+                  detail: "A request that arrives without context forces the other team to chase you for details before they can even decide whether to help, which delays everything and can feel like a burden. Structuring the ask as context, specific request, deadline, and relevance to them front-loads everything they need to say yes quickly — especially the 'why it matters to them' part, since teams prioritize work that connects to their own goals, not just yours.",
+                  detailTe: "context లేకుండా వచ్చిన request, సహాయం చేయాలా వద్దా అని నిర్ణయించుకునే ముందే వివరాల కోసం మిమ్మల్ని వెంబడించేలా చేస్తుంది — ఇది అన్నింటినీ ఆలస్యం చేస్తుంది, భారంలా అనిపించవచ్చు. context, నిర్దిష్ట request, deadline, వారికి relevance గా askను నిర్మించడం, వేగంగా yes చెప్పడానికి కావాల్సినదంతా ముందుగానే ఇస్తుంది — ముఖ్యంగా 'వారికి ఇది ఎందుకు ముఖ్యం' అనే భాగం, ఎందుకంటే teams మీ goals తో కాకుండా తమ own goals తో కనెక్ట్ అయ్యే పనికి ప్రాధాన్యత ఇస్తాయి.",
+                  examples: [
+                    { text: "We're migrating to the new auth service (context). Could your team update the login endpoint by the 20th (ask + deadline)? It'll also fix the timeout bug you've been seeing (why it matters to you)." },
+                    { text: "Quick cross-team ask: we need read access to your metrics dashboard by Friday to finish the quarterly report." },
+                    { text: "This unblocks both our launch and your team's reporting requirement — could you prioritize it this sprint?" }
+                  ] }
+              ] },
+            { type: "example", pattern: "Key phrases: adjusting messages for stakeholders and negotiating scope",
+              sentences: [
+                { text: "To put it in business terms, this cost us two hours of downtime." },
+                { text: "This release includes X and Y; Z is planned for the next phase." },
+                { text: "We're targeting the 15th; I'll confirm by Friday." },
+                { text: "We can do that — it moves the date to the 22nd. Which matters more?" },
+                { text: "Quick cross-team ask, with context and a deadline attached." },
+                { text: "Your call — I want to make sure you're choosing this trade-off knowingly." }
+              ]
+            },
+            { type: "mistake", wrong: "Yes yes, we will finish everything by Friday, no problem.",
+              right: "We can get the core feature done by Friday. The reporting piece would need until the following week — would you like us to prioritize the core feature first?",
+              whyEn: "Agreeing to everything to avoid an uncomfortable conversation sets an expectation that will likely break, damaging trust more than an honest trade-off would have. Naming what's realistic and offering a choice keeps the relationship honest and manageable.",
+              whyTe: "అసౌకర్యమైన సంభాషణను తప్పించుకోవడానికి అన్నింటికీ ఒప్పుకోవడం, విరిగిపోయే అవకాశం ఉన్న expectation ను సెట్ చేస్తుంది — ఇది నిజాయితీగా చెప్పే trade-off కన్నా నమ్మకాన్ని ఎక్కువ దెబ్బతీస్తుంది. వాస్తవికంగా ఏమి సాధ్యమో చెప్పి, ఎంపిక ఇవ్వడం సంబంధాన్ని నిజాయితీగా, నిర్వహించదగినదిగా ఉంచుతుంది." },
+            { type: "dialogue", roles: ["Product Head", "You"], lines: [
+              { role: "Product Head", text: "Can we add the export feature to this release? Customers have been asking for it." },
+              { role: "You", text: "We can do that — it would move the launch from the 15th to the 22nd. Which matters more, the date or the feature?" },
+              { role: "Product Head", text: "The date is pretty important for the sales demo. Is there a middle ground?" },
+              { role: "You", text: "We could ship a basic version of export now and the full version in the next release — that keeps the 15th." },
+              { role: "Product Head", text: "That works. What exactly would the basic version include?" },
+              { role: "You", text: "CSV export only, no scheduling. Scheduling and other formats would come in phase two — I'll put that in writing so it's clear to everyone." },
+              { role: "Product Head", text: "Good, please do. Anything you need from my side?" },
+              { role: "You", text: "Just a sign-off on this scope by tomorrow so the team can start today." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "You need to explain an outage to a customer. What should the message focus on?",
+                options: ["What changed for them and when it was resolved, without technical jargon.", "The exact root cause in the caching layer, in full technical detail.", "The internal team responsible for the mistake."],
+                answer: "What changed for them and when it was resolved, without technical jargon.",
+                explanationEn: "Customers care about outcomes and resolution, not internal technical root causes.",
+                explanationTe: "customers కు outcomes, resolution ముఖ్యం — internal technical root causes కాదు." },
+              { format: "choose-sentence", prompt: "Choose the better way to set expectations about scope:",
+                options: ["This release includes the dashboard and export feature; the mobile view is planned for phase two.", "We'll try to get everything done, we'll see how it goes."],
+                answer: "This release includes the dashboard and export feature; the mobile view is planned for phase two.",
+                explanationEn: "Explicitly stating what's out of scope prevents stakeholders from assuming it's included.",
+                explanationTe: "scope లో ఏముండదో స్పష్టంగా చెప్పడం, అది included అని stakeholders అనుకోకుండా నివారిస్తుంది." },
+              { format: "fill", prompt: "Instead of a flat no, frame pushback as a trade-off: 'We can do that — it moves the date to the 22nd. ___ matters more to you?'",
+                answer: "Which",
+                explanationEn: "'Which matters more' hands the actual decision to the stakeholder instead of shutting the door.",
+                explanationTe: "'Which matters more' అనేది తలుపు మూయకుండా, అసలు నిర్ణయాన్ని stakeholder కు ఇస్తుంది." },
+              { format: "mcq", prompt: "What makes a cross-team ask easiest for the other team to accept?",
+                options: ["Context, a specific request, a deadline, and why it matters to them.", "Just the deadline, so they know it's urgent.", "A long explanation of your own team's priorities."],
+                answer: "Context, a specific request, a deadline, and why it matters to them.",
+                explanationEn: "Teams prioritize work connected to their own goals, so explaining relevance to them speeds up a yes.",
+                explanationTe: "teams తమ own goals తో సంబంధం ఉన్న పనికే ప్రాధాన్యత ఇస్తాయి, కాబట్టి వారికి relevance చెప్పడం yes ను వేగవంతం చేస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the more honest response to a tight deadline you're not fully sure about:",
+                options: ["We're targeting the 15th; I'll confirm the exact date by Friday.", "Yes yes, we will finish everything by Friday, no problem."],
+                answer: "We're targeting the 15th; I'll confirm the exact date by Friday.",
+                explanationEn: "Under-promise phrasing sets a direction without over-committing to a date that might slip.",
+                explanationTe: "Under-promise phrasing జారిపోయే అవకాశం ఉన్న date కు అతిగా commit చేయకుండా ఒక దిశను ఇస్తుంది." }
+            ]}
+          ]},
+          { id: "one-on-ones", title: "1-on-1s & Coaching Conversations", cards: [
+            { type: "concept", title: "Making the 1-on-1 their meeting, not yours",
+              intro: "A Head-level leader treats the 1-on-1 as the report's meeting, not a status check, listens more than they speak, chooses between coaching and directing based on the situation, and turns career conversations into concrete next steps.",
+              introTe: "Head-level నాయకుడు 1-on-1 ను report యొక్క మీటింగ్‌గా చూస్తారు, status check గా కాదు, మాట్లాడటం కన్నా ఎక్కువ వింటారు, పరిస్థితిని బట్టి coaching, directing మధ్య ఎంచుకుంటారు, career సంభాషణలను నిర్దిష్ట next steps గా మారుస్తారు.",
+              points: [
+                { rule: "Open with 'What's on your mind?' and let the other person set the agenda — a 1-on-1 that's really a status report belongs in a standup instead.",
+                  ruleTe: "'What's on your mind?' అని మొదలుపెట్టి, ఇంకో వ్యక్తినే agenda సెట్ చేయనివ్వండి — నిజంగా status report అయిన 1-on-1 standup లో జరగాలి.",
+                  detail: "If every 1-on-1 opens with you asking about ticket status or project progress, the person learns that this time is just another check-in, and they'll never bring up the harder things — frustration with a teammate, uncertainty about their role, a mistake they're worried about. Opening with a genuine, open question signals that this slot belongs to them, and over time they'll start using it for what actually matters to them, not just what's visible on a dashboard.",
+                  detailTe: "ప్రతి 1-on-1 మీరు ticket status లేదా project progress అడగడంతో మొదలైతే, ఇది కేవలం మరో check-in అని ఆ వ్యక్తి నేర్చుకుంటారు, కష్టమైన విషయాలు — teammate తో frustration, role గురించి అనిశ్చితి, భయపెడుతున్న ఒక తప్పు — ఎప్పుడూ చెప్పరు. నిజమైన, open ప్రశ్నతో మొదలుపెట్టడం ఈ slot వారికే చెందుతుందని సూచిస్తుంది, కాలక్రమేణా వారు దీన్ని dashboard లో కనిపించే దానికే కాకుండా నిజంగా వారికి ముఖ్యమైన దానికి వాడతారు.",
+                  examples: [
+                    { text: "What's on your mind today? This time is yours." },
+                    { text: "Before we get into anything else — how are things going for you?" },
+                    { text: "Anything you've been sitting on that you haven't had a chance to raise?" }
+                  ] },
+                { rule: "Listen more than you speak, using follow-ups like 'Tell me more' and 'What have you tried?' instead of jumping in to solve it immediately.",
+                  ruleTe: "మీరు మాట్లాడటం కన్నా ఎక్కువ వినండి, వెంటనే పరిష్కరించడానికి బదులు 'Tell me more', 'What have you tried?' వంటి follow-ups వాడండి.",
+                  detail: "Jumping straight to a solution feels helpful but often shortcuts the person's own thinking and can come across as not fully hearing them out. Follow-up questions like 'What have you tried?' or 'What would you do in my place?' keep them in the driver's seat, surface things you'd have missed by solving too fast, and build their own problem-solving muscle over time rather than creating dependency on you for every answer.",
+                  detailTe: "వెంటనే పరిష్కారం చెప్పడం సహాయకరంగా అనిపించినా, ఇది వారి own ఆలోచనను షార్ట్‌కట్ చేస్తుంది, పూర్తిగా వినలేదని అనిపించవచ్చు. 'What have you tried?' లేదా 'What would you do in my place?' వంటి follow-up ప్రశ్నలు వారినే driver seat లో ఉంచుతాయి, మీరు తొందరగా పరిష్కరిస్తే మిస్ అయ్యే విషయాలను బయటపెడతాయి, ప్రతి సమాధానానికి మీపై ఆధారపడకుండా వారి own problem-solving సామర్థ్యాన్ని పెంచుతాయి.",
+                  examples: [
+                    { text: "Tell me more about that — what makes it feel stuck?" },
+                    { text: "What have you tried so far?" },
+                    { text: "If you were in my position, what would you do here?" }
+                  ] },
+                { rule: "Choose coaching questions over direct answers when the goal is growth or ownership; switch to directing when the situation is urgent, safety-related, or the person is new.",
+                  ruleTe: "growth లేదా ownership లక్ష్యమైతే coaching ప్రశ్నలను, direct answers కన్నా ఎంచుకోండి; పరిస్థితి urgent గా, safety కు సంబంధించి, లేదా వ్యక్తి కొత్తగా ఉంటే directing కు మారండి.",
+                  detail: "Coaching works well when there's time to let someone reason through a problem and the goal is building their judgment for next time — asking questions helps them own the solution. But coaching a brand-new hire through a production outage, or asking open questions when someone's safety or a hard deadline is at stake, wastes time they don't have. A Head-level leader reads the situation and switches modes deliberately, rather than defaulting to one style regardless of context.",
+                  detailTe: "ఒక సమస్యను ఆలోచించడానికి సమయం ఉన్నప్పుడు, తర్వాతిసారి కోసం వారి judgment నిర్మించడం లక్ష్యమైనప్పుడు coaching బాగా పనిచేస్తుంది — ప్రశ్నలు అడగడం వారికి పరిష్కారాన్ని own చేసుకోవడంలో సహాయపడుతుంది. కానీ production outage సమయంలో కొత్త హైర్‌కు coaching చేయడం, లేదా safety లేదా కఠినమైన deadline ప్రమాదంలో ఉన్నప్పుడు open ప్రశ్నలు అడగడం వారికి లేని సమయాన్ని వృధా చేస్తుంది. Head-level నాయకుడు పరిస్థితిని చదివి, context తో సంబంధం లేకుండా ఒకే style కు అలవాటుపడకుండా ఉద్దేశపూర్వకంగా modes మారుస్తారు.",
+                  examples: [
+                    { text: "What options have you considered, and what's holding you back from picking one?", note: "coaching — time available, growth goal" },
+                    { text: "Stop the deploy now and roll back — we'll debug after the rollback.", note: "directing — urgent, safety-related" },
+                    { text: "For this one, since it's your first incident, I'll walk you through the steps directly.", note: "directing — new hire" }
+                  ] },
+                { rule: "Make career conversations concrete — ask 'Where do you want to be in two years?' and turn the answer into specific next steps, not just a nice conversation.",
+                  ruleTe: "career సంభాషణలను concrete గా చేయండి — 'Where do you want to be in two years?' అని అడిగి, సమాధానాన్ని కేవలం మంచి సంభాషణగా కాకుండా నిర్దిష్ట next steps గా మార్చండి.",
+                  detail: "A career conversation that ends with 'that sounds great, keep it up' gives the person nothing to act on and often repeats the same vague exchange every quarter. Following the aspiration with a specific next step — a stretch project, a skill to build, an introduction to make — turns a nice conversation into visible progress, and gives you both something concrete to check on next time.",
+                  detailTe: "'that sounds great, keep it up' తో ముగిసే career సంభాషణ ఆ వ్యక్తికి action తీసుకోవడానికి ఏమీ ఇవ్వదు, తరచుగా ప్రతి క్వార్టర్‌లో అదే అస్పష్ట సంభాషణ పునరావృతమవుతుంది. ఆకాంక్షను నిర్దిష్ట next step తో అనుసరించడం — ఒక stretch project, నేర్చుకోవాల్సిన నైపుణ్యం, చేయాల్సిన introduction — మంచి సంభాషణను కనిపించే progress గా మారుస్తుంది, తర్వాతిసారి చెక్ చేసుకోవడానికి ఇద్దరికీ concrete విషయం ఇస్తుంది.",
+                  examples: [
+                    { text: "Where do you want to be in two years? Let's work backward from that." },
+                    { text: "Given that goal, taking the lead on the next migration project would be a good stretch — want to try it?" },
+                    { text: "Let's put a concrete next step on this: you'll shadow an architecture review this month." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Key phrases: opening space, coaching, and closing on next steps in a 1-on-1",
+              sentences: [
+                { text: "What's on your mind today? This time is yours." },
+                { text: "Tell me more about that." },
+                { text: "What have you tried so far?" },
+                { text: "What would you do in my place?" },
+                { text: "Where do you want to be in two years?" },
+                { text: "Let's put a concrete next step on this." }
+              ]
+            },
+            { type: "mistake", wrong: "So, is the migration done? What about the open tickets?",
+              right: "Before we talk about work — how are things going for you? Anything on your mind?",
+              whyEn: "Opening a 1-on-1 with task status turns it into a mini standup and signals that this time isn't really theirs, so they'll never use it to raise what actually matters to them. Opening with a genuine personal check-in makes space for the real agenda to surface.",
+              whyTe: "1-on-1 ను task status తో మొదలుపెట్టడం దాన్ని ఒక mini standup గా మార్చేస్తుంది, ఈ సమయం నిజంగా వారిది కాదని సూచిస్తుంది — దాంతో వారికి నిజంగా ముఖ్యమైన విషయాలు ఎప్పుడూ లేవనెత్తరు. నిజమైన వ్యక్తిగత check-in తో మొదలుపెడితే అసలు agenda బయటకు రావడానికి చోటు దొరుకుతుంది." },
+            { type: "dialogue", roles: ["You", "Teammate"], lines: [
+              { role: "You", text: "Before we get into anything else — what's on your mind today?" },
+              { role: "Teammate", text: "Honestly, I've been feeling stuck on the architecture decision for the new service." },
+              { role: "You", text: "Tell me more about that — what's making it feel stuck?" },
+              { role: "Teammate", text: "There are two approaches and I keep going back and forth, worried about picking the wrong one." },
+              { role: "You", text: "What have you tried so far to compare them?" },
+              { role: "Teammate", text: "I've listed pros and cons, but both still seem reasonable." },
+              { role: "You", text: "If you had to decide today with the information you have, what would you pick, and why?" },
+              { role: "Teammate", text: "Actually... I'd go with option B, since it scales better even though it's more work upfront. I think I just needed to say that out loud." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the better way to open a 1-on-1:",
+                options: ["What's on your mind today? This time is yours.", "So, is the migration done? What about the open tickets?"],
+                answer: "What's on your mind today? This time is yours.",
+                explanationEn: "Opening with an open question signals the meeting belongs to them, unlike a task-status question.",
+                explanationTe: "open ప్రశ్నతో మొదలుపెడితే మీటింగ్ వారికే చెందుతుందని సూచిస్తుంది — task-status ప్రశ్న అలా కాదు." },
+              { format: "mcq", prompt: "A teammate describes a problem they're facing. What's the best immediate follow-up?",
+                options: ["Tell me more — what have you tried so far?", "Here's exactly what you should do.", "That sounds like a small issue, don't worry about it."],
+                answer: "Tell me more — what have you tried so far?",
+                explanationEn: "Asking follow-up questions keeps the person in the driver's seat instead of solving it for them immediately.",
+                explanationTe: "follow-up ప్రశ్నలు అడగడం వెంటనే పరిష్కరించడం కన్నా ఆ వ్యక్తినే driver seat లో ఉంచుతుంది." },
+              { format: "fill", prompt: "During a production outage with a brand-new hire, the right move is to ___ them through the steps directly rather than ask open coaching questions.",
+                answer: "direct",
+                explanationEn: "Urgent, safety-related situations with a new hire call for directing, not coaching.",
+                explanationTe: "urgent, safety కు సంబంధించిన పరిస్థితుల్లో కొత్త హైర్‌తో directing అవసరం, coaching కాదు." },
+              { format: "mcq", prompt: "A teammate says they want to be a tech lead in two years. What turns this into real progress?",
+                options: ["Agreeing on a specific next step, like leading the next project as a stretch assignment.", "Saying 'that sounds great, keep it up' and moving on.", "Telling them to wait until a tech lead role opens up."],
+                answer: "Agreeing on a specific next step, like leading the next project as a stretch assignment.",
+                explanationEn: "A concrete next step turns the aspiration into visible progress, unlike a vague encouragement.",
+                explanationTe: "నిర్దిష్ట next step ఆకాంక్షను కనిపించే progress గా మారుస్తుంది — అస్పష్ట ప్రోత్సాహం అలా చేయదు." },
+              { format: "choose-sentence", prompt: "Choose the better coaching follow-up when someone is unsure how to proceed:",
+                options: ["What would you do if you were in my place?", "Just do it the way I always do it."],
+                answer: "What would you do if you were in my place?",
+                explanationEn: "This question invites them to reason through the decision themselves, building their own judgment.",
+                explanationTe: "ఈ ప్రశ్న వారినే నిర్ణయాన్ని ఆలోచించమని ఆహ్వానిస్తుంది, వారి own judgment ను నిర్మిస్తుంది." }
+            ]}
+          ]}
         ] },
         { id: "review", title: "Review", icon: "🔁", lessons: [] }
       ],
