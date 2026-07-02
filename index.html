@@ -6681,94 +6681,888 @@
           ]}
         ] },
         { id: "speaking", title: "Speaking", icon: "🗣", lessons: [
-          { id: "pronunciation-basics", title: "Pronunciation Basics", cards: [
-            { type: "concept", title: "Word stress and tricky sounds for Telugu speakers",
-              intro: "Clear English speech depends on stressing the right syllable and shaping a few tricky sounds correctly.",
-              introTe: "స్పష్టమైన ఇంగ్లీష్ మాట్లాడాలంటే సరైన syllable పై ఒత్తిడి పెట్టడం, మరియు కొన్ని కష్టమైన ధ్వనులను సరిగ్గా పలకడం అవసరం.",
+          { id: "pronunciation-basics", title: "Pronunciation Basics: Stress & Key Sounds", cards: [
+            { type: "concept", title: "Word stress: every word has ONE strong beat",
+              intro: "Every English word of more than one syllable has exactly one stressed (strong) syllable. Stressing the wrong syllable can make an otherwise correct word hard for listeners to recognize — even if every sound is pronounced right.",
+              introTe: "ఒకటి కంటే ఎక్కువ syllables ఉన్న ప్రతి ఇంగ్లీష్ పదానికి ఖచ్చితంగా ఒక stressed (బలమైన) syllable ఉంటుంది. తప్పు syllable పై ఒత్తిడి పెడితే, ప్రతి ధ్వని సరిగ్గా పలికినా, వినేవారికి ఆ పదం అర్థం కాకపోవచ్చు.",
               points: [
-                { rule: "Stress the correct syllable — many noun/verb pairs change meaning based on which syllable is stressed.",
-                  ruleTe: "సరైన syllable పై ఒత్తిడి పెట్టండి — చాలా noun/verb జతలు ఏ syllable పై ఒత్తిడి ఉందో దాన్ని బట్టి అర్థం మారుతుంది.",
+                { rule: "Find the ONE stressed syllable in a word and say it louder, longer, and slightly higher in pitch than the rest.",
+                  ruleTe: "పదంలో ఉన్న ఒక్క stressed syllable ను కనుగొని, దాన్ని మిగతా వాటి కంటే గట్టిగా, పొడవుగా, కొంచెం ఎక్కువ pitch తో పలకండి.",
                   examples: [
-                    { text: "record (noun: REC-ord) vs record (verb: re-CORD)" },
-                    { text: "present (noun: PRE-sent) vs present (verb: pre-SENT)" },
-                    { text: "project (noun: PRO-ject) vs project (verb: pro-JECT)" },
-                    { text: "We will review the record before the meeting starts." }
+                    { text: "PHOtograph — stress on the first syllable" },
+                    { text: "phoTOgrapher — stress moves to the second syllable" },
+                    { text: "photoGRAPHic — stress moves again to the third syllable" },
+                    { text: "The PHOtograph was taken by a professional phoTOgrapher." }
                   ] },
-                { rule: "Separate 'v' and 'w' — for 'v' the lower lip touches the upper teeth; for 'w' the lips round without touching the teeth.",
-                  ruleTe: "'v' మరియు 'w' ని వేరుగా పలకండి — 'v' కు కింది పెదవి పై పళ్ళను తాకుతుంది; 'w' కు పెదవులు గుండ్రంగా మారతాయి కానీ పళ్ళను తాకవు.",
+                { rule: "Do not give every syllable equal weight — that flat, equal-stress pattern is the biggest reason Telugu speakers sound less fluent, even with perfect grammar.",
+                  ruleTe: "ప్రతి syllable కు సమాన బలం ఇవ్వకండి — వ్యాకరణం సరిగ్గా ఉన్నా, అన్ని syllables ను సమానంగా పలకడం వల్లే తెలుగు మాట్లాడేవారి ఇంగ్లీష్ తక్కువ fluent గా వినిపిస్తుంది.",
                   examples: [
-                    { text: "very / wary — lip touches teeth only for 'v'" },
-                    { text: "village / wine — practice the lip position slowly" },
-                    { text: "We will review the vendor's proposal on Wednesday." },
-                    { text: "The village vendor sells very good wine." }
+                    { text: "comPUTer — not COM-PU-TER with equal weight" },
+                    { text: "deVELopment — not DE-VE-LOP-MENT with equal weight" },
+                    { text: "manAGEment — not MA-NA-GE-MENT with equal weight" },
+                    { text: "Our development team is reviewing the management report." }
                   ] },
-                { rule: "Shape the 'th' sound with the tongue tip behind the upper teeth — it is different from both 't' and 'd'.",
-                  ruleTe: "'th' ధ్వనిని నాలుక కొన పై పళ్ళ వెనుక ఉంచి పలకండి — ఇది 't' మరియు 'd' కంటే వేరుగా ఉంటుంది.",
+                { rule: "When two words look similar but stress differently, the meaning or word class can change — always check which syllable carries the beat.",
+                  ruleTe: "రెండు పదాలు ఒకేలా కనిపించినా, stress వేరుగా ఉంటే అర్థం లేదా word class మారవచ్చు — ఏ syllable పై ఒత్తిడి ఉందో ఎప్పుడూ చూసుకోండి.",
                   examples: [
-                    { text: "think / this — tongue tip touches behind the upper teeth" },
-                    { text: "three / thank you — hold the tongue position briefly" },
-                    { text: "I think this approach will work for the third release." },
-                    { text: "Thank you for reviewing this thread." }
+                    { text: "PHOto (noun, 2 syllables) vs phoTOgraphy (noun, 4 syllables, different stress)" },
+                    { text: "EVery (stressed first) vs deVELop (stressed second)" },
+                    { text: "I study phoTOgraphy, and I take a PHOto every day." },
+                    { text: "This is a comfortABle chair — stress stays on the first syllable." }
                   ] }
               ]
             },
-            { type: "example", pattern: "Practice words and sentences for tricky sounds",
-              sentences: [
-                { text: "very well, wary of, village, wine" },
-                { text: "think, this, three, thank you" },
-                { text: "I think this village makes very good wine." },
-                { text: "We will review the record before the meeting starts." }
+            { type: "concept", title: "'v' vs 'w': two sounds Telugu treats as one",
+              intro: "Telugu does not distinguish between 'v' and 'w' — both often collapse into a single sound. In English, they are made completely differently and mixing them up changes the word.",
+              introTe: "తెలుగులో 'v' మరియు 'w' రెండూ ఒకే ధ్వనిగా ఉంటాయి — వేరుగా ఉండవు. ఇంగ్లీష్‌లో ఇవి పూర్తిగా వేరే విధంగా పలుకుతారు, వాటిని తప్పుగా పలికితే పదం మారిపోతుంది.",
+              points: [
+                { rule: "For 'v': the top teeth touch the bottom lip lightly and air buzzes through — say 'very', 'voice', 'vendor'.",
+                  ruleTe: "'v' కోసం: పై పళ్ళు కింది పెదవిని తేలికగా తాకుతూ, గాలి బజ్ చేస్తుంది — 'very', 'voice', 'vendor' అని పలకండి.",
+                  examples: [
+                    { text: "very, voice, vendor, visit" },
+                    { text: "The vendor's voice was very clear during the visit." },
+                    { text: "We need to verify the vendor's invoice." },
+                    { text: "Vishal will visit the vendor on Tuesday." }
+                  ] },
+                { rule: "For 'w': the lips round into a small circle and push forward — teeth never touch the lip — say 'well', 'wine', 'window'.",
+                  ruleTe: "'w' కోసం: పెదవులు గుండ్రంగా చిన్న వృత్తంలా మారి ముందుకు కదులుతాయి — పళ్ళు పెదవిని అస్సలు తాకవు — 'well', 'wine', 'window' అని పలకండి.",
+                  examples: [
+                    { text: "well, wine, window, wanted" },
+                    { text: "We will open the window and pour the wine." },
+                    { text: "I wanted to walk to work this week." },
+                    { text: "The weather was wonderful on Wednesday." }
+                  ] },
+                { rule: "Practice minimal pairs slowly, feeling the difference at the lips: teeth-on-lip for 'v', rounded-no-teeth for 'w'.",
+                  ruleTe: "నెమ్మదిగా minimal pairs ప్రాక్టీస్ చేయండి, పెదవుల వద్ద తేడాను గమనించండి: 'v' కు పళ్ళు-పెదవి తాకడం, 'w' కు గుండ్రంగా-పళ్ళు-తాకకుండా.",
+                  examples: [
+                    { text: "vest / west — feel the teeth touch only for 'vest'" },
+                    { text: "vine / wine — repeat slowly, watching a mirror if possible" },
+                    { text: "verse / worse — the 'v' buzzes, the 'w' does not" },
+                    { text: "The wine vendor lives west of the village." }
+                  ] }
               ]
             },
+            { type: "concept", title: "The two 'th' sounds — not 't' and not 'd'",
+              intro: "English has two different 'th' sounds, and neither is the same as Telugu 't' or 'd'. Both are made by placing the tongue tip between the upper and lower teeth.",
+              introTe: "ఇంగ్లీష్‌లో రెండు వేర్వేరు 'th' ధ్వనులు ఉన్నాయి, ఇవి తెలుగు 't' లేదా 'd' లాంటివి కాదు. రెండింటికీ నాలుక కొనను పై, కింది పళ్ళ మధ్య పెట్టాలి.",
+              points: [
+                { rule: "The unvoiced 'th' (no vocal buzz) appears in words like 'think', 'three', 'thank' — breathe out gently with the tongue between the teeth.",
+                  ruleTe: "Unvoiced 'th' (గొంతులో బజ్ లేకుండా) 'think', 'three', 'thank' వంటి పదాల్లో వస్తుంది — నాలుకను పళ్ళ మధ్య పెట్టి మెల్లగా గాలి వదలండి.",
+                  examples: [
+                    { text: "think, three, thank you, through" },
+                    { text: "I think we need three more days to finish this." },
+                    { text: "Thank you for thinking this through carefully." },
+                    { text: "We went through the thread thoroughly." }
+                  ] },
+                { rule: "The voiced 'th' (with vocal buzz) appears in words like 'this', 'that', 'the' — same tongue position, but the vocal cords vibrate.",
+                  ruleTe: "Voiced 'th' (గొంతులో బజ్‌తో) 'this', 'that', 'the' వంటి పదాల్లో వస్తుంది — నాలుక అదే స్థానంలో ఉంటుంది, కానీ vocal cords వణుకుతాయి.",
+                  examples: [
+                    { text: "this, that, the, there" },
+                    { text: "This is the report that they sent." },
+                    { text: "There are three of these on the table." },
+                    { text: "The other option is better than this one." }
+                  ] },
+                { rule: "Never substitute 't'/'d' for 'th' — 'think' must not become 'tink', and 'this' must not become 'dis'.",
+                  ruleTe: "'th' స్థానంలో 't'/'d' వాడకండి — 'think' అనేది 'tink' గా, 'this' అనేది 'dis' గా మారకూడదు.",
+                  examples: [
+                    { text: "think (not tink), this (not dis)" },
+                    { text: "three (not tree), that (not dat)" },
+                    { text: "I think that this is the third thread on the topic." },
+                    { text: "Thank you — this thoroughly addresses the three concerns." }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Practice these aloud — focus on stress, v/w, and the two th sounds",
+              sentences: [
+                { text: "PHOtograph, phoTOgrapher, comPUTer, deVELopment" },
+                { text: "The vendor's voice was very clear during the visit." },
+                { text: "We will open the window and pour the wine." },
+                { text: "I think that this is the third thread on the topic." },
+                { text: "Thank you for thinking through the vendor's proposal this week." }
+              ]
+            },
+            { type: "mistake", wrong: "Wery good, I will wisit the office and tink about it.",
+              right: "Very good, I will visit the office and think about it.",
+              whyEn: "Telugu speakers often replace 'v' with 'w' (wery, wisit) and 'th' with 't' (tink). Fix it by placing the top teeth on the bottom lip for 'v', and the tongue tip between the teeth for 'th'.",
+              whyTe: "తెలుగు మాట్లాడేవారు తరచుగా 'v' స్థానంలో 'w' (wery, wisit) మరియు 'th' స్థానంలో 't' (tink) వాడతారు. 'v' కోసం పై పళ్ళు కింది పెదవిపై ఉంచి, 'th' కోసం నాలుక కొనను పళ్ళ మధ్య పెట్టడం ద్వారా దీన్ని సరిచేయండి." },
             { type: "dialogue", roles: ["Coach", "You"], lines: [
-              { role: "Coach", text: "Let's practice. Say: 'very well, thank you.'" },
-              { role: "You", text: "Very well, thank you." },
-              { role: "Coach", text: "Good. Now: 'I will think about this.'" },
-              { role: "You", text: "I will think about this." },
-              { role: "Coach", text: "Nice. One more: 'We reviewed the record together.'" },
-              { role: "You", text: "We reviewed the record together." }
+              { role: "Coach", text: "Let's start with stress. Say: 'I study phoTOgraphy.'" },
+              { role: "You", text: "I study photography." },
+              { role: "Coach", text: "Good. Now the v/w pair: 'The vendor sells very good wine.'" },
+              { role: "You", text: "The vendor sells very good wine." },
+              { role: "Coach", text: "Nice. Now the two th sounds: 'I think this is the third one.'" },
+              { role: "You", text: "I think this is the third one." },
+              { role: "Coach", text: "Excellent. Put it all together: 'I think the vendor's photography is very good.'" },
+              { role: "You", text: "I think the vendor's photography is very good." }
             ] },
             { type: "quiz", questions: [
-              { format: "mcq", prompt: "Which sound uses the tongue tip touching behind the upper teeth?",
-                options: ["'v' as in very", "'th' as in think", "'w' as in wary"],
-                answer: "'th' as in think",
-                explanationEn: "'th' requires the tongue tip to touch behind the upper teeth, unlike 't', 'd', or 'v'.",
-                explanationTe: "'th' పలికేటప్పుడు నాలుక కొన పై పళ్ళ వెనుక తాకుతుంది, 't', 'd', లేదా 'v' లాగా కాదు." },
-              { format: "mcq", prompt: "In the noun 'record' (a music record), which syllable is stressed?",
-                options: ["The first syllable (REC-ord)", "The second syllable (re-CORD)", "Both equally"],
-                answer: "The first syllable (REC-ord)",
-                explanationEn: "As a noun, 'record' stresses the first syllable; as a verb, it stresses the second.",
-                explanationTe: "నామవాచకంగా 'record' మొదటి syllable పై ఒత్తిడి పెడుతుంది; క్రియగా రెండవ syllable పై పెడుతుంది." }
+              { format: "mcq", prompt: "How many stressed syllables does a typical English word have?",
+                options: ["Exactly one", "One for every two syllables", "All syllables are stressed equally"],
+                answer: "Exactly one",
+                explanationEn: "Every English word of more than one syllable has exactly one strong, stressed syllable — the rest are said more quickly and quietly.",
+                explanationTe: "ఒకటి కంటే ఎక్కువ syllables ఉన్న ప్రతి ఇంగ్లీష్ పదానికి ఖచ్చితంగా ఒక బలమైన, stressed syllable ఉంటుంది — మిగతావి వేగంగా, తక్కువ శబ్దంతో పలుకుతారు." },
+              { format: "mcq", prompt: "What is the key difference between 'v' and 'w'?",
+                options: ["'v' touches teeth to lip; 'w' rounds lips without touching teeth", "They are pronounced the same way", "'w' uses the tongue; 'v' uses the lips only"],
+                answer: "'v' touches teeth to lip; 'w' rounds lips without touching teeth",
+                explanationEn: "For 'v' the top teeth touch the bottom lip; for 'w' the lips round forward and never touch the teeth.",
+                explanationTe: "'v' కోసం పై పళ్ళు కింది పెదవిని తాకుతాయి; 'w' కోసం పెదవులు ముందుకు గుండ్రంగా మారతాయి, పళ్ళను తాకవు." },
+              { format: "choose-sentence", prompt: "Choose the sentence with correct 'th' pronunciation described:",
+                options: ["'Think' is pronounced with the tongue tip between the teeth, not as 'tink'.", "'Think' is pronounced exactly like 'tink'."],
+                answer: "'Think' is pronounced with the tongue tip between the teeth, not as 'tink'.",
+                explanationEn: "The 'th' in 'think' requires the tongue tip between the teeth — replacing it with 't' is a common but incorrect substitution.",
+                explanationTe: "'think' లోని 'th' కు నాలుక కొనను పళ్ళ మధ్య పెట్టాలి — దాన్ని 't' తో మార్చడం సాధారణమైన కానీ తప్పు పలుకుబడి." },
+              { format: "fill", prompt: "The correct pronunciation of 'wery good' is ___ good. (fix the v/w mistake)",
+                answer: "very",
+                explanationEn: "'Very' uses 'v' — top teeth touching the bottom lip — not the 'w' sound.",
+                explanationTe: "'Very' లో 'v' ధ్వని ఉంటుంది — పై పళ్ళు కింది పెదవిని తాకుతాయి — 'w' ధ్వని కాదు." }
             ]}
           ]},
-          { id: "fluency-fillers", title: "Fluency Fillers", cards: [
-            { type: "concept", title: "Natural fillers instead of 'umm'",
-              intro: "Natural filler phrases buy you thinking time while sounding confident, instead of repeating 'umm' or 'aa'.",
-              introTe: "'umm' లేదా 'aa' అని పదేపదే అనడం కంటే, సహజమైన filler పదబంధాలు ఆత్మవిశ్వాసంతో ఉంటూ ఆలోచించడానికి సమయాన్ని ఇస్తాయి.",
+          { id: "tricky-sounds", title: "Tricky Sounds for Telugu Speakers", cards: [
+            { type: "concept", title: "'z' vs 'j' — don't turn zero into 'jero'",
+              intro: "The 'z' sound is a buzzing, vibrating version of 's' — it is not the same as 'j'. Telugu speakers often substitute 'j' for 'z', which changes the word.",
+              introTe: "'z' ధ్వని 's' కు buzzing, vibrating రూపం — ఇది 'j' లాంటిది కాదు. తెలుగు మాట్లాడేవారు తరచుగా 'z' స్థానంలో 'j' వాడతారు, దీనివల్ల పదం మారిపోతుంది.",
               points: [
-                { rule: "Buy time politely with a short phrase before you answer.",
-                  ruleTe: "సమాధానం చెప్పే ముందు చిన్న పదబంధంతో మర్యాదగా సమయం తీసుకోండి.",
+                { rule: "Make 'z' by keeping the tongue near the roof of the mouth (like 's') and adding a vocal buzz — do not close the mouth into a 'j' shape.",
+                  ruleTe: "'z' చేయడానికి నాలుకను నోటి పైభాగం దగ్గర ('s' లాగే) ఉంచి, గొంతు buzz చేర్చండి — నోటిని 'j' ఆకారంలో మూయవద్దు.",
+                  examples: [
+                    { text: "zero, zone, zebra, zoom" },
+                    { text: "The score was zero to zero at the zone line." },
+                    { text: "Let's zoom in on the zebra crossing." },
+                    { text: "Please reset the counter to zero before we begin." }
+                  ] },
+                { rule: "Contrast 'z' and 'j' directly — 'zero' vs 'Jerome', 'zoo' vs 'Jew' — to feel the difference in tongue and lip shape.",
+                  ruleTe: "'z' మరియు 'j' ని పోల్చండి — 'zero' vs 'Jerome', 'zoo' vs 'Jew' — నాలుక, పెదవుల ఆకారంలో తేడాను గమనించండి.",
+                  examples: [
+                    { text: "zero (not jero), zoo (not joo)" },
+                    { text: "prize, size, organize, realize" },
+                    { text: "We need to organize and finalize the prize list." },
+                    { text: "I realize the size of the zone has changed." }
+                  ] },
+                { rule: "Many common words end in a 'z' sound spelled with 's' — 'is', 'has', 'was', 'because' — keep the buzz there too.",
+                  ruleTe: "చాలా సాధారణ పదాలు 's' తో spell చేసినా చివర 'z' ధ్వనితో పలుకుతారు — 'is', 'has', 'was', 'because' — వాటిలో కూడా buzz ఉంచండి.",
+                  examples: [
+                    { text: "is, has, was, because" },
+                    { text: "He was busy because his flight was delayed." },
+                    { text: "She has always realized the value of good design." },
+                    { text: "This is the reason his proposal was approved." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "'f' is not 'p' or 'ph' said softly",
+              intro: "The 'f' sound needs the top teeth resting lightly on the bottom lip with air pushed through — it is a completely different mouth shape from 'p'.",
+              introTe: "'f' ధ్వని కోసం పై పళ్ళు కింది పెదవిపై తేలికగా ఉండి, గాలి బలంగా బయటకు వెళ్ళాలి — ఇది 'p' కంటే పూర్తిగా వేరే నోటి ఆకారం.",
+              points: [
+                { rule: "Rest the top teeth on the bottom lip and blow air through the small gap — this is 'f' as in 'coffee', 'office', 'flight'.",
+                  ruleTe: "పై పళ్ళను కింది పెదవిపై ఉంచి, చిన్న ఖాళీ ద్వారా గాలిని ఊదండి — ఇది 'coffee', 'office', 'flight' లోని 'f'.",
+                  examples: [
+                    { text: "coffee, office, flight, February" },
+                    { text: "I'll be in the office after my flight lands." },
+                    { text: "Let's grab coffee before the February meeting." },
+                    { text: "The office finalized the flight schedule for February." }
+                  ] },
+                { rule: "Do not replace 'f' with 'p' — 'coffee' should never sound like 'copee', and 'office' should never sound like 'opees'.",
+                  ruleTe: "'f' స్థానంలో 'p' వాడకండి — 'coffee' 'copee' గా వినిపించకూడదు, 'office' 'opees' గా వినిపించకూడదు.",
+                  examples: [
+                    { text: "coffee (not copee), office (not opees)" },
+                    { text: "phone, difficult, effort, professional" },
+                    { text: "It took real effort to finish this difficult phone call professionally." },
+                    { text: "Our professional office offers coffee every morning." }
+                  ] },
+                { rule: "Practice minimal pairs to isolate the sound: 'fan' vs 'pan', 'fine' vs 'pine', 'fast' vs 'past'.",
+                  ruleTe: "ధ్వనిని వేరుగా గుర్తించడానికి minimal pairs ప్రాక్టీస్ చేయండి: 'fan' vs 'pan', 'fine' vs 'pine', 'fast' vs 'past'.",
+                  examples: [
+                    { text: "fan / pan — teeth-on-lip for 'fan', lips-together for 'pan'" },
+                    { text: "fine / pine — repeat slowly, feeling the air on your lip" },
+                    { text: "fast / past — notice the airflow difference" },
+                    { text: "The fan blew fast air across the office." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "'-ed' endings: three different sounds",
+              intro: "The '-ed' ending on past-tense verbs is pronounced three different ways depending on the sound before it — never always 'id' or 'ed'.",
+              introTe: "Past-tense క్రియల చివర ఉండే '-ed' ముందున్న ధ్వనిని బట్టి మూడు వేర్వేరు రీతుల్లో పలుకుతారు — ఎప్పుడూ 'id' లేదా 'ed' గా కాదు.",
+              points: [
+                { rule: "After an unvoiced sound (k, p, s, ch, sh, f), '-ed' is pronounced /t/ — 'worked' sounds like 'workt'.",
+                  ruleTe: "Unvoiced ధ్వని (k, p, s, ch, sh, f) తర్వాత, '-ed' ను /t/ గా పలుకుతారు — 'worked' అనేది 'workt' లా వినిపిస్తుంది.",
+                  examples: [
+                    { text: "worked (workt), talked (talkt), watched (watcht)" },
+                    { text: "She worked late and talked to the client afterward." },
+                    { text: "I watched the presentation and finished my notes." },
+                    { text: "He walked to the office and helped with the setup." }
+                  ] },
+                { rule: "After a voiced sound (b, g, v, z, l, m, n, r, and vowels), '-ed' is pronounced /d/ — 'planned' sounds like 'plannd'.",
+                  ruleTe: "Voiced ధ్వని (b, g, v, z, l, m, n, r, మరియు vowels) తర్వాత, '-ed' ను /d/ గా పలుకుతారు — 'planned' అనేది 'plannd' లా వినిపిస్తుంది.",
+                  examples: [
+                    { text: "planned (plannd), called (calld), moved (moovd)" },
+                    { text: "We planned the trip and called the hotel." },
+                    { text: "They moved the meeting and agreed on a new time." },
+                    { text: "She showed the report and explained the numbers." }
+                  ] },
+                { rule: "After a 't' or 'd' sound, '-ed' is pronounced as a full extra syllable /id/ — 'wanted' sounds like 'want-id'.",
+                  ruleTe: "'t' లేదా 'd' ధ్వని తర్వాత, '-ed' ను పూర్తి అదనపు syllable /id/ గా పలుకుతారు — 'wanted' అనేది 'want-id' లా వినిపిస్తుంది.",
+                  examples: [
+                    { text: "wanted (want-id), needed (need-id), started (start-id)" },
+                    { text: "We wanted to start the project as needed." },
+                    { text: "He decided and requested an extra day." },
+                    { text: "The team started early and completed the task." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Silent letters — sounds you should NOT say",
+              intro: "Several common English words contain letters that are written but never pronounced. Saying them makes the word sound foreign to a native listener.",
+              introTe: "చాలా సాధారణ ఇంగ్లీష్ పదాల్లో కొన్ని అక్షరాలు రాయబడతాయి కానీ ఎప్పుడూ పలకరు. వాటిని పలికితే native listener కు ఆ పదం అసహజంగా వినిపిస్తుంది.",
+              points: [
+                { rule: "The 'b' in 'doubt', 'debt', and 'climb' is silent — do not pronounce it.",
+                  ruleTe: "'doubt', 'debt', 'climb' లలో 'b' silent గా ఉంటుంది — దాన్ని పలకవద్దు.",
+                  examples: [
+                    { text: "doubt (dout), debt (det), climb (clime)" },
+                    { text: "I have no doubt we can pay off the debt." },
+                    { text: "We need to climb the stairs to the office." },
+                    { text: "Without a doubt, the debt will be cleared this month." }
+                  ] },
+                { rule: "The 'l' in 'half', 'calm', 'walk', and 'talk' is silent — the vowel sound changes but the 'l' is not said.",
+                  ruleTe: "'half', 'calm', 'walk', 'talk' లలో 'l' silent గా ఉంటుంది — vowel ధ్వని మారుతుంది కానీ 'l' పలకరు.",
+                  examples: [
+                    { text: "half (haaf), calm (kaam), walk (wawk), talk (tawk)" },
+                    { text: "Let's talk for half an hour and stay calm." },
+                    { text: "We can walk to the venue after the call." },
+                    { text: "Half of the team stayed calm during the walk-through." }
+                  ] },
+                { rule: "The 't' in 'listen', 'castle', and 'often' (for many speakers) is silent — the word is shorter than its spelling suggests.",
+                  ruleTe: "'listen', 'castle', మరియు (చాలామంది కోసం) 'often' లలో 't' silent గా ఉంటుంది — పదం దాని spelling కంటే తక్కువ అక్షరాలతో పలుకుతారు.",
+                  examples: [
+                    { text: "listen (lissen), castle (cassle), often (offen)" },
+                    { text: "Please listen carefully and often review your notes." },
+                    { text: "We visited an old castle near the coast." },
+                    { text: "I often listen to this podcast during my commute." }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Practice these aloud — focus on z/j, f, -ed endings, and silent letters",
+              sentences: [
+                { text: "Reset the counter to zero before we organize the prize list." },
+                { text: "I'll be in the office after my flight, so let's grab coffee." },
+                { text: "We planned the trip, wanted an early start, and walked to the venue." },
+                { text: "Without a doubt, half the team often listens to this podcast." }
+              ]
+            },
+            { type: "mistake", wrong: "I yam going to the ophice at jero hour to talk about the debt.",
+              right: "I am going to the office at zero hour to talk about the debt.",
+              whyEn: "Telugu speakers sometimes add a 'y' glide before words starting with a vowel ('yam' for 'am'), replace 'f' with 'p'-like sounds ('ophice'), and swap 'z' for 'j' ('jero'). Also remember the silent 'b' in 'debt'.",
+              whyTe: "తెలుగు మాట్లాడేవారు కొన్నిసార్లు vowel తో మొదలయ్యే పదాల ముందు 'y' glide చేర్చుతారు ('am' కు 'yam'), 'f' స్థానంలో 'p' లాంటి ధ్వని వాడతారు ('ophice'), మరియు 'z' స్థానంలో 'j' వాడతారు ('jero'). 'debt' లో silent 'b' ను కూడా గుర్తుంచుకోండి." },
+            { type: "dialogue", roles: ["Coach", "You"], lines: [
+              { role: "Coach", text: "Let's warm up. Say: 'Reset the counter to zero.'" },
+              { role: "You", text: "Reset the counter to zero." },
+              { role: "Coach", text: "Good, no 'jero'. Now: 'I'll grab coffee at the office.'" },
+              { role: "You", text: "I'll grab coffee at the office." },
+              { role: "Coach", text: "Nice 'f' sound. Try the '-ed' endings: 'We planned and wanted an early start.'" },
+              { role: "You", text: "We planned and wanted an early start." },
+              { role: "Coach", text: "Now the silent letters: 'Without a doubt, we often listen carefully.'" },
+              { role: "You", text: "Without a doubt, we often listen carefully." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "How should 'zero' be pronounced?",
+                options: ["With a buzzing 'z' sound, not 'j'", "Exactly like 'jero'", "With a silent 'z'"],
+                answer: "With a buzzing 'z' sound, not 'j'",
+                explanationEn: "'Zero' uses the buzzing 'z' sound — substituting 'j' changes the word and confuses listeners.",
+                explanationTe: "'Zero' లో buzzing 'z' ధ్వని ఉంటుంది — 'j' వాడితే పదం మారిపోయి వినేవారికి గందరగోళం అవుతుంది." },
+              { format: "mcq", prompt: "What mouth position makes the correct 'f' sound in 'coffee'?",
+                options: ["Top teeth resting on the bottom lip with air pushed through", "Lips pressed together like 'p'", "Tongue touching the roof of the mouth"],
+                answer: "Top teeth resting on the bottom lip with air pushed through",
+                explanationEn: "'f' requires the top teeth on the bottom lip with airflow — using a 'p'-like closed-lip shape produces 'copee' instead of 'coffee'.",
+                explanationTe: "'f' కోసం పై పళ్ళు కింది పెదవిపై ఉండి గాలి ప్రవహించాలి — 'p' లాంటి మూసిన పెదవుల ఆకారం వాడితే 'coffee' కు బదులు 'copee' అవుతుంది." },
+              { format: "choose-sentence", prompt: "Choose the sentence describing the '-ed' ending in 'wanted' correctly:",
+                options: ["'Wanted' adds an extra syllable, pronounced 'want-id'.", "'Wanted' is pronounced exactly like 'want' with a silent ending."],
+                answer: "'Wanted' adds an extra syllable, pronounced 'want-id'.",
+                explanationEn: "After a 't' or 'd' sound, '-ed' becomes a full extra syllable, /id/ — so 'wanted' is 'want-id', not just 'want'.",
+                explanationTe: "'t' లేదా 'd' ధ్వని తర్వాత, '-ed' పూర్తి అదనపు syllable /id/ గా మారుతుంది — కాబట్టి 'wanted' అంటే 'want-id', కేవలం 'want' కాదు." },
+              { format: "fill", prompt: "In the word 'doubt', the letter ___ is silent. (fill the missing letter)",
+                answer: "b",
+                explanationEn: "'Doubt' is pronounced 'dout' — the 'b' is written but never spoken.",
+                explanationTe: "'Doubt' ను 'dout' అని పలుకుతారు — 'b' రాయబడుతుంది కానీ ఎప్పుడూ పలకరు." }
+            ]}
+          ]},
+          { id: "word-sentence-stress", title: "Word & Sentence Stress", cards: [
+            { type: "concept", title: "Stress content words, reduce function words",
+              intro: "In a natural English sentence, the important 'content words' (nouns, verbs, adjectives) are stressed, while small 'function words' (a, the, to, is) are said quickly and quietly. This rhythm is what makes English sound natural.",
+              introTe: "సహజమైన ఇంగ్లీష్ వాక్యంలో, ముఖ్యమైన 'content words' (nouns, verbs, adjectives) పై ఒత్తిడి ఉంటుంది, చిన్న 'function words' (a, the, to, is) వేగంగా, తక్కువ శబ్దంతో పలుకుతారు. ఈ rhythm వల్లే ఇంగ్లీష్ సహజంగా వినిపిస్తుంది.",
+              points: [
+                { rule: "Stress the words that carry meaning — nouns, main verbs, adjectives, and adverbs — and let small grammar words fade into the background.",
+                  ruleTe: "అర్థాన్ని మోసుకెళ్ళే పదాలపై ఒత్తిడి పెట్టండి — nouns, main verbs, adjectives, adverbs — చిన్న grammar పదాలను నేపథ్యంలో వదిలేయండి.",
+                  examples: [
+                    { text: "I want to GO to the OFFICE." },
+                    { text: "She NEEDS to FINISH the REPORT." },
+                    { text: "We SHOULD DISCUSS the BUDGET tomorrow." },
+                    { text: "He CALLED the CLIENT about the DELAY." }
+                  ] },
+                { rule: "Function words like 'a', 'the', 'to', 'is', 'of', 'and' are said fast and often reduced — for example 'to' can sound like 'tuh'.",
+                  ruleTe: "'a', 'the', 'to', 'is', 'of', 'and' వంటి function words వేగంగా, తరచుగా తగ్గించి పలుకుతారు — ఉదాహరణకు 'to' అనేది 'tuh' లా వినిపించవచ్చు.",
+                  examples: [
+                    { text: "I want to go — 'to' is quick and light" },
+                    { text: "One of the reports is missing — 'of' and 'the' are quick" },
+                    { text: "She and I are on the same team — 'and' is quick" },
+                    { text: "We are going to the meeting at the office." }
+                  ] },
+                { rule: "This stressed/unstressed pattern creates English rhythm — practice it by tapping your hand on every stressed word, keeping a steady beat.",
+                  ruleTe: "ఈ stressed/unstressed pattern ఇంగ్లీష్ rhythm ను సృష్టిస్తుంది — ప్రతి stressed పదం మీద చేత్తో tap చేస్తూ, స్థిరమైన బీట్‌తో ప్రాక్టీస్ చేయండి.",
+                  examples: [
+                    { text: "I WANT to GO to the OFFICE tomorrow." },
+                    { text: "She NEEDS to FINISH the REPORT by FRIDAY." },
+                    { text: "We SHOULD CALL the CLIENT before the MEETING." },
+                    { text: "He PLANS to JOIN the TEAM next MONTH." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Sentence stress can change the meaning",
+              intro: "Moving the stress to a different word in the same sentence can completely change what is being emphasized or implied — even though every word stays the same.",
+              introTe: "అదే వాక్యంలో ఒత్తిడిని వేరే పదానికి మార్చడం వల్ల, పదాలు అన్నీ అలాగే ఉన్నా, దాని అర్థం లేదా సూచించే విషయం పూర్తిగా మారిపోతుంది.",
+              points: [
+                { rule: "Stressing a different word answers a different implied question — think about which word is 'new information' before you speak.",
+                  ruleTe: "వేరే పదంపై ఒత్తిడి పెట్టడం వేరే implied ప్రశ్నకు సమాధానం ఇస్తుంది — మాట్లాడే ముందు ఏ పదం 'కొత్త సమాచారం' అని ఆలోచించండి.",
+                  examples: [
+                    { text: "I didn't say HE took it. (someone else said it)" },
+                    { text: "I didn't say he TOOK it. (maybe he borrowed it)" },
+                    { text: "I didn't say he took IT. (maybe he took something else)" },
+                    { text: "I didn't say he took it. (someone else did, not me)" }
+                  ] },
+                { rule: "Use stress to correct a misunderstanding or highlight contrast — the stressed word signals exactly what you are correcting.",
+                  ruleTe: "అపార్థాన్ని సరిచేయడానికి లేదా వ్యత్యాసాన్ని చూపడానికి ఒత్తిడిని ఉపయోగించండి — stressed పదం మీరు ఏమి సరిచేస్తున్నారో ఖచ్చితంగా సూచిస్తుంది.",
+                  examples: [
+                    { text: "I said TOMORROW, not today." },
+                    { text: "She is the MANAGER, not the assistant." },
+                    { text: "We need TEN copies, not two." },
+                    { text: "The meeting is at THREE, not four." }
+                  ] },
+                { rule: "In leadership communication, deliberate stress helps you sound confident and precise instead of flat or uncertain.",
+                  ruleTe: "నాయకత్వ కమ్యూనికేషన్‌లో, ఉద్దేశపూర్వకమైన ఒత్తిడి మీరు ఫ్లాట్‌గా లేదా అనిశ్చితంగా కాకుండా, ఆత్మవిశ్వాసంతో, స్పష్టంగా అనిపించేలా చేస్తుంది.",
+                  examples: [
+                    { text: "This is our TOP priority this quarter." },
+                    { text: "We ALREADY discussed this in the last meeting." },
+                    { text: "I want to be CLEAR about the timeline." },
+                    { text: "This decision is FINAL." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Noun/verb stress pairs",
+              intro: "Many two-syllable English words are spelled the same but stressed differently depending on whether they are used as a noun or a verb. The noun stresses the first syllable; the verb stresses the second.",
+              introTe: "చాలా రెండు-syllable ఇంగ్లీష్ పదాలు ఒకేలా స్పెల్ చేసినా, noun గా లేదా verb గా వాడటాన్ని బట్టి వేరే విధంగా stress చేస్తారు. Noun మొదటి syllable పై, verb రెండవ syllable పై stress ఉంటుంది.",
+              points: [
+                { rule: "'REcord' (noun: a music record or a written record) stresses the first syllable; 'reCORD' (verb: to record something) stresses the second.",
+                  ruleTe: "'REcord' (noun: రికార్డు లేదా వ్రాతపూర్వక పత్రం) మొదటి syllable పై stress ఉంటుంది; 'reCORD' (verb: ఏదైనా record చేయడం) రెండవ syllable పై stress ఉంటుంది.",
+                  examples: [
+                    { text: "I bought a new REcord (noun) at the shop." },
+                    { text: "Please reCORD (verb) the meeting for those who are absent." },
+                    { text: "This is the best REcord of attendance this year." },
+                    { text: "We will reCORD the results in the shared sheet." }
+                  ] },
+                { rule: "'PREsent' (noun: a gift, or adjective: current) stresses the first syllable; 'preSENT' (verb: to show or give a talk) stresses the second.",
+                  ruleTe: "'PREsent' (noun: బహుమతి, లేదా adjective: ప్రస్తుత) మొదటి syllable పై stress ఉంటుంది; 'preSENT' (verb: చూపించడం లేదా ప్రసంగం ఇవ్వడం) రెండవ syllable పై stress ఉంటుంది.",
+                  examples: [
+                    { text: "She bought a nice PREsent (noun) for the client." },
+                    { text: "I will preSENT (verb) the proposal on Monday." },
+                    { text: "The PREsent (adjective) situation needs attention." },
+                    { text: "He will preSENT the award at the ceremony." }
+                  ] },
+                { rule: "'PROject' (noun: a piece of planned work) stresses the first syllable; 'proJECT' (verb: to estimate or forecast) stresses the second.",
+                  ruleTe: "'PROject' (noun: ప్రణాళికాబద్ధమైన పని) మొదటి syllable పై stress ఉంటుంది; 'proJECT' (verb: అంచనా వేయడం) రెండవ syllable పై stress ఉంటుంది.",
+                  examples: [
+                    { text: "This PROject (noun) is due next quarter." },
+                    { text: "We proJECT (verb) a ten percent increase in revenue." },
+                    { text: "The PROject timeline was updated yesterday." },
+                    { text: "Analysts proJECT strong growth next year." }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Practice natural sentence stress and noun/verb stress pairs aloud",
+              sentences: [
+                { text: "I WANT to GO to the OFFICE tomorrow." },
+                { text: "I didn't say HE took it — I said someone else did." },
+                { text: "I bought a new REcord, and now I need to reCORD the results." },
+                { text: "This PROject is our TOP priority, and I want to be CLEAR about the timeline." }
+              ]
+            },
+            { type: "mistake", wrong: "I. WANT. TO. GO. TO. THE. OFFICE. TOMORROW. (every word said with equal, flat stress)",
+              right: "I want to GO to the OFFICE tomorrow. (content words stressed, function words reduced)",
+              whyEn: "Giving every word the same flat stress sounds robotic and unnatural to native listeners. Natural English rises and falls — stress the content words (GO, OFFICE) and let function words (to, the) pass quickly.",
+              whyTe: "ప్రతి పదానికి సమానమైన, ఫ్లాట్ ఒత్తిడి ఇవ్వడం native listeners కు రోబోటిక్‌గా, అసహజంగా అనిపిస్తుంది. సహజమైన ఇంగ్లీష్ పైకి, కిందికి కదులుతూ ఉంటుంది — content words (GO, OFFICE) పై ఒత్తిడి పెట్టి, function words (to, the) ను వేగంగా వదిలేయండి." },
+            { type: "dialogue", roles: ["Manager", "You"], lines: [
+              { role: "Manager", text: "Can you PREsent the PROject update in tomorrow's meeting?" },
+              { role: "You", text: "Sure, I'll preSENT it first thing in the morning." },
+              { role: "Manager", text: "Great. Please reCORD your key numbers before the call." },
+              { role: "You", text: "Got it — I'll have the REcord ready by tonight." },
+              { role: "Manager", text: "This PROject is our TOP priority this quarter." },
+              { role: "You", text: "Understood. I want to be CLEAR — we'll need two more days for testing." },
+              { role: "Manager", text: "That works. I didn't say we need it TODAY, just before Friday." },
+              { role: "You", text: "Perfect, I'll have it ready well before FRIDAY." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "In the sentence 'I want to GO to the OFFICE', which words should be stressed?",
+                options: ["Content words like GO and OFFICE", "Function words like 'to' and 'the'", "Every word equally"],
+                answer: "Content words like GO and OFFICE",
+                explanationEn: "Content words (nouns, main verbs, adjectives) carry the meaning and are stressed; function words are said quickly and quietly.",
+                explanationTe: "Content words (nouns, main verbs, adjectives) అర్థాన్ని మోసుకెళ్తాయి కాబట్టి వాటిపై ఒత్తిడి ఉంటుంది; function words వేగంగా, తక్కువ శబ్దంతో పలుకుతారు." },
+              { format: "choose-sentence", prompt: "Choose the sentence that implies 'someone else took it, not him':",
+                options: ["I didn't say HE took it.", "I didn't say he took IT."],
+                answer: "I didn't say HE took it.",
+                explanationEn: "Stressing 'HE' implies a different person is responsible — the stress placement changes the implied meaning.",
+                explanationTe: "'HE' పై ఒత్తిడి పెట్టడం వేరే వ్యక్తి బాధ్యుడు అని సూచిస్తుంది — ఒత్తిడి స్థానం implied అర్థాన్ని మారుస్తుంది." },
+              { format: "mcq", prompt: "As a verb (to record something), how is 'record' stressed?",
+                options: ["re-CORD (second syllable)", "REC-ord (first syllable)", "Both syllables equally"],
+                answer: "re-CORD (second syllable)",
+                explanationEn: "As a verb, 'record' stresses the second syllable; as a noun, it stresses the first syllable.",
+                explanationTe: "Verb గా, 'record' రెండవ syllable పై stress ఉంటుంది; noun గా, మొదటి syllable పై stress ఉంటుంది." },
+              { format: "fill", prompt: "As a noun (a piece of planned work), 'project' is stressed on the ___ syllable.",
+                answer: "first",
+                explanationEn: "The noun 'PROject' stresses the first syllable, while the verb 'proJECT' stresses the second.",
+                explanationTe: "Noun 'PROject' మొదటి syllable పై stress ఉంటుంది, verb 'proJECT' రెండవ syllable పై stress ఉంటుంది." }
+            ]}
+          ]},
+          { id: "intonation-rhythm", title: "Intonation & Rhythm", cards: [
+            { type: "concept", title: "Falling tone for statements and wh-questions",
+              intro: "Most statements and questions starting with 'what', 'where', 'why', 'who', 'when', 'how' end with a falling tone — the pitch drops on the last stressed word. This sounds confident and complete.",
+              introTe: "చాలా statements మరియు 'what', 'where', 'why', 'who', 'when', 'how' తో మొదలయ్యే wh-questions ఒక falling tone తో ముగుస్తాయి — చివరి stressed word పై pitch పడిపోతుంది. ఇది ఆత్మవిశ్వాసంగా, పూర్తయినట్లుగా అనిపిస్తుంది.",
+              points: [
+                { rule: "Let the pitch fall ↘ on the last stressed word of a plain statement — a flat or rising ending on a statement sounds unfinished or unsure.",
+                  ruleTe: "సాధారణ statement చివరి stressed word పై pitch పడిపోనివ్వండి ↘ — statement చివర flat గా లేదా పెరిగేలా ఉంటే అది అసంపూర్ణంగా లేదా అనిశ్చితంగా అనిపిస్తుంది.",
+                  examples: [
+                    { text: "I finished the RE↘port." },
+                    { text: "The meeting is at THREE↘ o'clock." },
+                    { text: "She joined the TEAM↘ last month." },
+                    { text: "We closed the DEAL↘ yesterday." }
+                  ] },
+                { rule: "Wh-questions (what, where, why, who, when, how) also fall ↘ at the end — this signals a genuine, neutral request for information.",
+                  ruleTe: "Wh-questions (what, where, why, who, when, how) కూడా చివర పడిపోతాయి ↘ — ఇది నిజమైన, తటస్థమైన సమాచార అభ్యర్థనను సూచిస్తుంది.",
+                  examples: [
+                    { text: "Where do you WORK↘?" },
+                    { text: "Why did the deployment FAIL↘?" },
+                    { text: "When is the NEXT release↘?" },
+                    { text: "How long will this TAKE↘?" }
+                  ] },
+                { rule: "A wh-question said with rising pitch instead of falling can sound surprised, suspicious, or aggressive — keep it falling unless you intend that extra emotion.",
+                  ruleTe: "Wh-question ను fall కు బదులు rise తో పలికితే ఆశ్చర్యంగా, అనుమానంగా లేదా aggressive గా వినిపించవచ్చు — ఆ అదనపు భావం ఉద్దేశపూర్వకంగా లేకపోతే, దాన్ని falling గానే ఉంచండి.",
+                  examples: [
+                    { text: "Where do you WORK↘? (neutral question)" },
+                    { text: "Where do you WORK↗?? (sounds shocked or disbelieving)" },
+                    { text: "Why did you DO↘ that? (calm question)" },
+                    { text: "Why did you DO↗ that?? (sounds accusing)" }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Rising tone for yes/no questions and politeness",
+              intro: "Yes/no questions (ones that can be answered with 'yes' or 'no') usually rise ↗ at the end. A rising tone also softens a sentence, making it sound polite, tentative, or unfinished.",
+              introTe: "Yes/no questions ('yes' లేదా 'no' తో సమాధానం ఇవ్వగలిగేవి) సాధారణంగా చివర పెరుగుతాయి ↗. Rising tone వాక్యాన్ని మెత్తగా, politely, లేదా అసంపూర్ణంగా అనిపించేలా చేస్తుంది.",
+              points: [
+                { rule: "Yes/no questions rise ↗ on the last stressed word — this is what makes them clearly sound like questions, not statements.",
+                  ruleTe: "Yes/no questions చివరి stressed word పై పెరుగుతాయి ↗ — దీని వల్లే అవి statement కాకుండా clearly question లా వినిపిస్తాయి.",
+                  examples: [
+                    { text: "Are you JOINING↗ the call?" },
+                    { text: "Did you SEND↗ the email?" },
+                    { text: "Can we RESCHEDULE↗ the meeting?" },
+                    { text: "Is the SERVER↗ back online?" }
+                  ] },
+                { rule: "Use a slight rise ↗ at the end of a polite request or offer, even if it is not strictly a yes/no question — it softens the tone.",
+                  ruleTe: "ఖచ్చితంగా yes/no question కాకపోయినా, polite request లేదా offer చివర కొంచెం rise ↗ ఉపయోగించండి — ఇది tone ను మెత్తగా చేస్తుంది.",
+                  examples: [
+                    { text: "Could you send it by tomorrow↗, please?" },
+                    { text: "Would you like some coffee↗?" },
+                    { text: "Maybe we could try a different approach↗?" },
+                    { text: "I was wondering if you're free↗ this afternoon?" }
+                  ] },
+                { rule: "A rise ↗ on a non-final phrase signals 'I'm not finished yet' — used when listing or pausing mid-sentence, it keeps the listener waiting for more.",
+                  ruleTe: "Non-final phrase చివర rise ↗ 'ఇంకా పూర్తి కాలేదు' అని సూచిస్తుంది — list చేసేటప్పుడు లేదా వాక్యం మధ్యలో pause చేసేటప్పుడు, ఇది listener ను మరింత వినడానికి వేచి ఉండేలా చేస్తుంది.",
+                  examples: [
+                    { text: "If you finish early↗, let me know." },
+                    { text: "Once the build passes↗, we'll deploy." },
+                    { text: "When you get a chance↗, review the PR." },
+                    { text: "Before the release↗, we need one more test." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "List intonation and avoiding a flat monotone",
+              intro: "When listing items, the voice rises on each item except the last, which falls — this signals to the listener how many items remain. A flat, unchanging pitch throughout a sentence sounds bored, unsure, or disengaged.",
+              introTe: "Items list చేసేటప్పుడు, చివరిది తప్ప ప్రతి item పై voice పెరుగుతుంది, చివరిది పడిపోతుంది — ఇది ఇంకా ఎన్ని items మిగిలి ఉన్నాయో listener కు సూచిస్తుంది. వాక్యం అంతటా flat గా, మారని pitch బోర్‌గా, అనిశ్చితంగా, disengaged గా అనిపిస్తుంది.",
+              points: [
+                { rule: "In a list, rise ↗ on every item except the last one, which falls ↘ — the falling tone signals 'that's the end of the list'.",
+                  ruleTe: "List లో, చివరి item తప్ప మిగతా అన్నింటిపై rise ↗ చేయండి, చివరిది fall ↘ అవుతుంది — falling tone 'list అయిపోయింది' అని సూచిస్తుంది.",
+                  examples: [
+                    { text: "We need design↗, coding↗, and testing↘." },
+                    { text: "The team covers frontend↗, backend↗, and DevOps↘." },
+                    { text: "I ordered tea↗, coffee↗, and juice↘." },
+                    { text: "She handles hiring↗, onboarding↗, and training↘." }
+                  ] },
+                { rule: "Vary your pitch across a sentence to sound engaged — a monotone voice, even with correct grammar, can sound bored or robotic to listeners.",
+                  ruleTe: "Sentence అంతటా pitch మార్చడం ద్వారా engaged గా అనిపించండి — grammar సరిగ్గా ఉన్నా, monotone voice listeners కు బోర్‌గా లేదా robotic గా అనిపించవచ్చు.",
+                  examples: [
+                    { text: "This is REALLY important — flat: this is really important." },
+                    { text: "I'm EXCITED about the launch — flat: i am excited about the launch." },
+                    { text: "That's a GREAT idea — flat: that is a great idea." },
+                    { text: "We SOLVED the issue — flat: we solved the issue." }
+                  ] },
+                { rule: "Practice by exaggerating pitch changes first, then dial it back — most learners under-use pitch variation, so starting big helps you find a natural middle ground.",
+                  ruleTe: "మొదట pitch మార్పులను exaggerate చేసి ప్రాక్టీస్ చేయండి, తర్వాత తగ్గించండి — చాలామంది learners pitch variation ను తక్కువగా ఉపయోగిస్తారు, కాబట్టి పెద్దగా మొదలుపెడితే natural మధ్యస్థానం దొరుకుతుంది.",
+                  examples: [
+                    { text: "We need design, coding, and testing. (exaggerate first, then soften)" },
+                    { text: "Are you joining the call? (exaggerate the rise, then soften)" },
+                    { text: "Where do you work? (exaggerate the fall, then soften)" },
+                    { text: "This is our top priority. (exaggerate the stress, then soften)" }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Practice these aloud, following the tone marks (↘ = falling, ↗ = rising)",
+              sentences: [
+                { text: "Where do you WORK↘?" },
+                { text: "Are you JOINING↗ the call?" },
+                { text: "We need design↗, coding↗, and testing↘." },
+                { text: "Could you send it by tomorrow↗, please?" },
+                { text: "I finished the RE↘port, and the results look GREAT↘." }
+              ]
+            },
+            { type: "mistake", wrong: "Are you joining the call↘? (said with a falling tone, like a command)",
+              right: "Are you joining the call↗? (said with a rising tone, like a genuine question)",
+              whyEn: "Yes/no questions need a rising tone at the end. A falling tone on a yes/no question can sound like a demand or a statement rather than a genuine question, which may confuse or unsettle the listener.",
+              whyTe: "Yes/no questions చివర rising tone అవసరం. Yes/no question పై falling tone వాడితే అది genuine question కాకుండా demand లేదా statement లా అనిపించవచ్చు, ఇది listener ను గందరగోళానికి గురిచేయవచ్చు." },
+            { type: "dialogue", roles: ["Colleague", "You"], lines: [
+              { role: "Colleague", text: "Hey, are you JOINING↗ the standup today?" },
+              { role: "You", text: "Yes, I'll be there in five minutes." },
+              { role: "Colleague", text: "Great. Where did we LEAVE↘ off yesterday?" },
+              { role: "You", text: "We covered the design↗, the API↗, and the testing plan↘." },
+              { role: "Colleague", text: "Perfect. Did you FINISH↗ the report?" },
+              { role: "You", text: "Almost — could you give me until this afternoon↗?" },
+              { role: "Colleague", text: "Sure, no problem. Why did the last build FAIL↘?" },
+              { role: "You", text: "A config issue — it's FIXED↘ now, and everything is stable↘." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "How should a wh-question like 'Where do you work?' usually end?",
+                options: ["With a falling tone", "With a rising tone", "With no pitch change at all"],
+                answer: "With a falling tone",
+                explanationEn: "Wh-questions (what, where, why, who, when, how) typically end with a falling tone, signaling a neutral, genuine request for information.",
+                explanationTe: "Wh-questions (what, where, why, who, when, how) సాధారణంగా falling tone తో ముగుస్తాయి, ఇది తటస్థమైన, నిజమైన సమాచార అభ్యర్థనను సూచిస్తుంది." },
+              { format: "mcq", prompt: "What tone should a yes/no question like 'Are you joining?' end with?",
+                options: ["A rising tone", "A falling tone", "It doesn't matter"],
+                answer: "A rising tone",
+                explanationEn: "Yes/no questions rise at the end — this rising tone is what signals to the listener that it is a question expecting a yes/no answer.",
+                explanationTe: "Yes/no questions చివర పెరుగుతాయి — ఈ rising tone listener కు అది yes/no సమాధానం కోరే question అని సూచిస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the sentence with correct list intonation:",
+                options: ["We need design↗, coding↗, and testing↘.", "We need design↘, coding↘, and testing↘."],
+                answer: "We need design↗, coding↗, and testing↘.",
+                explanationEn: "In a list, each item except the last rises, and the final item falls — signaling to the listener that the list has ended.",
+                explanationTe: "List లో, చివరిది తప్ప ప్రతి item పెరుగుతుంది, చివరిది పడిపోతుంది — ఇది list అయిపోయింది అని listener కు సూచిస్తుంది." },
+              { format: "fill", prompt: "A flat, unchanging pitch throughout a sentence tends to sound ___ or disengaged to listeners.",
+                answer: "bored",
+                explanationEn: "A monotone voice, even with perfect grammar, often sounds bored, unsure, or robotic — varying pitch keeps listeners engaged.",
+                explanationTe: "Monotone voice, grammar సరిగ్గా ఉన్నా, తరచుగా బోర్‌గా, అనిశ్చితంగా, రోబోటిక్‌గా అనిపిస్తుంది — pitch మార్చడం listeners ను engaged గా ఉంచుతుంది." }
+            ]}
+          ]},
+          { id: "connected-speech", title: "Connected Speech: Speaking Smoothly", cards: [
+            { type: "concept", title: "Linking consonant to vowel across words",
+              intro: "When a word ending in a consonant is followed by a word starting with a vowel, native speakers link them smoothly — the consonant sound slides onto the next word instead of stopping.",
+              introTe: "Consonant తో ముగిసే పదం తర్వాత vowel తో మొదలయ్యే పదం వస్తే, native speakers వాటిని smoothly link చేస్తారు — consonant ధ్వని ఆగకుండా తర్వాత పదంలోకి జారిపోతుంది.",
+              points: [
+                { rule: "Link the final consonant of one word to the vowel that starts the next word — 'an apple' sounds like 'a-napple', not two separate chunks.",
+                  ruleTe: "ఒక పదం చివరి consonant ను తర్వాత పదం మొదలయ్యే vowel తో link చేయండి — 'an apple' అనేది 'a-napple' లా వినిపిస్తుంది, రెండు వేర్వేరు ముక్కలు కాదు.",
+                  examples: [
+                    { text: "an apple → a-napple" },
+                    { text: "turn it on → tur-ni-ton" },
+                    { text: "come in → co-min" },
+                    { text: "an hour ago → a-nour-ago" }
+                  ] },
+                { rule: "This linking happens automatically in fast, natural speech — you don't need to force it, but recognizing it helps you understand native speakers.",
+                  ruleTe: "Fast, natural speech లో ఈ linking ఆటోమాటిక్‌గా జరుగుతుంది — దీన్ని బలవంతంగా చేయాల్సిన అవసరం లేదు, కానీ దీన్ని గుర్తించడం native speakers ను అర్థం చేసుకోవడానికి సహాయపడుతుంది.",
+                  examples: [
+                    { text: "Pick it up → pi-ki-tup" },
+                    { text: "Wait a minute → wai-ta minute" },
+                    { text: "Check it out → che-ki-tout" },
+                    { text: "Log in and check the email → login and check the email (linked smoothly)" }
+                  ] },
+                { rule: "Practice short phrases slowly with linking, then speed up — this builds the muscle memory for smooth, connected speech.",
+                  ruleTe: "మొదట linking తో నెమ్మదిగా చిన్న phrases ప్రాక్టీస్ చేసి, తర్వాత వేగం పెంచండి — ఇది smooth, connected speech కోసం muscle memory ను నిర్మిస్తుంది.",
+                  examples: [
+                    { text: "Turn it on and check it out." }
+                    ,{ text: "Pick it up and put it away." }
+                    ,{ text: "Send it over when it is ready." }
+                    ,{ text: "Log in, open the app, and check it." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Natural reductions: recognize them, don't always write them",
+              intro: "In fast, informal speech, common phrases get reduced — 'want to' becomes 'wanna', 'going to' becomes 'gonna', 'kind of' becomes 'kinda'. You should recognize these when listening, and may use them in casual speech, but always write formally.",
+              introTe: "Fast, informal speech లో సాధారణ phrases తగ్గించబడతాయి — 'want to' అనేది 'wanna' గా, 'going to' అనేది 'gonna' గా, 'kind of' అనేది 'kinda' గా మారుతుంది. వినేటప్పుడు వీటిని గుర్తించండి, casual speech లో వాడవచ్చు, కానీ రాసేటప్పుడు ఎప్పుడూ formal గానే రాయండి.",
+              points: [
+                { rule: "'Want to' often sounds like 'wanna' in casual speech — recognize it in listening, but write 'want to' in emails and documents.",
+                  ruleTe: "Casual speech లో 'want to' తరచుగా 'wanna' లా వినిపిస్తుంది — వినేటప్పుడు దీన్ని గుర్తించండి, కానీ emails మరియు documents లో 'want to' అనే రాయండి.",
+                  examples: [
+                    { text: "I wanna join the call early. (spoken, casual)" },
+                    { text: "I want to join the call early. (written, formal)" },
+                    { text: "Do you wanna grab lunch? (spoken, casual)" },
+                    { text: "Would you like to grab lunch? (written, formal)" }
+                  ] },
+                { rule: "'Going to' often sounds like 'gonna', and 'kind of' often sounds like 'kinda' — both are fine to hear and use casually, never in formal writing.",
+                  ruleTe: "'Going to' తరచుగా 'gonna' లా, 'kind of' తరచుగా 'kinda' లా వినిపిస్తుంది — వినడానికి, casual గా వాడటానికి ఇవి బాగానే ఉంటాయి, formal writing లో మాత్రం కాదు.",
+                  examples: [
+                    { text: "I'm gonna finish this today. (spoken, casual)" },
+                    { text: "I am going to finish this today. (written, formal)" },
+                    { text: "It's kinda late for a call. (spoken, casual)" },
+                    { text: "It is somewhat late for a call. (written, formal)" }
+                  ] },
+                { rule: "Listen for other common reductions like 'gotta' (got to), 'lemme' (let me), and 'gimme' (give me) — recognizing them prevents confusion in meetings and calls.",
+                  ruleTe: "'gotta' (got to), 'lemme' (let me), 'gimme' (give me) వంటి ఇతర సాధారణ reductions వినండి — వీటిని గుర్తించడం meetings, calls లో గందరగోళాన్ని నివారిస్తుంది.",
+                  examples: [
+                    { text: "I gotta finish this by five. (= I have got to)" },
+                    { text: "Lemme check the numbers first. (= let me)" },
+                    { text: "Gimme a minute to review this. (= give me)" },
+                    { text: "We gotta talk about the timeline. (= have got to)" }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Weak forms and speaking in chunks",
+              intro: "Small function words are often pronounced with a weak, reduced vowel sound rather than said fully. English also flows in rhythmic chunks rather than as separate, equally forced words.",
+              introTe: "చిన్న function words తరచుగా పూర్తిగా కాకుండా weak, తగ్గించిన vowel sound తో పలుకుతారు. ఇంగ్లీష్ కూడా విడివిడి, సమానంగా బలవంతం చేసిన పదాలుగా కాకుండా rhythmic chunks లో ప్రవహిస్తుంది.",
+              points: [
+                { rule: "'Can' often sounds like /kən/ (a quick, weak 'kuhn') in a sentence, not the fully stressed 'can' you'd say alone.",
+                  ruleTe: "వాక్యంలో 'can' తరచుగా /kən/ (వేగవంతమైన, weak 'kuhn') లా వినిపిస్తుంది, ఒంటరిగా చెప్పే fully stressed 'can' లా కాదు.",
+                  examples: [
+                    { text: "I can help you. (can sounds like 'kuhn' here)" },
+                    { text: "Yes, I CAN! (fully stressed when answering alone)" },
+                    { text: "She can join later. (can is weak, quick)" },
+                    { text: "We can finish this today. (can is weak, quick)" }
+                  ] },
+                { rule: "'To' often sounds like /tə/ ('tuh') and 'and' often sounds like /ən/ ('bread ən butter') inside natural chunks of speech.",
+                  ruleTe: "Natural speech chunks లో 'to' తరచుగా /tə/ ('tuh') లా, 'and' తరచుగా /ən/ ('bread ən butter') లా వినిపిస్తుంది.",
+                  examples: [
+                    { text: "I want to go. (to sounds like 'tuh')" },
+                    { text: "bread and butter → bread ən butter" },
+                    { text: "salt and pepper → salt ən pepper" },
+                    { text: "We need to talk. (to sounds like 'tuh')" }
+                  ] },
+                { rule: "Don't pronounce every word separately with equal force — group words into natural chunks and let weak forms flow between the stressed words.",
+                  ruleTe: "ప్రతి పదాన్ని విడివిడిగా, సమాన బలంతో పలకకండి — పదాలను natural chunks గా group చేసి, stressed words మధ్య weak forms flow అవ్వనివ్వండి.",
+                  examples: [
+                    { text: "I can help you | with the report | this afternoon." },
+                    { text: "We need to talk | about the budget | before Friday." },
+                    { text: "She wants to join | the team | next month." },
+                    { text: "Bread and butter | with a cup of tea." }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Practice these chunks aloud, linking words and using weak forms naturally",
+              sentences: [
+                { text: "Turn it on and check it out." },
+                { text: "I want to go — but I can help you first." },
+                { text: "Bread ən butter, salt ən pepper." },
+                { text: "She can join later, once the call ends." },
+                { text: "I can help you | with the report | this afternoon." }
+              ]
+            },
+            { type: "mistake", wrong: "I. Want. To. Go. To. The. Office. (each word said separately, with equal, robotic force)",
+              right: "I wanna go tuh the office. (spoken naturally) / I want to go to the office. (written formally)",
+              whyEn: "Pronouncing every word separately with equal force sounds robotic and unnatural. Native speech links words together and reduces small function words — you should recognize and practice this even though you write the full form.",
+              whyTe: "ప్రతి పదాన్ని విడివిడిగా, సమాన బలంతో పలకడం రోబోటిక్‌గా, అసహజంగా అనిపిస్తుంది. Native speech పదాలను link చేసి, చిన్న function words ను తగ్గిస్తుంది — పూర్తి రూపంలో రాసినా, దీన్ని గుర్తించి ప్రాక్టీస్ చేయాలి." },
+            { type: "dialogue", roles: ["Friend", "You"], lines: [
+              { role: "Friend", text: "Hey, you wanna grab coffee before the meeting?" },
+              { role: "You", text: "Yeah, I can meet you in ten minutes." },
+              { role: "Friend", text: "Cool. I gotta pick up my badge first, though." },
+              { role: "You", text: "No problem — turn it on and I'll wait by the entrance." },
+              { role: "Friend", text: "Are you gonna bring your laptop, or is it kinda heavy today?" },
+              { role: "You", text: "I'll bring it — I want to check something before we go in." },
+              { role: "Friend", text: "Lemme just grab my badge, and I'll be right there." },
+              { role: "You", text: "Sure, take your time — I can wait ən check my email." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "How does 'an apple' sound in natural connected speech?",
+                options: ["a-napple (linked)", "an / apple (two separate chunks)", "a-nnn-apple (with a long pause)"],
+                answer: "a-napple (linked)",
+                explanationEn: "The final consonant of 'an' links smoothly onto the vowel that starts 'apple', so it sounds like one flowing unit: 'a-napple'.",
+                explanationTe: "'an' చివరి consonant 'apple' మొదలయ్యే vowel తో smoothly link అవుతుంది, కాబట్టి ఇది ఒక flowing unit లా వినిపిస్తుంది: 'a-napple'." },
+              { format: "mcq", prompt: "Should you write 'gonna' and 'wanna' in a formal work email?",
+                options: ["No — write 'going to' and 'want to' in formal writing", "Yes, always write them exactly as spoken", "It doesn't matter in professional writing"],
+                answer: "No — write 'going to' and 'want to' in formal writing",
+                explanationEn: "Reductions like 'gonna' and 'wanna' are natural in casual speech but should never appear in formal written communication.",
+                explanationTe: "'gonna', 'wanna' వంటి reductions casual speech లో natural గా ఉంటాయి, కానీ formal written communication లో ఎప్పుడూ వాడకూడదు." },
+              { format: "choose-sentence", prompt: "Choose the sentence demonstrating a correct weak form of 'to':",
+                options: ["I want to go. (to sounds like a quick 'tuh')", "I want TO go. (to is fully stressed and long)"],
+                answer: "I want to go. (to sounds like a quick 'tuh')",
+                explanationEn: "In natural speech, small function words like 'to' are said quickly and weakly, sounding like 'tuh', not fully stressed.",
+                explanationTe: "Natural speech లో 'to' వంటి చిన్న function words వేగంగా, weak గా పలుకుతారు, 'tuh' లా వినిపిస్తుంది, fully stressed గా కాదు." },
+              { format: "fill", prompt: "Speaking every word separately with equal force, instead of linking words into chunks, sounds ___ to native listeners.",
+                answer: "robotic",
+                explanationEn: "Equal-force, word-by-word delivery sounds robotic and unnatural — natural English flows in linked, rhythmic chunks.",
+                explanationTe: "సమాన బలంతో, పదం-పదంగా చెప్పడం రోబోటిక్‌గా, అసహజంగా అనిపిస్తుంది — natural ఇంగ్లీష్ linked, rhythmic chunks లో ప్రవహిస్తుంది." }
+            ]}
+          ]},
+          { id: "mispronounced-words", title: "Commonly Mispronounced Words", cards: [
+            { type: "concept", title: "Hidden and swallowed syllables",
+              intro: "Some common English words have a syllable that is written but not fully pronounced — native speakers 'swallow' it. Pronouncing every written syllable in these words sounds unnatural.",
+              introTe: "కొన్ని సాధారణ ఇంగ్లీష్ పదాలలో ఒక syllable రాసినప్పటికీ పూర్తిగా పలకరు — native speakers దాన్ని 'swallow' చేస్తారు. ఈ పదాలలో రాసిన ప్రతి syllable ను పలకడం అసహజంగా అనిపిస్తుంది.",
+              points: [
+                { rule: "'Wednesday' is pronounced WENZ-day — the middle 'nes' syllable disappears; don't say WED-NES-DAY.",
+                  ruleTe: "'Wednesday' WENZ-day గా పలుకుతారు — మధ్యలో ఉన్న 'nes' syllable మాయమవుతుంది; WED-NES-DAY అని పలకవద్దు.",
+                  examples: [
+                    { text: "WENZ-day (not WED-NES-DAY)" },
+                    { text: "Let's meet on WENZ-day afternoon." },
+                    { text: "The report is due next WENZ-day." },
+                    { text: "I have a call every WENZ-day morning." }
+                  ] },
+                { rule: "'Comfortable' is pronounced KUMF-tər-bəl (3 syllables), not com-FOR-ta-ble (4 syllables) — the middle syllable is swallowed.",
+                  ruleTe: "'Comfortable' KUMF-tər-bəl (3 syllables) గా పలుకుతారు, com-FOR-ta-ble (4 syllables) కాదు — మధ్యలో ఉన్న syllable swallow అవుతుంది.",
+                  examples: [
+                    { text: "KUMF-tər-bəl (not com-FOR-ta-ble)" },
+                    { text: "This chair is very KUMF-tər-bəl." },
+                    { text: "I feel KUMF-tər-bəl presenting to clients now." },
+                    { text: "Please make yourself KUMF-tər-bəl." }
+                  ] },
+                { rule: "'Vegetable' is pronounced VEJ-tə-bəl (3 syllables), not veg-e-TA-ble (4 syllables) — the second syllable disappears.",
+                  ruleTe: "'Vegetable' VEJ-tə-bəl (3 syllables) గా పలుకుతారు, veg-e-TA-ble (4 syllables) కాదు — రెండవ syllable మాయమవుతుంది.",
+                  examples: [
+                    { text: "VEJ-tə-bəl (not veg-e-TA-ble)" },
+                    { text: "We ordered a VEJ-tə-bəl curry." },
+                    { text: "She only eats VEJ-tə-bəl dishes." },
+                    { text: "This VEJ-tə-bəl soup is delicious." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Stress traps in common words",
+              intro: "Some words are commonly stressed on the wrong syllable, especially by non-native speakers. Getting the stress right matters as much as getting the sounds right.",
+              introTe: "కొన్ని పదాలను, ముఖ్యంగా non-native speakers, తప్పు syllable పై stress పెడతారు. ధ్వనులు సరిగ్గా పలకడం ఎంత ముఖ్యమో, stress సరిగ్గా పెట్టడం కూడా అంతే ముఖ్యం.",
+              points: [
+                { rule: "'Development' is stressed deVELopment (second syllable), not developMENT — a very common trap in tech/office speech.",
+                  ruleTe: "'Development' deVELopment (రెండవ syllable) గా stress ఉంటుంది, developMENT కాదు — tech/office speech లో ఇది చాలా సాధారణమైన trap.",
+                  examples: [
+                    { text: "deVELopment (not developMENT)" },
+                    { text: "The deVELopment team finished the sprint." },
+                    { text: "We invested heavily in product deVELopment." },
+                    { text: "Her professional deVELopment plan is strong." }
+                  ] },
+                { rule: "'Management' is stressed MANagement (first syllable), not manageMENT — used constantly in office English, so worth fixing early.",
+                  ruleTe: "'Management' MANagement (మొదటి syllable) గా stress ఉంటుంది, manageMENT కాదు — office English లో నిరంతరం వాడతారు, కాబట్టి ముందుగానే సరిచేసుకోవాలి.",
+                  examples: [
+                    { text: "MANagement (not manageMENT)" },
+                    { text: "Senior MANagement approved the budget." },
+                    { text: "This needs better project MANagement." },
+                    { text: "The MANagement team meets every Monday." }
+                  ] },
+                { rule: "'Event' is stressed eVENT (second syllable), and 'hotel' is stressed hoTEL (second syllable) — not EE-vent or HO-tel.",
+                  ruleTe: "'Event' eVENT (రెండవ syllable) గా, 'hotel' hoTEL (రెండవ syllable) గా stress ఉంటుంది — EE-vent లేదా HO-tel కాదు.",
+                  examples: [
+                    { text: "eVENT (not EE-vent)" },
+                    { text: "hoTEL (not HO-tel)" },
+                    { text: "The eVENT is at the downtown hoTEL." },
+                    { text: "We booked the hoTEL for the launch eVENT." }
+                  ] }
+              ]
+            },
+            { type: "concept", title: "Borrowed-word and tech-office traps",
+              intro: "Words borrowed from other languages, and words common in a tech/office setting, are frequently mispronounced because their spelling doesn't match English's usual rules.",
+              introTe: "ఇతర భాషల నుండి తీసుకున్న పదాలు, మరియు tech/office సెట్టింగ్‌లో సాధారణమైన పదాలు, తరచుగా తప్పుగా పలుకుతారు, ఎందుకంటే వాటి spelling ఇంగ్లీష్ సాధారణ నియమాలతో సరిపోలదు.",
+              points: [
+                { rule: "'Pizza' is pronounced PEET-sa, 'buffet' is bu-FAY, and 'resume' (the CV document) is REZ-oo-may — these come from Italian and French spelling patterns.",
+                  ruleTe: "'Pizza' PEET-sa గా, 'buffet' bu-FAY గా, 'resume' (CV document) REZ-oo-may గా పలుకుతారు — ఇవి Italian, French spelling patterns నుండి వచ్చాయి.",
+                  examples: [
+                    { text: "PEET-sa (not PIZ-za)" },
+                    { text: "bu-FAY (not BUFF-et)" },
+                    { text: "REZ-oo-may (not ree-SUME, which means to continue)" },
+                    { text: "Please send your REZ-oo-may before the buffet-style lunch." }
+                  ] },
+                { rule: "In a tech/office setting, 'data' is commonly DAY-ta or DAH-ta (pick one and stay consistent), 'suite' is SWEET, and 'queue' is KYOO.",
+                  ruleTe: "Tech/office సెట్టింగ్‌లో, 'data' సాధారణంగా DAY-ta లేదా DAH-ta (ఒకటి ఎంచుకుని consistent గా ఉండండి), 'suite' SWEET గా, 'queue' KYOO గా పలుకుతారు.",
+                  examples: [
+                    { text: "DAY-ta (or DAH-ta — pick one, stay consistent)" },
+                    { text: "SWEET (for 'suite', not SOO-it)" },
+                    { text: "KYOO (for 'queue', not KWUH or KWEE)" },
+                    { text: "The DAY-ta is stuck in the KYOO for the test SWEET." }
+                  ] },
+                { rule: "'Hierarchy' is HIGH-er-ar-kee — four clear syllables, starting with 'HIGH', not 'HEER' or 'HAIR'.",
+                  ruleTe: "'Hierarchy' HIGH-er-ar-kee గా పలుకుతారు — నాలుగు స్పష్టమైన syllables, 'HIGH' తో మొదలవుతుంది, 'HEER' లేదా 'HAIR' తో కాదు.",
+                  examples: [
+                    { text: "HIGH-er-ar-kee (not HEER-ar-kee)" },
+                    { text: "The reporting HIGH-er-ar-kee changed this year." },
+                    { text: "She moved up the HIGH-er-ar-kee quickly." },
+                    { text: "Our team sits outside the usual HIGH-er-ar-kee." }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Practice these sentences aloud, using the correct pronunciation for each highlighted word",
+              sentences: [
+                { text: "Let's meet on WENZ-day to discuss product deVELopment." },
+                { text: "Senior MANagement booked the hoTEL for the launch eVENT." },
+                { text: "Please send your REZ-oo-may before the PEET-sa and bu-FAY lunch." },
+                { text: "The DAY-ta is stuck in the KYOO for the test SWEET." },
+                { text: "This chair is KUMF-tər-bəl, and the VEJ-tə-bəl soup is great." }
+              ]
+            },
+            { type: "mistake", wrong: "The event (EE-vent) is tomorrow, and I sent the details on WENS-DAY-DAY.",
+              right: "The eVENT is tomorrow, and I sent the details on WENZ-day.",
+              whyEn: "'Event' is stressed on the second syllable (eVENT, not EE-vent), and 'Wednesday' swallows its middle syllable (WENZ-day, not WED-NES-DAY). Both are common, fixable mispronunciations in office English.",
+              whyTe: "'Event' రెండవ syllable పై stress ఉంటుంది (eVENT, EE-vent కాదు), మరియు 'Wednesday' మధ్య syllable ను swallow చేస్తుంది (WENZ-day, WED-NES-DAY కాదు). రెండూ office English లో సాధారణమైన, సరిచేయగల తప్పు పలుకుబడులు." },
+            { type: "dialogue", roles: ["Coach", "You"], lines: [
+              { role: "Coach", text: "Let's fix a few words. Say 'Wednesday' naturally." },
+              { role: "You", text: "WENZ-day." },
+              { role: "Coach", text: "Good. Now 'development' — where's the stress?" },
+              { role: "You", text: "deVELopment — stress on the second syllable." },
+              { role: "Coach", text: "Nice. What about 'event' and 'hotel'?" },
+              { role: "You", text: "eVENT and hoTEL — both stressed on the second syllable." },
+              { role: "Coach", text: "Now try: 'The eVENT is at the hoTEL on WENZ-day.'" },
+              { role: "You", text: "The eVENT is at the hoTEL on WENZ-day." },
+              { role: "Coach", text: "And finally, tech words: 'data', 'suite', 'queue', 'hierarchy'?" },
+              { role: "You", text: "DAY-ta, SWEET, KYOO, and HIGH-er-ar-kee." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "How is 'Wednesday' correctly pronounced?",
+                options: ["WENZ-day", "WED-NES-DAY", "WED-day"],
+                answer: "WENZ-day",
+                explanationEn: "'Wednesday' swallows its middle syllable in natural speech — it is pronounced WENZ-day, not with every written syllable said separately.",
+                explanationTe: "'Wednesday' natural speech లో మధ్య syllable ను swallow చేస్తుంది — ఇది WENZ-day గా పలుకుతారు, ప్రతి రాసిన syllable విడివిడిగా కాదు." },
+              { format: "mcq", prompt: "Where is the stress in 'development'?",
+                options: ["deVELopment (second syllable)", "developMENT (last syllable)", "DEvelopment (first syllable)"],
+                answer: "deVELopment (second syllable)",
+                explanationEn: "'Development' is stressed on the second syllable — deVELopment — a common stress trap for non-native speakers.",
+                explanationTe: "'Development' రెండవ syllable పై stress ఉంటుంది — deVELopment — non-native speakers కు ఇది సాధారణమైన stress trap." },
+              { format: "choose-sentence", prompt: "Choose the sentence with correct pronunciation of 'resume' (the CV document):",
+                options: ["Please send your REZ-oo-may before Friday.", "Please send your ree-SUME before Friday."],
+                answer: "Please send your REZ-oo-may before Friday.",
+                explanationEn: "'Resume' as a noun (the CV document) is pronounced REZ-oo-may; 'ree-SUME' as a verb means 'to continue'.",
+                explanationTe: "'Resume' noun గా (CV document) REZ-oo-may గా పలుకుతారు; 'ree-SUME' verb గా 'కొనసాగించడం' అని అర్థం." },
+              { format: "fill", prompt: "In a tech/office setting, 'queue' is pronounced ___.",
+                answer: "KYOO",
+                explanationEn: "'Queue' is pronounced KYOO — a single clear syllable, despite its unusual five-letter spelling.",
+                explanationTe: "'Queue' KYOO గా పలుకుతారు — దాని అసాధారణ ఐదు-అక్షరాల spelling ఉన్నప్పటికీ, ఇది ఒక స్పష్టమైన syllable." }
+            ]}
+          ]},
+          { id: "fluency-fillers", title: "Fluency Fillers & Buying Time", cards: [
+            { type: "concept", title: "Natural fillers instead of 'umm'",
+              intro: "Natural filler phrases buy you thinking time while sounding confident, instead of repeating 'umm' or 'aa' or freezing into silence. Fluent speakers are not faster thinkers — they are better at filling the gap while they think.",
+              introTe: "'umm' లేదా 'aa' అని పదేపదే అనడం కంటే, లేదా మౌనంగా ఆగిపోవడం కంటే, సహజమైన filler పదబంధాలు ఆత్మవిశ్వాసంతో ఉంటూ ఆలోచించడానికి సమయాన్ని ఇస్తాయి. fluent గా మాట్లాడేవారు వేగంగా ఆలోచించేవారు కాదు — ఆలోచిస్తూనే gap ను నింపడంలో వారు నైపుణ్యం కలిగినవారు.",
+              points: [
+                { rule: "Buy time politely with a short phrase before you answer, instead of a silent gap.",
+                  ruleTe: "మౌనంగా ఆగిపోకుండా, సమాధానం చెప్పే ముందు చిన్న పదబంధంతో మర్యాదగా సమయం తీసుకోండి.",
                   examples: [
                     { text: "Let me think about that for a second." },
                     { text: "Give me a moment to gather my thoughts." },
                     { text: "Let me take a moment to think this through." },
                     { text: "One second — let me collect my thoughts on that." }
                   ] },
-                { rule: "Acknowledge the question before answering, to sound engaged rather than caught off guard.",
-                  ruleTe: "సమాధానం ఇచ్చే ముందు ప్రశ్నను గుర్తించండి — దీనివల్ల ఆశ్చర్యపోయినట్లు కాకుండా, ఆసక్తిగా వింటున్నట్లు అనిపిస్తుంది.",
+                { rule: "Acknowledge the question or point before answering, to sound engaged rather than caught off guard.",
+                  ruleTe: "సమాధానం ఇచ్చే ముందు ప్రశ్నను లేదా విషయాన్ని గుర్తించండి — దీనివల్ల ఆశ్చర్యపోయినట్లు కాకుండా, ఆసక్తిగా వింటున్నట్లు అనిపిస్తుంది.",
                   examples: [
                     { text: "That's a good question." },
-                    { text: "That's an interesting point you raised." },
-                    { text: "Good question — let me think about the best way to explain it." },
-                    { text: "That's worth thinking about carefully." }
+                    { text: "Right — that's an interesting point you raised." },
+                    { text: "I see what you mean. Let me think about the best way to explain it." },
+                    { text: "Good point — let me address that." }
                   ] },
-                { rule: "Signal that you're still thinking or rephrasing, using phrases like 'What I mean is…' or 'How can I put this…'.",
-                  ruleTe: "మీరు ఇంకా ఆలోచిస్తున్నారని లేదా వేరే విధంగా చెబుతున్నారని సూచించడానికి 'What I mean is…' లేదా 'How can I put this…' వంటి పదబంధాలు వాడండి.",
+                { rule: "Signal that you're structuring your answer, so listeners follow along instead of losing patience.",
+                  ruleTe: "మీ సమాధానాన్ని ఎలా organize చేస్తున్నారో సూచించండి — దీనివల్ల వినేవారు సహనం కోల్పోకుండా, మీతోపాటు అర్థం చేసుకుంటూ వెళ్తారు.",
                   examples: [
-                    { text: "What I mean is, we should prioritize stability first." },
-                    { text: "How can I put this... it's more of a process issue than a tooling issue." },
-                    { text: "What I'm trying to say is, we need more time for testing." },
-                    { text: "In other words, the risk is higher than we first thought." }
+                    { text: "There are two things here — let me take them one at a time." },
+                    { text: "So, first, let me give you some context." },
+                    { text: "Let me break this into a couple of parts." },
+                    { text: "There's a short answer and a longer answer — let me start with the short one." }
+                  ] },
+                { rule: "Recover smoothly when you lose your thread, instead of stopping completely.",
+                  ruleTe: "మీ ఆలోచనా క్రమం తప్పిపోయినప్పుడు పూర్తిగా ఆగిపోకుండా, సాఫీగా recover అవ్వండి.",
+                  examples: [
+                    { text: "Sorry, where was I? Ah yes — the second reason." },
+                    { text: "Let me put that another way." },
+                    { text: "Let me back up for a second and start over." },
+                    { text: "What I'm trying to say is this..." }
                   ] }
               ]
             },
@@ -6777,15 +7571,26 @@
                 { text: "Let me think about that for a second." },
                 { text: "That's a good question." },
                 { text: "Give me a moment to gather my thoughts." },
+                { text: "There are two things here — let me take them one at a time." },
+                { text: "Sorry, where was I? Ah yes — the second reason." },
                 { text: "How can I put this..." }
               ]
+            },
+            { type: "mistake",
+              wrong: "Umm... umm... [long silent gap] ...I think... umm... maybe...",
+              right: "That's a good question — let me think about that for a second. So, there are two things here...",
+              whyEn: "A long silent gap or a string of 'umm's makes you sound unprepared and unsure, even if your actual answer is strong. A short, natural filler phrase fills the same gap while sounding composed and in control.",
+              whyTe: "పొడవైన మౌనం లేదా వరుసగా 'umm' అనడం వల్ల, మీ సమాధానం బలంగా ఉన్నా కూడా మీరు సిద్ధంగా లేనట్లు, అనిశ్చితంగా ఉన్నట్లు అనిపిస్తుంది. చిన్న, సహజమైన filler పదబంధం అదే gap ను నింపుతూ, మీరు స్థిరంగా, నియంత్రణలో ఉన్నట్లు అనిపించేలా చేస్తుంది."
             },
             { type: "dialogue", roles: ["Interviewer", "You"], lines: [
               { role: "Interviewer", text: "Why do you want to move into a leadership role?" },
               { role: "You", text: "That's a good question. Let me think about that for a second." },
-              { role: "You", text: "What I mean is, I enjoy helping the team grow, not just writing code myself." },
+              { role: "You", text: "So, there are two things here — let me take them one at a time." },
+              { role: "You", text: "First, I enjoy helping the team grow, not just writing code myself." },
               { role: "Interviewer", text: "Can you give an example?" },
-              { role: "You", text: "Sure — give me a moment to gather my thoughts on the best example." }
+              { role: "You", text: "Sure — give me a moment to gather my thoughts on the best example." },
+              { role: "You", text: "Sorry, where was I? Ah yes — last quarter I mentored two junior engineers through a tough migration." },
+              { role: "Interviewer", text: "That's a solid example, thank you." }
             ] },
             { type: "quiz", questions: [
               { format: "mcq", prompt: "Which is a natural way to buy time before answering, instead of saying 'umm'?",
@@ -6797,8 +7602,439 @@
                 options: ["Give me a moment to gather my thoughts.", "Wait wait, my brain thinking now."],
                 answer: "Give me a moment to gather my thoughts.",
                 explanationEn: "This is a natural, professional way to ask for a brief pause before answering.",
-                explanationTe: "ఇది సమాధానం ఇచ్చే ముందు కొద్దిసేపు ఆలోచించడానికి సమయం అడగడానికి సహజమైన, professional విధానం." }
+                explanationTe: "ఇది సమాధానం ఇచ్చే ముందు కొద్దిసేపు ఆలోచించడానికి సమయం అడగడానికి సహజమైన, professional విధానం." },
+              { format: "mcq", prompt: "You suddenly lose your train of thought while speaking. What should you say?",
+                options: ["Sorry, where was I? Ah yes — the second reason.", "[stay silent for 10 seconds]", "Umm umm umm umm."],
+                answer: "Sorry, where was I? Ah yes — the second reason.",
+                explanationEn: "Naming the gap out loud and recovering smoothly sounds far more confident than freezing or filling with repeated 'umm's.",
+                explanationTe: "గ్యాప్ ను బయటకు చెప్పి సాఫీగా recover అవ్వడం, మౌనంగా ఆగిపోవడం కంటే లేదా 'umm' లు పదేపదే అనడం కంటే చాలా ఆత్మవిశ్వాసంగా అనిపిస్తుంది." },
+              { format: "fill", prompt: "To signal you are about to explain your answer in parts, you can say: 'So, ___, let me give you some context.'",
+                answer: "first",
+                explanationEn: "'So, first, let me give you some context' signals structure, helping the listener follow your explanation.",
+                explanationTe: "'So, first, let me give you some context' అనడం structure ను సూచిస్తుంది, ఇది వినేవారు మీ explanation ను అర్థం చేసుకోవడానికి సహాయపడుతుంది." }
             ]}
+          ]},
+          { id: "small-talk", title: "Small Talk & Conversation Starters", cards: [
+            { type: "concept", title: "Starting and sustaining light conversation",
+              intro: "Small talk is the social glue before meetings, in elevators, or at the coffee machine. It is not about deep topics — it is about safe openers, genuine follow-up, and answers that give the other person something to respond to.",
+              introTe: "Small talk అనేది meetings కు ముందు, lift లలో, లేదా coffee machine దగ్గర ఉండే సామాజిక అంటుకునే గుణం (social glue). ఇది లోతైన విషయాల గురించి కాదు — safe అయిన openers, నిజమైన follow-up, మరియు ఎదుటివారు స్పందించడానికి ఏదైనా ఇచ్చే సమాధానాల గురించి.",
+              points: [
+                { rule: "Use safe, low-risk openers — weekend, weather, commute, or current projects.",
+                  ruleTe: "safe అయిన, తక్కువ ప్రమాదం ఉన్న openers వాడండి — weekend, weather, commute, లేదా current projects.",
+                  examples: [
+                    { text: "How was your weekend?" },
+                    { text: "How's the new project treating you?" },
+                    { text: "Did you get caught in that traffic this morning?" },
+                    { text: "Busy week so far, or has it been quiet?" }
+                  ] },
+                { rule: "Keep the conversation going with a follow-up question — echo what they said, then ask something open.",
+                  ruleTe: "వారు చెప్పింది echo చేసి, తర్వాత open-ended ప్రశ్న అడగడం ద్వారా conversation ను కొనసాగించండి.",
+                  examples: [
+                    { text: "Goa? Nice — what did you like most?" },
+                    { text: "A new laptop? How's it working out so far?" },
+                    { text: "Oh, a new team? What are you working on there?" },
+                    { text: "That sounds busy — what's taking up most of your time?" }
+                  ] },
+                { rule: "Give expandable answers, not dead-ends — add one extra detail so the other person has something to pick up on.",
+                  ruleTe: "conversation ను ఆపేసే సమాధానాలు కాకుండా, expand చేయగలిగే సమాధానాలు ఇవ్వండి — ఎదుటివారు దాన్ని పట్టుకోవడానికి ఒక extra detail చేర్చండి.",
+                  examples: [
+                    { text: "It was great — we tried kayaking for the first time." },
+                    { text: "Pretty good, actually — we finally shipped the release on Friday." },
+                    { text: "Quiet, mostly — just caught up on some reading." },
+                    { text: "Busy, but in a good way — we're prepping for the client demo." }
+                  ] },
+                { rule: "Exit politely when it's time to move on, without seeming abrupt.",
+                  ruleTe: "అకస్మాత్తుగా అనిపించకుండా, వెళ్లాల్సిన సమయంలో మర్యాదగా conversation నుండి బయటపడండి.",
+                  examples: [
+                    { text: "Anyway, I should get back — good catching up!" },
+                    { text: "I'll let you get to it — talk soon!" },
+                    { text: "I've got a call in a few minutes, but let's catch up more later." },
+                    { text: "Great chatting — see you at the meeting." }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Small talk openers and follow-ups",
+              sentences: [
+                { text: "How was your weekend?" },
+                { text: "How's the new project treating you?" },
+                { text: "Goa? Nice — what did you like most?" },
+                { text: "Anyway, I should get back — good catching up!" }
+              ]
+            },
+            { type: "mistake",
+              wrong: "\"How was your weekend?\" — \"Fine.\"",
+              right: "\"How was your weekend?\" — \"Pretty good, actually — we went hiking. How about you?\"",
+              whyEn: "\"Fine.\" is a conversation killer — it gives the other person nothing to respond to. An expandable answer with one extra detail, plus a question back, keeps the exchange alive and feels natural.",
+              whyTe: "\"Fine.\" అనేది conversation ను ఆపేస్తుంది — ఎదుటివారు దానికి స్పందించడానికి ఏమీ ఉండదు. ఒక extra detail తో expand చేయగల సమాధానం, తిరిగి ప్రశ్న అడగడంతో పాటు, exchange ను సజీవంగా, సహజంగా ఉంచుతుంది."
+            },
+            { type: "dialogue", roles: ["Colleague", "You"], lines: [
+              { role: "Colleague", text: "Hey! How was your weekend?" },
+              { role: "You", text: "Pretty good, actually — we went to Goa for two days." },
+              { role: "Colleague", text: "Goa? Nice — what did you like most?" },
+              { role: "You", text: "The food, honestly. And we tried kayaking for the first time." },
+              { role: "You", text: "How about you — did you do anything fun?" },
+              { role: "Colleague", text: "Just relaxed at home, mostly. How's the new project treating you?" },
+              { role: "You", text: "Busy, but in a good way — we're prepping for the client demo next week." },
+              { role: "You", text: "Anyway, I should get back — good catching up!" }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "Which is a safe small-talk opener with a colleague?",
+                options: ["How was your weekend?", "How much do you earn?", "Why were you late again?"],
+                answer: "How was your weekend?",
+                explanationEn: "Weekend, weather, and commute are safe, low-risk small-talk topics for colleagues.",
+                explanationTe: "Weekend, weather, commute వంటివి colleagues తో safe గా, తక్కువ ప్రమాదం ఉన్న small-talk topics." },
+              { format: "choose-sentence", prompt: "Someone says: \"I just got back from Goa.\" Choose the best follow-up:",
+                options: ["Goa? Nice — what did you like most?", "Okay.", "I've never been interested in Goa."],
+                answer: "Goa? Nice — what did you like most?",
+                explanationEn: "Echoing what they said and asking an open follow-up question keeps the conversation going naturally.",
+                explanationTe: "వారు చెప్పింది echo చేసి, open follow-up ప్రశ్న అడగడం conversation ను సహజంగా కొనసాగిస్తుంది." },
+              { format: "mcq", prompt: "Which answer to \"How was your weekend?\" is a conversation killer?",
+                options: ["Fine.", "Pretty good, actually — we went hiking.", "Busy, but in a good way — we had guests over."],
+                answer: "Fine.",
+                explanationEn: "\"Fine.\" gives the other person nothing to respond to, so the conversation stops there.",
+                explanationTe: "\"Fine.\" అనేది ఎదుటివారు స్పందించడానికి ఏమీ ఇవ్వదు, అందుకే conversation అక్కడే ఆగిపోతుంది." },
+              { format: "fill", prompt: "To leave a small-talk conversation politely, you can say: 'Anyway, I should get back — good ___!'",
+                answer: "catching up",
+                explanationEn: "\"Good catching up!\" is a warm, polite way to end a small-talk exchange without seeming abrupt.",
+                explanationTe: "\"Good catching up!\" అనేది small-talk exchange ను అకస్మాత్తుగా అనిపించకుండా, మర్యాదగా ముగించే విధానం." }
+            ]}
+          ]},
+          { id: "explaining-clearly", title: "Explaining & Narrating Clearly", cards: [
+            { type: "concept", title: "Structuring a spoken explanation so listeners follow easily",
+              intro: "When you explain something out loud, listeners cannot re-read your words like they can with text. Clear spoken explanations lead with the headline, use signposts, chunk ideas, and check that the listener is still following.",
+              introTe: "మీరు ఏదైనా మాట్లాడి explain చేసినప్పుడు, వినేవారు text లా మళ్లీ చదవలేరు. స్పష్టమైన spoken explanations headline తో మొదలుపెట్టి, signposts వాడి, ఆలోచనలను chunks గా విభజించి, వినేవారు అర్థం చేసుకుంటున్నారా అని check చేసుకుంటాయి.",
+              points: [
+                { rule: "Lead with the headline first, then give the details — don't make listeners wait for the main point.",
+                  ruleTe: "మొదట headline చెప్పండి, తర్వాత details ఇవ్వండి — వినేవారిని main point కోసం వేచి ఉండేలా చేయకండి.",
+                  examples: [
+                    { text: "The release is delayed. There are two reasons." },
+                    { text: "We're changing vendors. Here's why." },
+                    { text: "Good news — we hit the target. Let me walk you through the numbers." },
+                    { text: "Short version: it's fixed. Here's what happened." }
+                  ] },
+                { rule: "Use signposts so listeners always know where they are in your explanation.",
+                  ruleTe: "మీ explanation లో వినేవారు ఎక్కడ ఉన్నారో తెలుసుకోవడానికి signposts వాడండి.",
+                  examples: [
+                    { text: "First, the vendor missed a deadline. Then, we found a bug in testing. Finally, we decided to push the date." },
+                    { text: "The key point is this: we need one more week." },
+                    { text: "There are three parts to this — let's go through them in order." },
+                    { text: "To sum up, here's what changes for the team." }
+                  ] },
+                { rule: "Chunk complex ideas into one idea per sentence, with a short pause between chunks.",
+                  ruleTe: "సంక్లిష్టమైన ఆలోచనలను ఒక్కో వాక్యానికి ఒక్క idea గా విభజించండి, chunks మధ్య చిన్న pause ఇవ్వండి.",
+                  examples: [
+                    { text: "The API was returning stale data. [pause] That caused the dashboard to show wrong numbers. [pause] We've since fixed the caching layer." },
+                    { text: "We lost a key vendor. [pause] That pushed our timeline by two weeks. [pause] We're now evaluating a backup vendor." },
+                    { text: "The migration is in three phases. [pause] Phase one is already done. [pause] Phases two and three are still in progress." },
+                    { text: "One idea, one sentence — that's the rule for staying clear." }
+                  ] },
+                { rule: "Check understanding as you go, instead of assuming the listener followed everything.",
+                  ruleTe: "వినేవారు ప్రతిదీ అర్థం చేసుకున్నారని అనుకోకుండా, మధ్యలో check చేసుకోండి.",
+                  examples: [
+                    { text: "Does that make sense so far?" },
+                    { text: "Shall I go deeper on any part of that?" },
+                    { text: "Let me know if you'd like me to slow down on any of this." },
+                    { text: "Any questions before I move to the next part?" }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "A short spoken status update, headline first",
+              sentences: [
+                { text: "The release is delayed by one week. There are two reasons." },
+                { text: "First, the vendor missed a deadline for the new hardware." },
+                { text: "Then, we found a bug during testing that needed a fix." },
+                { text: "The key point is: the new date is next Friday. Does that make sense so far?" }
+              ]
+            },
+            { type: "mistake",
+              wrong: "So basically what happened is we were waiting on the vendor and then testing found some issues and also the hardware didn't arrive on time and then there was a bug and so now we think maybe next week but not sure and there were other things too...",
+              right: "The release is delayed by one week. There are two reasons. First, the vendor missed a deadline. Then, testing found a bug. The new date is next Friday. Does that make sense so far?",
+              whyEn: "A long, breathless run-on explanation forces the listener to piece together the structure themselves, and key facts get buried. Chunking into short sentences with a clear headline and signposts makes the same information far easier to follow.",
+              whyTe: "పొడవైన, ఊపిరి తీసుకోని run-on explanation వినేవారు తామే structure ను జోడించుకోవాల్సి వచ్చేలా చేస్తుంది, ముఖ్యమైన విషయాలు కప్పబడిపోతాయి. స్పష్టమైన headline మరియు signposts తో చిన్న వాక్యాలుగా chunk చేయడం అదే సమాచారాన్ని అర్థం చేసుకోవడం చాలా సులభతరం చేస్తుంది."
+            },
+            { type: "dialogue", roles: ["Manager", "You"], lines: [
+              { role: "Manager", text: "Can you walk me through why the release is delayed?" },
+              { role: "You", text: "Sure. The release is delayed by one week. There are two reasons." },
+              { role: "You", text: "First, the vendor missed a deadline for the new hardware." },
+              { role: "You", text: "Then, our testing team found a bug that needed a proper fix, not a quick patch." },
+              { role: "Manager", text: "Okay, and the new target date?" },
+              { role: "You", text: "The key point is: we're now targeting next Friday." },
+              { role: "You", text: "Does that make sense so far, or should I go deeper on the bug?" },
+              { role: "Manager", text: "No, that's clear. Thanks for the quick summary." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "What should you do first when explaining something out loud?",
+                options: ["Lead with the headline, then give details.", "List every small detail in the order you thought of them.", "Wait for the listener to ask what happened."],
+                answer: "Lead with the headline, then give details.",
+                explanationEn: "Leading with the headline gives listeners the main point immediately, so they can follow the details in context.",
+                explanationTe: "headline తో మొదలుపెట్టడం వినేవారికి main point వెంటనే తెలియజేస్తుంది, దాంతో details ను context లో అర్థం చేసుకోగలరు." },
+              { format: "choose-sentence", prompt: "Choose the more clearly chunked explanation:",
+                options: ["The API was returning stale data. That caused wrong dashboard numbers. We've fixed the caching layer.", "The API was returning stale data and that caused wrong dashboard numbers and also we've fixed the caching layer and other things too."],
+                answer: "The API was returning stale data. That caused wrong dashboard numbers. We've fixed the caching layer.",
+                explanationEn: "Short sentences with one idea each, separated by pauses, are far easier for a listener to follow than one long run-on sentence.",
+                explanationTe: "ప్రతి వాక్యంలో ఒక్క idea, మధ్యలో pauses తో ఉండే చిన్న వాక్యాలు, ఒక పొడవైన run-on వాక్యం కంటే వినేవారికి అర్థం చేసుకోవడం చాలా సులభం." },
+              { format: "mcq", prompt: "Why should you check understanding while explaining something spoken?",
+                options: ["Because listeners cannot re-read spoken words like they can re-read text.", "Because it makes the explanation longer.", "Because it is required by grammar rules."],
+                answer: "Because listeners cannot re-read spoken words like they can re-read text.",
+                explanationEn: "Since spoken words disappear as soon as they're said, checking understanding ensures the listener hasn't silently gotten lost.",
+                explanationTe: "మాట్లాడిన పదాలు చెప్పిన వెంటనే అదృశ్యమవుతాయి కాబట్టి, understanding ను check చేసుకోవడం వినేవారు మౌనంగా అర్థం కోల్పోలేదని నిర్ధారిస్తుంది." },
+              { format: "fill", prompt: "A good phrase to check if your listener is following is: 'Does that make ___ so far?'",
+                answer: "sense",
+                explanationEn: "\"Does that make sense so far?\" is a natural, professional way to check understanding mid-explanation.",
+                explanationTe: "\"Does that make sense so far?\" అనేది explanation మధ్యలో understanding ను check చేసుకోవడానికి సహజమైన, professional విధానం." }
+            ]}
+          ]},
+          { id: "calls-video-meetings", title: "Speaking on Calls & Video Meetings", cards: [
+            { type: "concept", title: "Running a call smoothly: opening, tech issues, and clarification",
+              intro: "Voice and video calls strip away body language, so your words alone must carry the meeting. Open with purpose, handle audio glitches calmly, ask for repetition without embarrassment, and hand over or close cleanly.",
+              introTe: "వాయిస్ మరియు వీడియో కాల్స్‌లో body language ఉండదు, కాబట్టి మీటింగ్‌ను నడిపించేది మీ మాటలే. purpose తో మొదలుపెట్టండి, audio glitches ను శాంతంగా handle చేయండి, సిగ్గుపడకుండా repetition అడగండి, మరియు clean గా hand over చేసి close చేయండి.",
+              points: [
+                { rule: "Open the call with a short welcome and a clear signal that you're starting.",
+                  ruleTe: "కాల్‌ను చిన్న welcome తో మొదలుపెట్టి, మీరు start చేస్తున్నారని స్పష్టంగా చెప్పండి.",
+                  examples: [
+                    { text: "Hi everyone, thanks for joining. Shall we get started?" },
+                    { text: "Good morning, all. I think we have everyone, so let's begin." },
+                    { text: "Thanks for making the time today — let's dive in." },
+                    { text: "Welcome, everyone. Quick check — can everyone hear me okay?" }
+                  ] },
+                { rule: "Name audio and tech issues directly and calmly instead of struggling through them silently.",
+                  ruleTe: "audio మరియు tech issues ను మౌనంగా భరించకుండా, నేరుగా, శాంతంగా చెప్పండి.",
+                  examples: [
+                    { text: "You're breaking up a little — could you move closer to your mic?" },
+                    { text: "Could you repeat that? You cut out for a second." },
+                    { text: "I think you're on mute." },
+                    { text: "Sorry, your video is freezing — I can still hear you, so please continue." }
+                  ] },
+                { rule: "Ask for repetition or clarification confidently — it's normal on calls, not a sign of weakness.",
+                  ruleTe: "repetition లేదా clarification అడగడం confidence తో చేయండి — calls లో ఇది normal, బలహీనత సూచన కాదు.",
+                  examples: [
+                    { text: "Sorry, could you say that last part again?" },
+                    { text: "Just to confirm, you said the deadline moves to Friday?" },
+                    { text: "I missed that — could you repeat the number you mentioned?" },
+                    { text: "Could you say that again, a bit slower? The line was choppy." }
+                  ] },
+                { rule: "Hand over to the next speaker clearly and close the call with a concrete next step.",
+                  ruleTe: "తర్వాతి speaker కు స్పష్టంగా hand over చేసి, ఒక concrete next step తో కాల్ close చేయండి.",
+                  examples: [
+                    { text: "Over to you, Ravi, for the deployment update." },
+                    { text: "Let's take this offline and follow up over email." },
+                    { text: "Thanks everyone — I'll share the notes and action items by end of day." },
+                    { text: "That covers everything on the agenda. Any last questions before we close?" }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Phrases for running a call smoothly",
+              sentences: [
+                { text: "Hi everyone, thanks for joining. Shall we get started?" },
+                { text: "You're breaking up a little — could you repeat that?" },
+                { text: "I think you're on mute." },
+                { text: "Just to confirm, you said the release moves to next Friday?" },
+                { text: "Over to you, Priya, for the next update." },
+                { text: "Let's take this offline and I'll follow up by email." }
+              ]
+            },
+            { type: "mistake",
+              wrong: "[Stays silent and nods along after missing what the client said, hoping to figure it out later from context.]",
+              right: "Sorry, could you say that last part again? The line cut out for a second.",
+              whyEn: "Staying quiet when you didn't hear something on a call often leads to real misunderstandings later, and nodding along on video can look like agreement to something you never actually heard. Politely asking to repeat costs you one sentence and protects the whole meeting from confusion.",
+              whyTe: "కాల్‌లో వినకపోయినా మౌనంగా ఉండటం తర్వాత నిజమైన misunderstandings కు దారితీస్తుంది, వీడియోలో తలూపడం మీరు వినని దానికి agreement లా కనిపించవచ్చు. మర్యాదగా repeat అడగడం ఒక్క వాక్యం మాత్రమే తీసుకుంటుంది కానీ మీటింగ్ మొత్తాన్ని గందరగోళం నుండి కాపాడుతుంది."
+            },
+            { type: "dialogue", roles: ["Client", "You"], lines: [
+              { role: "You", text: "Hi everyone, thanks for joining. Shall we get started?" },
+              { role: "Client", text: "Sure, go ahead. We wanted an update on the integration." },
+              { role: "You", text: "Sorry, you're breaking up a little — could you repeat that?" },
+              { role: "Client", text: "I said we wanted an update on the integration timeline." },
+              { role: "You", text: "Got it, thanks. We're on track to finish testing by Wednesday." },
+              { role: "Client", text: "Great. And who's handling the deployment itself?" },
+              { role: "You", text: "Over to Ravi for that — Ravi, could you cover the deployment plan?" },
+              { role: "You", text: "Thanks everyone — I'll share the notes and next steps by email today." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "The best way to start a call you're hosting is:",
+                options: ["Hi everyone, thanks for joining. Shall we get started?", "Okay everyone here now, start.", "Hello hello, is working?"],
+                answer: "Hi everyone, thanks for joining. Shall we get started?",
+                explanationEn: "This is a warm, professional opener that signals the call is beginning.",
+                explanationTe: "ఇది warm, professional opener — కాల్ మొదలవుతుందని సూచిస్తుంది." },
+              { format: "choose-sentence", prompt: "You suspect the other person can't hear because their mic is off. Choose the correct sentence:",
+                options: ["I think you're on mute.", "Your voice is not coming, fix it now."],
+                answer: "I think you're on mute.",
+                explanationEn: "This is the standard, polite way to point out a muted mic on a call.",
+                explanationTe: "కాల్‌లో mic mute అయిందని చెప్పడానికి ఇది ప్రామాణిక, మర్యాదపూర్వక వాక్యం." },
+              { format: "fill", prompt: "Sorry, could you ___ that last part again? (asking someone to repeat)",
+                answer: "say",
+                explanationEn: "'Could you say that again?' is the natural way to ask for repetition on a call.",
+                explanationTe: "కాల్‌లో repetition అడగడానికి 'Could you say that again?' సహజమైన రూపం." },
+              { format: "mcq", prompt: "To pass the discussion to a colleague on the call, you say:",
+                options: ["Over to you, Ravi, for the deployment update.", "Ravi now you talk.", "Ravi's turn is coming."],
+                answer: "Over to you, Ravi, for the deployment update.",
+                explanationEn: "'Over to you, [name]' is the standard professional handover phrase on calls.",
+                explanationTe: "కాల్స్‌లో 'Over to you, [name]' అనేది ప్రామాణిక, professional handover పదబంధం." }
+            ]}
+          ]},
+          { id: "interview-self-introduction", title: "Interviews & Self-Introduction", cards: [
+            { type: "concept", title: "Introducing yourself and answering with structure at a senior level",
+              intro: "At a Head-level interview, your self-introduction and answers need to be tight, present-first, and backed by results — not a chronological life story. A structured 60-second pitch and mini-STAR answers show seniority as much as the content itself.",
+              introTe: "Head-level interview లో మీ self-introduction మరియు answers tight గా, present-first గా, results తో ఉండాలి — chronological life story కాదు. structured 60-second pitch మరియు mini-STAR answers content తో పాటు seniority ను కూడా చూపిస్తాయి.",
+              points: [
+                { rule: "Build your 60-second intro as: current role → key strength or scope → a notable result → why this conversation.",
+                  ruleTe: "మీ 60-second intro ను: current role → key strength/scope → notable result → why this conversation అనే క్రమంలో build చేయండి.",
+                  examples: [
+                    { text: "I currently head the platform team of 25 engineers at Vantage Systems." },
+                    { text: "My focus has been scaling our infrastructure to handle 10x traffic growth." },
+                    { text: "Last year, my team cut deployment time from two days to two hours." },
+                    { text: "I'm here because I'm looking for a broader mandate across multiple product lines." }
+                  ] },
+                { rule: "Answer behavioral questions with mini-STAR: Situation, what you did, result — kept tight, not a long story.",
+                  ruleTe: "behavioral questions కు mini-STAR తో సమాధానం చెప్పండి: Situation, మీరు చేసిన పని, result — పొడవైన కథ కాకుండా tight గా.",
+                  examples: [
+                    { text: "We had a critical outage during peak season. I formed a war room and we restored service in 40 minutes. We cut a similar risk out for the next release." },
+                    { text: "The team was missing deadlines consistently. I restructured our sprint planning. Delivery predictability went from 60% to 95%." },
+                    { text: "Two senior engineers were in conflict over architecture. I ran a design review with both. We shipped a hybrid approach two weeks later." },
+                    { text: "Keep it to three or four sentences — situation, action, result, and stop there." }
+                  ] },
+                { rule: "Speak about your achievements confidently, using ownership language and numbers, without over-qualifying or bragging.",
+                  ruleTe: "achievements గురించి confidence తో, ownership language మరియు numbers వాడి మాట్లాడండి, over-qualify చేయకుండా లేదా బ్రాగ్ చేయకుండా.",
+                  examples: [
+                    { text: "I led the migration that reduced our cloud costs by 30%." },
+                    { text: "My team delivered the platform rewrite three weeks ahead of schedule." },
+                    { text: "I built the on-call process that's still in use across four teams today." },
+                    { text: "Under my leadership, engagement scores rose from 68% to 89%." }
+                  ] },
+                { rule: "Close the interview with a small number of sharp questions that show you're evaluating fit, not just hoping to be picked.",
+                  ruleTe: "interview ను కొన్ని sharp questions తో close చేయండి — మీరు కూడా fit ను evaluate చేస్తున్నారని చూపించండి, ఎంపిక కోసం ఎదురుచూస్తున్నట్లు కాదు.",
+                  examples: [
+                    { text: "How is success measured for this role in the first six months?" },
+                    { text: "What's the biggest challenge the team is facing right now?" },
+                    { text: "How much autonomy would I have in shaping the roadmap?" },
+                    { text: "What would make someone truly successful in this position a year from now?" }
+                  ] }
+              ]
+            },
+            { type: "example", pattern: "Self-introduction lines to practice aloud",
+              sentences: [
+                { text: "I currently head the platform team of 25 engineers at Vantage Systems." },
+                { text: "My focus has been scaling our infrastructure to handle 10x traffic growth." },
+                { text: "Last year, my team cut deployment time from two days to two hours." },
+                { text: "I'm here because I'm looking for a broader mandate across multiple product lines." },
+                { text: "How is success measured for this role in the first six months?" }
+              ]
+            },
+            { type: "mistake",
+              wrong: "So basically I was born in Vizag, then I did my schooling there, then engineering, then my first job was at a small company where I did a bit of everything, and then I moved to my current company about six years ago and slowly grew into this role...",
+              right: "I currently head the platform team of 25 engineers. Before this, I scaled our infrastructure through 10x growth and cut deployment time significantly. I'm exploring this role because I want a broader mandate.",
+              whyEn: "Starting from school days makes interviewers wait several minutes for anything relevant, and it signals that you can't prioritize under pressure. Leading with the present role and a headline result respects the interviewer's time and immediately shows you at your current level of seniority.",
+              whyTe: "school days నుండి మొదలుపెట్టడం interviewers relevant సమాచారం కోసం చాలా నిమిషాలు వేచి ఉండేలా చేస్తుంది, pressure లో prioritize చేయలేరని కూడా సూచిస్తుంది. present role మరియు headline result తో మొదలుపెట్టడం interviewer సమయాన్ని గౌరవిస్తుంది మరియు మీ current seniority ను వెంటనే చూపిస్తుంది."
+            },
+            { type: "dialogue", roles: ["Interviewer", "You"], lines: [
+              { role: "Interviewer", text: "Tell me a little about yourself and your current role." },
+              { role: "You", text: "I currently head the platform team of 25 engineers at Vantage Systems." },
+              { role: "You", text: "My focus over the last two years has been scaling our infrastructure through 10x traffic growth, and last year we cut deployment time from two days to two hours." },
+              { role: "Interviewer", text: "Impressive. Can you walk me through a time you handled a major incident?" },
+              { role: "You", text: "We had a critical outage during peak season. I formed a war room, and we restored service in 40 minutes." },
+              { role: "You", text: "We also built a safeguard afterward so that specific failure couldn't recur." },
+              { role: "Interviewer", text: "Good. Do you have any questions for us?" },
+              { role: "You", text: "Yes — how is success measured for this role in the first six months?" }
+            ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "A strong 60-second self-introduction should start with:",
+                options: ["Your current role and scope.", "Where you were born and your schooling.", "A list of every company you've ever worked at."],
+                answer: "Your current role and scope.",
+                explanationEn: "Leading with the present role gives the interviewer immediate, relevant context about your seniority.",
+                explanationTe: "present role తో మొదలుపెట్టడం interviewer కు మీ seniority గురించి వెంటనే relevant context ఇస్తుంది." },
+              { format: "choose-sentence", prompt: "Choose the more structured, senior-sounding answer to a behavioral question:",
+                options: ["We had a critical outage during peak season. I formed a war room and we restored service in 40 minutes.", "So there was this outage and everyone was panicking and I was trying different things and eventually somehow it got fixed after a while."],
+                answer: "We had a critical outage during peak season. I formed a war room and we restored service in 40 minutes.",
+                explanationEn: "This follows the mini-STAR structure — situation, action, result — in three tight sentences.",
+                explanationTe: "ఇది mini-STAR structure ను అనుసరిస్తుంది — situation, action, result — మూడు tight వాక్యాల్లో." },
+              { format: "fill", prompt: "I ___ the migration that reduced our cloud costs by 30%. (confident ownership language)",
+                answer: "led",
+                explanationEn: "'I led...' is confident ownership language that credits you without sounding boastful.",
+                explanationTe: "'I led...' అనేది confident ownership language — బ్రాగింగ్ లేకుండా మీ credit చూపిస్తుంది." },
+              { format: "mcq", prompt: "A good closing question to ask the interviewer is:",
+                options: ["How is success measured for this role?", "Did I get the job or not?", "Is the salary negotiable, tell me now?"],
+                answer: "How is success measured for this role?",
+                explanationEn: "This shows you're thoughtfully evaluating fit, which is appropriate at a senior level.",
+                explanationTe: "ఇది మీరు fit ను ఆలోచనాత్మకంగా evaluate చేస్తున్నారని చూపిస్తుంది — senior level కు తగినది." }
+            ]}
+          ]},
+          { id: "shadowing-practice", title: "Shadowing Practice Sets", cards: [
+            { type: "concept", title: "The shadowing method: listen, repeat, record, compare",
+              intro: "Shadowing means listening to a model line and then repeating it aloud, matching its rhythm and stress — not just its words. Recording yourself and comparing to the model is what turns this into real, measurable practice.",
+              introTe: "Shadowing అంటే ఒక model line ను విని, దాని rhythm మరియు stress ను match చేస్తూ మళ్లీ మాట్లాడటం — కేవలం పదాలు కాదు. మీ గొంతును record చేసి model తో compare చేయడం వల్ల ఇది real, measurable practice గా మారుతుంది.",
+              points: [
+                { rule: "Listen to the model line fully first, without repeating, so you absorb the whole rhythm before you speak.",
+                  ruleTe: "మొదట model line ను పూర్తిగా వినండి, repeat చేయకుండా, మాట్లాడే ముందు మొత్తం rhythm ను గ్రహించండి.",
+                  examples: [
+                    { text: "Play the line once and just listen — don't speak yet." },
+                    { text: "Notice which word in the sentence is said with the most stress." },
+                    { text: "Notice where the speaker pauses and where the pitch rises or falls." },
+                    { text: "Only after this first full listen should you attempt to say it." }
+                  ] },
+                { rule: "Repeat the line aloud, copying the rhythm and stress pattern — not just saying the same words.",
+                  ruleTe: "line ను గట్టిగా repeat చేయండి, rhythm మరియు stress pattern ను copy చేస్తూ — కేవలం అదే పదాలు అనడం కాదు.",
+                  examples: [
+                    { text: "Match the stronger and weaker beats, not just the words themselves." },
+                    { text: "If the model pauses after 'so,' you pause there too." },
+                    { text: "Copy the rise in pitch on questions, and the fall on statements." },
+                    { text: "Speak at roughly the same speed as the model, not slower out of caution." }
+                  ] },
+                { rule: "Record yourself saying the line and compare it directly to the model's version.",
+                  ruleTe: "మీరు ఆ line చెప్పడాన్ని record చేసి, model version తో నేరుగా compare చేయండి.",
+                  examples: [
+                    { text: "Use the record-yourself control right after hearing each line." },
+                    { text: "Play your recording immediately after the model's line." },
+                    { text: "Listen for stress, pauses, and pitch — not just correct pronunciation." },
+                    { text: "Comparing honestly, even when it feels uncomfortable, is what improves you fastest." }
+                  ] },
+                { rule: "Repeat each line multiple times until the gap between your version and the model closes.",
+                  ruleTe: "మీ version మరియు model మధ్య తేడా తగ్గే వరకు ప్రతి line ను చాలాసార్లు repeat చేయండి.",
+                  examples: [
+                    { text: "If the first attempt sounds flat, try again with more stress on the key word." },
+                    { text: "Three to five repeats per line is normal before it starts to match." },
+                    { text: "Move to the next line only once your rhythm is close to the model's." },
+                    { text: "Small, steady improvement each repeat matters more than getting it perfect once." }
+                  ] }
+              ]
+            },
+            { type: "dialogue", roles: ["Model", "You"], lines: [
+              { role: "Model", text: "Good morning, everyone." },
+              { role: "You", text: "Good morning, everyone." },
+              { role: "Model", text: "Could you send that file over when you get a chance?" },
+              { role: "You", text: "Could you send that file over when you get a chance?" },
+              { role: "Model", text: "I'll take a look and get back to you by this afternoon." },
+              { role: "You", text: "I'll take a look and get back to you by this afternoon." },
+              { role: "Model", text: "Sorry about that — could you say that one more time?" },
+              { role: "You", text: "Sorry about that — could you say that one more time?" }
+            ] },
+            { type: "dialogue", roles: ["Manager", "You"], lines: [
+              { role: "Manager", text: "How's the migration going? Give me the quick version." },
+              { role: "You", text: "We're about seventy percent done, and on track for Friday." },
+              { role: "Manager", text: "Any blockers I should know about right now?" },
+              { role: "You", text: "One — we're waiting on access from the infra team." },
+              { role: "Manager", text: "I'll chase that today. Anything else?" },
+              { role: "You", text: "No, that's the only open item. Everything else is moving smoothly." },
+              { role: "Manager", text: "Good. Send me a short update again tomorrow morning." },
+              { role: "You", text: "Will do — I'll have it in your inbox by nine." }
+            ] },
+            { type: "dialogue", roles: ["Presenter", "You"], lines: [
+              { role: "Presenter", text: "Thanks everyone for joining — let's get straight into it." },
+              { role: "You", text: "Thanks everyone for joining — let's get straight into it." },
+              { role: "Presenter", text: "Moving on to the next slide, here's where things get interesting." },
+              { role: "You", text: "Moving on to the next slide, here's where things get interesting." },
+              { role: "Presenter", text: "Let me pause here and take any questions before continuing." },
+              { role: "You", text: "Let me pause here and take any questions before continuing." },
+              { role: "Presenter", text: "To wrap up, here are the three things I want you to remember." },
+              { role: "You", text: "To wrap up, here are the three things I want you to remember." }
+            ] },
+            { type: "example", pattern: "Daily 5-minute shadowing routine",
+              sentences: [
+                { text: "Pick one dialogue set and listen to the full conversation once, without speaking." },
+                { text: "Play the first line, then pause and repeat it aloud, matching the rhythm." },
+                { text: "Record yourself saying the line and play it back right after the model." },
+                { text: "Repeat any line that sounds flat two or three more times before moving on." },
+                { text: "Finish by saying the whole set aloud once, start to finish, at natural speed." }
+              ]
+            }
           ]}
         ] },
         { id: "situations", title: "Situations", icon: "🎬", lessons: [
