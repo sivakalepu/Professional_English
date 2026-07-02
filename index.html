@@ -92,6 +92,7 @@
 .rule-detail { margin:2px 0 8px; font-size:15px; }
 .ex-note { color:var(--muted); font-size:13px; font-style:italic; margin-left:6px; }
     .used-with { color:var(--muted); font-size:14px; font-style:italic; margin:6px 0; }
+.when-to-use { font-size:15px; margin:4px 0 8px; border-left:3px solid var(--good); padding-left:10px; }
 .danger { border-color:var(--warn); color:var(--warn); }
 .reset-lesson { display:block; margin-top:16px; background:transparent; border:1px solid var(--line); color:var(--muted); font-size:13px; }
 .reset-lesson:hover { border-color:var(--warn); color:var(--warn); }
@@ -11534,7 +11535,8 @@
           this.el("h3", {}, card.word),
           this.el("span", { class: "pos" }, card.pos || "")));
         c.appendChild(this.el("p", {}, card.meaningEn));
-        c.appendChild(this._teluguReveal(card.meaningTe));
+        if (card.whenToUse) c.appendChild(this.el("p", { class: "when-to-use" }, card.whenToUse));
+        c.appendChild(this._teluguReveal([card.meaningTe, card.whenToUseTe].filter(Boolean).join(" ")));
         if (card.usedWith) c.appendChild(this.el("div", { class: "used-with" }, "Used with: " + card.usedWith));
         (card.examples || []).forEach(ex => {
           c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
