@@ -70,7 +70,12 @@
     .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px; }
     .mistake .why { color:var(--muted); }
     .back { margin-bottom:8px; }
-    .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+    .card-viewport { height:min(58vh, 560px); overflow-y:auto; margin:12px 0;
+      border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); }
+    .card-viewport .card { margin:0; border:none; }
+    .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px; }
+    .stepper > button { min-width:96px; }
+    .done-btn { background:var(--good); border-color:var(--good); color:#fff; }
     .dots { display:flex; gap:6px; }
     .dot { width:8px; height:8px; border-radius:50%; background:var(--panel-2); }
     .dot.on { background:var(--accent); }
@@ -106,6 +111,8 @@
       .lesson-item { flex-direction:column; align-items:flex-start; gap:4px; }
       .bar { width:100%; }
       .stepper { gap:8px; }
+      .stepper > button { min-width:74px; }
+      .card-viewport { height:46vh; }
     }
     .concept-intro { margin-top:0; }
     ul.rules { list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:16px; }
@@ -13291,16 +13298,21 @@
         const lesson = CourseData.lesson(phase.id, Router.state.lessonId);
         const idx = Router.state.cardIndex;
         const card = lesson.cards[idx];
+        const last = idx === lesson.cards.length - 1;
         const wrap = this.el("div", { class: "lesson" });
         wrap.appendChild(this.el("button", { class: "back", onclick: () => Router.goPhase(phase.id) }, "← " + phase.title));
         wrap.appendChild(this.el("h2", {}, lesson.title));
-        wrap.appendChild(this._renderCard(card, phase.id, lesson.id, idx));
+        // fixed-height scroll viewport so the Prev/Next row never shifts between cards
+        wrap.appendChild(this.el("div", { class: "card-viewport" },
+          this._renderCard(card, phase.id, lesson.id, idx)));
         const dots = this.el("div", { class: "dots" });
         lesson.cards.forEach((_, i) => dots.appendChild(this.el("span", { class: "dot" + (i === idx ? " on" : "") })));
         wrap.appendChild(this.el("div", { class: "stepper" },
           this.el("button", { onclick: () => Router.prevCard(), disabled: idx === 0 ? "" : null }, "◀ Prev"),
           dots,
-          this.el("button", { onclick: () => Router.nextCard(), disabled: idx === lesson.cards.length - 1 ? "" : null }, "Next ▶")));
+          last
+            ? this.el("button", { class: "done-btn", onclick: () => Router.goPhase(phase.id) }, "✓ Done")
+            : this.el("button", { onclick: () => Router.nextCard() }, "Next ▶")));
         wrap.appendChild(this.el("button", { class: "reset-lesson",
           onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺ Reset this lesson"));
         this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
