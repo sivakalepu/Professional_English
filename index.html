@@ -18,12 +18,17 @@
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--text);
       font: 16px/1.6 system-ui, "Segoe UI", Roboto, sans-serif; }
-    #app { max-width: var(--maxw); margin: 0 auto; padding: 16px; }
+    #app { max-width: var(--maxw); margin: 0 auto; padding: 12px 16px; height:100dvh;
+      display:flex; flex-direction:column; }
     button { font: inherit; cursor: pointer; }
     .telugu { font-family: "Nirmala UI", "Gautami", system-ui; }
-    .hdr { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
-      padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:12px; position:relative; }
-    .hdr h1 { font-size:20px; margin:0; }
+    .hdr { display:flex; align-items:center; gap:10px; flex:0 0 auto;
+      padding-bottom:8px; border-bottom:1px solid var(--line); margin-bottom:10px; position:relative; }
+    .hdr h1 { font-size:19px; margin:0; white-space:nowrap; }
+    .brand { flex:0 0 auto; }
+    .sep { flex:0 0 auto; align-self:stretch; width:1px; background:var(--line); margin:0 2px; }
+    .main { flex:1 1 auto; min-height:0; display:flex; flex-direction:column; overflow-y:auto; }
+    .lesson, .phase { flex:1 1 auto; min-height:0; display:flex; flex-direction:column; }
 .gear { font-size:18px; border-radius:50%; width:38px; height:38px; padding:0; line-height:1; }
 .gear.active { border-color:var(--accent); color:var(--accent); }
 .settings-panel { position:absolute; right:0; top:calc(100% - 4px); background:var(--panel);
@@ -40,14 +45,15 @@
 .name-save { flex:0 0 auto !important; min-width:42px; }
 .brand { display:flex; flex-direction:column; gap:2px; }
 .tagline { color:var(--muted); font-size:12.5px; font-style:italic; }
-.footer { margin-top:28px; padding:14px 0 6px; border-top:1px solid var(--line);
-  color:var(--muted); font-size:13px; text-align:center; }
+.footer { flex:0 0 auto; margin-top:8px; padding:8px 0 2px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:12.5px; text-align:center; }
     .hdr-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .muted { color:var(--muted); font-size:13px; }
-    .tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:10px; }
+    .tabs { flex:1 1 auto; min-width:0; display:flex; gap:6px; overflow-x:auto; padding:2px 0; }
     .tab { background:var(--panel); color:var(--text); border:1px solid var(--line);
-      border-radius:999px; padding:8px 14px; white-space:nowrap; }
+      border-radius:999px; padding:5px 11px; font-size:13px; white-space:nowrap; }
     .tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .gear { flex:0 0 auto; }
     button, .btnlike { background:var(--panel); color:var(--text); border:1px solid var(--line);
       border-radius:8px; padding:6px 10px; }
     .icon { border:none; background:transparent; font-size:16px; padding:2px 6px; }
@@ -70,15 +76,16 @@
     .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px; }
     .mistake .why { color:var(--muted); }
     .back { margin-bottom:8px; }
-    .card-viewport { height:min(66vh, 620px); overflow-y:auto; margin:10px 0;
+    .card-viewport { flex:1 1 auto; min-height:0; overflow-y:auto; margin:10px 0;
       border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); }
     .card-viewport .card { margin:0; border:none; }
     .lesson-bar { display:flex; align-items:center; gap:10px; margin-bottom:2px; }
     .lesson-bar .back { margin:0; flex:0 0 auto; }
     .lesson-title { margin:0; font-size:17px; flex:1; min-width:0; overflow:hidden;
       text-overflow:ellipsis; white-space:nowrap; }
-    .list-viewport { height:min(66vh, 620px); overflow-y:auto; margin-top:8px; padding-right:2px; }
-    .phase-sub { margin-top:2px; }
+    .list-viewport { flex:1 1 auto; min-height:0; overflow-y:auto; margin-top:8px; padding-right:2px; }
+    .phase-sub { margin-top:2px; flex:0 0 auto; }
+    .phase > h2, .phase-sub, .lesson-bar, .stepper { flex:0 0 auto; }
     .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px; }
     .stepper > button { min-width:96px; }
     .done-btn { background:var(--good); border-color:var(--good); color:#fff; }
@@ -113,12 +120,13 @@
 .journey .walker { animation: jwalk 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes jwalk { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     @media (max-width: 640px) {
-      .hdr { flex-direction:column; align-items:flex-start; }
+      .tagline { display:none; }
+      .hdr h1 { font-size:17px; }
+      .tab { font-size:12.5px; padding:5px 9px; }
       .lesson-item { flex-direction:column; align-items:flex-start; gap:4px; }
       .bar { width:100%; }
       .stepper { gap:8px; }
       .stepper > button { min-width:74px; }
-      .card-viewport, .list-viewport { height:54vh; }
       .lesson-title { font-size:15px; }
     }
     .concept-intro { margin-top:0; }
@@ -13008,8 +13016,7 @@
         const root = document.getElementById("app");
         root.innerHTML = "";
         root.appendChild(this._header());
-        root.appendChild(this._tabs());
-        root.appendChild(this._body());
+        root.appendChild(this.el("div", { class: "main" }, this._body()));
         root.appendChild(this.el("footer", { class: "footer" },
           "Orchestrated by Sivakumar Kalepu"));
       },
@@ -13020,6 +13027,8 @@
           this.el("div", { class: "brand" },
             this.el("h1", {}, "SpeakElevate"),
             this.el("div", { class: "tagline" }, "Elevate your English. Empower your voice.")),
+          this.el("div", { class: "sep" }),
+          this._tabs(),
           gear);
         if (this._settingsOpen) hdr.appendChild(this._settingsPanel());
         return hdr;
@@ -13177,23 +13186,25 @@
       },
       // node + trophy positions that fill the measured width; snake layout when narrow
       _journeyLayout(W) {
-        const round = a => a.map(p => [Math.round(p[0]), Math.round(p[1])]);
+        const rnd = n => Math.round(n);
         if (W >= 500) {
+          // WIDE: single winding row climbing bottom-left -> top-right; labels above/below
           const H = 230, padX = 54, top = 48, bot = H - 48;
           const wave = [0, -30, 24, -36, 8, -30];
-          const pts = [0, 1, 2, 3, 4, 5].map(i => {
-            const x = padX + (W - 2 * padX) * i / 5;
-            const y = Math.max(42, Math.min(H - 42, (bot - (bot - top) * i / 5) + wave[i]));
-            return [x, y];
-          });
-          return { pts: round(pts), H, labelAbove: pts.map(p => p[1] > H / 2) };
+          const pts = [0, 1, 2, 3, 4, 5].map(i => [
+            rnd(padX + (W - 2 * padX) * i / 5),
+            rnd(Math.max(42, Math.min(H - 42, (bot - (bot - top) * i / 5) + wave[i])))]);
+          const labels = pts.map(p => ({ x: p[0], y: p[1] > H / 2 ? p[1] - 44 : p[1] + 46, anchor: "middle" }));
+          return { pts, H, labels };
         }
-        // narrow: 2-row snake (top row L→R: 0,1,2 · bottom row R→L: 3,4,5)
-        const H = 300, padX = 44;
-        const cx = [padX, W / 2, W - padX], ry = [66, 230];
-        const pts = [[cx[0], ry[0]], [cx[1], ry[0]], [cx[2], ry[0]],
-                     [cx[2], ry[1]], [cx[1], ry[1]], [cx[0], ry[1]]];
-        return { pts: round(pts), H, labelAbove: [true, true, true, false, false, false] };
+        // NARROW (mobile): vertical climb, bottom-left start -> top-right goal; labels to the side
+        const padX = 42, stepY = 78, topY = 46, H = topY + stepY * 5 + 46;
+        const lane = i => (i % 2 === 0 ? padX : W - padX);
+        const pts = [0, 1, 2, 3, 4, 5].map(i => [lane(i), rnd(topY + stepY * (5 - i))]);
+        const labels = pts.map((p, i) => (i % 2 === 0)
+          ? { x: p[0] + 32, y: p[1] - 3, anchor: "start" }
+          : { x: p[0] - 32, y: p[1] - 3, anchor: "end" });
+        return { pts, H, labels };
       },
       _drawJourney(box) {
         const W = Math.round(box.clientWidth) - 16; // minus horizontal padding
@@ -13209,7 +13220,7 @@
           return { id, icon: p.icon, title: p.title, done, total: p.lessons.length,
             frac: p.lessons.length ? sum / p.lessons.length : 0 };
         });
-        const { pts, H, labelAbove } = this._journeyLayout(W);
+        const { pts, H, labels } = this._journeyLayout(W);
         // smooth road through the stops: Catmull-Rom spline -> cubic bezier segments
         const segs = [];
         for (let i = 0; i < 5; i++) {
@@ -13250,7 +13261,7 @@
           const [x, y] = pts[i];
           const complete = ph.done === ph.total && ph.total > 0;
           const pct = Math.round(ph.frac * 100);
-          const ly = labelAbove[i] ? y - 44 : y + 46;
+          const lb = labels[i];
           svg += '<g class="jnode" data-phase="' + ph.id + '" style="cursor:pointer">';
           // base ring (grey) + a green/blue arc that fills with this phase's fraction
           svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--panel-2)" stroke="var(--line)" stroke-width="3"/>';
@@ -13260,15 +13271,15 @@
               'stroke-dasharray="' + fmt(C) + '" stroke-dashoffset="' + fmt(C * (1 - Math.min(1, ph.frac))) +
               '" transform="rotate(-90 ' + x + ' ' + y + ')"/>';
           svg += '<text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-size="20">' + ph.icon + '</text>';
-          svg += '<text x="' + x + '" y="' + ly + '" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text)">' + ph.title + '</text>';
-          svg += '<text x="' + x + '" y="' + (ly + 15) + '" text-anchor="middle" font-size="11.5" fill="var(--muted)">' +
+          svg += '<text x="' + lb.x + '" y="' + lb.y + '" text-anchor="' + lb.anchor + '" font-size="13" font-weight="600" fill="var(--text)">' + ph.title + '</text>';
+          svg += '<text x="' + lb.x + '" y="' + (lb.y + 15) + '" text-anchor="' + lb.anchor + '" font-size="11.5" fill="var(--muted)">' +
             ph.done + " / " + ph.total + (complete ? " ✓" : (pct > 0 ? " · " + pct + "%" : "")) + '</text>';
           svg += '</g>';
         });
-        const [tx, ty] = pts[5];
+        const [tx, ty] = pts[5], tl = labels[5];
         svg += '<circle cx="' + tx + '" cy="' + ty + '" r="24" fill="var(--panel-2)" stroke="' + (allDone ? "var(--warn)" : "var(--line)") + '" stroke-width="3"/>';
         svg += '<text x="' + tx + '" y="' + (ty + 8) + '" text-anchor="middle" font-size="20">🏆</text>';
-        svg += '<text x="' + tx + '" y="' + (ty + 46) + '" text-anchor="middle" font-size="13" font-weight="600" fill="var(--muted)">Pro level</text>';
+        svg += '<text x="' + tl.x + '" y="' + tl.y + '" text-anchor="' + tl.anchor + '" font-size="13" font-weight="600" fill="var(--muted)">Pro level</text>';
         svg += '<g transform="translate(' + fmt(wx) + ',' + fmt(wy - 14) + ') scale(-1,1)"><text class="walker" x="0" y="0" text-anchor="middle" font-size="24">' + (allDone ? "🎉" : "🚶") + '</text></g>';
         svg += '</svg>';
         const cap = '<div class="journey-cap muted">🚶 ' + Math.round(overall * 100) +
