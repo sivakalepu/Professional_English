@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>English Path — Foundations to Pro</title>
+  <title>SpeakElevate — Elevate your English. Empower your voice.</title>
   <style>
     :root {
       --bg: #14171c; --panel: #1e232b; --panel-2: #262d37;
@@ -24,6 +24,10 @@
     .hdr { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
       padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:12px; }
     .hdr h1 { font-size:20px; margin:0; }
+.brand { display:flex; flex-direction:column; gap:2px; }
+.tagline { color:var(--muted); font-size:12.5px; font-style:italic; }
+.footer { margin-top:28px; padding:14px 0 6px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:13px; text-align:center; }
     .hdr-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .muted { color:var(--muted); font-size:13px; }
     .tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:10px; }
@@ -12850,7 +12854,8 @@
             ]}
           ]}
         ] },
-        { id: "review", title: "Review", icon: "🔁", lessons: [] }
+        { id: "review", title: "Review", icon: "🔁", lessons: [] },
+        { id: "help", title: "Help", icon: "❓", lessons: [] }
       ],
       phase(id) { return this.phases.find(p => p.id === id); },
       lesson(phaseId, lessonId) {
@@ -12972,6 +12977,8 @@
         root.appendChild(this._header());
         root.appendChild(this._tabs());
         root.appendChild(this._body());
+        root.appendChild(this.el("footer", { class: "footer" },
+          "Orchestrated by Sivakumar Kalepu"));
       },
       _header() {
         const rate = this.el("input", { type: "range", min: "0.5", max: "1.25", step: "0.05",
@@ -12986,7 +12993,9 @@
         const reset = this.el("button", { class: "danger", title: "Clear all progress and start fresh",
           onclick: () => this._resetAll() }, "↺ Reset");
         return this.el("header", { class: "hdr" },
-          this.el("h1", {}, "English Path"),
+          this.el("div", { class: "brand" },
+            this.el("h1", {}, "SpeakElevate"),
+            this.el("div", { class: "tagline" }, "Elevate your English. Empower your voice.")),
           this.el("div", { class: "hdr-tools" },
             this.el("span", { class: "muted" }, "🔊 speed"), rate, theme, backup, restore, reset));
       },
@@ -13004,8 +13013,48 @@
         const pid = Router.state.phaseId;
         if (pid === "dashboard") return this._dashboard();
         if (pid === "review") return this._reviewView();
+        if (pid === "help") return this._helpView();
         if (Router.state.lessonId) return this._lessonView();
         return this._phaseView();
+      },
+      _helpView() {
+        const sections = [
+          { icon: "🗺️", title: "Your learning path",
+            body: "The tabs are ordered as a journey: Grammar builds your foundation (start at 'Sentence Basics' and go in order), Vocabulary grows your word power by category, Speaking trains pronunciation and conversation, Situations gives you real-life scenes, and Professional covers leadership communication. New learner? Follow the tabs left to right. Already comfortable? Jump to any topic — every lesson stands on its own.",
+            bodyTe: "ట్యాబ్‌లు ఒక ప్రయాణంలా అమర్చబడ్డాయి: Grammar పునాది, Vocabulary పద సంపద, Speaking ఉచ్చారణ & సంభాషణ, Situations నిజ జీవిత సన్నివేశాలు, Professional నాయకత్వ సంభాషణ. కొత్తవారు ఎడమ నుండి కుడికి వెళ్ళండి; అనుభవం ఉంటే ఎక్కడి నుండైనా మొదలుపెట్టవచ్చు." },
+          { icon: "🃏", title: "Moving through a lesson",
+            body: "Each lesson is a set of cards — concepts, examples, mistakes to avoid, dialogues, and a quiz at the end. Use the Prev / Next buttons or your keyboard arrow keys (← →) to move between cards. The dots show where you are. A lesson counts as complete when you've seen every card and attempted the quiz.",
+            bodyTe: "ప్రతి పాఠం కార్డుల సమూహం — భావనలు, ఉదాహరణలు, తప్పులు, సంభాషణలు, చివరలో క్విజ్. Prev/Next బటన్లు లేదా కీబోర్డ్ బాణం కీలతో (← →) కదలండి. అన్ని కార్డులు చూసి క్విజ్ ప్రయత్నిస్తే పాఠం పూర్తయినట్లు." },
+          { icon: "🔊", title: "Listen to anything",
+            body: "Tap the speaker icon next to any word or sentence to hear it read aloud. Use the speed slider in the header to slow speech down while you're learning a sound, then bring it back up. This works completely offline using your computer's built-in voices.",
+            bodyTe: "ఏ పదం/వాక్యం పక్కనైనా స్పీకర్ గుర్తు నొక్కితే చదివి వినిపిస్తుంది. పైన ఉన్న స్పీడ్ స్లయిడర్‌తో వేగాన్ని తగ్గించి నేర్చుకోండి. ఇది పూర్తిగా ఆఫ్‌లైన్‌లో పనిచేస్తుంది." },
+          { icon: "తె", title: "Telugu support",
+            body: "Wherever you see the 'తెలుగులో చూడండి' button, tap it to reveal the explanation in Telugu. Try to understand the English first, then confirm with Telugu — over time you'll need the reveals less and less. That's by design: it trains you to think in English.",
+            bodyTe: "'తెలుగులో చూడండి' బటన్ నొక్కితే తెలుగు వివరణ కనిపిస్తుంది. ముందు ఇంగ్లీష్‌లో అర్థం చేసుకోవడానికి ప్రయత్నించండి, తర్వాత తెలుగుతో నిర్ధారించుకోండి — క్రమంగా తెలుగు అవసరం తగ్గుతుంది." },
+          { icon: "🎙️", title: "Practice speaking (shadowing)",
+            body: "In dialogues, press '🔊 Model' to hear a line, then '🎙 Record' to record yourself saying it, and '▶ My voice' to compare. Copy the rhythm and stress, not just the words — repeat until the gap closes. Your browser will ask for microphone permission the first time; recordings stay on your device and are never uploaded. The Speaking tab's 'Shadowing Practice Sets' lesson has a daily 5-minute routine.",
+            bodyTe: "సంభాషణల్లో '🔊 Model' నొక్కి వినండి, '🎙 Record' తో మీ గొంతు రికార్డ్ చేయండి, '▶ My voice' తో పోల్చుకోండి. పదాలే కాదు — లయ, ఒత్తిడి కూడా అనుకరించండి. రికార్డింగ్‌లు మీ పరికరంలోనే ఉంటాయి; ఎక్కడికీ పంపబడవు." },
+          { icon: "🔁", title: "Quizzes & Review — how you actually remember",
+            body: "Quiz answers you get wrong are saved automatically to the Review tab. Words you mark 'Still learning' go there too. Visit Review regularly — answering a question correctly there 'graduates' it out. This repetition of your weak spots is the single most effective habit in the app.",
+            bodyTe: "క్విజ్‌లో తప్పైన ప్రశ్నలు, 'Still learning' గుర్తు పెట్టిన పదాలు Review ట్యాబ్‌లో చేరతాయి. అక్కడ సరిగ్గా జవాబిస్తే అవి బయటకు వెళ్తాయి. బలహీన అంశాల పునరావృతమే గుర్తుంచుకోవడానికి అత్యుత్తమ మార్గం." },
+          { icon: "💾", title: "Your progress is saved — and portable",
+            body: "Progress saves automatically in this browser. Use '⤓ Backup' (header) to download it as a file — do this occasionally, since clearing browser data would erase it. '⤒ Restore' loads a backup on any computer. '↺ Reset' clears everything for a fresh start, and each lesson has its own 'Reset this lesson' at the bottom.",
+            bodyTe: "పురోగతి ఈ బ్రౌజర్‌లో ఆటోమేటిక్‌గా సేవ్ అవుతుంది. '⤓ Backup' తో ఫైల్‌గా దించుకోండి (అప్పుడప్పుడు తప్పక చేయండి), '⤒ Restore' తో తిరిగి తెచ్చుకోండి. '↺ Reset' అంతా క్లియర్ చేస్తుంది." },
+          { icon: "📅", title: "A simple daily routine",
+            body: "20 focused minutes beats 3 scattered hours: one Grammar or Vocabulary lesson (10 min) → Review tab (5 min) → shadow one dialogue aloud (5 min). Speak out loud every single day — reading silently builds knowledge, but only speaking builds fluency.",
+            bodyTe: "రోజూ 20 నిమిషాలు చాలు: ఒక పాఠం (10 ని) → Review (5 ని) → ఒక సంభాషణ షాడోయింగ్ (5 ని). ప్రతిరోజూ బిగ్గరగా మాట్లాడండి — చదవడం జ్ఞానాన్ని ఇస్తుంది, మాట్లాడటమే ధారాళతను ఇస్తుంది." }
+        ];
+        const wrap = this.el("div", { class: "phase" });
+        wrap.appendChild(this.el("h2", {}, "❓ How to use SpeakElevate"));
+        wrap.appendChild(this.el("p", { class: "muted" }, "Everything runs offline in this one file — no account, no internet needed. Here's how to get the most out of it."));
+        sections.forEach(s => {
+          const c = this.el("div", { class: "card" });
+          c.appendChild(this.el("h3", {}, s.icon + " " + s.title));
+          c.appendChild(this.el("p", {}, s.body));
+          if (s.bodyTe) c.appendChild(this._teluguReveal(s.bodyTe));
+          wrap.appendChild(c);
+        });
+        return wrap;
       },
       _toggleTheme() {
         this.state.settings.theme = this.state.settings.theme === "dark" ? "light" : "dark";
