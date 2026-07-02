@@ -10625,6 +10625,99 @@
                 explanationEn: "This question invites them to reason through the decision themselves, building their own judgment.",
                 explanationTe: "ఈ ప్రశ్న వారినే నిర్ణయాన్ని ఆలోచించమని ఆహ్వానిస్తుంది, వారి own judgment ను నిర్మిస్తుంది." }
             ]}
+          ]},
+          { id: "performance-conversations", title: "Performance Conversations", cards: [
+            { type: "concept", title: "Making feedback land, both praise and difficult",
+              intro: "A Head-level leader praises with specific behavior and impact, delivers difficult feedback using Situation–Behavior–Impact so it targets actions rather than character, keeps appraisals free of surprises, and holds the standard even when the other person pushes back.",
+              introTe: "Head-level నాయకుడు నిర్దిష్ట behavior, impact తో ప్రశంసిస్తారు, Situation–Behavior–Impact ఉపయోగించి కష్టమైన feedback ఇస్తారు — అది character ను కాకుండా actions ను target చేస్తుంది, appraisals లో ఆశ్చర్యాలు లేకుండా చూస్తారు, ఇంకో వ్యక్తి pushback ఇచ్చినా standard ను పట్టుకుంటారు.",
+              points: [
+                { rule: "Praise specific behavior and its impact — 'Your caching fix cut page load 40%, that unblocked the launch' — instead of a generic 'good job'; praise publicly when possible.",
+                  ruleTe: "నిర్దిష్ట behavior, దాని impact ను ప్రశంసించండి — 'Your caching fix cut page load 40%, that unblocked the launch' — సాధారణ 'good job' కు బదులు; వీలైనప్పుడు publicగా ప్రశంసించండి.",
+                  detail: "Generic praise like 'good job' feels nice for a moment but teaches the person nothing about what to repeat — they can't tell if it was the approach, the speed, or the communication that mattered. Naming the specific behavior and the measurable impact it had tells them exactly what worked, and doing it in front of the team multiplies the effect: it sets a visible standard for everyone else and costs the person nothing, unlike difficult feedback which should almost always stay private.",
+                  detailTe: "'good job' వంటి సాధారణ ప్రశంస క్షణానికి బాగానే అనిపిస్తుంది, కానీ ఏమి repeat చేయాలో ఆ వ్యక్తికి ఏమీ నేర్పదు — approach, speed, లేదా communication ఏది ముఖ్యమో వారికి తెలియదు. నిర్దిష్ట behavior, దాని measurable impact ను పేర్కొనడం సరిగ్గా ఏమి పనిచేసిందో చెబుతుంది, team ముందు చేయడం ప్రభావాన్ని రెట్టింపు చేస్తుంది: అందరికీ కనిపించే standard సెట్ చేస్తుంది, ఆ వ్యక్తికి ఖర్చు ఏమీ ఉండదు — కష్టమైన feedback దాదాపు ఎప్పుడూ ప్రైవేట్‌గా ఉండాలి అనేది దీనికి భిన్నం.",
+                  examples: [
+                    { text: "Your caching fix cut page load by 40% — that's what unblocked the launch this week." },
+                    { text: "The way you walked the client through the risk trade-offs yesterday was excellent — clear, calm, and specific." },
+                    { text: "Good job on the release.", note: "generic — avoid; doesn't say what to repeat" }
+                  ] },
+                { rule: "Deliver difficult feedback with SBI — Situation, Behavior, Impact — and target behavior, never personality: 'you're careless' is an attack, not feedback.",
+                  ruleTe: "SBI తో కష్టమైన feedback ఇవ్వండి — Situation, Behavior, Impact — personality ను కాదు, behavior ను target చేయండి: 'you're careless' అనేది feedback కాదు, attack.",
+                  detail: "Naming a specific situation and a specific, observable behavior keeps the conversation about something the person can actually change, and the impact line explains why it matters so it doesn't feel arbitrary. 'You're careless' or 'you don't care about quality' attacks identity, triggers defensiveness, and gives no lever for change; 'In yesterday's review, you dismissed Anita's concern before she finished, and she's stopped raising issues since' names an event, an action, and a consequence the person can address.",
+                  detailTe: "నిర్దిష్ట situation, నిర్దిష్ట, గమనించదగ్గ behavior పేర్కొనడం సంభాషణను ఆ వ్యక్తి నిజంగా మార్చగలిగే విషయం మీదే ఉంచుతుంది, impact line అది ఎందుకు ముఖ్యమో వివరిస్తుంది కాబట్టి ఇది arbitrary గా అనిపించదు. 'You're careless' లేదా 'you don't care about quality' identity ను attack చేస్తుంది, defensiveness ను ప్రేరేపిస్తుంది, మార్పుకు ఏ lever ఇవ్వదు; 'In yesterday's review, you dismissed Anita's concern before she finished, and she's stopped raising issues since' ఒక event, ఒక action, ఆ వ్యక్తి పరిష్కరించగల consequence ను పేర్కొంటుంది.",
+                  examples: [
+                    { text: "In yesterday's review (situation), you dismissed Anita's concern before she finished (behavior); she's stopped raising issues since (impact)." },
+                    { text: "You're careless and don't think things through.", note: "attacks personality — avoid" },
+                    { text: "In the last three standups, you've joined ten minutes late; the team ends up repeating updates for you." }
+                  ] },
+                { rule: "Keep appraisal language balanced — strengths backed by evidence, growth areas framed as next steps, and never a surprise negative that should have come up earlier.",
+                  ruleTe: "appraisal భాషను balanced గా ఉంచండి — evidence తో strengths, next steps గా framed growth areas, ముందే రావాల్సిన surprise negative ఎప్పుడూ ఉండకూడదు.",
+                  detail: "An appraisal is a summary of a year's conversations, not the place to introduce a problem for the first time — if a negative is genuinely new to the person in that meeting, the real failure was not raising it months earlier when it could still be fixed. Strengths should cite actual instances, not vague adjectives, and growth areas should read as a forward-looking plan ('build stronger delegation habits by Q3') rather than a backward-looking complaint, so the person leaves with something to do, not just something to feel bad about.",
+                  detailTe: "appraisal అనేది ఒక సంవత్సరం సంభాషణల సారాంశం, మొదటిసారి ఒక సమస్యను ప్రవేశపెట్టే స్థలం కాదు — ఆ మీటింగ్‌లో ఒక negative నిజంగా కొత్తగా అనిపిస్తే, నిజమైన వైఫల్యం అది ఇంకా సరిదిద్దగలిగే నెలల ముందు లేవనెత్తకపోవడమే. Strengths వాస్తవ instances ను ఉదహరించాలి, అస్పష్ట adjectives ను కాదు, growth areas వెనక్కి చూసే complaint గా కాకుండా ముందుకు చూసే plan గా ('build stronger delegation habits by Q3') ఉండాలి, తద్వారా ఆ వ్యక్తి చేయడానికి ఏదో ఒకటి తీసుకుని వెళ్తారు, కేవలం బాధపడటానికి కాదు.",
+                  examples: [
+                    { text: "Your architecture reviews consistently catch issues early — three production incidents were avoided this quarter because of that." },
+                    { text: "For the next two quarters, let's build stronger delegation habits — starting with handing off the on-call rotation planning." },
+                    { text: "By the way, your communication has actually been a problem all year.", note: "surprise negative — should have surfaced earlier" }
+                  ] },
+                { rule: "When someone pushes back on feedback, listen fully, ask for their view, then hold the standard — 'I hear you, and the deadline was still missed. How do we prevent it next time?'",
+                  ruleTe: "feedback పై ఎవరైనా pushback ఇస్తే, పూర్తిగా వినండి, వారి view అడగండి, తర్వాత standard ను పట్టుకోండి — 'I hear you, and the deadline was still missed. How do we prevent it next time?'",
+                  detail: "Pushback often carries real information — a dependency you didn't know about, a conflicting priority someone assigned them — so dismissing it outright can mean missing a legitimate cause and looking unfair. But hearing them out doesn't mean the standard moves; a leader who listens and then quietly lets the underlying issue slide has really just delayed the same conversation. The pattern is to acknowledge what they said, then bring the conversation back to the outcome and the plan going forward, so the standard holds without dismissing their perspective.",
+                  detailTe: "Pushback తరచుగా నిజమైన సమాచారాన్ని కలిగి ఉంటుంది — మీకు తెలియని dependency, ఎవరో అప్పగించిన conflicting priority — కాబట్టి దాన్ని పూర్తిగా తోసిపుచ్చడం ఒక legitimate కారణాన్ని కోల్పోవడం, అన్యాయంగా కనిపించడం కావచ్చు. కానీ వారిని వినడం అంటే standard మారుతుందని కాదు; విని తర్వాత underlying issue ను నిశ్శబ్దంగా వదిలేసే నాయకుడు నిజానికి అదే సంభాషణను వాయిదా వేశారు. Acknowledge చేసి, తర్వాత సంభాషణను outcome, future plan వైపు తీసుకురావడమే pattern — వారి perspective ను తోసిపుచ్చకుండా standard ను నిలబెట్టడం.",
+                  examples: [
+                    { text: "I hear you — the dependency on the other team wasn't visible to me. And the deadline was still missed. How do we prevent that next time?" },
+                    { text: "That's fair context, thanks for sharing it. Given that, what would you do differently if this came up again?" },
+                    { text: "You're right that it was tight. Let's agree on a buffer for next time so it doesn't repeat." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Key phrases: specific praise, SBI feedback, and holding the standard",
+              sentences: [
+                { text: "Your caching fix cut page load by 40% — that unblocked the launch." },
+                { text: "In yesterday's review, you dismissed her concern before she finished; she's stopped raising issues since." },
+                { text: "Let's build stronger delegation habits, starting with the on-call rotation." },
+                { text: "I hear you — and the deadline was still missed." },
+                { text: "How do we prevent this next time?" },
+                { text: "What's your view on what happened here?" }
+              ]
+            },
+            { type: "mistake", wrong: "You are always late with everything, this is your problem.",
+              right: "In the last three sprints, the module you owned shipped after the deadline each time. That's put pressure on the team downstream — what's getting in the way?",
+              whyEn: "'Always' and 'your problem' attack the person's character and give no specific event to discuss, which triggers defensiveness. Naming the situation, the observed pattern, and the impact — then asking what's causing it — keeps the conversation actionable.",
+              whyTe: "'Always', 'your problem' అనే మాటలు వ్యక్తి character ను attack చేస్తాయి, చర్చించడానికి ఏ నిర్దిష్ట event ను ఇవ్వవు, ఇది defensiveness ను ప్రేరేపిస్తుంది. Situation, గమనించిన pattern, impact ను పేర్కొని — తర్వాత కారణం ఏమిటో అడగడం సంభాషణను actionable గా ఉంచుతుంది." },
+            { type: "dialogue", roles: ["You", "Report"], lines: [
+              { role: "You", text: "Thanks for making time. I wanted to talk through the last release cycle." },
+              { role: "Report", text: "Sure, I figured this was coming." },
+              { role: "You", text: "In the planning review two weeks ago, the estimate you gave didn't account for the QA cycle, and we ended up slipping by four days." },
+              { role: "Report", text: "Yeah, I underestimated how long the regression suite would take this time." },
+              { role: "You", text: "That's useful to know. What's your view on what would have caught that earlier?" },
+              { role: "Report", text: "Honestly, I should have looped in QA during planning instead of after. I didn't think it was necessary." },
+              { role: "You", text: "I agree that's the gap. Let's make QA input part of every estimate from now on — can you own that change for the team?" },
+              { role: "Report", text: "Yes, I'll add it to our planning template and walk the team through it this week." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the praise that will land better:",
+                options: ["Your caching fix cut page load by 40% — that unblocked the launch.", "Good job on the release."],
+                answer: "Your caching fix cut page load by 40% — that unblocked the launch.",
+                explanationEn: "Naming the specific behavior and its measurable impact tells the person exactly what to repeat, unlike generic praise.",
+                explanationTe: "నిర్దిష్ట behavior, దాని measurable impact పేర్కొనడం సాధారణ ప్రశంసకు భిన్నంగా ఏమి repeat చేయాలో సరిగ్గా చెబుతుంది." },
+              { format: "mcq", prompt: "Which feedback statement follows the SBI structure correctly?",
+                options: ["In yesterday's review, you dismissed Anita's concern before she finished; she's stopped raising issues since.", "You're careless and never listen to your teammates.", "You always do this, it's frustrating."],
+                answer: "In yesterday's review, you dismissed Anita's concern before she finished; she's stopped raising issues since.",
+                explanationEn: "This names a specific situation, a specific behavior, and its impact — it targets the action, not the person's character.",
+                explanationTe: "ఇది నిర్దిష్ట situation, నిర్దిష్ట behavior, దాని impact ను పేర్కొంటుంది — వ్యక్తి character ను కాదు, action ను target చేస్తుంది." },
+              { format: "fill", prompt: "A good appraisal should never contain a surprise negative, because it should have been raised ___ , when it could still be fixed.",
+                answer: "earlier",
+                explanationEn: "Feedback belongs in ongoing conversations, not saved up for a once-a-year surprise.",
+                explanationTe: "Feedback కొనసాగుతున్న సంభాషణల్లో ఉండాలి, సంవత్సరానికి ఒకసారి surprise కోసం దాచకూడదు." },
+              { format: "mcq", prompt: "A report pushes back on feedback with new context you didn't know. What's the best response?",
+                options: ["Acknowledge the context, then still hold the standard and ask how to prevent it next time.", "Drop the feedback entirely since they had a reason.", "Ignore what they said and repeat the original feedback unchanged."],
+                answer: "Acknowledge the context, then still hold the standard and ask how to prevent it next time.",
+                explanationEn: "Listening to pushback doesn't mean the standard moves — acknowledge, then bring it back to the outcome and plan.",
+                explanationTe: "Pushback వినడం అంటే standard మారుతుందని కాదు — acknowledge చేసి, తర్వాత outcome, plan వైపు తీసుకురావాలి." },
+              { format: "choose-sentence", prompt: "Choose the better way to frame a growth area in an appraisal:",
+                options: ["Let's build stronger delegation habits, starting with the on-call rotation planning.", "Your delegation has been a real problem all year."],
+                answer: "Let's build stronger delegation habits, starting with the on-call rotation planning.",
+                explanationEn: "Framing the growth area as a forward-looking next step gives the person something to act on.",
+                explanationTe: "growth area ను ముందుకు చూసే next step గా framing చేయడం ఆ వ్యక్తికి చేయడానికి ఏదో ఒకటి ఇస్తుంది." }
+            ]}
           ]}
         ] },
         { id: "review", title: "Review", icon: "🔁", lessons: [] }
