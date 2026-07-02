@@ -10346,7 +10346,100 @@
                 explanationEn: "Silence often reflects hesitation, especially from quieter or junior voices, not genuine agreement.",
                 explanationTe: "నిశ్శబ్దం తరచుగా సంకోచాన్ని సూచిస్తుంది, ముఖ్యంగా నిశ్శబ్దంగా ఉండేవారి నుండి — నిజమైన అంగీకారాన్ని కాదు." }
             ]}
-          ]}
+          ]},
+          { id: "reporting-up", title: "Status Updates & Reporting Up", cards: [
+            { type: "concept", title: "Leading with the headline, not the story",
+              intro: "Executives read the first line of a status update and decide how much attention it needs. A Head-level report leads with the headline, uses a consistent risk signal, backs claims with numbers, and pairs every risk with an ask.",
+              introTe: "Executives status update యొక్క మొదటి వాక్యం చదివి, దానికి ఎంత attention కావాలో నిర్ణయించుకుంటారు. Head-level report headline తో మొదలై, స్థిరమైన risk signal వాడి, claims ను numbers తో సమర్థించి, ప్రతి riskకు ఒక askను జతచేస్తుంది.",
+              points: [
+                { rule: "Say the status in one sentence before any detail — 'We're on track for the 15th' or 'We're at risk — two blockers' — because executives often read only the first line.",
+                  ruleTe: "వివరాలు చెప్పే ముందు ఒకే వాక్యంలో status చెప్పండి — 'We're on track for the 15th' లేదా 'We're at risk — two blockers' — ఎందుకంటే executives తరచుగా మొదటి వాక్యం మాత్రమే చదువుతారు.",
+                  detail: "A chronological narration — 'We started with the design, then ran into an API issue, then fixed it, but now testing is behind' — forces the reader to hold the whole story in their head just to find out whether things are okay. Leading with the headline answers that question immediately, and the detail that follows becomes optional context rather than required reading. This matters most in written updates and Slack messages, where the reader may only see the first line in a notification preview.",
+                  detailTe: "కాలక్రమానుసారంగా చెప్పడం — 'We started with the design, then ran into an API issue, then fixed it, but now testing is behind' — పరిస్థితి బాగుందో లేదో తెలుసుకోవడానికి reader మొత్తం కథను గుర్తుంచుకోవాల్సి వస్తుంది. headline తో మొదలుపెడితే ఆ ప్రశ్నకు వెంటనే సమాధానం దొరుకుతుంది, తర్వాత వచ్చే వివరం తప్పనిసరి కాకుండా optional context అవుతుంది. ఇది written updates, Slack messages లో మరీ ముఖ్యం — reader notification preview లో మొదటి వాక్యం మాత్రమే చూసే అవకాశం ఉంది.",
+                  examples: [
+                    { text: "We're on track for the 15th. Design and build are done; QA starts Monday.", note: "headline first — green status" },
+                    { text: "We're at risk — two blockers on the vendor side. Details below.", note: "headline first — red status" },
+                    { text: "Started with design, hit an API snag, fixed it, but testing slipped a bit...", note: "chronological — status buried at the end" }
+                  ] },
+                { rule: "Use a consistent RAG signal (green/amber/red) plus what changed since the last update — and never bury a red status inside paragraph three.",
+                  ruleTe: "స్థిరమైన RAG signal (green/amber/red) వాడండి, దానితో పాటు గత update నుండి ఏం మారిందో చెప్పండి — red status ను ఎప్పుడూ మూడో paragraph లో దాచకండి.",
+                  detail: "A consistent color signal lets a busy executive scan five project updates in ten seconds and know exactly where to focus. The 'what changed' part is just as important as the color itself — 'still amber, but the mitigation is working' tells a very different story from 'newly amber as of this week.' Burying a red status inside a longer paragraph, even unintentionally, reads as an attempt to soften bad news, and it erodes trust faster than the bad news itself would.",
+                  detailTe: "స్థిరమైన color signal ఉంటే, బిజీగా ఉన్న executive ఐదు ప్రాజెక్ట్ updates ను పది సెకన్లలో scan చేసి ఎక్కడ దృష్టి పెట్టాలో తెలుసుకోగలరు. 'ఏం మారింది' అనే భాగం color అంత ముఖ్యమే — 'still amber, but the mitigation is working' అనేది 'newly amber as of this week' కన్నా వేరే కథ చెబుతుంది. తెలియకుండానే అయినా, red status ను పొడవైన paragraph లో దాచడం చెడు వార్తను మెత్తబరచే ప్రయత్నంలా అనిపిస్తుంది, అది చెడు వార్త కన్నా వేగంగా నమ్మకాన్ని దెబ్బతీస్తుంది.",
+                  examples: [
+                    { text: "Status: Amber, unchanged from last week — mitigation is in progress and on track." },
+                    { text: "Status: Red, newly this week — the vendor missed their delivery date." },
+                    { text: "Status: Green — no change, everything is proceeding as planned." }
+                  ] },
+                { rule: "Back claims with numbers instead of adjectives — 'latency dropped 40%' is verifiable, 'performance improved a lot' is not.",
+                  ruleTe: "claims ను adjectives తో కాకుండా numbers తో సమర్థించండి — 'latency dropped 40%' verify చేయగలిగేది, 'performance improved a lot' కాదు.",
+                  detail: "Numbers let the reader judge the magnitude themselves instead of trusting your subjective adjective — '40%' means something concrete, while 'a lot' could mean anything from 5% to 90% depending on who's speaking. Round numbers when the exact figure doesn't change the decision ('roughly 40%' is fine for a summary slide), but be precise when the number itself is the point of the update, such as in a post-incident report or a budget variance.",
+                  detailTe: "numbers ఉంటే reader మీ subjective adjective ను నమ్మకుండా, magnitude ను తానే అంచనా వేసుకోగలరు — '40%' అంటే ఖచ్చితమైన అర్థం ఉంటుంది, 'a lot' అనేది ఎవరు చెబుతున్నారో బట్టి 5% నుండి 90% వరకు దేనినైనా సూచించవచ్చు. నిర్ణయాన్ని మార్చని చోట numbers ను round చేయండి ('roughly 40%' summary slide కు సరిపోతుంది), కానీ number అనేదే update యొక్క ప్రధాన విషయం అయితే — post-incident report లేదా budget variance లో లాగా — ఖచ్చితంగా ఉండండి.",
+                  examples: [
+                    { text: "Latency dropped 40% after the caching change — from 800ms to 480ms average." },
+                    { text: "We're roughly 40% through migration, on pace for the June target.", note: "rounded — precision doesn't change the decision" },
+                    { text: "Performance improved a lot after the fix.", note: "vague — avoid this phrasing" }
+                  ] },
+                { rule: "State risks with an ask attached — a risk without an ask is just a worry, not something the reader can act on.",
+                  ruleTe: "risks ను ask తో కలిపి చెప్పండి — ask లేని risk కేవలం ఒక worry మాత్రమే, reader action తీసుకోగలిగింది కాదు.",
+                  detail: "'We might miss the deadline because of a vendor delay' tells the reader something is wrong but gives them no way to help — they're left wondering whether you need something from them or are just informing them. Pairing the risk with a specific ask — approval, a decision, resources, or simply awareness — turns the same sentence into something actionable: 'Risk: vendor delay. Ask: approval to start plan B by Wednesday.'",
+                  detailTe: "'We might miss the deadline because of a vendor delay' అనేది ఏదో తప్పు జరుగుతోందని చెబుతుంది కానీ reader ఎలా సహాయం చేయాలో చెప్పదు — మీకు వారి నుండి ఏదైనా కావాలా లేక కేవలం సమాచారం మాత్రమేనా అని వారు ఆలోచించాల్సి వస్తుంది. risk ను నిర్దిష్ట askతో జతచేస్తే — approval, ఒక నిర్ణయం, resources, లేదా కేవలం awareness అయినా — అదే వాక్యం actionable గా మారుతుంది: 'Risk: vendor delay. Ask: approval to start plan B by Wednesday.'",
+                  examples: [
+                    { text: "Risk: vendor delay on the API integration. Ask: approval to start plan B by Wednesday." },
+                    { text: "Risk: two engineers are on leave next sprint. Ask: awareness only, no action needed yet." },
+                    { text: "Risk: budget may overrun by 10%. Ask: a decision on whether to cut scope or extend the timeline." }
+                  ] }
+              ] },
+            { type: "example", pattern: "Key phrases: headline-first status updates and reporting risk",
+              sentences: [
+                { text: "We're on track for the 15th — no blockers to flag." },
+                { text: "We're at risk — two blockers on the vendor side." },
+                { text: "Status: Amber, unchanged from last week." },
+                { text: "Latency dropped 40% after the caching change." },
+                { text: "Risk: vendor delay. Ask: approval to start plan B by Wednesday." },
+                { text: "Here's what changed since our last update:" }
+              ]
+            },
+            { type: "mistake", wrong: "So first we started the integration, then we hit an issue with the vendor API, then we spent a few days debugging, and it turns out we're now going to be late.",
+              right: "We're at risk of missing the 15th. Headline: vendor API issue cost us three days. Ask: approval to add a contractor to recover the timeline.",
+              whyEn: "A long chronological account forces the listener to wait until the end to learn the one thing they actually need to know — whether the project is on track. Leading with the headline and the ask gets the critical information across immediately, with the story available as backup detail if asked.",
+              whyTe: "పొడవైన కాలక్రమానుసార వివరణ, వినేవారు నిజంగా తెలుసుకోవాల్సిన ఒకే విషయం — ప్రాజెక్ట్ track లో ఉందా లేదా — తెలుసుకోవడానికి చివరి వరకు ఆగేలా చేస్తుంది. headline, ask తో మొదలుపెడితే కీలకమైన సమాచారం వెంటనే చేరుతుంది, అడిగితే కథను వెనుక వివరంగా ఇవ్వొచ్చు." },
+            { type: "dialogue", roles: ["CTO", "You"], lines: [
+              { role: "CTO", text: "Give me the quick version on the migration — where are we?" },
+              { role: "You", text: "We're at risk of missing the 15th. Everything else is green except one red item on the vendor side." },
+              { role: "CTO", text: "Tell me about the red item." },
+              { role: "You", text: "Risk: the vendor hasn't delivered the API keys, and that's blocking QA. Ask: approval to escalate directly to their account manager today." },
+              { role: "CTO", text: "Approved. What's changed since last week otherwise?" },
+              { role: "You", text: "Latency work is done — we cut it by 40%, ahead of target. Everything else is unchanged, still amber on the documentation task." },
+              { role: "CTO", text: "Good. If the vendor escalation doesn't work by Wednesday, what's the fallback?" },
+              { role: "You", text: "Plan B is to mock the API and swap it in later — I'll confirm by Wednesday evening if we need to switch to that." }
+            ] },
+            { type: "quiz", questions: [
+              { format: "choose-sentence", prompt: "Choose the better opening line for a status update:",
+                options: ["We're at risk — two blockers on the vendor side. Details below.", "So first we kicked things off, then ran into a few issues along the way..."],
+                answer: "We're at risk — two blockers on the vendor side. Details below.",
+                explanationEn: "Leading with the headline tells the reader the status immediately, unlike a chronological account that buries it.",
+                explanationTe: "headline తో మొదలుపెడితే readerకు వెంటనే status తెలుస్తుంది — కాలక్రమానుసార వివరణ దాన్ని దాచేస్తుంది." },
+              { format: "mcq", prompt: "A project has been amber for three weeks with the same mitigation in progress. What should the update include?",
+                options: ["The RAG color plus a note that it's unchanged and the mitigation is still on track.", "Just the RAG color, since the status hasn't changed.", "A new color each week to keep it looking active."],
+                answer: "The RAG color plus a note that it's unchanged and the mitigation is still on track.",
+                explanationEn: "Stating that the status is unchanged, with the mitigation still progressing, is more informative than the color alone.",
+                explanationTe: "status మారలేదని, mitigation ఇంకా progress లో ఉందని చెప్పడం కేవలం color కన్నా ఎక్కువ సమాచారం ఇస్తుంది." },
+              { format: "fill", prompt: "'Performance improved a lot' is vague. A more credible version is: 'Latency dropped 40% ___ the caching change.'",
+                answer: "after",
+                explanationEn: "'After the caching change' ties the number to a specific cause, making the claim verifiable.",
+                explanationTe: "'After the caching change' అనేది number ను ఒక నిర్దిష్ట కారణంతో ముడిపెడుతుంది, claim verify చేయగలిగేలా చేస్తుంది." },
+              { format: "mcq", prompt: "Which version of a risk statement gives the reader something to act on?",
+                options: ["Risk: vendor delay. Ask: approval to start plan B by Wednesday.", "We might be a bit late because of the vendor.", "There could be some issues with the vendor, not sure yet."],
+                answer: "Risk: vendor delay. Ask: approval to start plan B by Wednesday.",
+                explanationEn: "Pairing the risk with a specific ask turns it into something the reader can respond to, unlike a vague worry.",
+                explanationTe: "risk ను నిర్దిష్ట askతో జతచేస్తే reader స్పందించగలిగే విషయంగా మారుతుంది — అస్పష్టమైన worry అలా కాదు." },
+              { format: "choose-sentence", prompt: "Choose the better way to report a red status to an executive:",
+                options: ["Status: Red, newly this week — the vendor missed their delivery date. Ask: approval to escalate.", "Things are mostly fine, just a small hiccup with the vendor that we're keeping an eye on."],
+                answer: "Status: Red, newly this week — the vendor missed their delivery date. Ask: approval to escalate.",
+                explanationEn: "Naming the status clearly and attaching an ask is more useful than softening a red status into a 'small hiccup'.",
+                explanationTe: "status ను స్పష్టంగా చెప్పి, askను జతచేయడం, red status ను 'small hiccup' గా మెత్తబరచడం కన్నా ఉపయోగకరం." }
+            ]}
+          ]},
         ] },
         { id: "review", title: "Review", icon: "🔁", lessons: [] }
       ],
