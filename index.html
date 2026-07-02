@@ -33,6 +33,11 @@
 .set-row { display:flex; align-items:center; gap:8px; }
 .set-row input[type=range] { flex:1; min-width:0; }
 .set-row button, .set-row .btnlike { flex:1; text-align:center; }
+.name-input { padding:8px 12px; border-radius:8px; border:1px solid var(--line);
+  background:var(--panel-2); color:var(--text); font:inherit; flex:1; min-width:0; }
+.name-card h3 { margin-top:0; }
+.name-card .cta { margin:0; flex:0 0 auto; }
+.name-save { flex:0 0 auto !important; min-width:42px; }
 .brand { display:flex; flex-direction:column; gap:2px; }
 .tagline { color:var(--muted); font-size:12.5px; font-style:italic; }
 .footer { margin-top:28px; padding:14px 0 6px; border-top:1px solid var(--line);
@@ -13013,22 +13018,18 @@
         const restore = this.el("label", { class: "btnlike" }, "⤒ Restore",
           this.el("input", { type: "file", accept: "application/json", style: "display:none",
             onchange: e => this._importProgress(e) }));
-        const rename = this.el("button", { onclick: () => { this._askName(); this.render(); } }, "✏ Change name");
+        const nameInp = this.el("input", { type: "text", class: "name-input",
+          value: this.state.settings.userName || "", placeholder: "Your name", maxlength: "30" });
+        const nameSave = this.el("button", { class: "name-save", title: "Save name",
+          onclick: () => { this.state.settings.userName = (nameInp.value || "").trim(); this.save(); this.render(); } }, "✓");
         const reset = this.el("button", { class: "danger", title: "Clear all progress and start fresh",
           onclick: () => this._resetAll() }, "↺ Reset everything");
         return this.el("div", { class: "settings-panel" },
           this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "🔊 Voice speed"), rate),
           theme,
           this.el("div", { class: "set-row" }, backup, restore),
-          rename,
+          this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "✏ Name"), nameInp, nameSave),
           reset);
-      },
-      _askName() {
-        const current = this.state.settings.userName;
-        const n = prompt("Welcome to SpeakElevate! What should we call you?", current || "");
-        if (n === null && current) return; // cancelled a rename — keep existing
-        this.state.settings.userName = (n || "").trim();
-        this.save();
       },
       _tabs() {
         const bar = this.el("nav", { class: "tabs" });
@@ -13117,8 +13118,20 @@
         const name = this.state.settings.userName;
         const fresh = !Object.keys(this.state.progress).length &&
           !this.state.review.wrongQuestions.length && !this.state.review.learningWords.length;
-        wrap.appendChild(this.el("h2", {},
-          "🏠 " + (fresh ? "Welcome" : "Welcome back") + (name ? ", " + name : "") + (fresh ? "!" : "")));
+        if (name == null) {
+          const inp = this.el("input", { type: "text", class: "name-input", placeholder: "Your name", maxlength: "30" });
+          const saveName = () => { this.state.settings.userName = (inp.value || "").trim(); this.save(); this.render(); };
+          inp.addEventListener("keydown", e => { if (e.key === "Enter") saveName(); });
+          wrap.appendChild(this.el("div", { class: "card name-card" },
+            this.el("h3", {}, "👋 Welcome to SpeakElevate!"),
+            this.el("p", { class: "muted" }, "What should we call you?"),
+            this.el("div", { class: "set-row" }, inp,
+              this.el("button", { class: "cta name-go", onclick: saveName }, "Let's go →"))));
+          setTimeout(() => inp.focus(), 0);
+        } else {
+          wrap.appendChild(this.el("h2", {},
+            "🏠 " + (fresh ? "Welcome" : "Welcome back") + (name ? ", " + name : "") + (fresh ? "!" : "")));
+        }
         const last = this._lastLesson();
         if (last && CourseData.lesson(last.phaseId, last.lessonId)) {
           const l = CourseData.lesson(last.phaseId, last.lessonId);
@@ -13136,15 +13149,17 @@
       _journeyMap() {
         const phases = ["grammar", "vocabulary", "speaking", "situations", "professional"].map(id => {
           const p = CourseData.phase(id);
-          let done = 0;
+          let done = 0, sum = 0;
           p.lessons.forEach(l => {
             const pr = this._lessonProgress(id, l.id);
             if (pr.cardsDone.length === l.cards.length && pr.quizAttempted) done++;
+            sum += Math.min(1, (pr.cardsDone.length + (pr.quizAttempted ? 1 : 0)) / (l.cards.length + 1));
           });
-          return { id, icon: p.icon, title: p.title, done, total: p.lessons.length };
+          return { id, icon: p.icon, title: p.title, done, total: p.lessons.length,
+            frac: p.lessons.length ? sum / p.lessons.length : 0 };
         });
         // route: starts bottom-left, winds upward, goal at top-right
-        const pts = [[65, 245], [195, 168], [330, 232], [455, 112], [548, 172], [612, 58]];
+        const pts = [[65, 206], [195, 140], [330, 196], [455, 94], [548, 144], [612, 50]];
         const labelAbove = [true, true, false, true, false, false]; // per-node label side
         // smooth road through the stops: Catmull-Rom spline -> cubic bezier segments
         const segs = [];
@@ -13158,11 +13173,13 @@
         const fmt = n => Math.round(n * 10) / 10;
         const segC = s => " C" + fmt(s[1][0]) + " " + fmt(s[1][1]) + "," + fmt(s[2][0]) + " " + fmt(s[2][1]) + "," + fmt(s[3][0]) + " " + fmt(s[3][1]);
         const roadD = "M" + pts[0][0] + " " + pts[0][1] + segs.map(segC).join("");
-        let d = 0;
-        while (d < 5 && phases[d].total > 0 && phases[d].done === phases[d].total) d++;
-        const allDone = d >= 5;
-        const f = allDone ? 1 : (phases[d].total ? phases[d].done / phases[d].total : 0);
-        const si = Math.min(d, 4);
+        // walker travels the whole road by overall progress — every card viewed
+        // and quiz attempted anywhere nudges it forward
+        const overall = phases.reduce((n, p) => n + p.frac, 0) / 5;
+        const allDone = phases.every(p => p.frac >= 1);
+        const walkerT = Math.min(overall * 5, 5);
+        const si = Math.min(Math.floor(walkerT), 4);
+        const f = allDone ? 1 : walkerT - si;
         // walker position: exact point on the current bezier segment
         const bez = (s, t) => { const u = 1 - t; return [
           u*u*u*s[0][0] + 3*u*u*t*s[1][0] + 3*u*t*t*s[2][0] + t*t*t*s[3][0],
@@ -13177,13 +13194,13 @@
         };
         const doneSegs = segs.slice(0, si).concat(!allDone && f > 0 ? [splitLeft(segs[si], f)] : allDone ? [segs[4]] : []);
         const doneD = doneSegs.length ? "M" + pts[0][0] + " " + pts[0][1] + segs.slice(0, si).map(segC).join("") + (doneSegs.length > si ? segC(doneSegs[doneSegs.length - 1]) : "") : "";
-        let svg = '<svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto">';
+        let svg = '<svg viewBox="0 0 660 265" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;margin:0 auto">';
         svg += '<path d="' + roadD + '" fill="none" stroke="var(--line)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 10"/>';
         if (doneD) svg += '<path d="' + doneD + '" fill="none" stroke="var(--good)" stroke-width="6" stroke-linecap="round"/>';
         phases.forEach((ph, i) => {
           const [x, y] = pts[i];
           const complete = ph.done === ph.total && ph.total > 0;
-          const ring = complete ? "var(--good)" : (i === d ? "var(--accent)" : "var(--line)");
+          const ring = complete ? "var(--good)" : (ph.frac > 0 ? "var(--accent)" : "var(--line)");
           const ly = labelAbove[i] ? y - 44 : y + 46;
           svg += '<g class="jnode" data-phase="' + ph.id + '" style="cursor:pointer">';
           svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--panel-2)" stroke="' + ring + '" stroke-width="3"/>';
@@ -13264,7 +13281,6 @@
         this.state.settings.userName = null;
         this.save();
         this._settingsOpen = false;
-        this._askName();
         Router.goPhase("dashboard");
       },
       _resetLesson(phaseId, lessonId) {
@@ -13514,7 +13530,6 @@
     UI.state = Storage.load();
     document.documentElement.setAttribute("data-theme", UI.state.settings.theme);
     TTS.init();
-    if (UI.state.settings.userName == null) UI._askName();
     UI.render();
     document.addEventListener("keydown", e => {
       if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
