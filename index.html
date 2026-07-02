@@ -13230,16 +13230,24 @@
         let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">';
         svg += '<path d="' + roadD + '" fill="none" stroke="var(--line)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 10"/>';
         if (doneD) svg += '<path d="' + doneD + '" fill="none" stroke="var(--good)" stroke-width="6" stroke-linecap="round"/>';
+        const C = 2 * Math.PI * 24; // node ring circumference for the progress arc
         phases.forEach((ph, i) => {
           const [x, y] = pts[i];
           const complete = ph.done === ph.total && ph.total > 0;
-          const ring = complete ? "var(--good)" : (ph.frac > 0 ? "var(--accent)" : "var(--line)");
+          const pct = Math.round(ph.frac * 100);
           const ly = labelAbove[i] ? y - 44 : y + 46;
           svg += '<g class="jnode" data-phase="' + ph.id + '" style="cursor:pointer">';
-          svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--panel-2)" stroke="' + ring + '" stroke-width="3"/>';
+          // base ring (grey) + a green/blue arc that fills with this phase's fraction
+          svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--panel-2)" stroke="var(--line)" stroke-width="3"/>';
+          if (ph.frac > 0)
+            svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="none" stroke="' +
+              (complete ? "var(--good)" : "var(--accent)") + '" stroke-width="3.5" stroke-linecap="round" ' +
+              'stroke-dasharray="' + fmt(C) + '" stroke-dashoffset="' + fmt(C * (1 - Math.min(1, ph.frac))) +
+              '" transform="rotate(-90 ' + x + ' ' + y + ')"/>';
           svg += '<text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-size="20">' + ph.icon + '</text>';
           svg += '<text x="' + x + '" y="' + ly + '" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text)">' + ph.title + '</text>';
-          svg += '<text x="' + x + '" y="' + (ly + 15) + '" text-anchor="middle" font-size="11.5" fill="var(--muted)">' + ph.done + " / " + ph.total + (complete ? " ✓" : "") + '</text>';
+          svg += '<text x="' + x + '" y="' + (ly + 15) + '" text-anchor="middle" font-size="11.5" fill="var(--muted)">' +
+            ph.done + " / " + ph.total + (complete ? " ✓" : (pct > 0 ? " · " + pct + "%" : "")) + '</text>';
           svg += '</g>';
         });
         const [tx, ty] = pts[5];
