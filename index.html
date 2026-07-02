@@ -89,6 +89,8 @@
     ul.rules { list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:16px; }
     .rule { border-left:3px solid var(--accent); padding:4px 0 4px 12px; }
     .rule-text { font-weight:600; margin-bottom:6px; }
+.rule-detail { margin:2px 0 8px; font-size:15px; }
+.ex-note { color:var(--muted); font-size:13px; font-style:italic; margin-left:6px; }
     .used-with { color:var(--muted); font-size:14px; font-style:italic; margin:6px 0; }
 .danger { border-color:var(--warn); color:var(--warn); }
 .reset-lesson { display:block; margin-top:16px; background:transparent; border:1px solid var(--line); color:var(--muted); font-size:13px; }
@@ -8866,9 +8868,13 @@
           card.points.forEach(pt => {
             const li = this.el("li", { class: "rule" });
             li.appendChild(this.el("div", { class: "rule-text" }, pt.rule));
-            if (pt.ruleTe) li.appendChild(this._teluguReveal(pt.ruleTe));
+            if (pt.detail) li.appendChild(this.el("p", { class: "rule-detail" }, pt.detail));
+            const te = [pt.ruleTe, pt.detailTe].filter(Boolean).join(" ");
+            if (te) li.appendChild(this._teluguReveal(te));
             (pt.examples || []).forEach(ex => {
-              li.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
+              const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text));
+              if (ex.note) line.appendChild(this.el("span", { class: "ex-note" }, "— " + ex.note));
+              li.appendChild(line);
               if (ex.telugu) li.appendChild(this._teluguReveal(ex.telugu));
             });
             ul.appendChild(li);
