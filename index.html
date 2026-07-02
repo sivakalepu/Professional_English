@@ -83,6 +83,9 @@
     .stat { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
       padding:14px; cursor:pointer; }
     .stat-icon { font-size:24px; }
+.journey { padding:10px 8px 4px; }
+.journey .walker { animation: jwalk 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes jwalk { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     @media (max-width: 640px) {
       .hdr { flex-direction:column; align-items:flex-start; }
       .lesson-item { flex-direction:column; align-items:flex-start; gap:4px; }
@@ -13091,25 +13094,61 @@
             onclick: () => { Router.state.phaseId = last.phaseId; Router.openLesson(last.lessonId); } },
             "▸ Continue: " + l.title));
         }
-        const grid = this.el("div", { class: "stat-grid" });
-        CourseData.phases.filter(p => !["dashboard", "review"].includes(p.id)).forEach(p => {
-          let done = 0;
-          p.lessons.forEach(l => {
-            const pr = this._lessonProgress(p.id, l.id);
-            if (pr.cardsDone.length === l.cards.length && pr.quizAttempted) done++;
-          });
-          const total = p.lessons.length || 0;
-          grid.appendChild(this.el("div", { class: "stat", onclick: () => Router.goPhase(p.id) },
-            this.el("div", { class: "stat-icon" }, p.icon),
-            this.el("div", {}, p.title),
-            this.el("div", { class: "muted" }, total ? (done + " / " + total + " lessons") : "coming soon")));
-        });
-        wrap.appendChild(grid);
+        wrap.appendChild(this._journeyMap());
         wrap.appendChild(this.el("div", { class: "muted" },
           "Review queue: " + this.state.review.wrongQuestions.length + " questions, " +
           this.state.review.learningWords.length + " words. ",
           this.el("button", { class: "opt", onclick: () => Router.goPhase("review") }, "Go to Review 🔁")));
         return wrap;
+      },
+      _journeyMap() {
+        const phases = ["grammar", "vocabulary", "speaking", "situations", "professional"].map(id => {
+          const p = CourseData.phase(id);
+          let done = 0;
+          p.lessons.forEach(l => {
+            const pr = this._lessonProgress(id, l.id);
+            if (pr.cardsDone.length === l.cards.length && pr.quizAttempted) done++;
+          });
+          return { id, icon: p.icon, title: p.title, done, total: p.lessons.length };
+        });
+        // route: 3 stops on the top row, then down and back across the bottom row to the trophy
+        const pts = [[70, 74], [320, 74], [570, 74], [570, 208], [320, 208], [70, 208]];
+        let d = 0;
+        while (d < 5 && phases[d].total > 0 && phases[d].done === phases[d].total) d++;
+        const allDone = d >= 5;
+        const f = allDone ? 1 : (phases[d].total ? phases[d].done / phases[d].total : 0);
+        const si = Math.min(d, 4);
+        const [x1, y1] = pts[si], [x2, y2] = pts[si + 1];
+        const wx = allDone ? pts[5][0] : x1 + (x2 - x1) * f;
+        const wy = allDone ? pts[5][1] : y1 + (y2 - y1) * f;
+        const poly = pts.map(p => p.join(",")).join(" ");
+        const donePoly = pts.slice(0, si + 1).concat([[wx, wy]]).map(p => p.join(",")).join(" ");
+        let svg = '<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">';
+        svg += '<polyline points="' + poly + '" fill="none" stroke="var(--line)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 10"/>';
+        svg += '<polyline points="' + donePoly + '" fill="none" stroke="var(--good)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>';
+        phases.forEach((ph, i) => {
+          const [x, y] = pts[i];
+          const complete = ph.done === ph.total && ph.total > 0;
+          const ring = complete ? "var(--good)" : (i === d ? "var(--accent)" : "var(--line)");
+          const top = y < 140;
+          const ly = top ? y - 48 : y + 46;
+          svg += '<g class="jnode" data-phase="' + ph.id + '" style="cursor:pointer">';
+          svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--panel-2)" stroke="' + ring + '" stroke-width="3"/>';
+          svg += '<text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-size="20">' + ph.icon + '</text>';
+          svg += '<text x="' + x + '" y="' + ly + '" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text)">' + ph.title + '</text>';
+          svg += '<text x="' + x + '" y="' + (ly + 15) + '" text-anchor="middle" font-size="11.5" fill="var(--muted)">' + ph.done + " / " + ph.total + (complete ? " ✓" : "") + '</text>';
+          svg += '</g>';
+        });
+        const [tx, ty] = pts[5];
+        svg += '<circle cx="' + tx + '" cy="' + ty + '" r="24" fill="var(--panel-2)" stroke="' + (allDone ? "var(--warn)" : "var(--line)") + '" stroke-width="3"/>';
+        svg += '<text x="' + tx + '" y="' + (ty + 8) + '" text-anchor="middle" font-size="20"' + (allDone ? "" : ' opacity="0.45"') + '>🏆</text>';
+        svg += '<text x="' + tx + '" y="' + (ty + 46) + '" text-anchor="middle" font-size="13" font-weight="600" fill="var(--muted)">Pro level</text>';
+        svg += '<text class="walker" x="' + wx + '" y="' + (wy - 14) + '" text-anchor="middle" font-size="24">' + (allDone ? "🎉" : "🚶") + '</text>';
+        svg += '</svg>';
+        const box = this.el("div", { class: "journey card", html: svg });
+        box.querySelectorAll(".jnode").forEach(n =>
+          n.addEventListener("click", () => Router.goPhase(n.getAttribute("data-phase"))));
+        return box;
       },
       _lessonProgress(phaseId, lessonId) {
         const key = phaseId + "/" + lessonId;
