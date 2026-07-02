@@ -2,7 +2,7 @@
 
 *Elevate your English. Empower your voice.*
 
-A single-file, offline English-learning web app for a Telugu-medium learner working toward professional, pro-level English. No install, no build, no internet — just open `index.html` in any browser.
+A single-file, offline English-learning web app for a Telugu-medium learner working toward professional, pro-level English. No install, no build, no internet — just open `SpeakElevate.html` in any browser.
 
 Orchestrated by **Sivakumar Kalepu**.
 
@@ -20,11 +20,11 @@ Orchestrated by **Sivakumar Kalepu**.
 
 ## Usage
 
-Open `index.html` in a modern browser (Chrome or Edge recommended for read-aloud and voice recording). Your progress is saved automatically in the browser; use **⤓ Backup** to export it and **⤒ Restore** to bring it back.
+Open `SpeakElevate.html` in a modern browser (Chrome or Edge recommended for read-aloud and voice recording). Your progress is saved automatically in the browser; use **⤓ Backup** to export it and **⤒ Restore** to bring it back.
 
 ## Adding content
 
-All lessons live as data in the `CourseData` object inside `index.html`. Adding a lesson is just appending an object to the relevant phase's `lessons` array — no code changes needed. Card types: `concept`, `vocab`, `example`, `mistake`, `dialogue`, `quiz`.
+All lessons live as data in the `CourseData` object inside `SpeakElevate.html`. Adding a lesson is just appending an object to the relevant phase's `lessons` array — no code changes needed. Card types: `concept`, `vocab`, `example`, `mistake`, `dialogue`, `quiz`.
 
 ## Tech
 
