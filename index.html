@@ -57,6 +57,7 @@
     .tab { background:var(--panel); color:var(--text); border:1px solid var(--line);
       border-radius:999px; padding:4px 10px; font-size:12.5px; white-space:nowrap; }
     .tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .tab-home { font-size:16px; line-height:1; padding:4px 11px; }
     .gear { flex:0 0 auto; }
     button, .btnlike { background:var(--panel); color:var(--text); border:1px solid var(--line);
       border-radius:8px; padding:6px 10px; }
@@ -13064,9 +13065,12 @@
         const bar = this.el("nav", { class: "tabs" });
         CourseData.phases.forEach(p => {
           const active = Router.state.phaseId === p.id;
+          const home = p.id === "dashboard";
           bar.appendChild(this.el("button",
-            { class: "tab" + (active ? " active" : ""), onclick: () => Router.goPhase(p.id) },
-            p.icon + " " + p.title));
+            { class: "tab" + (home ? " tab-home" : "") + (active ? " active" : ""),
+              title: home ? "Dashboard (home)" : p.title,
+              onclick: () => Router.goPhase(p.id) },
+            home ? "🏠" : (p.icon + " " + p.title)));
         });
         return bar;
       },
