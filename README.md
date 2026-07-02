@@ -1,6 +1,10 @@
-# English Path — Foundations to Pro
+# SpeakElevate
+
+*Elevate your English. Empower your voice.*
 
 A single-file, offline English-learning web app for a Telugu-medium learner working toward professional, pro-level English. No install, no build, no internet — just open `index.html` in any browser.
+
+Orchestrated by **Sivakumar Kalepu**.
 
 ## Features
 
