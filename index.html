@@ -70,9 +70,15 @@
     .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px; }
     .mistake .why { color:var(--muted); }
     .back { margin-bottom:8px; }
-    .card-viewport { height:min(58vh, 560px); overflow-y:auto; margin:12px 0;
+    .card-viewport { height:min(66vh, 620px); overflow-y:auto; margin:10px 0;
       border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); }
     .card-viewport .card { margin:0; border:none; }
+    .lesson-bar { display:flex; align-items:center; gap:10px; margin-bottom:2px; }
+    .lesson-bar .back { margin:0; flex:0 0 auto; }
+    .lesson-title { margin:0; font-size:17px; flex:1; min-width:0; overflow:hidden;
+      text-overflow:ellipsis; white-space:nowrap; }
+    .list-viewport { height:min(66vh, 620px); overflow-y:auto; margin-top:8px; padding-right:2px; }
+    .phase-sub { margin-top:2px; }
     .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px; }
     .stepper > button { min-width:96px; }
     .done-btn { background:var(--good); border-color:var(--good); color:#fff; }
@@ -112,7 +118,8 @@
       .bar { width:100%; }
       .stepper { gap:8px; }
       .stepper > button { min-width:74px; }
-      .card-viewport { height:46vh; }
+      .card-viewport, .list-viewport { height:54vh; }
+      .lesson-title { font-size:15px; }
     }
     .concept-intro { margin-top:0; }
     ul.rules { list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:16px; }
@@ -123,7 +130,8 @@
     .used-with { color:var(--muted); font-size:14px; font-style:italic; margin:6px 0; }
 .when-to-use { font-size:15px; margin:4px 0 8px; border-left:3px solid var(--good); padding-left:10px; }
 .danger { border-color:var(--warn); color:var(--warn); }
-.reset-lesson { display:block; margin-top:16px; background:transparent; border:1px solid var(--line); color:var(--muted); font-size:13px; }
+.reset-lesson { flex:0 0 auto; background:transparent; border:1px solid var(--line); color:var(--muted);
+  font-size:16px; border-radius:8px; width:38px; height:34px; padding:0; line-height:1; }
 .reset-lesson:hover { border-color:var(--warn); color:var(--warn); }
   </style>
 </head>
@@ -13281,16 +13289,19 @@
           wrap.appendChild(this.el("p", { class: "muted" }, "Lessons coming soon in this phase."));
           return wrap;
         }
+        let doneCount = 0;
         const list = this.el("div", { class: "lesson-list" });
         phase.lessons.forEach(l => {
           const pr = this._lessonProgress(phase.id, l.id);
           const pct = Math.round((pr.cardsDone.length / l.cards.length) * 100);
           const done = pct === 100 && pr.quizAttempted;
+          if (done) doneCount++;
           list.appendChild(this.el("button", { class: "lesson-item", onclick: () => Router.openLesson(l.id) },
             this.el("span", {}, (done ? "✓ " : "▸ ") + l.title),
             this.el("span", { class: "bar" }, this.el("span", { class: "bar-fill", style: "width:" + pct + "%" }))));
         });
-        wrap.appendChild(list);
+        wrap.appendChild(this.el("div", { class: "muted phase-sub" }, doneCount + " of " + phase.lessons.length + " lessons complete"));
+        wrap.appendChild(this.el("div", { class: "list-viewport" }, list));
         return wrap;
       },
       _lessonView() {
@@ -13300,8 +13311,12 @@
         const card = lesson.cards[idx];
         const last = idx === lesson.cards.length - 1;
         const wrap = this.el("div", { class: "lesson" });
-        wrap.appendChild(this.el("button", { class: "back", onclick: () => Router.goPhase(phase.id) }, "← " + phase.title));
-        wrap.appendChild(this.el("h2", {}, lesson.title));
+        // compact top bar: back + lesson title + reset, all on one row to free vertical space
+        wrap.appendChild(this.el("div", { class: "lesson-bar" },
+          this.el("button", { class: "back", onclick: () => Router.goPhase(phase.id) }, "← " + phase.title),
+          this.el("h2", { class: "lesson-title" }, lesson.title),
+          this.el("button", { class: "reset-lesson", title: "Reset this lesson",
+            onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺")));
         // fixed-height scroll viewport so the Prev/Next row never shifts between cards
         wrap.appendChild(this.el("div", { class: "card-viewport" },
           this._renderCard(card, phase.id, lesson.id, idx)));
@@ -13313,8 +13328,6 @@
           last
             ? this.el("button", { class: "done-btn", onclick: () => Router.goPhase(phase.id) }, "✓ Done")
             : this.el("button", { onclick: () => Router.nextCard() }, "Next ▶")));
-        wrap.appendChild(this.el("button", { class: "reset-lesson",
-          onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺ Reset this lesson"));
         this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
         return wrap;
       },
