@@ -22,8 +22,17 @@
     button { font: inherit; cursor: pointer; }
     .telugu { font-family: "Nirmala UI", "Gautami", system-ui; }
     .hdr { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
-      padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:12px; }
+      padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:12px; position:relative; }
     .hdr h1 { font-size:20px; margin:0; }
+.gear { font-size:18px; border-radius:50%; width:38px; height:38px; padding:0; line-height:1; }
+.gear.active { border-color:var(--accent); color:var(--accent); }
+.settings-panel { position:absolute; right:0; top:calc(100% - 4px); background:var(--panel);
+  border:1px solid var(--line); border-radius:12px; padding:14px; display:flex; flex-direction:column;
+  gap:10px; z-index:20; min-width:250px; box-shadow:0 10px 28px rgba(0,0,0,.35); }
+.settings-panel > button, .settings-panel > .btnlike { width:100%; text-align:center; }
+.set-row { display:flex; align-items:center; gap:8px; }
+.set-row input[type=range] { flex:1; min-width:0; }
+.set-row button, .set-row .btnlike { flex:1; text-align:center; }
 .brand { display:flex; flex-direction:column; gap:2px; }
 .tagline { color:var(--muted); font-size:12.5px; font-style:italic; }
 .footer { margin-top:28px; padding:14px 0 6px; border-top:1px solid var(--line);
@@ -83,7 +92,7 @@
     .stat { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
       padding:14px; cursor:pointer; }
     .stat-icon { font-size:24px; }
-.journey { padding:10px 8px 4px; }
+.journey { padding:6px 8px 0; margin:10px 0; }
 .journey .walker { animation: jwalk 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes jwalk { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
     @media (max-width: 640px) {
@@ -114,7 +123,7 @@
       _defaults() {
         return {
           progress: {},
-          settings: { theme: "dark", voiceRate: 0.9, voiceName: null },
+          settings: { theme: "dark", voiceRate: 0.9, voiceName: null, userName: null },
           review: { wrongQuestions: [], learningWords: [] }
         };
       },
@@ -12984,23 +12993,42 @@
           "Orchestrated by Sivakumar Kalepu"));
       },
       _header() {
+        const gear = this.el("button", { class: "gear" + (this._settingsOpen ? " active" : ""), title: "Settings",
+          onclick: () => { this._settingsOpen = !this._settingsOpen; this.render(); } }, "⚙");
+        const hdr = this.el("header", { class: "hdr" },
+          this.el("div", { class: "brand" },
+            this.el("h1", {}, "SpeakElevate"),
+            this.el("div", { class: "tagline" }, "Elevate your English. Empower your voice.")),
+          gear);
+        if (this._settingsOpen) hdr.appendChild(this._settingsPanel());
+        return hdr;
+      },
+      _settingsPanel() {
         const rate = this.el("input", { type: "range", min: "0.5", max: "1.25", step: "0.05",
           value: this.state.settings.voiceRate,
           oninput: e => { this.state.settings.voiceRate = parseFloat(e.target.value); this.save(); } });
         const theme = this.el("button", { onclick: () => this._toggleTheme() },
-          this.state.settings.theme === "dark" ? "☀ Light" : "🌙 Dark");
+          this.state.settings.theme === "dark" ? "☀ Switch to light theme" : "🌙 Switch to dark theme");
         const backup = this.el("button", { onclick: () => this._exportProgress() }, "⤓ Backup");
         const restore = this.el("label", { class: "btnlike" }, "⤒ Restore",
           this.el("input", { type: "file", accept: "application/json", style: "display:none",
             onchange: e => this._importProgress(e) }));
+        const rename = this.el("button", { onclick: () => { this._askName(); this.render(); } }, "✏ Change name");
         const reset = this.el("button", { class: "danger", title: "Clear all progress and start fresh",
-          onclick: () => this._resetAll() }, "↺ Reset");
-        return this.el("header", { class: "hdr" },
-          this.el("div", { class: "brand" },
-            this.el("h1", {}, "SpeakElevate"),
-            this.el("div", { class: "tagline" }, "Elevate your English. Empower your voice.")),
-          this.el("div", { class: "hdr-tools" },
-            this.el("span", { class: "muted" }, "🔊 speed"), rate, theme, backup, restore, reset));
+          onclick: () => this._resetAll() }, "↺ Reset everything");
+        return this.el("div", { class: "settings-panel" },
+          this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "🔊 Voice speed"), rate),
+          theme,
+          this.el("div", { class: "set-row" }, backup, restore),
+          rename,
+          reset);
+      },
+      _askName() {
+        const current = this.state.settings.userName;
+        const n = prompt("Welcome to SpeakElevate! What should we call you?", current || "");
+        if (n === null && current) return; // cancelled a rename — keep existing
+        this.state.settings.userName = (n || "").trim();
+        this.save();
       },
       _tabs() {
         const bar = this.el("nav", { class: "tabs" });
@@ -13086,7 +13114,11 @@
       },
       _dashboard() {
         const wrap = this.el("div", { class: "phase" });
-        wrap.appendChild(this.el("h2", {}, "🏠 Welcome back"));
+        const name = this.state.settings.userName;
+        const fresh = !Object.keys(this.state.progress).length &&
+          !this.state.review.wrongQuestions.length && !this.state.review.learningWords.length;
+        wrap.appendChild(this.el("h2", {},
+          "🏠 " + (fresh ? "Welcome" : "Welcome back") + (name ? ", " + name : "") + (fresh ? "!" : "")));
         const last = this._lastLesson();
         if (last && CourseData.lesson(last.phaseId, last.lessonId)) {
           const l = CourseData.lesson(last.phaseId, last.lessonId);
@@ -13145,7 +13177,7 @@
         };
         const doneSegs = segs.slice(0, si).concat(!allDone && f > 0 ? [splitLeft(segs[si], f)] : allDone ? [segs[4]] : []);
         const doneD = doneSegs.length ? "M" + pts[0][0] + " " + pts[0][1] + segs.slice(0, si).map(segC).join("") + (doneSegs.length > si ? segC(doneSegs[doneSegs.length - 1]) : "") : "";
-        let svg = '<svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">';
+        let svg = '<svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto">';
         svg += '<path d="' + roadD + '" fill="none" stroke="var(--line)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 10"/>';
         if (doneD) svg += '<path d="' + doneD + '" fill="none" stroke="var(--good)" stroke-width="6" stroke-linecap="round"/>';
         phases.forEach((ph, i) => {
@@ -13162,7 +13194,7 @@
         });
         const [tx, ty] = pts[5];
         svg += '<circle cx="' + tx + '" cy="' + ty + '" r="24" fill="var(--panel-2)" stroke="' + (allDone ? "var(--warn)" : "var(--line)") + '" stroke-width="3"/>';
-        svg += '<text x="' + tx + '" y="' + (ty + 8) + '" text-anchor="middle" font-size="20"' + (allDone ? "" : ' opacity="0.45"') + '>🏆</text>';
+        svg += '<text x="' + tx + '" y="' + (ty + 8) + '" text-anchor="middle" font-size="20">🏆</text>';
         svg += '<text x="' + tx + '" y="' + (ty + 46) + '" text-anchor="middle" font-size="13" font-weight="600" fill="var(--muted)">Pro level</text>';
         // walker mirrored to face right (emoji faces left by default); bounce animates the inner text
         svg += '<g transform="translate(' + fmt(wx) + ',' + fmt(wy - 14) + ') scale(-1,1)"><text class="walker" x="0" y="0" text-anchor="middle" font-size="24">' + (allDone ? "🎉" : "🚶") + '</text></g>';
@@ -13226,10 +13258,13 @@
         }
       },
       _resetAll() {
-        if (!confirm("Reset ALL progress? This clears completed lessons, quiz scores, and your Review queue. Your theme and voice settings are kept. This cannot be undone.")) return;
+        if (!confirm("Reset ALL progress? This clears completed lessons, quiz scores, your Review queue, and your name. Your theme and voice settings are kept. This cannot be undone.")) return;
         this.state.progress = {};
         this.state.review = { wrongQuestions: [], learningWords: [] };
+        this.state.settings.userName = null;
         this.save();
+        this._settingsOpen = false;
+        this._askName();
         Router.goPhase("dashboard");
       },
       _resetLesson(phaseId, lessonId) {
@@ -13479,6 +13514,7 @@
     UI.state = Storage.load();
     document.documentElement.setAttribute("data-theme", UI.state.settings.theme);
     TTS.init();
+    if (UI.state.settings.userName == null) UI._askName();
     UI.render();
     document.addEventListener("keydown", e => {
       if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
