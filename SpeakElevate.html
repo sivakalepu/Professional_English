@@ -94,6 +94,8 @@
     .stepper { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px; }
     .stepper > button { min-width:96px; }
     .done-btn { background:var(--good); border-color:var(--good); color:#fff; }
+    .done-btn.locked { background:var(--panel-2); border-color:var(--line); color:var(--muted); cursor:not-allowed; opacity:.75; }
+    .mic-note { display:block; line-height:1.45; margin-top:4px; }
     .dots { display:flex; gap:6px; }
     .dot { width:8px; height:8px; border-radius:50%; background:var(--panel-2); }
     .dot.on { background:var(--accent); }
@@ -12960,6 +12962,12 @@
     };
     const Recorder = {
       supported: !!(navigator.mediaDevices && window.MediaRecorder),
+      // why recording is unavailable — mic APIs only exist in a secure context (https / localhost / file)
+      reason() {
+        if (this.supported) return null;
+        if (!window.isSecureContext) return "insecure";
+        return "unsupported";
+      },
       _rec: null, _chunks: [], _url: null, _stream: null,
       async start() {
         if (!this.supported) throw new Error("unsupported");
@@ -13026,6 +13034,27 @@
         root.appendChild(this.el("div", { class: "main" }, this._body()));
         root.appendChild(this.el("footer", { class: "footer" },
           "Orchestrated by Sivakumar Kalepu"));
+        this._bindOutsideSettings();
+      },
+      // clicking anywhere outside the settings panel (or pressing Esc) closes it
+      _bindOutsideSettings() {
+        if (this._outside) {
+          document.removeEventListener("click", this._outside, true);
+          document.removeEventListener("keydown", this._onEsc, true);
+          this._outside = this._onEsc = null;
+        }
+        if (!this._settingsOpen) return;
+        this._outside = e => {
+          if (e.target.closest(".settings-panel") || e.target.closest(".gear")) return;
+          this._settingsOpen = false; this.render();
+        };
+        this._onEsc = e => { if (e.key === "Escape" && this._settingsOpen) { this._settingsOpen = false; this.render(); } };
+        // bind on the next tick so the click that opened the panel doesn't immediately close it
+        setTimeout(() => {
+          if (!this._settingsOpen) return;
+          document.addEventListener("click", this._outside, true);
+          document.addEventListener("keydown", this._onEsc, true);
+        }, 0);
       },
       _header() {
         const gear = this.el("button", { class: "gear" + (this._settingsOpen ? " active" : ""), title: "Settings",
@@ -13099,7 +13128,7 @@
             body: "Wherever you see the 'తెలుగులో చూడండి' button, tap it to reveal the explanation in Telugu. Try to understand the English first, then confirm with Telugu — over time you'll need the reveals less and less. That's by design: it trains you to think in English.",
             bodyTe: "'తెలుగులో చూడండి' బటన్ నొక్కితే తెలుగు వివరణ కనిపిస్తుంది. ముందు ఇంగ్లీష్‌లో అర్థం చేసుకోవడానికి ప్రయత్నించండి, తర్వాత తెలుగుతో నిర్ధారించుకోండి — క్రమంగా తెలుగు అవసరం తగ్గుతుంది." },
           { icon: "🎙️", title: "Practice speaking (shadowing)",
-            body: "In dialogues, press '🔊 Model' to hear a line, then '🎙 Record' to record yourself saying it, and '▶ My voice' to compare. Copy the rhythm and stress, not just the words — repeat until the gap closes. Your browser will ask for microphone permission the first time; recordings stay on your device and are never uploaded. The Speaking tab's 'Shadowing Practice Sets' lesson has a daily 5-minute routine.",
+            body: "In dialogues, press '🔊 Model' to hear a line, then '🎙 Record' to record yourself saying it, and '▶ My voice' to compare. Copy the rhythm and stress, not just the words — repeat until the gap closes. Your browser will ask for microphone permission the first time; recordings stay on your device and are never uploaded. Note: browsers only allow microphone access on a secure page — recording works when you open the file directly or over an https:// link, but not over a plain http:// address (common when opening it on a phone from another computer). The Speaking tab's 'Shadowing Practice Sets' lesson has a daily 5-minute routine.",
             bodyTe: "సంభాషణల్లో '🔊 Model' నొక్కి వినండి, '🎙 Record' తో మీ గొంతు రికార్డ్ చేయండి, '▶ My voice' తో పోల్చుకోండి. పదాలే కాదు — లయ, ఒత్తిడి కూడా అనుకరించండి. రికార్డింగ్‌లు మీ పరికరంలోనే ఉంటాయి; ఎక్కడికీ పంపబడవు." },
           { icon: "🔁", title: "Quizzes & Review — how you actually remember",
             body: "Quiz answers you get wrong are saved automatically to the Review tab. Words you mark 'Still learning' go there too. Visit Review regularly — answering a question correctly there 'graduates' it out. This repetition of your weak spots is the single most effective habit in the app.",
@@ -13185,52 +13214,67 @@
         const box = this.el("div", { class: "journey card" });
         const draw = () => this._drawJourney(box);
         if (this._journeyRO) this._journeyRO.disconnect();
+        if (this._journeyResize) window.removeEventListener("resize", this._journeyResize);
         if (window.ResizeObserver) {
           this._journeyRO = new ResizeObserver(() => draw());
           this._journeyRO.observe(box);
-        } else {
-          window.addEventListener("resize", draw);
         }
+        // also redraw on viewport height changes (rotate / browser chrome) so the board keeps fitting
+        this._journeyResize = draw;
+        window.addEventListener("resize", this._journeyResize);
         setTimeout(draw, 0); // first paint once the box has a measured width
         return box;
       },
       // node + trophy positions that fill the measured width; snake layout when narrow
-      _journeyLayout(W) {
+      _journeyLayout(W, maxH) {
         const rnd = n => Math.round(n);
+        maxH = maxH || 9999;
         if (W >= 500) {
           // WIDE: single winding row climbing bottom-left -> top-right; labels above/below
-          const H = 230, padX = 54, top = 48, bot = H - 48;
+          const R = 24;
+          const H = Math.max(190, Math.min(230, maxH)), padX = 54, top = 48, bot = H - 48;
           const wave = [0, -30, 24, -36, 8, -30];
           const pts = [0, 1, 2, 3, 4, 5].map(i => [
             rnd(padX + (W - 2 * padX) * i / 5),
             rnd(Math.max(42, Math.min(H - 42, (bot - (bot - top) * i / 5) + wave[i])))]);
           const labels = pts.map(p => ({ x: p[0], y: p[1] > H / 2 ? p[1] - 44 : p[1] + 46, anchor: "middle" }));
-          return { pts, H, labels };
+          return { pts, H, labels, R };
         }
-        // NARROW (mobile): vertical climb, bottom-left start -> top-right goal; labels to the side
-        const padX = 42, stepY = 78, topY = 46, H = topY + stepY * 5 + 46;
+        // NARROW (mobile): vertical climb, bottom-left start -> top-right goal; labels to the side.
+        // Shrink BOTH the step spacing and the node radius to fit the visible height in one frame.
+        const stepY = Math.max(34, Math.min(78, (maxH - 92) / 5));
+        const R = Math.round(Math.max(13, Math.min(24, stepY * 0.5 - 2)));
+        const topY = R + 14, padX = R + 20;
+        const H = rnd(topY + stepY * 5 + R + 18);
         const lane = i => (i % 2 === 0 ? padX : W - padX);
         const pts = [0, 1, 2, 3, 4, 5].map(i => [lane(i), rnd(topY + stepY * (5 - i))]);
         const labels = pts.map((p, i) => (i % 2 === 0)
-          ? { x: p[0] + 32, y: p[1] - 3, anchor: "start" }
-          : { x: p[0] - 32, y: p[1] - 3, anchor: "end" });
-        return { pts, H, labels };
+          ? { x: p[0] + R + 8, y: p[1] - 3, anchor: "start" }
+          : { x: p[0] - R - 8, y: p[1] - 3, anchor: "end" });
+        return { pts, H, labels, R };
       },
       _drawJourney(box) {
         const W = Math.round(box.clientWidth) - 16; // minus horizontal padding
         if (W < 140) return; // not laid out yet
+        // size the SVG to the space left in view so the whole board shows in one frame
+        // (board card padding + the caption line inside the box ~= 60px; review line may scroll)
+        const top = box.getBoundingClientRect().top;
+        const maxH = Math.max(200, Math.round(window.innerHeight - top - 60));
         const phases = ["grammar", "vocabulary", "speaking", "situations", "professional"].map(id => {
           const p = CourseData.phase(id);
           let done = 0, sum = 0;
           p.lessons.forEach(l => {
-            const pr = this._lessonProgress(id, l.id);
-            if (pr.cardsDone.length === l.cards.length && pr.quizAttempted) done++;
-            sum += Math.min(1, (pr.cardsDone.length + (pr.quizAttempted ? 1 : 0)) / (l.cards.length + 1));
+            const st = this._lessonStats(id, l);
+            if (st.done) done++;
+            sum += st.frac;
           });
           return { id, icon: p.icon, title: p.title, done, total: p.lessons.length,
             frac: p.lessons.length ? sum / p.lessons.length : 0 };
         });
-        const { pts, H, labels } = this._journeyLayout(W);
+        const { pts, H, labels, R } = this._journeyLayout(W, maxH);
+        const iconSize = Math.round(R * 0.85);        // phase emoji scales with the node
+        const labelSize = Math.max(11, Math.round(R * 0.5) + 1);
+        const subSize = Math.max(10, labelSize - 1.5);
         // smooth road through the stops: Catmull-Rom spline -> cubic bezier segments
         const segs = [];
         for (let i = 0; i < 5; i++) {
@@ -13266,7 +13310,7 @@
         let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">';
         svg += '<path d="' + roadD + '" fill="none" stroke="var(--line)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 10"/>';
         if (doneD) svg += '<path d="' + doneD + '" fill="none" stroke="var(--good)" stroke-width="6" stroke-linecap="round"/>';
-        const C = 2 * Math.PI * 24; // node ring circumference for the progress arc
+        const C = 2 * Math.PI * R; // node ring circumference for the progress arc
         phases.forEach((ph, i) => {
           const [x, y] = pts[i];
           const complete = ph.done === ph.total && ph.total > 0;
@@ -13274,23 +13318,23 @@
           const lb = labels[i];
           svg += '<g class="jnode" data-phase="' + ph.id + '" style="cursor:pointer">';
           // base ring (grey) + a green/blue arc that fills with this phase's fraction
-          svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="var(--panel-2)" stroke="var(--line)" stroke-width="3"/>';
+          svg += '<circle cx="' + x + '" cy="' + y + '" r="' + R + '" fill="var(--panel-2)" stroke="var(--line)" stroke-width="3"/>';
           if (ph.frac > 0)
-            svg += '<circle cx="' + x + '" cy="' + y + '" r="24" fill="none" stroke="' +
+            svg += '<circle cx="' + x + '" cy="' + y + '" r="' + R + '" fill="none" stroke="' +
               (complete ? "var(--good)" : "var(--accent)") + '" stroke-width="3.5" stroke-linecap="round" ' +
               'stroke-dasharray="' + fmt(C) + '" stroke-dashoffset="' + fmt(C * (1 - Math.min(1, ph.frac))) +
               '" transform="rotate(-90 ' + x + ' ' + y + ')"/>';
-          svg += '<text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-size="20">' + ph.icon + '</text>';
-          svg += '<text x="' + lb.x + '" y="' + lb.y + '" text-anchor="' + lb.anchor + '" font-size="13" font-weight="600" fill="var(--text)">' + ph.title + '</text>';
-          svg += '<text x="' + lb.x + '" y="' + (lb.y + 15) + '" text-anchor="' + lb.anchor + '" font-size="11.5" fill="var(--muted)">' +
+          svg += '<text x="' + x + '" y="' + (y + iconSize / 3) + '" text-anchor="middle" font-size="' + iconSize + '">' + ph.icon + '</text>';
+          svg += '<text x="' + lb.x + '" y="' + lb.y + '" text-anchor="' + lb.anchor + '" font-size="' + labelSize + '" font-weight="600" fill="var(--text)">' + ph.title + '</text>';
+          svg += '<text x="' + lb.x + '" y="' + (lb.y + labelSize + 2) + '" text-anchor="' + lb.anchor + '" font-size="' + subSize + '" fill="var(--muted)">' +
             ph.done + " / " + ph.total + (complete ? " ✓" : (pct > 0 ? " · " + pct + "%" : "")) + '</text>';
           svg += '</g>';
         });
         const [tx, ty] = pts[5], tl = labels[5];
-        svg += '<circle cx="' + tx + '" cy="' + ty + '" r="24" fill="var(--panel-2)" stroke="' + (allDone ? "var(--warn)" : "var(--line)") + '" stroke-width="3"/>';
-        svg += '<text x="' + tx + '" y="' + (ty + 8) + '" text-anchor="middle" font-size="20">🏆</text>';
-        svg += '<text x="' + tl.x + '" y="' + tl.y + '" text-anchor="' + tl.anchor + '" font-size="13" font-weight="600" fill="var(--muted)">Pro level</text>';
-        svg += '<g transform="translate(' + fmt(wx) + ',' + fmt(wy - 14) + ') scale(-1,1)"><text class="walker" x="0" y="0" text-anchor="middle" font-size="24">' + (allDone ? "🎉" : "🚶") + '</text></g>';
+        svg += '<circle cx="' + tx + '" cy="' + ty + '" r="' + R + '" fill="var(--panel-2)" stroke="' + (allDone ? "var(--warn)" : "var(--line)") + '" stroke-width="3"/>';
+        svg += '<text x="' + tx + '" y="' + (ty + iconSize / 3) + '" text-anchor="middle" font-size="' + iconSize + '">🏆</text>';
+        svg += '<text x="' + tl.x + '" y="' + tl.y + '" text-anchor="' + tl.anchor + '" font-size="' + labelSize + '" font-weight="600" fill="var(--muted)">Pro level</text>';
+        svg += '<g transform="translate(' + fmt(wx) + ',' + fmt(wy - R * 0.6) + ') scale(-1,1)"><text class="walker" x="0" y="0" text-anchor="middle" font-size="' + Math.round(R) + '">' + (allDone ? "🎉" : "🚶") + '</text></g>';
         svg += '</svg>';
         const cap = '<div class="journey-cap muted">🚶 ' + Math.round(overall * 100) +
           '% of your journey covered · ' + doneLessons + ' / ' + totalLessons + ' lessons complete</div>';
@@ -13301,6 +13345,20 @@
       _lessonProgress(phaseId, lessonId) {
         const key = phaseId + "/" + lessonId;
         return this.state.progress[key] || { cardsDone: [], quizAttempted: false, quizScore: 0 };
+      },
+      // single source of truth for lesson completion: the quiz card is NOT a content card —
+      // its slot only fills when the quiz is actually attempted, so viewing it never shows "100%".
+      _lessonStats(phaseId, lesson) {
+        const pr = this._lessonProgress(phaseId, lesson.id);
+        const quizIdx = lesson.cards.findIndex(c => c.type === "quiz");
+        const hasQuiz = quizIdx >= 0;
+        const contentTotal = hasQuiz ? lesson.cards.length - 1 : lesson.cards.length;
+        const contentDone = Math.min(contentTotal, pr.cardsDone.filter(i => i !== quizIdx).length);
+        const denom = lesson.cards.length || 1;
+        const numer = contentDone + (hasQuiz && pr.quizAttempted ? 1 : 0);
+        const frac = Math.min(1, numer / denom);
+        const done = contentDone >= contentTotal && (!hasQuiz || pr.quizAttempted);
+        return { pr, hasQuiz, quizAttempted: pr.quizAttempted, pct: Math.round(frac * 100), frac, done };
       },
       _phaseView() {
         const phase = CourseData.phase(Router.state.phaseId);
@@ -13313,9 +13371,8 @@
         let doneCount = 0;
         const list = this.el("div", { class: "lesson-list" });
         phase.lessons.forEach(l => {
-          const pr = this._lessonProgress(phase.id, l.id);
-          const pct = Math.round((pr.cardsDone.length / l.cards.length) * 100);
-          const done = pct === 100 && pr.quizAttempted;
+          const st = this._lessonStats(phase.id, l);
+          const pct = st.pct, done = st.done;
           if (done) doneCount++;
           list.appendChild(this.el("button", { class: "lesson-item", onclick: () => Router.openLesson(l.id) },
             this.el("span", {}, (done ? "✓ " : "▸ ") + l.title),
@@ -13331,6 +13388,7 @@
         const idx = Router.state.cardIndex;
         const card = lesson.cards[idx];
         const last = idx === lesson.cards.length - 1;
+        const isQuiz = card.type === "quiz";
         const wrap = this.el("div", { class: "lesson" });
         // compact top bar: back + lesson title + reset, all on one row to free vertical space
         wrap.appendChild(this.el("div", { class: "lesson-bar" },
@@ -13338,19 +13396,47 @@
           this.el("h2", { class: "lesson-title" }, lesson.title),
           this.el("button", { class: "reset-lesson", title: "Reset this lesson",
             onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺")));
+        // Done stays locked until the quiz is fully answered (or is already attempted / there is no quiz).
+        const alreadyAttempted = this._lessonProgress(phase.id, lesson.id).quizAttempted;
+        const locked = last && isQuiz && !alreadyAttempted;
+        const doneBtn = this.el("button",
+          { class: "done-btn" + (locked ? " locked" : ""), disabled: locked ? "" : null,
+            title: locked ? "Answer all quiz questions to finish" : "Finish this lesson",
+            onclick: () => Router.goPhase(phase.id) }, "✓ Done");
+        const unlockDone = () => { doneBtn.disabled = false; doneBtn.classList.remove("locked");
+          doneBtn.title = "Finish this lesson"; };
         // fixed-height scroll viewport so the Prev/Next row never shifts between cards
-        wrap.appendChild(this.el("div", { class: "card-viewport" },
-          this._renderCard(card, phase.id, lesson.id, idx)));
+        const cardEl = isQuiz
+          ? this._quizCard(card, phase.id, lesson.id, last ? unlockDone : null)
+          : this._renderCard(card, phase.id, lesson.id, idx);
+        const viewport = this.el("div", { class: "card-viewport" }, cardEl);
+        this._bindSwipe(viewport, idx, last);
+        wrap.appendChild(viewport);
         const dots = this.el("div", { class: "dots" });
         lesson.cards.forEach((_, i) => dots.appendChild(this.el("span", { class: "dot" + (i === idx ? " on" : "") })));
         wrap.appendChild(this.el("div", { class: "stepper" },
           this.el("button", { onclick: () => Router.prevCard(), disabled: idx === 0 ? "" : null }, "◀ Prev"),
           dots,
-          last
-            ? this.el("button", { class: "done-btn", onclick: () => Router.goPhase(phase.id) }, "✓ Done")
-            : this.el("button", { onclick: () => Router.nextCard() }, "Next ▶")));
-        this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
+          last ? doneBtn : this.el("button", { onclick: () => Router.nextCard() }, "Next ▶")));
+        // the quiz card is not a "content card" — its completion is tracked via quizAttempted only
+        if (!isQuiz) this._markCardDone(phase.id, lesson.id, idx, lesson.cards.length);
         return wrap;
+      },
+      // touch swipe: horizontal drag beyond threshold flips cards (respecting first/last bounds)
+      _bindSwipe(el, idx, last) {
+        let sx = 0, sy = 0, active = false;
+        el.addEventListener("touchstart", e => {
+          if (e.touches.length !== 1) { active = false; return; }
+          const t = e.touches[0]; sx = t.clientX; sy = t.clientY; active = true;
+        }, { passive: true });
+        el.addEventListener("touchend", e => {
+          if (!active) return; active = false;
+          const t = e.changedTouches[0];
+          const dx = t.clientX - sx, dy = t.clientY - sy;
+          if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return; // not a clear horizontal swipe
+          if (dx < 0) { if (!last) Router.nextCard(); }      // swipe left → next
+          else { if (idx > 0) Router.prevCard(); }           // swipe right → prev
+        }, { passive: true });
       },
       _markCardDone(phaseId, lessonId, idx, total) {
         const key = phaseId + "/" + lessonId;
@@ -13470,14 +13556,22 @@
       },
       _shadowControl(modelText) {
         const btn = this.el("button", { class: "opt" }, "🎙 Record");
-        if (!Recorder.supported) return this.el("span", { class: "muted" }, "🎙 (recording not supported)");
+        if (!Recorder.supported) {
+          const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
+          const msg = Recorder.reason() === "insecure"
+            ? "🎙 Recording needs a secure page (https:// or opening the file directly). Over a plain http:// link on your phone the browser blocks the mic — see the Help tab."
+            : "🎙 Recording isn't supported in this browser — try Chrome or Edge.";
+          return this.el("div", { class: "shadow" },
+            this.el("span", { class: "muted" }, "Your turn — repeat it:"), playModel,
+            this.el("span", { class: "muted mic-note" }, msg));
+        }
         let recording = false;
         const playMine = this.el("button", { class: "opt", style: "display:none", onclick: () => Recorder.play() }, "▶ My voice");
         const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
         btn.onclick = async () => {
           if (!recording) {
             try { await Recorder.start(); recording = true; btn.textContent = "⏹ Stop"; }
-            catch (e) { btn.textContent = "🎙 (mic blocked)"; btn.disabled = true; }
+            catch (e) { btn.textContent = "🎙 Allow mic & retry"; } // permission denied — let them try again
           } else {
             await Recorder.stop(); recording = false; btn.textContent = "🎙 Record again";
             playMine.style.display = "";
@@ -13501,7 +13595,7 @@
         c.appendChild(this._shadowControl(card.lines[0].text));
         return c;
       },
-      _quizCard(card, phaseId, lessonId) {
+      _quizCard(card, phaseId, lessonId, onComplete) {
         const c = this.el("div", { class: "card" });
         c.appendChild(this.el("h3", {}, "Quiz"));
         let correct = 0, answered = 0;
@@ -13524,6 +13618,7 @@
             if (q.explanationTe) feedback.appendChild(this._teluguReveal(q.explanationTe));
             status.textContent = answered + " / " + total + " answered";
             this._saveQuizScore(phaseId, lessonId, correct, total);
+            if (answered === total && onComplete) onComplete();
           };
           if (q.format === "mcq" || q.format === "choose-sentence") {
             q.options.forEach(opt => qWrap.appendChild(
