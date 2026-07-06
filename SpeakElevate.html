@@ -43,6 +43,9 @@
 .set-row button, .set-row .btnlike { flex:1; text-align:center; }
 .name-input { padding:8px 12px; border-radius:8px; border:1px solid var(--line);
   background:var(--panel-2); color:var(--text); font:inherit; flex:1; min-width:0; }
+.voice-select { flex:1; min-width:0; padding:7px 8px; border-radius:8px; border:1px solid var(--line);
+  background:var(--panel-2); color:var(--text); font:inherit; }
+.voice-test { flex:0 0 auto !important; min-width:42px; }
 .name-card h3 { margin-top:0; }
 .name-card .cta { margin:0; flex:0 0 auto; }
 .name-save { flex:0 0 auto !important; min-width:42px; }
@@ -13116,6 +13119,8 @@
         const rate = this.el("input", { type: "range", min: "0.5", max: "1.25", step: "0.05",
           value: this.state.settings.voiceRate,
           oninput: e => { this.state.settings.voiceRate = parseFloat(e.target.value); this.save(); } });
+        // voice picker — lists the English voices the browser/OS provides (accents differ per device)
+        const voiceRow = TTS.supported ? this._voiceRow() : null;
         const theme = this.el("button", { onclick: () => this._toggleTheme() },
           this.state.settings.theme === "dark" ? "☀ Switch to light theme" : "🌙 Switch to dark theme");
         const backup = this.el("button", { onclick: () => this._exportProgress() }, "⤓ Backup");
@@ -13134,10 +13139,26 @@
         return this.el("div", { class: "settings-panel" },
           this.el("div", { class: "set-row" }, review, help),
           this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "🔊 Voice speed"), rate),
+          voiceRow,
           theme,
           this.el("div", { class: "set-row" }, backup, restore),
           this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "✏ Name"), nameInp, nameSave),
           reset);
+      },
+      _voiceRow() {
+        const voices = (speechSynthesis.getVoices() || []).filter(v => /^en/i.test(v.lang));
+        const sel = this.el("select", { class: "voice-select", title: "Read-aloud voice",
+          onchange: e => { this.state.settings.voiceName = e.target.value || null; this.save(); } },
+          this.el("option", { value: "" }, "Auto (recommended)"),
+          voices.map(v => this.el("option", { value: v.name }, v.name + " (" + v.lang + ")")));
+        sel.value = this.state.settings.voiceName || "";
+        // voices load asynchronously — if none yet, repopulate once they arrive (while panel is open)
+        if (!voices.length)
+          speechSynthesis.addEventListener("voiceschanged",
+            () => { if (this._settingsOpen) this.render(); }, { once: true });
+        const test = this.el("button", { class: "voice-test", title: "Hear a sample",
+          onclick: () => TTS.speak("Hello! This is how the selected voice sounds.", this.state) }, "▶");
+        return this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "🎙 Voice"), sel, test);
       },
       _body() {
         const pid = Router.state.phaseId;
