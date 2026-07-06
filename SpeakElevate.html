@@ -52,12 +52,11 @@
   color:var(--muted); font-size:12.5px; text-align:center; }
     .hdr-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .muted { color:var(--muted); font-size:13px; }
-    .tabs { flex:1 1 0; min-width:0; display:flex; flex-wrap:wrap; align-content:center;
-      gap:5px 6px; padding:2px 0; }
-    .tab { background:var(--panel); color:var(--text); border:1px solid var(--line);
-      border-radius:999px; padding:4px 10px; font-size:12.5px; white-space:nowrap; }
-    .tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
-    .tab-home { font-size:16px; line-height:1; padding:4px 11px; }
+    .home-btn { flex:0 0 auto; font-size:17px; line-height:1; padding:7px 11px; border-radius:10px; }
+    .home-btn.active { border-color:var(--accent); color:var(--accent); }
+    .back-btn { flex:0 0 auto; font-size:18px; line-height:1; padding:7px 12px; border-radius:10px; }
+    .nav-title { flex:1 1 0; min-width:0; font-size:16px; font-weight:700; line-height:1.25;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .gear { flex:0 0 auto; }
     button, .btnlike { background:var(--panel); color:var(--text); border:1px solid var(--line);
       border-radius:8px; padding:6px 10px; }
@@ -129,9 +128,8 @@
     @media (max-width: 640px) {
       .tagline { display:none; }
       .sep { display:none; }
-      .tabs { flex-basis:100%; }
       .hdr h1 { font-size:17px; }
-      .tab { font-size:12.5px; padding:5px 9px; }
+      .nav-title { order:1; flex-basis:100%; white-space:normal; font-size:15px; }
       .lesson-item { flex-direction:column; align-items:flex-start; gap:4px; }
       .bar { width:100%; }
       .stepper { gap:8px; }
@@ -12948,8 +12946,22 @@
         }
         return en[0] || this._voices[0] || null;
       },
+      // strip visual-only symbols so the voice doesn't read "up arrow", "middle dot", etc.
+      // (display text keeps the arrows — this only affects what is spoken)
+      _clean(text) {
+        return String(text)
+          .replace(/→/g, ", ")                         // → transformation/step: read as a pause
+          .replace(/[←-⇿⤀-⥿⬀-⯿]/g, " ") // other arrows incl. ↗ ↘ intonation cues: drop
+          .replace(/[·•‣⁃]/g, ", ")      // · • ‣ ⁃ bullets/separators: read as a pause
+          .replace(/\s+([,.;:!?])/g, "$1")                   // tidy space left before punctuation
+          .replace(/([,;:])(?=[,;:])/g, "")                  // collapse doubled pause marks
+          .replace(/\s{2,}/g, " ")
+          .trim();
+      },
       speak(text, state) {
         if (!this.supported || !text) return;
+        text = this._clean(text);
+        if (!text) return;
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
         const v = this._pickVoice(state);
@@ -13059,15 +13071,46 @@
       _header() {
         const gear = this.el("button", { class: "gear" + (this._settingsOpen ? " active" : ""), title: "Settings",
           onclick: () => { this._settingsOpen = !this._settingsOpen; this.render(); } }, "⚙");
+        const onDash = Router.state.phaseId === "dashboard";
+        const home = this.el("button", { class: "home-btn" + (onDash ? " active" : ""), title: "Home (dashboard)",
+          onclick: () => Router.goPhase("dashboard") }, "🏠");
+        // in a lesson, the back + reset controls live in the header so the lesson page loses no rows
+        let back = null, reset = null;
+        if (Router.state.lessonId) {
+          const phase = CourseData.phase(Router.state.phaseId);
+          const lesson = phase && CourseData.lesson(phase.id, Router.state.lessonId);
+          if (phase && lesson) {
+            back = this.el("button", { class: "back-btn", title: "Back to " + phase.title,
+              onclick: () => Router.goPhase(phase.id) }, "←");
+            reset = this.el("button", { class: "reset-lesson", title: "Reset this lesson",
+              onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺");
+          }
+        }
         const hdr = this.el("header", { class: "hdr" },
           this.el("div", { class: "brand" },
             this.el("h1", {}, "SpeakElevate"),
             this.el("div", { class: "tagline" }, "Elevate your English. Empower your voice.")),
           this.el("div", { class: "sep" }),
-          this._tabs(),
+          home,
+          back,
+          this._navTitle(),
+          reset,
           gear);
         if (this._settingsOpen) hdr.appendChild(this._settingsPanel());
         return hdr;
+      },
+      // contextual page title shown in the header where the tab row used to be
+      _navTitle() {
+        const pid = Router.state.phaseId;
+        if (pid === "dashboard") return null;
+        if (pid === "review") return this.el("div", { class: "nav-title" }, "🔁 Review");
+        if (pid === "help") return this.el("div", { class: "nav-title" }, "❓ Help");
+        const phase = CourseData.phase(pid);
+        if (Router.state.lessonId) {
+          const lesson = CourseData.lesson(pid, Router.state.lessonId);
+          return this.el("div", { class: "nav-title" }, lesson ? lesson.title : (phase && phase.title) || "");
+        }
+        return this.el("div", { class: "nav-title" }, phase ? phase.icon + " " + phase.title : "");
       },
       _settingsPanel() {
         const rate = this.el("input", { type: "range", min: "0.5", max: "1.25", step: "0.05",
@@ -13085,25 +13128,16 @@
           onclick: () => { this.state.settings.userName = (nameInp.value || "").trim(); this.save(); this.render(); } }, "✓");
         const reset = this.el("button", { class: "danger", title: "Clear all progress and start fresh",
           onclick: () => this._resetAll() }, "↺ Reset everything");
+        const go = pid => { this._settingsOpen = false; Router.goPhase(pid); };
+        const review = this.el("button", { onclick: () => go("review") }, "🔁 Review");
+        const help = this.el("button", { onclick: () => go("help") }, "❓ Help");
         return this.el("div", { class: "settings-panel" },
+          this.el("div", { class: "set-row" }, review, help),
           this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "🔊 Voice speed"), rate),
           theme,
           this.el("div", { class: "set-row" }, backup, restore),
           this.el("div", { class: "set-row" }, this.el("span", { class: "muted" }, "✏ Name"), nameInp, nameSave),
           reset);
-      },
-      _tabs() {
-        const bar = this.el("nav", { class: "tabs" });
-        CourseData.phases.forEach(p => {
-          const active = Router.state.phaseId === p.id;
-          const home = p.id === "dashboard";
-          bar.appendChild(this.el("button",
-            { class: "tab" + (home ? " tab-home" : "") + (active ? " active" : ""),
-              title: home ? "Dashboard (home)" : p.title,
-              onclick: () => Router.goPhase(p.id) },
-            home ? "🏠" : (p.icon + " " + p.title)));
-        });
-        return bar;
       },
       _body() {
         const pid = Router.state.phaseId;
@@ -13116,8 +13150,8 @@
       _helpView() {
         const sections = [
           { icon: "🗺️", title: "Your learning path",
-            body: "The tabs are ordered as a journey: Grammar builds your foundation (start at 'Sentence Basics' and go in order), Vocabulary grows your word power by category, Speaking trains pronunciation and conversation, Situations gives you real-life scenes, and Professional covers leadership communication. New learner? Follow the tabs left to right. Already comfortable? Jump to any topic — every lesson stands on its own.",
-            bodyTe: "ట్యాబ్‌లు ఒక ప్రయాణంలా అమర్చబడ్డాయి: Grammar పునాది, Vocabulary పద సంపద, Speaking ఉచ్చారణ & సంభాషణ, Situations నిజ జీవిత సన్నివేశాలు, Professional నాయకత్వ సంభాషణ. కొత్తవారు ఎడమ నుండి కుడికి వెళ్ళండి; అనుభవం ఉంటే ఎక్కడి నుండైనా మొదలుపెట్టవచ్చు." },
+            body: "The dashboard (🏠 Home) shows your journey as a road with five stops — tap any stop to open that stage: Grammar builds your foundation (start at 'Sentence Basics' and go in order), Vocabulary grows your word power by category, Speaking trains pronunciation and conversation, Situations gives you real-life scenes, and Professional covers leadership communication. New learner? Follow the road from Grammar upward. Already comfortable? Tap straight to any stage — every lesson stands on its own. Review and this Help page live in the ⚙ menu (top-right).",
+            bodyTe: "డాష్‌బోర్డ్ (🏠 Home) మీ ప్రయాణాన్ని ఐదు మజిలీలున్న రోడ్డులా చూపిస్తుంది — ఏ మజిలీ నొక్కితే ఆ దశ తెరుచుకుంటుంది: Grammar పునాది, Vocabulary పద సంపద, Speaking ఉచ్చారణ & సంభాషణ, Situations నిజ జీవిత సన్నివేశాలు, Professional నాయకత్వ సంభాషణ. కొత్తవారు Grammar నుండి పైకి వెళ్ళండి; అనుభవం ఉంటే ఏ దశకైనా నేరుగా వెళ్ళవచ్చు. Review, ఈ Help పేజీ ⚙ మెనూలో (కుడి పైన) ఉంటాయి." },
           { icon: "🃏", title: "Moving through a lesson",
             body: "Each lesson is a set of cards — concepts, examples, mistakes to avoid, dialogues, and a quiz at the end. Use the Prev / Next buttons or your keyboard arrow keys (← →) to move between cards. The dots show where you are. A lesson counts as complete when you've seen every card and attempted the quiz.",
             bodyTe: "ప్రతి పాఠం కార్డుల సమూహం — భావనలు, ఉదాహరణలు, తప్పులు, సంభాషణలు, చివరలో క్విజ్. Prev/Next బటన్లు లేదా కీబోర్డ్ బాణం కీలతో (← →) కదలండి. అన్ని కార్డులు చూసి క్విజ్ ప్రయత్నిస్తే పాఠం పూర్తయినట్లు." },
@@ -13131,13 +13165,13 @@
             body: "In dialogues, press '🔊 Model' to hear a line, then '🎙 Record' to record yourself saying it, and '▶ My voice' to compare. Copy the rhythm and stress, not just the words — repeat until the gap closes. Your browser will ask for microphone permission the first time; recordings stay on your device and are never uploaded. Note: browsers only allow microphone access on a secure page — recording works when you open the file directly or over an https:// link, but not over a plain http:// address (common when opening it on a phone from another computer). The Speaking tab's 'Shadowing Practice Sets' lesson has a daily 5-minute routine.",
             bodyTe: "సంభాషణల్లో '🔊 Model' నొక్కి వినండి, '🎙 Record' తో మీ గొంతు రికార్డ్ చేయండి, '▶ My voice' తో పోల్చుకోండి. పదాలే కాదు — లయ, ఒత్తిడి కూడా అనుకరించండి. రికార్డింగ్‌లు మీ పరికరంలోనే ఉంటాయి; ఎక్కడికీ పంపబడవు." },
           { icon: "🔁", title: "Quizzes & Review — how you actually remember",
-            body: "Quiz answers you get wrong are saved automatically to the Review tab. Words you mark 'Still learning' go there too. Visit Review regularly — answering a question correctly there 'graduates' it out. This repetition of your weak spots is the single most effective habit in the app.",
-            bodyTe: "క్విజ్‌లో తప్పైన ప్రశ్నలు, 'Still learning' గుర్తు పెట్టిన పదాలు Review ట్యాబ్‌లో చేరతాయి. అక్కడ సరిగ్గా జవాబిస్తే అవి బయటకు వెళ్తాయి. బలహీన అంశాల పునరావృతమే గుర్తుంచుకోవడానికి అత్యుత్తమ మార్గం." },
+            body: "Quiz answers you get wrong are saved automatically to Review (open it from the ⚙ menu, top-right). Words you mark 'Still learning' go there too. Visit Review regularly — answering a question correctly there 'graduates' it out. This repetition of your weak spots is the single most effective habit in the app.",
+            bodyTe: "క్విజ్‌లో తప్పైన ప్రశ్నలు, 'Still learning' గుర్తు పెట్టిన పదాలు Review లో చేరతాయి (⚙ మెనూలో తెరవండి). అక్కడ సరిగ్గా జవాబిస్తే అవి బయటకు వెళ్తాయి. బలహీన అంశాల పునరావృతమే గుర్తుంచుకోవడానికి అత్యుత్తమ మార్గం." },
           { icon: "💾", title: "Your progress is saved — and portable",
-            body: "Progress saves automatically in this browser. Use '⤓ Backup' (header) to download it as a file — do this occasionally, since clearing browser data would erase it. '⤒ Restore' loads a backup on any computer. '↺ Reset' clears everything for a fresh start, and each lesson has its own 'Reset this lesson' at the bottom.",
+            body: "Progress saves automatically in this browser. Use '⤓ Backup' (in the ⚙ menu) to download it as a file — do this occasionally, since clearing browser data would erase it. '⤒ Restore' loads a backup on any computer. '↺ Reset' clears everything for a fresh start, and each lesson has its own 'Reset this lesson' at the top.",
             bodyTe: "పురోగతి ఈ బ్రౌజర్‌లో ఆటోమేటిక్‌గా సేవ్ అవుతుంది. '⤓ Backup' తో ఫైల్‌గా దించుకోండి (అప్పుడప్పుడు తప్పక చేయండి), '⤒ Restore' తో తిరిగి తెచ్చుకోండి. '↺ Reset' అంతా క్లియర్ చేస్తుంది." },
           { icon: "📅", title: "A simple daily routine",
-            body: "20 focused minutes beats 3 scattered hours: one Grammar or Vocabulary lesson (10 min) → Review tab (5 min) → shadow one dialogue aloud (5 min). Speak out loud every single day — reading silently builds knowledge, but only speaking builds fluency.",
+            body: "20 focused minutes beats 3 scattered hours: one Grammar or Vocabulary lesson (10 min) → Review (5 min) → shadow one dialogue aloud (5 min). Speak out loud every single day — reading silently builds knowledge, but only speaking builds fluency.",
             bodyTe: "రోజూ 20 నిమిషాలు చాలు: ఒక పాఠం (10 ని) → Review (5 ని) → ఒక సంభాషణ షాడోయింగ్ (5 ని). ప్రతిరోజూ బిగ్గరగా మాట్లాడండి — చదవడం జ్ఞానాన్ని ఇస్తుంది, మాట్లాడటమే ధారాళతను ఇస్తుంది." }
         ];
         const wrap = this.el("div", { class: "phase" });
@@ -13363,7 +13397,6 @@
       _phaseView() {
         const phase = CourseData.phase(Router.state.phaseId);
         const wrap = this.el("div", { class: "phase" });
-        wrap.appendChild(this.el("h2", {}, phase.icon + " " + phase.title));
         if (!phase.lessons.length) {
           wrap.appendChild(this.el("p", { class: "muted" }, "Lessons coming soon in this phase."));
           return wrap;
@@ -13390,12 +13423,7 @@
         const last = idx === lesson.cards.length - 1;
         const isQuiz = card.type === "quiz";
         const wrap = this.el("div", { class: "lesson" });
-        // compact top bar: back + lesson title + reset, all on one row to free vertical space
-        wrap.appendChild(this.el("div", { class: "lesson-bar" },
-          this.el("button", { class: "back", onclick: () => Router.goPhase(phase.id) }, "← " + phase.title),
-          this.el("h2", { class: "lesson-title" }, lesson.title),
-          this.el("button", { class: "reset-lesson", title: "Reset this lesson",
-            onclick: () => this._resetLesson(phase.id, lesson.id) }, "↺")));
+        // back + reset now live in the header (see _header) — the lesson page keeps its full height
         // Done stays locked until the quiz is fully answered (or is already attempted / there is no quiz).
         const alreadyAttempted = this._lessonProgress(phase.id, lesson.id).quizAttempted;
         const locked = last && isQuiz && !alreadyAttempted;
@@ -13559,7 +13587,7 @@
         if (!Recorder.supported) {
           const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
           const msg = Recorder.reason() === "insecure"
-            ? "🎙 Recording needs a secure page (https:// or opening the file directly). Over a plain http:// link on your phone the browser blocks the mic — see the Help tab."
+            ? "🎙 Recording needs a secure page (https:// or opening the file directly). Over a plain http:// link on your phone the browser blocks the mic — see Help in the ⚙ menu."
             : "🎙 Recording isn't supported in this browser — try Chrome or Edge.";
           return this.el("div", { class: "shadow" },
             this.el("span", { class: "muted" }, "Your turn — repeat it:"), playModel,
@@ -13642,7 +13670,6 @@
       },
       _reviewView() {
         const wrap = this.el("div", { class: "phase" });
-        wrap.appendChild(this.el("h2", {}, "🔁 Review"));
         const wrongs = this.state.review.wrongQuestions;
         const words = this.state.review.learningWords;
         if (!wrongs.length && !words.length) {
