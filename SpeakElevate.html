@@ -78,10 +78,26 @@
       padding:18px; margin:12px 0; }
     .card h3 { margin-top:0; }
     .ex { display:flex; align-items:center; gap:6px; margin:6px 0; }
-    .card.mistake { border-left:4px solid var(--warn); }
-    .mistake .wrong { color:var(--warn); text-decoration:line-through; }
-    .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px; }
-    .mistake .why { color:var(--muted); }
+    /* numbered concept "point cards" — categorized explanation layout */
+    .points { display:flex; flex-direction:column; gap:14px; margin-top:12px; }
+    .point { border:1px solid var(--line); background:var(--panel-2); border-radius:10px; padding:12px 14px; }
+    .point-head { display:flex; align-items:flex-start; gap:10px; }
+    .point-num { flex:0 0 auto; width:24px; height:24px; border-radius:50%; background:var(--accent);
+      color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+    .point-rule { font-weight:700; font-size:15.5px; line-height:1.35; }
+    .point-detail { margin:10px 0 0; font-size:14.5px; line-height:1.55; }
+    .point-test { margin-top:10px; font-size:14px; border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+      padding:8px 10px; background:color-mix(in srgb, var(--accent) 12%, transparent); }
+    .point-test b { color:var(--accent); }
+    .point .ex { margin-top:8px; flex-wrap:wrap; }
+    .ex-text { flex:1 1 auto; }
+    .ex-tag { margin-left:auto; font-size:11.5px; font-style:italic; color:var(--muted);
+      background:var(--panel); border:1px solid var(--line); border-radius:999px; padding:2px 8px; white-space:nowrap; }
+    .mistake .wrong { color:var(--warn); text-decoration:line-through;
+      background:color-mix(in srgb, var(--warn) 14%, transparent); border-radius:8px; padding:8px 10px; }
+    .mistake .right { color:var(--good); display:flex; align-items:center; gap:6px;
+      background:color-mix(in srgb, var(--good) 14%, transparent); border-radius:8px; padding:8px 10px; margin-top:8px; }
+    .mistake .why { color:var(--muted); margin-top:10px; }
     .back { margin-bottom:8px; }
     .card-viewport { flex:1 1 auto; min-height:0; overflow-y:auto; margin:10px 0;
       border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); }
@@ -181,7 +197,9 @@
 .rule-detail { margin:2px 0 8px; font-size:15px; }
 .ex-note { color:var(--muted); font-size:13px; font-style:italic; margin-left:6px; }
     .used-with { color:var(--muted); font-size:14px; font-style:italic; margin:6px 0; }
-.when-to-use { font-size:15px; margin:4px 0 8px; border-left:3px solid var(--good); padding-left:10px; }
+.when-to-use { font-size:15px; margin:6px 0 8px; border-left:3px solid var(--good); border-radius:0 8px 8px 0;
+  padding:8px 10px; background:color-mix(in srgb, var(--good) 12%, transparent); }
+.when-to-use::before { content:"💡 When to use — "; font-weight:700; color:var(--good); }
 .danger { border-color:var(--warn); color:var(--warn); }
 .reset-lesson { flex:0 0 auto; background:transparent; border:1px solid var(--line); color:var(--muted);
   font-size:16px; border-radius:8px; width:38px; height:34px; padding:0; line-height:1; }
@@ -14156,22 +14174,31 @@
         if (Array.isArray(card.points)) {
           if (card.intro) c.appendChild(this.el("p", { class: "concept-intro" }, card.intro));
           if (card.introTe) c.appendChild(this._teluguReveal(card.introTe));
-          const ul = this.el("ul", { class: "rules" });
-          card.points.forEach(pt => {
-            const li = this.el("li", { class: "rule" });
-            li.appendChild(this.el("div", { class: "rule-text" }, pt.rule));
-            if (pt.detail) li.appendChild(this.el("p", { class: "rule-detail" }, pt.detail));
+          const wrap = this.el("div", { class: "points" });
+          card.points.forEach((pt, i) => {
+            const box = this.el("div", { class: "point" });
+            box.appendChild(this.el("div", { class: "point-head" },
+              this.el("span", { class: "point-num" }, String(i + 1)),
+              this.el("div", { class: "point-rule" }, pt.rule)));
+            if (pt.detail) {
+              let main = pt.detail, test = null;
+              const ti = pt.detail.search(/\bTest:\s/);
+              if (ti >= 0) { main = pt.detail.slice(0, ti).trim(); test = pt.detail.slice(ti).replace(/^Test:\s*/, "").trim(); }
+              if (main) box.appendChild(this.el("p", { class: "point-detail" }, main));
+              if (test) box.appendChild(this.el("div", { class: "point-test" },
+                this.el("b", {}, "✓ Quick check — "), document.createTextNode(test)));
+            }
             const te = [pt.ruleTe, pt.detailTe].filter(Boolean).join(" ");
-            if (te) li.appendChild(this._teluguReveal(te));
+            if (te) box.appendChild(this._teluguReveal(te));
             (pt.examples || []).forEach(ex => {
-              const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text));
-              if (ex.note) line.appendChild(this.el("span", { class: "ex-note" }, "— " + ex.note));
-              li.appendChild(line);
-              if (ex.telugu) li.appendChild(this._teluguReveal(ex.telugu));
+              const line = this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", { class: "ex-text" }, ex.text));
+              if (ex.note) line.appendChild(this.el("span", { class: "ex-tag" }, ex.note));
+              box.appendChild(line);
+              if (ex.telugu) box.appendChild(this._teluguReveal(ex.telugu));
             });
-            ul.appendChild(li);
+            wrap.appendChild(box);
           });
-          c.appendChild(ul);
+          c.appendChild(wrap);
           return c;
         }
         // legacy fallback
