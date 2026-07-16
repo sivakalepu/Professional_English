@@ -104,8 +104,18 @@
     .q { border-top:1px solid var(--line); padding:12px 0; }
     .q-prompt { font-weight:600; margin-bottom:8px; }
     .opt { margin:4px 6px 4px 0; }
+    /* answered quiz options: right answer fills green, the wrong pick fills red */
+    .opt.correct { background:var(--good); border-color:var(--good); color:#fff; }
+    .opt.wrong { background:var(--warn); border-color:var(--warn); color:#fff; }
+    .opt:disabled { cursor:default; opacity:1; }
+    .opt:disabled:not(.correct):not(.wrong) { opacity:.55; }
+    /* "Still learning" / "Got it" selected state */
+    .opt.rate-learn.active { background:var(--warn); border-color:var(--warn); color:#fff; }
+    .opt.rate-known.active { background:var(--good); border-color:var(--good); color:#fff; }
     .fill { padding:6px 10px; border-radius:8px; border:1px solid var(--line);
       background:var(--panel-2); color:var(--text); }
+    .fill.correct { border-color:var(--good); color:var(--good); }
+    .fill.wrong { border-color:var(--warn); color:var(--warn); }
     .q-feedback { margin-top:8px; }
     .q-feedback.ok { color:var(--good); }
     .q-feedback.bad { color:var(--warn); }
@@ -163,7 +173,7 @@
         return {
           progress: {},
           settings: { theme: "dark", voiceRate: 0.9, voiceName: null, userName: null },
-          review: { wrongQuestions: [], learningWords: [] }
+          review: { wrongQuestions: [], learningWords: [], knownWords: [] }
         };
       },
       load() {
@@ -1396,6 +1406,86 @@
                 answer: "She explained the plan very clearly.",
                 explanationEn: "An adverb is needed to describe how she explained the plan.",
                 explanationTe: "ఆమె ఎలా plan ను explain చేసిందో చెప్పడానికి adverb అవసరం." }
+            ]}
+          ]},
+          { id: "noun-phrases", title: "Noun Phrases", cards: [
+            { type: "concept", title: "Building and Using Noun Phrases",
+              intro: "A noun phrase is a noun plus all the words that go with it — determiners, adjectives, and extra description — working together as a single unit in the sentence.",
+              introTe: "Noun phrase అంటే ఒక noun తో పాటు దానితో కలిసి పనిచేసే అన్ని పదాలు — determiners, adjectives, అదనపు వివరణ — వాక్యంలో ఒకే యూనిట్‌గా కలిసి పనిచేస్తాయి.",
+              points: [
+                { rule: "A noun phrase is a group of words built around one main noun (the 'head'), and the whole group acts as one unit — a subject or an object.",
+                  ruleTe: "Noun phrase అనేది ఒక ప్రధాన noun ('head') చుట్టూ నిర్మించిన పదాల సమూహం, ఆ మొత్తం సమూహం ఒకే యూనిట్‌గా — subject లేదా object గా — పనిచేస్తుంది.",
+                  detail: "The 'head' is the main noun; everything else just adds information about it. 'The tall engineer in the blue shirt' is one noun phrase with the head 'engineer' — the whole thing is the subject. Test: you can replace the entire phrase with 'he', 'she', or 'it' and the sentence still works ('He arrived late').",
+                  detailTe: "'Head' అంటే ప్రధాన noun; మిగతావన్నీ దాని గురించి సమాచారం మాత్రమే చేర్చుతాయి. 'The tall engineer in the blue shirt' అనేది 'engineer' అనే head తో ఒకే noun phrase — మొత్తం subject. పరీక్ష: మొత్తం phrase ను 'he', 'she', లేదా 'it' తో మార్చినా వాక్యం పనిచేస్తుంది ('He arrived late').",
+                  examples: [
+                    { text: "The new manager started today.", note: "head = manager" },
+                    { text: "A long email from the client arrived.", note: "head = email" },
+                    { text: "My two senior developers are on leave.", note: "head = developers" }
+                  ] },
+                { rule: "Before the noun, words follow a fixed order: determiner → opinion → size → age → colour → origin/material → noun.",
+                  ruleTe: "Noun కి ముందు, పదాలు స్థిర క్రమాన్ని అనుసరిస్తాయి: determiner → opinion → size → age → colour → origin/material → noun.",
+                  detail: "Start with a determiner (a, the, my, three), then adjectives in a natural order — opinion before fact, and size/age/colour before origin/material. 'A nice big old wooden desk' sounds right; 'a wooden old big nice desk' sounds wrong to native ears. You rarely stack this many; the key is determiner first, opinion before size/colour, and material closest to the noun.",
+                  detailTe: "మొదట determiner (a, the, my, three), తర్వాత adjectives సహజ క్రమంలో — opinion ముందు, size/age/colour తర్వాత origin/material. 'A nice big old wooden desk' సరిగ్గా ఉంటుంది; 'a wooden old big nice desk' native వారికి తప్పుగా వినిపిస్తుంది. ఇన్ని adjectives అరుదుగా పేర్చుతారు; ముఖ్యం — determiner మొదట, opinion size/colour కంటే ముందు, material noun కి దగ్గరగా.",
+                  examples: [
+                    { text: "a reliable old server", note: "opinion + age + noun" },
+                    { text: "three small plastic cases", note: "number + size + material + noun" },
+                    { text: "my favourite black coffee mug", note: "determiner + opinion + colour + noun" }
+                  ] },
+                { rule: "Longer description goes AFTER the noun — as a prepositional phrase ('in the report') or a relative clause ('that I sent').",
+                  ruleTe: "పొడవైన వివరణ noun తర్వాత వస్తుంది — prepositional phrase ('in the report') లేదా relative clause ('that I sent') గా.",
+                  detail: "Short describing words go before the noun; longer phrases go after it. Say 'the file on the shared drive', not 'the on-the-shared-drive file'. Use a prepositional phrase (of/in/with/from) or a relative clause (who/that/which) to add the detail: 'the client who called yesterday'. Test: if the description is more than one or two words, put it after the noun.",
+                  detailTe: "చిన్న వివరణ పదాలు noun కి ముందు; పొడవైన phrases తర్వాత. 'the file on the shared drive' అనండి, 'the on-the-shared-drive file' కాదు. వివరం చేర్చడానికి prepositional phrase (of/in/with/from) లేదా relative clause (who/that/which) వాడండి: 'the client who called yesterday'. పరీక్ష: వివరణ ఒకటి రెండు పదాల కంటే ఎక్కువైతే, noun తర్వాత పెట్టండి.",
+                  examples: [
+                    { text: "the report on last quarter's sales", note: "prepositional phrase after noun" },
+                    { text: "the email that I sent this morning", note: "relative clause after noun" },
+                    { text: "a colleague from the Bangalore office", note: "prepositional phrase after noun" }
+                  ] },
+                { rule: "The verb agrees with the HEAD noun, not with a noun in the phrase after it.",
+                  ruleTe: "Verb, phrase లో తర్వాత వచ్చే noun తో కాకుండా, HEAD noun తో agree అవుతుంది.",
+                  detail: "In a long noun phrase, find the head noun and match the verb to it — ignore nouns inside 'of...' or other modifiers. 'The list of open issues IS long' (head = list, singular), not 'are long'. 'The box of chocolates was...'; the chocolates are plural but 'box' is the head. Test: strip the after-noun part and see what the real subject is.",
+                  detailTe: "పొడవైన noun phrase లో, head noun ను గుర్తించి verb ను దానితో match చేయండి — 'of...' లోపల లేదా ఇతర modifiers లోని nouns ను పట్టించుకోకండి. 'The list of open issues IS long' (head = list, singular), 'are long' కాదు. 'The box of chocolates was...'; chocolates plural అయినా 'box' head. పరీక్ష: noun తర్వాతి భాగాన్ని తీసేసి నిజమైన subject ఏదో చూడండి.",
+                  examples: [
+                    { text: "The list of items is ready.", note: "head = list → is" },
+                    { text: "A set of new rules was announced.", note: "head = set → was" },
+                    { text: "The team of engineers is meeting now.", note: "head = team → is" }
+                  ] }
+              ] },
+            { type: "example", pattern: "Noun phrases at work",
+              sentences: [
+                { text: "The senior developer on the payments team resolved the issue." },
+                { text: "A detailed summary of the findings was shared with everyone." },
+                { text: "My two biggest concerns about the plan are cost and timing." }
+              ] },
+            { type: "mistake", wrong: "I bought a wooden nice big table.", right: "I bought a nice big wooden table.",
+              whyEn: "Adjectives before a noun follow a set order: opinion (nice) → size (big) → material (wooden). 'Wooden' is material, so it sits closest to the noun, not first.",
+              whyTe: "Noun కి ముందు adjectives ఒక నిర్ణీత క్రమాన్ని అనుసరిస్తాయి: opinion (nice) → size (big) → material (wooden). 'Wooden' material కాబట్టి అది మొదట కాకుండా noun కి దగ్గరగా వస్తుంది." },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "In 'The tall building near the station is new', what is the head noun of the subject?", options: ["station", "building", "tall"], answer: "building",
+                explanationEn: "The head noun is 'building' — everything else ('tall', 'near the station') just describes it.",
+                explanationTe: "Head noun 'building' — మిగతావన్నీ ('tall', 'near the station') దాన్ని వివరిస్తాయి మాత్రమే." },
+              { format: "choose-sentence", prompt: "Which one is a single noun phrase that can act as the subject?",
+                options: ["arrived very late last night", "The new client from Delhi", "quickly and quietly"], answer: "The new client from Delhi",
+                explanationEn: "'The new client from Delhi' is built around the head noun 'client' and can act as a subject (replace it with 'they').",
+                explanationTe: "'The new client from Delhi' అనేది head noun 'client' చుట్టూ నిర్మించబడింది, subject గా పనిచేస్తుంది ('they' తో మార్చవచ్చు)." },
+              { format: "choose-sentence", prompt: "Choose the correct word order:", options: ["a big old red car", "a red old big car"], answer: "a big old red car",
+                explanationEn: "Order is size (big) → age (old) → colour (red), so 'a big old red car'.",
+                explanationTe: "క్రమం size (big) → age (old) → colour (red), కాబట్టి 'a big old red car'." },
+              { format: "mcq", prompt: "Pick the natural-sounding phrase.", options: ["a plastic small container", "a small plastic container", "a small container plastic"], answer: "a small plastic container",
+                explanationEn: "Size (small) comes before material (plastic), and the material word sits right before the noun.",
+                explanationTe: "Size (small) material (plastic) కంటే ముందు వస్తుంది, material పదం noun కి సరిగ్గా ముందు ఉంటుంది." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:",
+                options: ["I read the on-the-website article.", "I read the article on the website."], answer: "I read the article on the website.",
+                explanationEn: "A prepositional phrase ('on the website') goes after the noun, not squeezed in before it.",
+                explanationTe: "Prepositional phrase ('on the website') noun కి ముందు కుక్కకుండా, తర్వాత వస్తుంది." },
+              { format: "fill", prompt: "Add the description after the noun using 'who': 'the manager ___ me' (called me).", answer: "who called me",
+                explanationEn: "A relative clause with 'who' comes after the noun: 'the manager who called me'.",
+                explanationTe: "'who' తో relative clause noun తర్వాత వస్తుంది: 'the manager who called me'." },
+              { format: "mcq", prompt: "The list of open tasks ___ on the wiki.", options: ["are", "is", "were"], answer: "is",
+                explanationEn: "The head noun is 'list' (singular), so the verb is 'is' — ignore 'tasks'.",
+                explanationTe: "Head noun 'list' (singular), కాబట్టి verb 'is' — 'tasks' ను పట్టించుకోవద్దు." },
+              { format: "fill", prompt: "A box of tools ___ missing from the shelf. (use is/are)", answer: "is",
+                explanationEn: "'Box' is the head noun (singular), so use 'is', not 'are'.",
+                explanationTe: "'Box' head noun (singular), కాబట్టి 'are' కాదు 'is' వాడండి." }
             ]}
           ]},
           { id: "conditionals", title: "Conditionals (If-sentences)", cards: [
@@ -12917,18 +13007,20 @@
     const Router = {
       state: { phaseId: "dashboard", lessonId: null, cardIndex: 0 },
       goPhase(phaseId) {
+        TTS.stop(); // stop any read-aloud when leaving the current screen
         this.state.phaseId = phaseId; this.state.lessonId = null; this.state.cardIndex = 0;
         UI.render();
       },
       openLesson(lessonId) {
+        TTS.stop();
         this.state.lessonId = lessonId; this.state.cardIndex = 0; UI.render();
       },
       nextCard() {
         const l = CourseData.lesson(this.state.phaseId, this.state.lessonId);
-        if (l && this.state.cardIndex < l.cards.length - 1) { this.state.cardIndex++; UI.render(); }
+        if (l && this.state.cardIndex < l.cards.length - 1) { TTS.stop(); this.state.cardIndex++; UI.render(); }
       },
       prevCard() {
-        if (this.state.cardIndex > 0) { this.state.cardIndex--; UI.render(); }
+        if (this.state.cardIndex > 0) { TTS.stop(); this.state.cardIndex--; UI.render(); }
       }
     };
     const TTS = {
@@ -12961,17 +13053,47 @@
           .replace(/\s{2,}/g, " ")
           .trim();
       },
-      speak(text, state) {
+      speak(text, state, voice) {
         if (!this.supported || !text) return;
         text = this._clean(text);
         if (!text) return;
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
-        const v = this._pickVoice(state);
+        const v = voice || this._pickVoice(state);
         if (v) u.voice = v;
         u.lang = (v && v.lang) || "en-US";
         u.rate = state.settings.voiceRate || 0.9;
         speechSynthesis.speak(u);
+      },
+      // speak a list of {text, voice} in order (utterances queue automatically)
+      speakSequence(items, state) {
+        if (!this.supported) return;
+        speechSynthesis.cancel();
+        const rate = state.settings.voiceRate || 0.9;
+        items.forEach(it => {
+          const t = this._clean(it.text);
+          if (!t) return;
+          const u = new SpeechSynthesisUtterance(t);
+          if (it.voice) { u.voice = it.voice; u.lang = it.voice.lang || "en-US"; } else { u.lang = "en-US"; }
+          u.rate = rate;
+          speechSynthesis.speak(u);
+        });
+      },
+      // two distinct English voices so the two speakers in a dialogue sound different
+      twoVoices(state) {
+        const primary = this._pickVoice(state);
+        const en = (this._voices || []).filter(v => /^en/i.test(v.lang));
+        // prefer a different-sounding second voice (opposite gender by common name hints), else any other en voice
+        const female = /zira|hazel|susan|heera|female|linda|catherine|eva|aria|jenny|michelle/i;
+        const male = /david|mark|george|ravi|male|james|guy|paul|richard|christopher/i;
+        let second = null;
+        if (primary) {
+          const pIsFemale = female.test(primary.name), pIsMale = male.test(primary.name);
+          if (pIsFemale) second = en.find(v => male.test(v.name));
+          else if (pIsMale) second = en.find(v => female.test(v.name));
+        }
+        if (!second) second = en.find(v => !primary || v.name !== primary.name);
+        return [primary, second || primary];
       },
       stop() { if (this.supported) speechSynthesis.cancel(); }
     };
@@ -13212,10 +13334,10 @@
         document.documentElement.setAttribute("data-theme", this.state.settings.theme);
         this.save(); this.render();
       },
-      _speakBtn(text) {
+      _speakBtn(text, voice) {
         if (!TTS.supported) return document.createTextNode("");
         return this.el("button", { class: "icon", title: "Read aloud",
-          onclick: () => TTS.speak(text, this.state) }, "🔊");
+          onclick: () => TTS.speak(text, this.state, voice) }, "🔊");
       },
       _teluguReveal(teText) {
         if (!teText) return document.createTextNode("");
@@ -13499,7 +13621,7 @@
       _resetAll() {
         if (!confirm("Reset ALL progress? This clears completed lessons, quiz scores, your Review queue, and your name. Your theme and voice settings are kept. This cannot be undone.")) return;
         this.state.progress = {};
-        this.state.review = { wrongQuestions: [], learningWords: [] };
+        this.state.review = { wrongQuestions: [], learningWords: [], knownWords: [] };
         this.state.settings.userName = null;
         this.save();
         this._settingsOpen = false;
@@ -13589,18 +13711,28 @@
           c.appendChild(this.el("div", { class: "ex" }, this._speakBtn(ex.text), this.el("span", {}, ex.text)));
         });
         const inLearning = this.state.review.learningWords.some(w => w.word === card.word);
+        const isKnown = (this.state.review.knownWords || []).includes(card.word);
         const rate = this.el("div", { class: "rate" },
-          this.el("button", { class: "opt", onclick: () => this._rateWord(card, true) }, "Still learning"),
-          this.el("button", { class: "opt", onclick: () => this._rateWord(card, false) }, "Got it ✓"));
+          this.el("button", { class: "opt rate-learn" + (inLearning ? " active" : ""),
+            onclick: () => this._rateWord(card, true) }, "Still learning"),
+          this.el("button", { class: "opt rate-known" + (isKnown ? " active" : ""),
+            onclick: () => this._rateWord(card, false) }, "Got it ✓"));
         if (inLearning) rate.appendChild(this.el("span", { class: "muted" }, " (in Review)"));
         c.appendChild(rate);
         return c;
       },
       _rateWord(card, learning) {
-        const list = this.state.review.learningWords;
-        const i = list.findIndex(w => w.word === card.word);
-        if (learning && i < 0) list.push({ word: card.word, meaningEn: card.meaningEn, meaningTe: card.meaningTe || null });
-        if (!learning && i >= 0) list.splice(i, 1);
+        const r = this.state.review;
+        if (!r.knownWords) r.knownWords = [];
+        const li = r.learningWords.findIndex(w => w.word === card.word);
+        const ki = r.knownWords.indexOf(card.word);
+        if (learning) {                                   // "Still learning" → add to review, clear known
+          if (li < 0) r.learningWords.push({ word: card.word, meaningEn: card.meaningEn, meaningTe: card.meaningTe || null });
+          if (ki >= 0) r.knownWords.splice(ki, 1);
+        } else {                                          // "Got it" → mark known, remove from review
+          if (li >= 0) r.learningWords.splice(li, 1);
+          if (ki < 0) r.knownWords.push(card.word);
+        }
         this.save(); this.render();
       },
       _shadowControl(modelText) {
@@ -13633,11 +13765,15 @@
         const c = this.el("div", { class: "card" });
         c.appendChild(this.el("h3", {}, "Dialogue"));
         const roleClass = {}; card.roles.forEach((r, i) => roleClass[r] = i === 0 ? "role-a" : "role-b");
-        const allText = card.lines.map(l => l.text).join(" ");
-        c.appendChild(this.el("button", { class: "opt", onclick: () => TTS.speak(allText, this.state) }, "▶ Play whole conversation"));
+        // two distinct voices so the speakers are easy to tell apart
+        const [vA, vB] = TTS.twoVoices(this.state);
+        const roleVoice = {}; card.roles.forEach((r, i) => roleVoice[r] = i === 0 ? vA : vB);
+        c.appendChild(this.el("button", { class: "opt",
+          onclick: () => TTS.speakSequence(card.lines.map(l => ({ text: l.text, voice: roleVoice[l.role] })), this.state) },
+          "▶ Play whole conversation"));
         card.lines.forEach(line => {
           c.appendChild(this.el("div", { class: "dline " + roleClass[line.role] },
-            this._speakBtn(line.text),
+            this._speakBtn(line.text, roleVoice[line.role]),
             this.el("b", {}, line.role + ": "),
             this.el("span", {}, line.text)));
         });
@@ -13654,10 +13790,20 @@
           const qWrap = this.el("div", { class: "q" });
           qWrap.appendChild(this.el("div", { class: "q-prompt" }, q.prompt));
           const feedback = this.el("div", { class: "q-feedback" });
-          const commit = given => {
+          const optBtns = [];
+          let fillInp = null, fillBtn = null;
+          const commit = (given, chosenBtn) => {
             if (qWrap.dataset.done) return;
             qWrap.dataset.done = "1"; answered++;
             const ok = Quiz.check(q, given);
+            // lock every option and color them: correct answer green, the wrong pick red
+            optBtns.forEach(b => {
+              b.disabled = true;
+              if (Quiz.check(q, b.dataset.val)) b.classList.add("correct");
+            });
+            if (chosenBtn && !ok) chosenBtn.classList.add("wrong");
+            if (fillInp) { fillInp.disabled = true; fillInp.classList.add(ok ? "correct" : "wrong"); }
+            if (fillBtn) fillBtn.disabled = true;
             if (ok) { correct++; feedback.className = "q-feedback ok"; feedback.textContent = "✓ Correct. " + q.explanationEn; }
             else {
               feedback.className = "q-feedback bad";
@@ -13670,12 +13816,18 @@
             if (answered === total && onComplete) onComplete();
           };
           if (q.format === "mcq" || q.format === "choose-sentence") {
-            q.options.forEach(opt => qWrap.appendChild(
-              this.el("button", { class: "opt", onclick: () => commit(opt) }, opt)));
+            q.options.forEach(opt => {
+              const b = this.el("button", { class: "opt", onclick: () => commit(opt, b) }, opt);
+              b.dataset.val = opt;
+              optBtns.push(b);
+              qWrap.appendChild(b);
+            });
           } else if (q.format === "fill") {
-            const inp = this.el("input", { type: "text", class: "fill", placeholder: "type your answer" });
-            qWrap.appendChild(inp);
-            qWrap.appendChild(this.el("button", { class: "opt", onclick: () => commit(inp.value) }, "Check"));
+            fillInp = this.el("input", { type: "text", class: "fill", placeholder: "type your answer" });
+            fillBtn = this.el("button", { class: "opt", onclick: () => commit(fillInp.value) }, "Check");
+            fillInp.addEventListener("keydown", e => { if (e.key === "Enter") commit(fillInp.value); });
+            qWrap.appendChild(fillInp);
+            qWrap.appendChild(fillBtn);
           }
           qWrap.appendChild(feedback);
           c.appendChild(qWrap);
