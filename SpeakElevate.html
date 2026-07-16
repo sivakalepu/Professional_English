@@ -133,6 +133,10 @@
     .fw-core .fw-head, .fw-key.fw-core { background:var(--accent); }
     .fw-detail .fw-head, .fw-key.fw-detail { background:var(--good); }
     .fw-why .fw-head, .fw-key.fw-why { background:var(--warn); }
+    /* summary-map stage colours */
+    .fw-g1 .fw-head { background:#4A90D9; } .fw-g2 .fw-head { background:#7BAA50; }
+    .fw-g3 .fw-head { background:#D97A4A; } .fw-g4 .fw-head { background:#8E6FC7; }
+    .fw-g5 .fw-head { background:#3FA6A0; } .fw-g6 .fw-head { background:#C75D7A; }
     .fw-plus { align-self:center; color:var(--muted); font-weight:700; font-size:18px; padding:0 1px; }
     .fw-legend { display:flex; gap:8px; flex-wrap:wrap; }
     .fw-key { color:#fff; font-size:11.5px; font-weight:700; padding:2px 10px; border-radius:999px; }
@@ -1841,6 +1845,7 @@
             { type: "framework", title: "The Sentence Framework",
               intro: "Build any sentence by filling these slots in order. Blue is the core (who does what); green adds detail (how, where, when); orange gives the reason (why).",
               introTe: "ఈ slots ను క్రమంలో నింపుతూ ఏ వాక్యాన్నైనా నిర్మించండి. నీలం core (ఎవరు ఏమి చేస్తారు); ఆకుపచ్చ వివరం చేర్చుతుంది (how, where, when); నారింజ కారణం ఇస్తుంది (why).",
+              legend: [ { label: "Core", group: "core" }, { label: "Detail", group: "detail" }, { label: "Reason", group: "why" } ],
               slots: [
                 { key: "WHO", role: "subject — the doer", fills: ["noun", "pronoun", "noun phrase", "noun clause", "gerund"], group: "core" },
                 { key: "WHAT", role: "verb + object — the action", fills: ["verb (+ helping verb)", "object"], group: "core" },
@@ -1925,6 +1930,99 @@
                 explanationEn: "'where the new team sits' is a full clause filling the WHERE slot.", explanationTe: "'where the new team sits' అనేది WHERE slot ను నింపే పూర్తి clause." },
               { format: "choose-sentence", prompt: "Which correctly joins two full ideas instead of overloading one slot?", options: ["We shipped the release the client happy delay no.", "We shipped the release, so the client was happy."], answer: "We shipped the release, so the client was happy.",
                 explanationEn: "Two complete ideas are joined with the conjunction 'so'.", explanationTe: "రెండు పూర్తి ఆలోచనలు 'so' అనే conjunction తో కలపబడ్డాయి." }
+            ]}
+          ]},
+          { id: "grammar-summary", title: "Grammar Summary & Cheat Sheet", cards: [
+            { type: "framework", title: "Grammar at a Glance",
+              intro: "The whole grammar journey in one view — six stages, from the basics up to building full sentences.",
+              introTe: "మొత్తం grammar ప్రయాణం ఒకే చూపులో — ఆరు దశలు, పునాదుల నుండి పూర్తి వాక్యాలు నిర్మించడం వరకు.",
+              slots: [
+                { key: "FOUNDATIONS", role: "the building blocks", fills: ["word order (SVO)", "nouns & plurals", "pronouns", "articles"], group: "g1" },
+                { key: "TENSES", role: "when it happens", fills: ["present / past / future", "continuous forms", "present & past perfect"], group: "g2" },
+                { key: "MODALS", role: "attitude & degree", fills: ["can / may", "shall / will", "must / should"], group: "g3" },
+                { key: "DESCRIBING & JOINING", role: "colour & connection", fills: ["adjectives & adverbs", "conjunctions", "subject–verb agreement", "questions & negatives", "prepositions"], group: "g4" },
+                { key: "CLAUSES & PHRASES", role: "bigger chunks", fills: ["noun phrases", "noun clauses", "relative clauses", "gerunds & infinitives"], group: "g5" },
+                { key: "BUILDING SENTENCES", role: "putting it together", fills: ["conditionals", "WHO+WHAT+HOW+WHERE+WHEN+WHY", "Manner → Place → Time"], group: "g6" }
+              ] },
+            { type: "concept", title: "Golden Rules — When to Use What",
+              intro: "The highest-value decisions from the whole section, in one place. When two forms compete, these tests tell you which to pick.",
+              introTe: "మొత్తం విభాగం నుండి అత్యంత ముఖ్యమైన నిర్ణయాలు ఒకే చోట. రెండు రూపాలు పోటీపడినప్పుడు, ఏది ఎంచుకోవాలో ఈ పరీక్షలు చెప్తాయి.",
+              points: [
+                { rule: "Tenses: past simple for a finished time; present perfect when the time is vague or the result matters now.",
+                  ruleTe: "Tenses: ముగిసిన సమయానికి past simple; సమయం అస్పష్టంగా ఉన్నా లేదా ఫలితం ఇప్పుడు ముఖ్యమైనా present perfect.",
+                  detail: "If you can name a finished past time (yesterday, in 2020, last week), use the past simple. If the time is unspecified or the effect is still felt now (already, just, ever), use the present perfect. Test: 'yesterday' → past simple; 'already / so far' → present perfect.",
+                  detailTe: "ముగిసిన past సమయాన్ని పేర్కొనగలిగితే (yesterday, in 2020, last week), past simple వాడండి. సమయం అస్పష్టంగా ఉంటే లేదా ప్రభావం ఇప్పటికీ ఉంటే (already, just, ever), present perfect వాడండి. పరీక్ష: 'yesterday' → past simple; 'already / so far' → present perfect.",
+                  examples: [
+                    { text: "We launched the app last month.", note: "finished time → past simple" },
+                    { text: "We have already launched the app.", note: "relevant now → present perfect" }
+                  ] },
+                { rule: "Modals: match the modal to your intent — ability, permission, possibility, offer, obligation, or advice.",
+                  ruleTe: "Modals: మీ ఉద్దేశ్యానికి modal ను సరిపోల్చండి — ability, permission, possibility, offer, obligation, లేదా advice.",
+                  detail: "can/could = ability or request; may/might = permission or possibility; shall/will = offer or future; must = strong obligation (no choice); should = advice (recommended). Test: 'no choice' → must; 'a good idea' → should; asking politely → could/may.",
+                  detailTe: "can/could = ability లేదా request; may/might = permission లేదా possibility; shall/will = offer లేదా future; must = బలమైన obligation (choice లేదు); should = advice (సిఫార్సు). పరీక్ష: 'choice లేదు' → must; 'మంచి ఆలోచన' → should; మర్యాదగా అడగడం → could/may.",
+                  examples: [
+                    { text: "Could you review this by 5?", note: "polite request" },
+                    { text: "You must not share the password.", note: "prohibition" },
+                    { text: "You should test it first.", note: "advice" }
+                  ] },
+                { rule: "Agreement: the verb matches the HEAD noun of the subject — ignore words in between.",
+                  ruleTe: "Agreement: verb, subject యొక్క HEAD noun తో సరిపోతుంది — మధ్యలోని పదాలను పట్టించుకోవద్దు.",
+                  detail: "Find the main noun and match the verb to it. 'The list of open tasks IS long' (head = list). Strip out 'of open tasks' to see the real subject. Also: two nouns joined by 'and' are plural; 'each / every' is singular.",
+                  detailTe: "ప్రధాన noun ను గుర్తించి verb ను దానితో సరిపోల్చండి. 'The list of open tasks IS long' (head = list). నిజమైన subject చూడటానికి 'of open tasks' తీసేయండి. అలాగే: 'and' తో కలిపిన రెండు nouns plural; 'each / every' singular.",
+                  examples: [
+                    { text: "The set of instructions is unclear.", note: "head = set → is" },
+                    { text: "Ravi and his team are joining.", note: "and → plural" }
+                  ] },
+                { rule: "Articles: a/an for a first mention or any-one; 'the' when both people know which one; no article for general ideas.",
+                  ruleTe: "Articles: మొదటిసారి పేర్కొన్నా లేదా ఏదో ఒకటి అయితే a/an; ఏది అని ఇద్దరికీ తెలిస్తే 'the'; సాధారణ భావనలకు article వద్దు.",
+                  detail: "First mention or non-specific → a/an ('I need a laptop'). Specific or already known → the ('the laptop I ordered'). General plurals and uncountables take no article ('Meetings are useful', 'Trust matters').",
+                  detailTe: "మొదటిసారి లేదా నిర్దిష్టం కానిది → a/an ('I need a laptop'). నిర్దిష్టం లేదా ఇప్పటికే తెలిసినది → the ('the laptop I ordered'). సాధారణ plurals, uncountables కి article ఉండదు ('Meetings are useful', 'Trust matters').",
+                  examples: [
+                    { text: "I raised a ticket; the ticket is still open.", note: "a → the" },
+                    { text: "Trust is hard to rebuild.", note: "general → no article" }
+                  ] },
+                { rule: "Clauses & forms: who=people, which=things; embedded questions use statement order; verbs choose gerund or infinitive.",
+                  ruleTe: "Clauses & forms: who=వ్యక్తులు, which=వస్తువులు; embedded questions statement order వాడతాయి; verbs gerund లేదా infinitive ఎంచుకుంటాయి.",
+                  detail: "Relative pronouns: 'the client who called', 'the tool which broke'. Embedded question: 'Tell me where it is' — not 'where is it'. Gerund vs infinitive: 'enjoy doing' but 'want to do'; after any preposition use -ing ('good at writing').",
+                  detailTe: "Relative pronouns: 'the client who called', 'the tool which broke'. Embedded question: 'Tell me where it is' — 'where is it' కాదు. Gerund vs infinitive: 'enjoy doing' కానీ 'want to do'; ఏ preposition తర్వాతైనా -ing వాడండి ('good at writing').",
+                  examples: [
+                    { text: "Do you know when the demo starts?", note: "embedded → statement order" },
+                    { text: "She suggested changing the plan.", note: "suggest + gerund" },
+                    { text: "We decided to wait.", note: "decide + infinitive" }
+                  ] },
+                { rule: "Word order: core first (WHO + WHAT), then Manner → Place → Time, then Why.",
+                  ruleTe: "Word order: ముందు core (WHO + WHAT), తర్వాత Manner → Place → Time, తర్వాత Why.",
+                  detail: "Build subject + verb + object first, then add how, where, when in that order, and finish with the reason or purpose. Keep the object next to the verb; don't drop the time between the verb and its object.",
+                  detailTe: "ముందు subject + verb + object నిర్మించండి, తర్వాత how, where, when ను ఆ క్రమంలో చేర్చండి, చివరగా కారణం లేదా ఉద్దేశ్యం. Object ను verb పక్కనే ఉంచండి; time ను verb కి, దాని object కి మధ్య పెట్టవద్దు.",
+                  examples: [
+                    { text: "She presented calmly in the hall yesterday to reassure the client.", note: "how → where → when → why" }
+                  ] }
+              ] },
+            { type: "quiz", questions: [
+              { format: "mcq", prompt: "We ___ the report yesterday.", options: ["have finished", "finished", "finish"], answer: "finished",
+                explanationEn: "'Yesterday' is a finished time, so use the past simple: finished.",
+                explanationTe: "'Yesterday' ముగిసిన సమయం, కాబట్టి past simple వాడండి: finished." },
+              { format: "mcq", prompt: "___ I use your laptop for a minute?", options: ["May", "Will", "Must"], answer: "May",
+                explanationEn: "'May' politely asks for permission.",
+                explanationTe: "'May' మర్యాదగా అనుమతి అడుగుతుంది." },
+              { format: "mcq", prompt: "The list of open issues ___ growing.", options: ["are", "is", "were"], answer: "is",
+                explanationEn: "The head noun 'list' is singular, so the verb is 'is'.",
+                explanationTe: "Head noun 'list' singular, కాబట్టి verb 'is'." },
+              { format: "mcq", prompt: "I raised ___ ticket this morning; ___ ticket is still open.", options: ["the / a", "a / the", "a / a"], answer: "a / the",
+                explanationEn: "First mention takes 'a ticket'; the now-specific one takes 'the ticket'.",
+                explanationTe: "మొదటిసారి 'a ticket'; ఇప్పుడు నిర్దిష్టమైనది 'the ticket'." },
+              { format: "mcq", prompt: "She's the manager ___ approved the budget.", options: ["which", "who", "where"], answer: "who",
+                explanationEn: "Use 'who' for people.",
+                explanationTe: "వ్యక్తులకు 'who' వాడండి." },
+              { format: "choose-sentence", prompt: "Choose the correct sentence:", options: ["Could you tell me where is the printer?", "Could you tell me where the printer is?"], answer: "Could you tell me where the printer is?",
+                explanationEn: "An embedded question uses statement order: 'where the printer is'.",
+                explanationTe: "Embedded question statement order వాడుతుంది: 'where the printer is'." },
+              { format: "mcq", prompt: "We decided ___ the launch.", options: ["postponing", "to postpone", "postpone"], answer: "to postpone",
+                explanationEn: "'decide' is followed by an infinitive: 'decided to postpone'.",
+                explanationTe: "'decide' తర్వాత infinitive వస్తుంది: 'decided to postpone'." },
+              { format: "choose-sentence", prompt: "Choose the natural word order:", options: ["She spoke yesterday in the hall calmly.", "She spoke calmly in the hall yesterday."], answer: "She spoke calmly in the hall yesterday.",
+                explanationEn: "The default order is Manner (calmly), Place (in the hall), Time (yesterday).",
+                explanationTe: "Default క్రమం Manner (calmly), Place (in the hall), Time (yesterday)." }
             ]}
           ]}
         ]},
@@ -14034,11 +14132,9 @@
             this.el("div", { class: "fw-fills" }, (s.fills || []).join(" · "))));
         });
         fw.appendChild(row);
-        // legend
-        fw.appendChild(this.el("div", { class: "fw-legend" },
-          this.el("span", { class: "fw-key fw-core" }, "Core"),
-          this.el("span", { class: "fw-key fw-detail" }, "Detail"),
-          this.el("span", { class: "fw-key fw-why" }, "Reason")));
+        if (Array.isArray(card.legend))
+          fw.appendChild(this.el("div", { class: "fw-legend" },
+            card.legend.map(k => this.el("span", { class: "fw-key fw-" + k.group }, k.label))));
         if (card.example && card.example.length) {
           const ex = this.el("div", { class: "fw-example" });
           ex.appendChild(this.el("div", { class: "fw-cap" }, card.exampleCaption || "The same slots, assembled into one sentence:"));
