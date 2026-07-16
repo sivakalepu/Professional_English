@@ -122,6 +122,27 @@
     .vocab-head { display:flex; align-items:center; gap:8px; }
     .vocab-head h3 { margin:0; }
     .pos { color:var(--muted); font-style:italic; }
+    /* sentence framework (visual slot boxes) */
+    .fw { display:flex; flex-direction:column; gap:14px; margin-top:10px; }
+    .fw-row { display:flex; flex-wrap:wrap; align-items:stretch; gap:8px; }
+    .fw-slot { flex:1 1 128px; min-width:118px; border:1px solid var(--line); border-radius:10px;
+      overflow:hidden; background:var(--panel-2); display:flex; flex-direction:column; }
+    .fw-head { padding:6px 10px; font-weight:700; color:#fff; font-size:15px; letter-spacing:.5px; }
+    .fw-role { padding:6px 10px 0; font-size:12px; color:var(--muted); font-style:italic; }
+    .fw-fills { padding:4px 10px 10px; font-size:12.5px; line-height:1.5; }
+    .fw-core .fw-head, .fw-key.fw-core { background:var(--accent); }
+    .fw-detail .fw-head, .fw-key.fw-detail { background:var(--good); }
+    .fw-why .fw-head, .fw-key.fw-why { background:var(--warn); }
+    .fw-plus { align-self:center; color:var(--muted); font-weight:700; font-size:18px; padding:0 1px; }
+    .fw-legend { display:flex; gap:8px; flex-wrap:wrap; }
+    .fw-key { color:#fff; font-size:11.5px; font-weight:700; padding:2px 10px; border-radius:999px; }
+    .fw-example { border:1px dashed var(--line); border-radius:10px; padding:10px 12px; background:var(--panel); }
+    .fw-cap { font-size:12.5px; color:var(--muted); margin-bottom:8px; }
+    .fw-line { display:flex; flex-wrap:wrap; gap:6px; align-items:flex-end; }
+    .fw-seg { color:#fff; padding:4px 8px; border-radius:8px; font-size:14px; line-height:1.35; }
+    .fw-seg small { display:block; font-size:9.5px; font-weight:700; letter-spacing:.4px; opacity:.9; margin-bottom:1px; }
+    .seg-core { background:var(--accent); } .seg-detail { background:var(--good); } .seg-why { background:var(--warn); }
+    .fw-play { margin-top:10px; display:flex; align-items:center; gap:6px; }
     .rate { margin-top:12px; }
     .dline { padding:6px 8px; border-radius:8px; margin:6px 0; }
     .role-a { background:var(--panel-2); }
@@ -1817,6 +1838,26 @@
             ]}
           ]},
           { id: "sentence-expansion", title: "Building & Expanding Sentences", cards: [
+            { type: "framework", title: "The Sentence Framework",
+              intro: "Build any sentence by filling these slots in order. Blue is the core (who does what); green adds detail (how, where, when); orange gives the reason (why).",
+              introTe: "ఈ slots ను క్రమంలో నింపుతూ ఏ వాక్యాన్నైనా నిర్మించండి. నీలం core (ఎవరు ఏమి చేస్తారు); ఆకుపచ్చ వివరం చేర్చుతుంది (how, where, when); నారింజ కారణం ఇస్తుంది (why).",
+              slots: [
+                { key: "WHO", role: "subject — the doer", fills: ["noun", "pronoun", "noun phrase", "noun clause", "gerund"], group: "core" },
+                { key: "WHAT", role: "verb + object — the action", fills: ["verb (+ helping verb)", "object"], group: "core" },
+                { key: "HOW", role: "manner", fills: ["adverb", "adverb phrase", "adverb clause"], group: "detail" },
+                { key: "WHERE", role: "place", fills: ["prepositional phrase", "adverb", "adverb clause"], group: "detail" },
+                { key: "WHEN", role: "time", fills: ["adverb", "prepositional phrase", "adverbial clause"], group: "detail" },
+                { key: "WHY", role: "reason / purpose", fills: ["to + verb (purpose)", "because / since (reason)"], group: "why" }
+              ],
+              exampleCaption: "The same slots, assembled into one natural sentence:",
+              example: [
+                { key: "WHO", text: "The support team", group: "core" },
+                { key: "WHAT", text: "resolved the outage", group: "core" },
+                { key: "HOW", text: "calmly", group: "detail" },
+                { key: "WHERE", text: "in the war room", group: "detail" },
+                { key: "WHEN", text: "last night", group: "detail" },
+                { key: "WHY", text: "to restore service", group: "why" }
+              ] },
             { type: "concept", title: "WHO + WHAT + HOW + WHERE + WHEN + WHY",
               intro: "Every clear English sentence starts with a subject and a verb, then grows by answering a fixed set of questions in a natural order: who, what, how, where, when, and why. Knowing the order stops sentences from sounding jumbled.",
               introTe: "ప్రతి స్పష్టమైన ఇంగ్లీష్ వాక్యం subject, verb తో మొదలై, ఒక నిర్ణీత క్రమంలో కొన్ని ప్రశ్నలకు సమాధానమిస్తూ పెరుగుతుంది: who, what, how, where, when, why. ఈ క్రమం తెలిస్తే వాక్యాలు అస్తవ్యస్తంగా అనిపించవు.",
@@ -13968,6 +14009,7 @@
       _renderCard(card, phaseId, lessonId, idx) {
         switch (card.type) {
           case "concept": return this._conceptCard(card);
+          case "framework": return this._frameworkCard(card);
           case "example": return this._exampleCard(card);
           case "mistake": return this._mistakeCard(card);
           case "vocab": return this._vocabCard(card);
@@ -13975,6 +14017,42 @@
           case "quiz": return this._quizCard(card, phaseId, lessonId);
           default: return this.el("div", {}, "Unknown card");
         }
+      },
+      // visual slot-based sentence framework (boxes for WHO/WHAT/HOW/WHERE/WHEN/WHY)
+      _frameworkCard(card) {
+        const c = this.el("div", { class: "card" });
+        c.appendChild(this.el("h3", {}, card.title || "The sentence framework"));
+        if (card.intro) c.appendChild(this.el("p", { class: "muted" }, card.intro));
+        if (card.introTe) c.appendChild(this._teluguReveal(card.introTe));
+        const fw = this.el("div", { class: "fw" });
+        const row = this.el("div", { class: "fw-row" });
+        (card.slots || []).forEach((s, i) => {
+          if (i > 0) row.appendChild(this.el("span", { class: "fw-plus" }, "+"));
+          row.appendChild(this.el("div", { class: "fw-slot fw-" + s.group },
+            this.el("div", { class: "fw-head" }, s.key),
+            this.el("div", { class: "fw-role" }, s.role),
+            this.el("div", { class: "fw-fills" }, (s.fills || []).join(" · "))));
+        });
+        fw.appendChild(row);
+        // legend
+        fw.appendChild(this.el("div", { class: "fw-legend" },
+          this.el("span", { class: "fw-key fw-core" }, "Core"),
+          this.el("span", { class: "fw-key fw-detail" }, "Detail"),
+          this.el("span", { class: "fw-key fw-why" }, "Reason")));
+        if (card.example && card.example.length) {
+          const ex = this.el("div", { class: "fw-example" });
+          ex.appendChild(this.el("div", { class: "fw-cap" }, card.exampleCaption || "The same slots, assembled into one sentence:"));
+          const line = this.el("div", { class: "fw-line" });
+          card.example.forEach(seg => line.appendChild(this.el("span", { class: "fw-seg seg-" + seg.group },
+            this.el("small", {}, seg.key), document.createTextNode(seg.text))));
+          ex.appendChild(line);
+          const full = card.example.map(s => s.text).join(" ") + ".";
+          ex.appendChild(this.el("div", { class: "fw-play" }, this._speakBtn(full),
+            this.el("span", { class: "muted" }, " hear the whole sentence")));
+          fw.appendChild(ex);
+        }
+        c.appendChild(fw);
+        return c;
       },
       _conceptCard(card) {
         const c = this.el("div", { class: "card" });
