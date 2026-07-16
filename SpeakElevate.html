@@ -167,8 +167,13 @@
     .dline { padding:6px 8px; border-radius:8px; margin:6px 0; }
     .role-a { background:var(--panel-2); }
     .role-b { background:transparent; border:1px solid var(--line); }
-    .shadow { margin-top:12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    .shadow { margin-top:12px; display:flex; flex-direction:column; align-items:flex-start; gap:8px;
       border-top:1px dashed var(--line); padding-top:10px; }
+    .shadow-nav { display:flex; align-items:center; gap:8px; }
+    .shadow-count { color:var(--muted); font-size:13px; min-width:96px; text-align:center; }
+    .shadow-line { background:var(--panel-2); border:1px solid var(--line); border-radius:8px;
+      padding:8px 12px; font-size:15.5px; align-self:stretch; }
+    .shadow-controls { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .cta { background:var(--accent); color:#fff; border:none; border-radius:10px;
       padding:12px 18px; font-size:16px; margin:12px 0; }
     .stat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin:12px 0; }
@@ -14279,31 +14284,54 @@
         }
         this.save(); this.render();
       },
+      // step-through shadowing: one line at a time — Model replays the current line,
+      // Next/Prev move through the dialogue, record & compare per line.
       _shadowControl(modelItems) {
-        const btn = this.el("button", { class: "opt" }, "🎙 Record");
-        if (!Recorder.supported) {
-          const playModel = this.el("button", { class: "opt", onclick: () => TTS.speakSequence(modelItems, this.state) }, "🔊 Model");
-          const msg = Recorder.reason() === "insecure"
-            ? "🎙 Recording needs a secure page (https:// or opening the file directly). Over a plain http:// link on your phone the browser blocks the mic — see Help in the ⚙ menu."
-            : "🎙 Recording isn't supported in this browser — try Chrome or Edge.";
-          return this.el("div", { class: "shadow" },
-            this.el("span", { class: "muted" }, "Your turn — repeat it:"), playModel,
-            this.el("span", { class: "muted mic-note" }, msg));
-        }
-        let recording = false;
+        const items = (modelItems || []).filter(m => m && m.text);
+        const total = items.length;
+        const sup = Recorder.supported;
+        let i = 0, recording = false;
+
+        const count = this.el("span", { class: "shadow-count" });
+        const line = this.el("div", { class: "shadow-line" });
+        const prev = this.el("button", { class: "opt", title: "Previous sentence", onclick: () => step(-1) }, "◀");
+        const next = this.el("button", { class: "opt", title: "Next sentence", onclick: () => step(1) }, "Next ▶");
+        const playModel = this.el("button", { class: "opt",
+          onclick: () => TTS.speak(items[i].text, this.state, items[i].voice) }, "🔊 Model");
         const playMine = this.el("button", { class: "opt", style: "display:none", onclick: () => Recorder.play() }, "▶ My voice");
-        const playModel = this.el("button", { class: "opt", onclick: () => TTS.speakSequence(modelItems, this.state) }, "🔊 Model");
-        btn.onclick = async () => {
+        const rec = this.el("button", { class: "opt" }, "🎙 Record");
+        rec.onclick = async () => {
           if (!recording) {
-            try { await Recorder.start(); recording = true; btn.textContent = "⏹ Stop"; }
-            catch (e) { btn.textContent = "🎙 Allow mic & retry"; } // permission denied — let them try again
+            try { await Recorder.start(); recording = true; rec.textContent = "⏹ Stop"; }
+            catch (e) { rec.textContent = "🎙 Allow mic & retry"; }
           } else {
-            await Recorder.stop(); recording = false; btn.textContent = "🎙 Record again";
+            await Recorder.stop(); recording = false; rec.textContent = "🎙 Record again";
             playMine.style.display = "";
           }
         };
-        return this.el("div", { class: "shadow" },
-          this.el("span", { class: "muted" }, "Your turn — repeat it:"), playModel, btn, playMine);
+        const resetRec = () => { recording = false; if (sup) { rec.textContent = "🎙 Record"; playMine.style.display = "none"; } };
+        const update = () => {
+          count.textContent = "Sentence " + (i + 1) + " / " + total;
+          line.textContent = items[i] ? items[i].text : "";
+          prev.disabled = i === 0; next.disabled = i >= total - 1;
+          resetRec();
+        };
+        const step = d => { const n = Math.min(total - 1, Math.max(0, i + d)); if (n !== i) { i = n; TTS.stop(); update(); } };
+
+        const nav = this.el("div", { class: "shadow-nav" }, prev, count, next);
+        const controls = sup
+          ? this.el("div", { class: "shadow-controls" }, playModel, rec, playMine)
+          : this.el("div", { class: "shadow-controls" }, playModel);
+        const kids = [this.el("span", { class: "muted" }, "Your turn — shadow one line at a time:"), nav, line, controls];
+        if (!sup) {
+          const msg = Recorder.reason() === "insecure"
+            ? "🎙 Recording needs a secure page (https:// or opening the file directly). Over a plain http:// link on your phone the browser blocks the mic — see Help in the ⚙ menu."
+            : "🎙 Recording isn't supported in this browser — try Chrome or Edge.";
+          kids.push(this.el("span", { class: "muted mic-note" }, msg));
+        }
+        const box = this.el("div", { class: "shadow" }, kids);
+        update();
+        return box;
       },
       _dialogueCard(card) {
         const c = this.el("div", { class: "card" });
