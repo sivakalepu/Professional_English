@@ -14279,10 +14279,10 @@
         }
         this.save(); this.render();
       },
-      _shadowControl(modelText) {
+      _shadowControl(modelItems) {
         const btn = this.el("button", { class: "opt" }, "🎙 Record");
         if (!Recorder.supported) {
-          const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
+          const playModel = this.el("button", { class: "opt", onclick: () => TTS.speakSequence(modelItems, this.state) }, "🔊 Model");
           const msg = Recorder.reason() === "insecure"
             ? "🎙 Recording needs a secure page (https:// or opening the file directly). Over a plain http:// link on your phone the browser blocks the mic — see Help in the ⚙ menu."
             : "🎙 Recording isn't supported in this browser — try Chrome or Edge.";
@@ -14292,7 +14292,7 @@
         }
         let recording = false;
         const playMine = this.el("button", { class: "opt", style: "display:none", onclick: () => Recorder.play() }, "▶ My voice");
-        const playModel = this.el("button", { class: "opt", onclick: () => TTS.speak(modelText, this.state) }, "🔊 Model");
+        const playModel = this.el("button", { class: "opt", onclick: () => TTS.speakSequence(modelItems, this.state) }, "🔊 Model");
         btn.onclick = async () => {
           if (!recording) {
             try { await Recorder.start(); recording = true; btn.textContent = "⏹ Stop"; }
@@ -14321,7 +14321,7 @@
             this.el("b", {}, line.role + ": "),
             this.el("span", {}, line.text)));
         });
-        c.appendChild(this._shadowControl(card.lines[0].text));
+        c.appendChild(this._shadowControl(card.lines.map(l => ({ text: l.text, voice: roleVoice[l.role] }))));
         return c;
       },
       _quizCard(card, phaseId, lessonId, onComplete) {
